@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Found Selection | Ulasan & Artikel Terkini Inspirasi Anda</title>
+    
+    <meta name="description" content="Found Selection menyajikan ulasan produk mendalam, artikel teknologi, hiburan, esensial, gaya hidup, dan kesehatan terkini. Temukan perspektif baru yang faktual dan tajam.">
+    <meta name="keywords" content="ulasan produk, blog teknologi, tren hiburan, gaya hidup modern, kesehatan, artikel esensial, Found Selection, review objektif">
+    <meta name="author" content="Found Selection">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    
+    <!-- Link Canonical Manual Absolut (Beranda) untuk pencegahan duplikat konten -->
+    <link rel="canonical" href="https://foundselection.blog/" />
+    
+    <meta property="og:title" content="Found Selection | Sudut Pandang Baru untuk Setiap Cerita">
+    <meta property="og:description" content="Temukan artikel pilihan, ulasan produk terpercaya, dan tren terkini dari kacamata Found Selection.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://foundselection.blog/">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1200&fm=webp&auto=format&fit=crop">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Sistem 3 Font SEO Google: Lato, Open Sans, Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        opensans: ['Open Sans', 'Arial', 'sans-serif'],
+                        lato: ['Lato', 'Arial', 'sans-serif'],
+                        roboto: ['Roboto', 'Arial', 'sans-serif'],
+                    },
+                    colors: {
+                        text: {
+                            main: '#0f172a', // Hitam Solid untuk Heading
+                            body: '#334155', // Abu gelap nyaman untuk paragraf
+                            muted: '#64748b' // Abu-abu meta dan pelengkap
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6; /* Standar keterbacaan Google */
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Performa Navbar Otomatis dengan momentum ringan */
+        .smart-navbar {
+            will-change: transform;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* FAQ Accordion Animasi Halus (Tidak kaku) */
+        details.faq-item > summary { list-style: none; }
+        details.faq-item > summary::-webkit-details-marker { display: none; }
+        details.faq-item[open] summary ~ * {
+            animation: softOpen 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes softOpen {
+            0% { opacity: 0; transform: translateY(-8px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Gradient Elegan Kerjasama (Bubble Wave) */
+        .bg-bubble-wave {
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(circle at 15% 25%, rgba(14, 165, 233, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 75%, rgba(59, 130, 246, 0.06) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(226, 232, 240, 0.5) 0%, transparent 60%);
+        }
+
+        /* Animasi Pop-up Modal Privasi */
+        .modal-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-inactive {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal-content-transition {
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        .modal-inactive .modal-body {
+            transform: translateY(20px) scale(0.95);
+            opacity: 0;
+        }
+        .modal-active .modal-body {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-[#f8fafc] text-text-body font-lato text-[1rem] selection:bg-text-main selection:text-white">
+
+    <!-- Navbar Kapsul Melayang (Smart Autohide) -->
+    <div id="navbar-container" class="smart-navbar fixed top-4 md:top-6 left-0 w-full z-50 flex justify-center px-4 fade-in">
+        <nav class="bg-white/95 backdrop-blur-md border border-gray-200/60 shadow-sm rounded-full" aria-label="Navigasi Utama">
+            <div class="px-6 md:px-10 h-14 flex items-center justify-center overflow-x-auto scrollbar-hide relative">
+                <ul id="main-nav" class="flex items-center space-x-2 md:space-x-4 text-[0.875rem] font-opensans font-bold whitespace-nowrap relative z-10">
+                    <li><a href="#artikel" class="nav-link block relative px-5 py-2 rounded-full text-text-muted transition-colors duration-300">Artikel</a></li>
+                    <li><a href="#kerja-sama" class="nav-link block relative px-5 py-2 rounded-full text-text-muted transition-colors duration-300">Kerja Sama</a></li>
+                    <li><a href="#faq" class="nav-link block relative px-5 py-2 rounded-full text-text-muted transition-colors duration-300">FAQ</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Header / Hero Section (Satu-satunya Tag H1 demi SEO) -->
+    <header class="relative w-full min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden bg-white">
+        <div class="absolute inset-0 z-0">
+            <picture>
+                <source media="(min-width: 1024px)" srcset="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1920&fm=webp&auto=format&fit=crop">
+                <source media="(min-width: 640px)" srcset="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1024&fm=webp&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=640&fm=webp&auto=format&fit=crop" width="1920" height="1080" alt="Ruang kerja editorial Found Selection" class="w-full h-full object-cover object-center opacity-30" fetchpriority="high">
+            </picture>
+            <div class="absolute inset-0 bg-gradient-to-b from-white/40 via-white/80 to-[#f8fafc]"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-6 fade-in max-w-[1200px] mx-auto" style="animation-delay: 0.2s;">
+            <span class="inline-block py-1.5 px-4 rounded-full bg-slate-100 text-text-main text-[0.875rem] font-opensans font-bold tracking-widest mb-6 uppercase border border-slate-200">Perspektif Tajam</span>
+            <!-- Tag H1 Khusus di Beranda (Responsif Font Size) -->
+            <h1 class="font-opensans text-[1.75rem] md:text-[2.5rem] font-bold tracking-tight text-text-main leading-[1.2] mb-6">
+                Sudut Pandang Baru <br class="hidden md:block"> untuk Setiap Cerita
+            </h1>
+            <p class="font-lato text-[1rem] text-text-body max-w-2xl mx-auto mb-10 leading-[1.6]">
+                Temukan inspirasi melalui ulasan mendalam, tren teknologi terkini, dan gaya hidup modern yang dikemas secara profesional, faktual, dan mudah dipahami.
+            </p>
+            <a href="#artikel" class="inline-flex items-center justify-center px-8 py-4 font-opensans text-[0.875rem] font-bold text-white bg-text-main rounded-full hover:bg-black transition-colors shadow-lg">
+                Mulai Membaca
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section Artikel (5 Kategori dengan Slider Horizontal per 5 Artikel) -->
+        <section id="artikel" class="py-24 bg-[#f8fafc]">
+            <div class="max-w-[1200px] mx-auto px-8 md:px-12">
+                
+                <div class="text-center mb-16">
+                    <h2 class="font-opensans text-[1.75rem] md:text-[2rem] font-bold text-text-main mb-4 tracking-tight">Bacaan Terkini</h2>
+                    <p class="font-lato text-[1rem] text-text-muted max-w-2xl mx-auto">Eksplorasi wawasan terbaru dari kategori pilihan kami, disusun mendalam dan dioptimalkan untuk Anda.</p>
+                </div>
+
+                <div class="space-y-24">
+                    
+                    <!-- Kategori: Teknologi (Slider) -->
+                    <div id="cat-teknologi" class="relative scroll-mt-24 group/section">
+                        <div class="mb-6 pb-2 border-b border-gray-200/80">
+                            <!-- Menggunakan Tag H2 pemisah kategori (Ketebalan Bold) -->
+                            <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Teknologi</h2>
+                        </div>
+                        <div class="relative">
+                            <!-- Floating Button Kiri -->
+                            <button onclick="slideLeft('slider-teknologi')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <!-- Slider Container dengan padding Y agak besar agar animasi Pop-up Card tidak Crop -->
+                            <div id="slider-teknologi" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
+                                <div class="artikel-kategori-teknologi flex gap-6 w-max pb-4"></div>
+                            </div>
+                            <!-- Floating Button Kanan -->
+                            <button onclick="slideRight('slider-teknologi')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kategori: Hiburan (Slider) -->
+                    <div id="cat-hiburan" class="relative scroll-mt-24 group/section">
+                        <div class="mb-6 pb-2 border-b border-gray-200/80">
+                            <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Hiburan</h2>
+                        </div>
+                        <div class="relative">
+                            <button onclick="slideLeft('slider-hiburan')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <div id="slider-hiburan" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
+                                <div class="artikel-kategori-hiburan flex gap-6 w-max pb-4"></div>
+                            </div>
+                            <button onclick="slideRight('slider-hiburan')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kategori: Esensial (Slider) -->
+                    <div id="cat-esensial" class="relative scroll-mt-24 group/section">
+                        <div class="mb-6 pb-2 border-b border-gray-200/80">
+                            <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Esensial</h2>
+                        </div>
+                        <div class="relative">
+                            <button onclick="slideLeft('slider-esensial')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <div id="slider-esensial" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
+                                <div class="artikel-kategori-esensial flex gap-6 w-max pb-4"></div>
+                            </div>
+                            <button onclick="slideRight('slider-esensial')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kategori: Gaya Hidup (Slider) -->
+                    <div id="cat-gaya-hidup" class="relative scroll-mt-24 group/section">
+                        <div class="mb-6 pb-2 border-b border-gray-200/80">
+                            <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Gaya Hidup</h2>
+                        </div>
+                        <div class="relative">
+                            <button onclick="slideLeft('slider-gayahidup')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <div id="slider-gayahidup" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
+                                <div class="artikel-kategori-gaya-hidup flex gap-6 w-max pb-4"></div>
+                            </div>
+                            <button onclick="slideRight('slider-gayahidup')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Kategori: Kesehatan (Slider Tambahan) -->
+                    <div id="cat-kesehatan" class="relative scroll-mt-24 group/section">
+                        <div class="mb-6 pb-2 border-b border-gray-200/80">
+                            <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Kesehatan</h2>
+                        </div>
+                        <div class="relative">
+                            <button onclick="slideLeft('slider-kesehatan')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <div id="slider-kesehatan" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
+                                <div class="artikel-kategori-kesehatan flex gap-6 w-max pb-4"></div>
+                            </div>
+                            <button onclick="slideRight('slider-kesehatan')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Tombol Tunggal "Lihat Semua Artikel" Invert Color (Tanpa Hover Menonjol) -->
+                <div class="mt-20 text-center">
+                    <a href="/artikel/index.html" class="inline-flex items-center justify-center px-10 py-4 font-opensans text-[0.875rem] font-bold text-text-main bg-white border-2 border-text-main rounded-full hover:bg-text-main hover:text-white transition-colors duration-300 shadow-sm">
+                        Lihat Semua Artikel
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section Kerja Sama (Gradasi Bubble Wave) -->
+        <section id="kerja-sama" class="py-32 bg-bubble-wave text-center border-t border-gray-200/60 relative">
+            <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+                <h2 class="font-opensans text-[1.75rem] md:text-[2.5rem] font-bold text-text-main mb-6 tracking-tight">
+                    Tumbuh Bersama Found Selection.
+                </h2>
+                <p class="font-lato text-[1rem] text-text-body mb-10 leading-[1.6] max-w-2xl mx-auto">
+                    Hadirkan produk Anda di hadapan audiens yang tepat. Kami menyajikan ulasan yang berimbang, elegan, dan teroptimasi secara profesional untuk visibilitas maksimal di mesin pencari.
+                </p>
+                <!-- Tombol Invert Color (Tanpa Hover Menonjol) -->
+                <a href="mailto:proview.support@gmail.com" class="inline-flex items-center justify-center gap-3 px-10 py-4 font-opensans text-[0.875rem] font-bold text-white bg-text-main border-2 border-text-main hover:bg-white hover:text-text-main transition-colors duration-300 rounded-full shadow-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    proview.support@gmail.com
+                </a>
+            </div>
+        </section>
+
+        <!-- Section FAQ (Bersih & Sederhana) -->
+        <section id="faq" class="py-24 bg-[#f8fafc] border-t border-gray-200/60">
+            <div class="max-w-[1200px] mx-auto px-6">
+                <div class="max-w-3xl mx-auto">
+                    <div class="text-left md:text-center mb-16">
+                        <h2 class="font-opensans text-[1.75rem] md:text-[2rem] font-bold text-text-main mb-4 tracking-tight">Pertanyaan Populer</h2>
+                        <p class="font-lato text-[1rem] text-text-muted">Informasi yang paling sering ditanyakan mengenai platform kami.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <details class="faq-item group bg-white rounded-xl border border-gray-200/80 px-6 py-5 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
+                            <summary class="flex justify-between items-center font-opensans font-bold text-text-main outline-none text-[1rem]">
+                                <span>Apa fokus utama konten di Found Selection?</span>
+                                <span class="transition-transform duration-300 group-open:rotate-180 text-text-muted">
+                                    <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="font-lato text-[1rem] text-text-body pt-4 pb-2 leading-[1.6] border-t border-gray-100 mt-4">
+                                Found Selection berfokus pada ulasan dan wawasan mendalam mengenai Teknologi, Hiburan, barang Esensial, tren Gaya Hidup, dan Kesehatan.
+                            </div>
+                        </details>
+
+                        <details class="faq-item group bg-white rounded-xl border border-gray-200/80 px-6 py-5 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
+                            <summary class="flex justify-between items-center font-opensans font-bold text-text-main outline-none text-[1rem]">
+                                <span>Bagaimana standar objektivitas ulasan produk?</span>
+                                <span class="transition-transform duration-300 group-open:rotate-180 text-text-muted">
+                                    <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="font-lato text-[1rem] text-text-body pt-4 pb-2 leading-[1.6] border-t border-gray-100 mt-4">
+                                Kami memegang teguh prinsip ulasan jujur. Setiap produk dijabarkan kelebihan dan kekurangannya berdasarkan pengujian aktual.
+                            </div>
+                        </details>
+
+                        <details class="faq-item group bg-white rounded-xl border border-gray-200/80 px-6 py-5 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
+                            <summary class="flex justify-between items-center font-opensans font-bold text-text-main outline-none text-[1rem]">
+                                <span>Apakah semua artikel terindeks Google?</span>
+                                <span class="transition-transform duration-300 group-open:rotate-180 text-text-muted">
+                                    <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="font-lato text-[1rem] text-text-body pt-4 pb-2 leading-[1.6] border-t border-gray-100 mt-4">
+                                Ya, seluruh arsitektur web kami dirancang menggunakan praktik SEO White Hat terbaik dan terstruktur dengan rapi untuk index Google.
+                            </div>
+                        </details>
+                        
+                        <details class="faq-item group bg-white rounded-xl border border-gray-200/80 px-6 py-5 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
+                            <summary class="flex justify-between items-center font-opensans font-bold text-text-main outline-none text-[1rem]">
+                                <span>Bagaimana cara memulai kemitraan bisnis?</span>
+                                <span class="transition-transform duration-300 group-open:rotate-180 text-text-muted">
+                                    <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="font-lato text-[1rem] text-text-body pt-4 pb-2 leading-[1.6] border-t border-gray-100 mt-4">
+                                Hubungi tim kami dengan mengirimkan email kemitraan langsung ke alamat proview.support@gmail.com.
+                            </div>
+                        </details>
+                        
+                        <details class="faq-item group bg-white rounded-xl border border-gray-200/80 px-6 py-5 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
+                            <summary class="flex justify-between items-center font-opensans font-bold text-text-main outline-none text-[1rem]">
+                                <span>Seberapa sering artikel baru diterbitkan?</span>
+                                <span class="transition-transform duration-300 group-open:rotate-180 text-text-muted">
+                                    <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
+                                </span>
+                            </summary>
+                            <div class="font-lato text-[1rem] text-text-body pt-4 pb-2 leading-[1.6] border-t border-gray-100 mt-4">
+                                Kami memprioritaskan riset mendalam. Artikel diterbitkan secara rutin 3 hingga 5 kali per minggu secara optimal.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-16 text-[0.875rem] text-text-muted text-center md:text-left relative z-10">
+        <div class="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
+            
+            <div class="text-center md:text-left">
+                <span class="font-opensans font-bold text-[1.5rem] tracking-tight text-text-main block mb-2">Found Selection.</span>
+                <p class="font-lato">&copy; 2026 Found Selection. Hak cipta dilindungi.</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-x-10 gap-y-4 font-opensans">
+                <div class="relative group pb-4 -mb-4">
+                    <a href="#artikel" class="hover:text-text-main font-bold transition-colors flex items-center gap-1 cursor-pointer">
+                        Artikel
+                        <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col overflow-hidden z-50 transform translate-y-2 group-hover:translate-y-0">
+                        <a href="#cat-teknologi" class="px-5 py-3 text-left hover:bg-gray-50 text-text-main font-bold transition-colors border-b border-gray-100">Teknologi</a>
+                        <a href="#cat-hiburan" class="px-5 py-3 text-left hover:bg-gray-50 text-text-main font-bold transition-colors border-b border-gray-100">Hiburan</a>
+                        <a href="#cat-esensial" class="px-5 py-3 text-left hover:bg-gray-50 text-text-main font-bold transition-colors border-b border-gray-100">Esensial</a>
+                        <a href="#cat-gaya-hidup" class="px-5 py-3 text-left hover:bg-gray-50 text-text-main font-bold transition-colors border-b border-gray-100">Gaya Hidup</a>
+                        <a href="#cat-kesehatan" class="px-5 py-3 text-left hover:bg-gray-50 text-text-main font-bold transition-colors">Kesehatan</a>
+                    </div>
+                </div>
+
+                <a href="#kerja-sama" class="hover:text-text-main font-bold transition-colors">Kerja Sama</a>
+                <a href="#faq" class="hover:text-text-main font-bold transition-colors">FAQ</a>
+            </div>
+
+            <div class="flex justify-center md:justify-end gap-8 font-opensans items-center">
+                <!-- Trigger Pop-up Modal Privasi -->
+                <a href="javascript:void(0)" onclick="openPrivacyModal()" class="hover:text-text-main font-bold transition-colors">Kebijakan Privasi</a>
+                
+                <a href="mailto:proview.support@gmail.com" class="hover:text-text-main transition-colors flex items-center gap-2 group/mail" aria-label="Contact">
+                    <svg class="w-5 h-5 text-text-muted group-hover/mail:text-text-main transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span class="font-bold hidden md:inline">Contact</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- POP-UP MODAL KEBIJAKAN PRIVASI -->
+    <div id="privacyModal" class="fixed inset-0 z-[60] flex items-center justify-center modal-inactive modal-content-transition">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onclick="closePrivacyModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="modal-body relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl mx-4 max-h-[85vh] flex flex-col overflow-hidden">
+            <!-- Header Modal -->
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white">
+                <h2 class="font-opensans text-[1.25rem] font-bold text-text-main tracking-tight">Kebijakan Privasi</h2>
+                <button onclick="closePrivacyModal()" class="text-text-muted hover:text-red-500 transition-colors p-2 -mr-2 outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <!-- Isi Modal Scrollable -->
+            <div class="px-6 py-6 overflow-y-auto font-lato text-[1rem] text-text-body space-y-4">
+                <p><strong>Terakhir Diperbarui: 09 September 2026</strong></p>
+                <p>Selamat datang di Found Selection (foundselection.blog). Privasi Anda sangat penting bagi kami. Dokumen Kebijakan Privasi ini menguraikan jenis informasi pribadi yang dikumpulkan dan dicatat oleh sistem kami, serta bagaimana kami menggunakannya untuk menunjang keamanan dan kenyamanan penjelajahan Anda.</p>
+                
+                <h3 class="font-opensans font-bold text-[1.125rem] text-text-main mt-6">1. Pengumpulan Data</h3>
+                <p>Kami hanya mengumpulkan data esensial berupa aktivitas analitik anonim (seperti *page views* dan *time on site*) guna memahami tren bacaan audiens. Kami tidak melakukan ekstraksi data sensitif tanpa persetujuan eksplisit dari pihak pengguna.</p>
+                
+                <h3 class="font-opensans font-bold text-[1.125rem] text-text-main mt-6">2. Penggunaan Tautan Afiliasi</h3>
+                <p>Found Selection berpartisipasi dalam program afiliasi. Kami menyertakan tautan afiliasi pada beberapa ulasan produk. Jika Anda mengklik atau melakukan pembelian melalui tautan tersebut, sistem jaringan afiliasi mungkin akan menempatkan *cookies* pada peramban (*browser*) Anda untuk melacak sumber referensi. Kami mungkin menerima komisi kecil tanpa adanya biaya tambahan bagi Anda.</p>
+                
+                <h3 class="font-opensans font-bold text-[1.125rem] text-text-main mt-6">3. Pengelolaan Cookies</h3>
+                <p>Anda memegang kendali penuh atas konfigurasi *cookies* pada peramban Anda. Anda dapat menonaktifkan pelacakan pihak ketiga melalui pengaturan privasi keamanan *browser* yang Anda gunakan kapan saja.</p>
+                
+                <h3 class="font-opensans font-bold text-[1.125rem] text-text-main mt-6">4. Hubungi Kami</h3>
+                <p>Apabila Anda memerlukan informasi lebih lanjut mengenai tata kelola privasi portal publikasi kami, jangan ragu untuk menghubungi representatif hukum atau tim peninjau kami melalui alamat: <strong>proview.support@gmail.com</strong>.</p>
+            </div>
+            
+            <!-- Footer Modal -->
+            <div class="px-6 py-4 border-t border-gray-100 bg-gray-50 flex justify-end">
+                <button onclick="closePrivacyModal()" class="px-6 py-2 bg-text-main text-white font-opensans font-bold text-[0.875rem] rounded-full hover:bg-black transition-colors">
+                    Saya Mengerti
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Logika Geser Slider
+        function slideLeft(sliderId) {
+            const slider = document.getElementById(sliderId);
+            if(slider) {
+                const scrollAmount = window.innerWidth < 768 ? 284 : 324;
+                slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        function slideRight(sliderId) {
+            const slider = document.getElementById(sliderId);
+            if(slider) {
+                const scrollAmount = window.innerWidth < 768 ? 284 : 324;
+                slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        // Logika Pop-up Modal Privasi
+        const privacyModal = document.getElementById('privacyModal');
+        function openPrivacyModal() {
+            privacyModal.classList.remove('modal-inactive');
+            privacyModal.classList.add('modal-active');
+            document.body.style.overflow = 'hidden'; // Kunci scroll background
+        }
+        function closePrivacyModal() {
+            privacyModal.classList.remove('modal-active');
+            privacyModal.classList.add('modal-inactive');
+            document.body.style.overflow = ''; // Lepas kunci scroll
+        }
+
+        function generateSlug(text) {
+            return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Logika SMART FLOATING NAVBAR ---
+            let lastScrollTop = 0;
+            const navbar = document.getElementById('navbar-container');
+            let scrollTimeout;
+
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop && scrollTop > 80) {
+                    navbar.style.transform = 'translateY(-150%)'; 
+                } else {
+                    navbar.style.transform = 'translateY(0)';
+                }
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    navbar.style.transform = 'translateY(0)';
+                }, 800);
+            }, { passive: true });
+
+            // --- Pembentukan Card Artikel Maksimal 5 Item Horizontal ---
+            const generateCards = (categoryId, categoryLabel, images, titles, dates, readTimes) => {
+                const container = document.querySelector(`.artikel-kategori-${categoryId}`);
+                if(!container) return;
+
+                let cardsHtml = '';
+                
+                // HANYA 5 KARTU (Horizontal Slide System)
+                for (let i = 0; i < 5; i++) {
+                    const optimizedImg = images[i % images.length] + '&fm=webp&q=80';
+                    const title = titles[i % titles.length];
+                    const publishDate = dates[i];
+                    const readTime = readTimes[i % readTimes.length];
+                    
+                    const slug = generateSlug(title);
+                    const permalink = `/artikel/${categoryId}/${slug}.html`;
+                    
+                    cardsHtml += `
+                        <a href="${permalink}" class="snap-start shrink-0 w-[260px] md:w-[300px] flex flex-col group cursor-pointer no-underline block outline-none">
+                            <article class="transition-all duration-300 transform group-hover:-translate-y-2 h-full flex flex-col relative bg-transparent">
+                                
+                                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-5 relative bg-gray-200 shadow-sm group-hover:shadow-xl transition-all duration-300 group-hover:ring-4 group-hover:ring-blue-50/50">
+                                    <img src="${optimizedImg}" width="400" height="300" alt="Thumbnail ${title}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async">
+                                    <span class="absolute top-3 left-3 bg-white/95 backdrop-blur shadow-sm text-text-main text-[11px] font-opensans font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">${categoryLabel}</span>
+                                </div>
+                                
+                                <!-- Metadata: Ketebalan Semibold, Warna Muted elegan, + Icon Jam -->
+                                <div class="flex items-center justify-between mb-3 text-[0.875rem] font-opensans font-semibold text-text-muted">
+                                    <time datetime="2026-09-07">${publishDate}</time>
+                                    <span class="flex items-center gap-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        ${readTime}
+                                    </span>
+                                </div>
+                                
+                                <!-- Judul Statis Tanpa Hover Color Change -->
+                                <h3 class="font-opensans text-[1.25rem] font-bold text-text-main leading-snug mb-3 line-clamp-2" title="${title}">
+                                    ${title}
+                                </h3>
+                                
+                                <p class="font-lato text-[1rem] leading-[1.6] text-text-body line-clamp-2 mb-4 flex-grow">
+                                    Simak penjabaran komprehensif dari tim kami mengenai kelebihan, kekurangan, dan detail spesifik produk ini.
+                                </p>
+
+                                <!-- Tombol Tactile BACA SELENGKAPNYA dengan garis bawah dinamis -->
+                                <span class="inline-block mt-auto font-opensans font-bold text-[0.875rem] uppercase tracking-wider text-blue-600 group-hover:text-[#0b2b54] group-hover:underline transition-colors duration-300">
+                                    Baca Selengkapnya &rarr;
+                                </span>
+                                
+                            </article>
+                        </a>
+                    `;
+                }
+                
+                container.innerHTML = cardsHtml;
+            };
+
+            const datesOrdered = [
+                '09 September 2026', '08 September 2026', '07 September 2026', 
+                '06 September 2026', '05 September 2026'
+            ];
+            const readTimesDummy = ['3 min read', '5 min read', '4 min read', '6 min read', '4 min read'];
+            
+            generateCards('teknologi', 'Teknologi', [
+                'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800',
+                'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800'
+            ], [
+                'Era Baru Kecerdasan Buatan dalam Kehidupan Sehari-hari',
+                'Ulasan Mendalam: Smartphone Flagship Terbaik Tahun Ini',
+                'Mengoptimalkan Produktivitas dengan Gadget Minimalis',
+                'Masa Depan Realitas Virtual di Industri Kerja',
+                'Keamanan Siber: Panduan Dasar untuk Pemula'
+            ], datesOrdered, readTimesDummy);
+
+            generateCards('hiburan', 'Entertainment', [
+                'https://images.unsplash.com/photo-1603190287605-e6ade32fa852?q=80&w=800',
+                'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800'
+            ], [
+                'Rekomendasi Film Independen yang Wajib Anda Tonton',
+                'Tren Musik Digital dan Pengaruhnya terhadap Musisi Lokal',
+                'Di Balik Layar: Proses Kreatif Serial Populer',
+                'Podcast Terbaik untuk Menemani Waktu Santai Anda',
+                'Ulasan Konser: Tata Panggung Spektakuler Tahun Ini'
+            ], datesOrdered, readTimesDummy);
+
+            generateCards('esensial', 'Esensial', [
+                'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=800',
+                'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800'
+            ], [
+                'Headphone Noise-Cancelling: Investasi atau Gengsi?',
+                'Review Kursi Ergonomis untuk Kerja Jarak Jauh',
+                '5 Alat Tulis Premium yang Membangkitkan Inspirasi',
+                'Tas Ransel Fungsional untuk Mobilitas Tinggi',
+                'Botol Minum Pintar: Tetap Terhidrasi Secara Efektif'
+            ], datesOrdered, readTimesDummy);
+
+            generateCards('gaya-hidup', 'Gaya Hidup', [
+                'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800',
+                'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=800'
+            ], [
+                'Filosofi Minimalisme dalam Menata Ruang Pribadi',
+                'Rutinitas Pagi yang Efektif Sebelum Memulai Hari',
+                'Kopi Artisan: Memahami Cita Rasa dari Biji',
+                'Panduan Singkat Merawat Tanaman Hias Indoor',
+                'Menjaga Keseimbangan Kerja dan Kehidupan Personal'
+            ], datesOrdered, readTimesDummy);
+
+            generateCards('kesehatan', 'Kesehatan', [
+                'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=800',
+                'https://images.unsplash.com/photo-1549460228-56f4d2f8e9c6?q=80&w=800'
+            ], [
+                'Pentingnya Menjaga Pola Tidur untuk Produktivitas',
+                'Superfood Lokal yang Mudah Ditemukan di Pasar',
+                'Olahraga Ringan 15 Menit di Sela Waktu Kerja',
+                'Mengelola Stres dengan Teknik Meditasi Sederhana',
+                'Mitos dan Fakta Seputar Diet Karbohidrat'
+            ], datesOrdered, readTimesDummy);
+
+
+            // --- Logika Scrollspy Kapsul Navbar Aktif ---
+            const sections = document.querySelectorAll("section, header");
+            const navLinks = document.querySelectorAll("#main-nav a");
+
+            window.addEventListener("scroll", () => {
+                let current = "";
+                sections.forEach((section) => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                        current = section.getAttribute("id");
+                    }
+                });
+
+                navLinks.forEach((link) => {
+                    link.classList.remove("bg-text-main", "text-white");
+                    link.classList.add("text-text-muted");
+
+                    if (link.getAttribute("href").includes(current) && current !== "") {
+                        link.classList.remove("text-text-muted");
+                        link.classList.add("bg-text-main", "text-white");
+                    }
+                });
+            }, { passive: true });
+
+            window.dispatchEvent(new Event("scroll"));
+        });
+    </script>
+</body>
+</html>
