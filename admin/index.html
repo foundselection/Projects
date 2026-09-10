@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob: https:; connect-src 'self' https://found-selection-api.foundselection.workers.dev; font-src 'self' data: https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob: https:; connect-src 'self' https://found-selection-api.foundselection.workers.dev https://api.cloudinary.com; font-src 'self' data: https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; upgrade-insecure-requests">
 <style>
 :root{--sidebar-width:220px;--wp:#1d2327;--blue:#2271b1;--blue2:#135e96;--border:#c3c4c7;--line:#dcdcde;--bg:#f0f0f1;--text:#1d2327;--muted:#646970;--green:#00a32a;--yellow:#dba617;--red:#d63638;--gold:#b99220;}
 *{box-sizing:border-box}html,body{margin:0;padding:0}body{background:var(--bg);color:var(--text);font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}.hidden{display:none!important}button,input,textarea,select{font:inherit}button{cursor:pointer}
@@ -93,7 +93,9 @@ sideResizer.addEventListener('pointerup',stopSidebarResize);sideResizer.addEvent
 'use strict';
 const API='https://found-selection-api.foundselection.workers.dev/api/admin/articles';
 const AUTH_API='https://found-selection-api.foundselection.workers.dev/api/auth';
-const MEDIA_API='https://found-selection-api.foundselection.workers.dev/api/media';
+const CLOUDINARY_CLOUD_NAME='ql2t5mnu';
+const CLOUDINARY_UPLOAD_PRESET='found-selection';
+const CLOUDINARY_UPLOAD_URL=`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
 const CATS=['Teknologi','Hiburan','Esensial','Gaya Hidup','Kesehatan'];
 let posts=[],editingSlug=null,slugManual=false,deleteSlug=null,mode='visual',pendingImage=null,storedImageUrl='',dirty=false,suppressDirty=false;
 const $=id=>document.getElementById(id);
@@ -138,7 +140,28 @@ function hideLogin(){$('loginGate').style.display='none';$('loginError').textCon
 async function login(e){e.preventDefault();const btn=$('loginButton');btn.disabled=true;$('loginError').textContent='';try{const r=await fetch(AUTH_API+'/login',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({password:$('loginPassword').value})});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||'Kata sandi salah.');hideLogin();await load()}catch(err){$('loginError').textContent=err.message||'Gagal masuk.'}finally{btn.disabled=false}}
 async function editPost(slug){const a=posts.find(x=>x.slug===slug);if(a){fill(a);return}try{const r=await apiFetch(API+'/'+encodeURIComponent(slug));const j=await r.json();if(!j.success)throw Error(j.error||'Artikel tidak ditemukan');fill(j.data)}catch(e){toast(e.message)}}
 function buildPayload(status){const body=getBody();status=status==='published'?'published':'draft';return{title:$('title').value.trim(),slug:$('slug').value.trim()||slugify($('title').value),category:getCategory(),excerpt:$('excerpt').value.trim(),content:body,publish_date:$('publishDate').value,read_time:Math.max(1,Number($('readTime').value)||5),status,thumbnail:storedImageUrl||'',image_alt:$('altText').value.trim(),image_name:$('imageName').value.trim(),image_title:$('imageTitle').value.trim(),seo_title:$('seoTitle').value.trim(),meta_description:$('metaDesc').value.trim(),focus_keyword:$('focus').value.trim(),secondary_keywords:$('secondary').value.trim(),canonical_url:$('canonical').value.trim(),og_title:$('ogTitle').value.trim(),og_description:$('ogDesc').value.trim(),og_image:$('ogImage').value.trim(),robots_index:$('robotsIndex').value,robots_follow:$('robotsFollow').value,schema_type:$('schema').value}}
-async function uploadMedia(){if(!pendingImage)return storedImageUrl;const fd=new FormData();fd.append('file',pendingImage.blob,pendingImage.filename);fd.append('alt_text',$('altText').value.trim());fd.append('title',$('imageTitle').value.trim());const r=await apiFetch(MEDIA_API,{method:'POST',body:fd});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||'Endpoint upload gambar belum tersedia di Worker.');storedImageUrl=j.url||j.data?.url||'';if(!storedImageUrl)throw Error('Worker tidak mengembalikan URL gambar.');pendingImage=null;return storedImageUrl}
+async function uploadMedia(){
+  if(!pendingImage)return storedImageUrl;
+
+  const fd=new FormData();
+  fd.append('file',pendingImage.blob,pendingImage.filename);
+  fd.append('upload_preset',CLOUDINARY_UPLOAD_PRESET);
+
+  const r=await fetch(CLOUDINARY_UPLOAD_URL,{
+    method:'POST',
+    body:fd
+  });
+
+  const j=await r.json().catch(()=>({}));
+
+  if(!r.ok||!j.secure_url){
+    throw Error(j.error?.message||'Gagal mengunggah gambar ke Cloudinary.');
+  }
+
+  storedImageUrl=j.secure_url;
+  pendingImage=null;
+  return storedImageUrl;
+}
 async function savePost(status){const title=$('title').value.trim(),slug=$('slug').value.trim()||slugify(title),body=getBody();if(!title||!slug||!textOf(body).trim()||!$('publishDate').value){toast('Lengkapi judul, slug, isi artikel, dan tanggal.');return}try{if(pendingImage) await uploadMedia(); const p=buildPayload(status);const url=editingSlug?API+'/'+encodeURIComponent(editingSlug):API;const r=await apiFetch(url,{method:editingSlug?'PUT':'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||(j.details||[]).join(', ')||'Gagal menyimpan artikel.');editingSlug=p.slug;markSaved();toast(status==='published'?'Artikel berhasil dipublikasikan.':'Draft berhasil disimpan.');await load();show('posts')}catch(e){console.error(e);toast(e.message)}}
 function seoChecks(p){const k=p.focus_keyword.toLowerCase().trim(),t=p.title.toLowerCase(),s=p.slug.toLowerCase(),c=textOf(p.content).toLowerCase(),st=p.seo_title.toLowerCase(),m=p.meta_description.toLowerCase(),w=words(c);return[[!!p.title,'Judul artikel terisi'],[!!k,'Kata kunci utama ditentukan'],[!!p.seo_title,'Judul SEO tersedia'],[p.seo_title.length>=40&&p.seo_title.length<=60,'Panjang judul SEO ideal'],[!!p.meta_description,'Deskripsi SEO tersedia'],[p.meta_description.length>=120&&p.meta_description.length<=160,'Panjang deskripsi SEO ideal'],[!!k&&t.includes(k),'Kata kunci ada di judul'],[!!k&&s.includes(slugify(k)),'Kata kunci ada di slug'],[!!k&&c.slice(0,600).includes(k),'Kata kunci ada di pembuka'],[!!k&&st.includes(k),'Kata kunci ada di judul SEO'],[!!k&&m.includes(k),'Kata kunci ada di deskripsi SEO'],[w>=600,'Isi artikel minimal 600 kata'],[!!p.canonical_url,'URL utama tersedia'] ]}
 function analyze(){updateSlugPreview();const p=buildPayload($('pubStatus').textContent.toLowerCase()),checks=seoChecks(p),score=Math.round(checks.filter(x=>x[0]).length/checks.length*100),txt=textOf(p.content),w=words(txt);$('wordCount').textContent='Jumlah kata: '+w;$('readTimeLive').textContent='Waktu baca: '+Math.max(1,Math.ceil(w/200))+' min';$('gSlug').textContent=p.slug||'slug-artikel';$('gTitle').textContent=p.seo_title||p.title||'Judul SEO artikel';$('gDesc').textContent=p.meta_description||p.excerpt||'Meta description akan tampil di sini.';$('seoTitleCount').textContent=p.seo_title.length+'/70';$('metaCount').textContent=p.meta_description.length+'/170';$('seoScore').textContent=score+'/100';$('seoFill').style.width=score+'%';$('seoBadge').textContent=score>=80?'Baik':score>=55?'Perlu diperbaiki':'Perlu dilengkapi';$('seoBadge').className='badge '+(score>=80?'b-green':score>=55?'b-yellow':'b-red');$('seoChecks').innerHTML=checks.map(x=>`<div class="check"><span class="${x[0]?'ok':'no'}">${x[0]?'✓':'○'}</span> ${esc(x[1])}</div>`).join('');const sent=txt.split(/[.!?]+/).map(words).filter(Boolean),avg=sent.length?sent.reduce((a,b)=>a+b,0)/sent.length:0,paras=txt.split(/\n\s*\n/).filter(Boolean),rd=[[w>=300,'Konten cukup panjang'],[avg>0&&avg<=22,'Kalimat rata-rata ≤22 kata'],[paras.every(x=>words(x)<=100),'Paragraf tidak terlalu padat'],[/<h2|<h3/i.test(p.content),'Subheading tersedia'],[/<a\s/i.test(p.content),'Ada link dalam artikel']];const rs=Math.round(rd.filter(x=>x[0]).length/rd.length*100);$('readBadge').textContent=rs+'/100';$('readBadge').className='badge '+(rs>=80?'b-green':rs>=60?'b-yellow':'b-red');$('readChecks').innerHTML=rd.map(x=>`<div class="check"><span class="${x[0]?'ok':'no'}">${x[0]?'✓':'○'}</span> ${x[1]}</div>`).join('')}
@@ -147,7 +170,76 @@ function seoScoreFor(a){const p={...a,content:a.content||'',focus_keyword:a.focu
 function renderArtikel(){const q=($('search')?.value||'').toLowerCase(),f=$('filter')?.value||'';const rows=posts.filter(a=>(!q||(`${a.title} ${a.slug}`).toLowerCase().includes(q))&&(!f||a.status===f));$('postRows').innerHTML=rows.map(a=>{const n=seoScoreFor(a);return`<tr><td><button class="post-title" onclick="editPost('${esc(a.slug)}')">${esc(a.title)}</button><div class="post-slug">/artikel/${esc(a.slug)}</div></td><td>${esc(a.category||'')}</td><td>${a.status==='published'?'<span class="badge b-green">Terbit</span>':'<span class="badge b-yellow">Draft</span>'}</td><td><span class="badge ${n>=80?'b-green':n>=55?'b-yellow':'b-red'}">${n}</span></td><td>${esc(a.publish_date||'—')}</td><td class="actions"><button class="button" onclick="editPost('${esc(a.slug)}')">Edit</button> <button class="button danger" onclick="askHapus('${esc(a.slug)}')">Hapus</button></td></tr>`}).join('');$('noArtikel').classList.toggle('hidden',rows.length>0)}
 function dashboard(){const pub=posts.filter(a=>a.status==='published').length,draft=posts.filter(a=>a.status==='draft').length,seo=posts.filter(a=>a.focus_keyword&&a.seo_title&&a.meta_description).length;$('sTotal').textContent=posts.length;$('sPub').textContent=pub;$('sDraft').textContent=draft;$('sSEO').textContent=seo;const r=[...posts].sort((a,b)=>(b.publish_date||'').localeCompare(a.publish_date||'')).slice(0,6);$('recent').innerHTML=r.length?r.map(a=>`<button onclick="editPost('${esc(a.slug)}')"><b>${esc(a.title)}</b><small style="display:block;color:var(--muted);margin-top:4px">${esc(a.category||'')} · ${esc(a.publish_date||'')} · ${a.status}</small></button>`).join(''):'<div style="padding:25px;color:var(--muted)">Belum ada artikel.</div>';const mx=Math.max(1,...CATS.map(c=>posts.filter(a=>a.category===c).length));$('catStats').innerHTML=CATS.map(c=>{const n=posts.filter(a=>a.category===c).length;return`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:11px;font-weight:600;margin-bottom:4px"><span>${c}</span><span>${n}</span></div><div style="height:7px;background:#dcdcde;border-radius:10px"><div style="height:7px;background:var(--blue);width:${n/mx*100}%;border-radius:10px"></div></div></div>`}).join('')}
 function askHapus(slug){deleteSlug=slug;const a=posts.find(x=>x.slug===slug);$('modalText').textContent=`“${a?.title||slug}” akan dihapus permanen.`;$('modal').style.display='flex'}function closeModal(){$('modal').style.display='none';deleteSlug=null}async function confirmHapus(){if(!deleteSlug)return;try{const r=await apiFetch(API+'/'+encodeURIComponent(deleteSlug),{method:'DELETE'});const j=await r.json();if(!r.ok||!j.success)throw Error(j.error||'Gagal menghapus');closeModal();toast('Artikel dihapus.');await load();show('posts')}catch(e){toast(e.message)}}
-async function processImage(file){if(!file.type.startsWith('image/')){toast('File harus berupa gambar.');return}try{const img=await new Promise((res,rej)=>{const u=URL.createObjectURL(file),i=new Image();i.onload=()=>{URL.revokeObjectURL(u);res(i)};i.onerror=rej;i.src=u});let sw=img.naturalWidth,sh=img.naturalHeight,ratio=sw/sh,target=16/9,cw=sw,ch=sh,sx=0,sy=0;if(ratio>target){cw=Math.round(sh*target);sx=Math.round((sw-cw)/2)}else if(ratio<target){ch=Math.round(sw/target);sy=Math.round((sh-ch)/2)}let ow=Math.min(1920,cw),oh=Math.round(ow/target);if(oh>1080){oh=1080;ow=Math.round(oh*target)}const canvas=document.createElement('canvas');canvas.width=ow;canvas.height=oh;const ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(img,sx,sy,cw,ch,0,0,ow,oh);const blob=await new Promise(r=>canvas.toBlob(r,'image/webp',.92));if(!blob)throw Error('Browser tidak mendukung WebP');const data=canvas.toDataURL('image/webp',.92);let base=slugify($('focus').value||$('title').value||'featured-image');const filename=base+'.webp';pendingImage={blob,filename};$('imageName').value=filename;$('imagePreview').src=data;$('imagePreview').classList.remove('hidden');$('fileMeta').textContent=`${sw}×${sh} → ${ow}×${oh} WebP · ${(blob.size/1024).toFixed(0)} KB`;if(!$('altText').value)$('altText').value=$('title').value.trim();if(!$('imageTitle').value)$('imageTitle').value=$('title').value.trim();markDirty();toast('Gambar diproses: 16:9 WebP kualitas tinggi.')}catch(e){toast('Gagal memproses gambar: '+e.message)}}
+async function processImage(file){
+  if(!file.type.startsWith('image/')){
+    toast('File harus berupa gambar.');
+    return;
+  }
+
+  try{
+    const img=await new Promise((res,rej)=>{
+      const u=URL.createObjectURL(file);
+      const i=new Image();
+      i.onload=()=>{URL.revokeObjectURL(u);res(i)};
+      i.onerror=rej;
+      i.src=u;
+    });
+
+    let sw=img.naturalWidth,sh=img.naturalHeight;
+    const ratio=sw/sh,target=16/9;
+    let cw=sw,ch=sh,sx=0,sy=0;
+
+    if(ratio>target){
+      cw=Math.round(sh*target);
+      sx=Math.round((sw-cw)/2);
+    }else if(ratio<target){
+      ch=Math.round(sw/target);
+      sy=Math.round((sh-ch)/2);
+    }
+
+    let ow=Math.min(1920,cw),oh=Math.round(ow/target);
+    if(oh>1080){
+      oh=1080;
+      ow=Math.round(oh*target);
+    }
+
+    const canvas=document.createElement('canvas');
+    canvas.width=ow;
+    canvas.height=oh;
+
+    const ctx=canvas.getContext('2d');
+    ctx.imageSmoothingEnabled=true;
+    ctx.imageSmoothingQuality='high';
+    ctx.drawImage(img,sx,sy,cw,ch,0,0,ow,oh);
+
+    const blob=await new Promise(r=>canvas.toBlob(r,'image/webp',.92));
+    if(!blob)throw Error('Browser tidak mendukung WebP');
+
+    const data=canvas.toDataURL('image/webp',.92);
+    const base=slugify($('focus').value||$('title').value||'featured-image');
+    const filename=base+'.webp';
+
+    pendingImage={blob,filename};
+    $('imageName').value=filename;
+    $('imagePreview').src=data;
+    $('imagePreview').classList.remove('hidden');
+
+    if(!$('altText').value)$('altText').value=$('title').value.trim();
+    if(!$('imageTitle').value)$('imageTitle').value=$('title').value.trim();
+
+    $('fileMeta').textContent=`${sw}×${sh} → ${ow}×${oh} WebP · ${(blob.size/1024).toFixed(0)} KB · Mengunggah...`;
+    markDirty();
+    toast('Gambar sedang diunggah ke Cloudinary...');
+
+    await uploadMedia();
+
+    $('fileMeta').textContent=`${sw}×${sh} → ${ow}×${oh} WebP · ${(blob.size/1024).toFixed(0)} KB · Tersimpan di Cloudinary`;
+    toast('Featured image berhasil diunggah.');
+  }catch(e){
+    $('fileMeta').textContent='Upload gambar gagal.';
+    toast('Gagal mengunggah gambar: '+e.message);
+  }
+}
 $('drop').addEventListener('click',()=>$('imageFile').click());$('imageFile').addEventListener('change',e=>{if(e.target.files[0])processImage(e.target.files[0])});$('drop').addEventListener('dragover',e=>{e.preventDefault();$('drop').classList.add('drag')});$('drop').addEventListener('dragleave',()=>$('drop').classList.remove('drag'));$('drop').addEventListener('drop',e=>{e.preventDefault();$('drop').classList.remove('drag');if(e.dataTransfer.files[0])processImage(e.dataTransfer.files[0])});
 ['focus','secondary','seoTitle','metaDesc','excerpt','altText','imageName','imageTitle','canonical','ogTitle','ogDesc','ogImage','readTime','robotsIndex','robotsFollow','schema','publishDate'].forEach(id=>{const el=$(id);if(el){el.addEventListener('input',markDirty);el.addEventListener('change',markDirty)}});
 $('body').addEventListener('input',markDirty);
