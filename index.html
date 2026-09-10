@@ -27,6 +27,7 @@
     <meta name="keywords" content="ulasan produk, blog teknologi, tren hiburan, gaya hidup modern, kesehatan, artikel esensial, Found Selection, review objektif">
     <meta name="author" content="Found Selection">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <!-- Bahasa utama: Indonesia. Arsitektur siap diperluas ke /en/article/{slug} bila demand internasional terbukti. -->
     
     <!-- Link Canonical Manual Absolut (Beranda) untuk pencegahan duplikat konten -->
     <link rel="canonical" href="https://foundselection.blog/" />
@@ -105,13 +106,12 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Gradient Elegan Kerjasama (Bubble Wave) */
+        /* Modern Luxury Gold x White Gradient — Kerja Sama */
         .bg-bubble-wave {
-            background-color: #f8fafc;
-            background-image: 
-                radial-gradient(circle at 15% 25%, rgba(14, 165, 233, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 85% 75%, rgba(59, 130, 246, 0.06) 0%, transparent 45%),
-                radial-gradient(circle at 50% 50%, rgba(226, 232, 240, 0.5) 0%, transparent 60%);
+            background:
+                radial-gradient(circle at 12% 20%, rgba(212, 175, 55, 0.20) 0%, transparent 34%),
+                radial-gradient(circle at 88% 78%, rgba(212, 175, 55, 0.14) 0%, transparent 38%),
+                linear-gradient(135deg, #ffffff 0%, #fffdf7 42%, #f4e7bc 100%);
         }
 
         /* Animasi Pop-up Modal Privasi */
@@ -134,9 +134,77 @@
             transform: translateY(0) scale(1);
             opacity: 1;
         }
+
+        /* Premium gold interaction system */
+        .gold-hover {
+            transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+        }
+        .gold-hover:hover {
+            color: #B99220;
+        }
+        .faq-item:hover {
+            border-color: rgba(212, 175, 55, 0.35);
+        }
+        .faq-item[open] summary {
+            color: #B99220;
+        }
+        .faq-item[open] summary > span:last-child {
+            color: #B99220;
+        }
     </style>
+
+    <!-- FAQPage structured data untuk pemahaman mesin pencari -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Apa saja topik dan kategori yang dibahas di Found Selection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Found Selection membahas ulasan produk dan wawasan mendalam dalam lima kategori utama: Teknologi, Hiburan, Esensial, Gaya Hidup, dan Kesehatan. Konten disusun agar informatif, mudah dipahami, dan relevan dengan kebutuhan pembaca."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Bagaimana standar ulasan produk di Found Selection?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kami memegang teguh prinsip ulasan yang jujur dan berimbang. Setiap produk dibahas berdasarkan informasi dan pengujian yang tersedia, termasuk kelebihan, kekurangan, fitur, serta detail yang relevan sebelum pembaca mengambil keputusan."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Apakah artikel Found Selection dioptimalkan untuk Google dan mesin pencari?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Found Selection menggunakan struktur halaman yang ramah mesin pencari, metadata yang relevan, dan praktik SEO White Hat. Namun, pengindeksan dan peringkat di Google tetap ditentukan oleh sistem Google dan tidak dapat dijamin untuk setiap artikel."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Bagaimana cara menghubungi Found Selection untuk kerja sama atau kemitraan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Untuk kerja sama, kemitraan, ulasan produk, atau kebutuhan publikasi, hubungi tim Found Selection melalui email proview.support@gmail.com dengan menjelaskan kebutuhan dan detail kerja sama Anda."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Seberapa sering Found Selection menerbitkan artikel baru?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kami memprioritaskan riset dan kualitas konten. Artikel baru diterbitkan secara rutin sekitar 3 hingga 5 kali per minggu, mencakup topik teknologi, hiburan, esensial, gaya hidup, dan kesehatan."
+          }
+        }
+      ]
+    }
+    </script>
+
 </head>
-<body class="bg-[#f8fafc] text-text-body font-lato text-[1rem] selection:bg-text-main selection:text-white">
+<body class="bg-[#f8fafc] text-text-body font-lato text-[1rem] selection:bg-[#D4AF37] selection:text-white">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N8VVWT4H"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -175,7 +243,7 @@
             <p class="font-lato text-[1rem] text-text-body max-w-2xl mx-auto mb-10 leading-[1.6]">
                 Temukan inspirasi melalui ulasan mendalam, tren teknologi terkini, dan gaya hidup modern yang dikemas secara profesional, faktual, dan mudah dipahami.
             </p>
-            <a href="#artikel" class="inline-flex items-center justify-center px-8 py-4 font-opensans text-[0.875rem] font-bold text-white bg-text-main rounded-full hover:bg-black transition-colors shadow-lg">
+            <a href="#artikel" class="inline-flex items-center justify-center px-8 py-4 font-opensans text-[0.875rem] font-bold text-white bg-[#D4AF37] rounded-full hover:bg-[#B99220] transition-colors shadow-lg">
                 Mulai Membaca
             </a>
         </div>
@@ -201,7 +269,7 @@
                         </div>
                         <div class="relative">
                             <!-- Floating Button Kiri -->
-                            <button onclick="slideLeft('slider-teknologi')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                            <button onclick="slideLeft('slider-teknologi')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#D4AF37] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
                             </button>
                             <!-- Slider Container dengan padding Y agak besar agar animasi Pop-up Card tidak Crop -->
@@ -209,7 +277,7 @@
                                 <div class="artikel-kategori-teknologi flex gap-6 w-max pb-4"></div>
                             </div>
                             <!-- Floating Button Kanan -->
-                            <button onclick="slideRight('slider-teknologi')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                            <button onclick="slideRight('slider-teknologi')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#D4AF37] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -221,13 +289,13 @@
                             <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Hiburan</h2>
                         </div>
                         <div class="relative">
-                            <button onclick="slideLeft('slider-hiburan')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                            <button onclick="slideLeft('slider-hiburan')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#D4AF37] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
                             </button>
                             <div id="slider-hiburan" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
                                 <div class="artikel-kategori-hiburan flex gap-6 w-max pb-4"></div>
                             </div>
-                            <button onclick="slideRight('slider-hiburan')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                            <button onclick="slideRight('slider-hiburan')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#D4AF37] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -239,13 +307,13 @@
                             <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Esensial</h2>
                         </div>
                         <div class="relative">
-                            <button onclick="slideLeft('slider-esensial')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                            <button onclick="slideLeft('slider-esensial')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#D4AF37] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
                             </button>
                             <div id="slider-esensial" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
                                 <div class="artikel-kategori-esensial flex gap-6 w-max pb-4"></div>
                             </div>
-                            <button onclick="slideRight('slider-esensial')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                            <button onclick="slideRight('slider-esensial')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#D4AF37] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -257,13 +325,13 @@
                             <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Gaya Hidup</h2>
                         </div>
                         <div class="relative">
-                            <button onclick="slideLeft('slider-gayahidup')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                            <button onclick="slideLeft('slider-gayahidup')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#D4AF37] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
                             </button>
                             <div id="slider-gayahidup" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
                                 <div class="artikel-kategori-gaya-hidup flex gap-6 w-max pb-4"></div>
                             </div>
-                            <button onclick="slideRight('slider-gayahidup')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                            <button onclick="slideRight('slider-gayahidup')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#D4AF37] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -275,13 +343,13 @@
                             <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Kesehatan</h2>
                         </div>
                         <div class="relative">
-                            <button onclick="slideLeft('slider-kesehatan')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                            <button onclick="slideLeft('slider-kesehatan')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#D4AF37] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
                             </button>
                             <div id="slider-kesehatan" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
                                 <div class="artikel-kategori-kesehatan flex gap-6 w-max pb-4"></div>
                             </div>
-                            <button onclick="slideRight('slider-kesehatan')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-text-main hover:text-white transition-all shadow-xl">
+                            <button onclick="slideRight('slider-kesehatan')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#D4AF37] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -291,7 +359,7 @@
 
                 <!-- Tombol Tunggal "Lihat Semua Artikel" Invert Color (Tanpa Hover Menonjol) -->
                 <div class="mt-20 text-center">
-                    <a href="/artikel/index.html" class="inline-flex items-center justify-center px-10 py-4 font-opensans text-[0.875rem] font-bold text-text-main bg-white border-2 border-text-main rounded-full hover:bg-text-main hover:text-white transition-colors duration-300 shadow-sm">
+                    <a href="artikel/index.html" class="inline-flex items-center justify-center px-10 py-4 font-opensans text-[0.875rem] font-bold text-text-main bg-white border-2 border-[#D4AF37] rounded-full hover:bg-[#D4AF37] hover:text-white transition-colors duration-300 shadow-sm">
                         Lihat Semua Artikel
                     </a>
                 </div>
@@ -309,7 +377,7 @@
                     Hadirkan produk Anda di hadapan audiens yang tepat. Kami menyajikan ulasan yang berimbang, elegan, dan teroptimasi secara profesional untuk visibilitas maksimal di mesin pencari.
                 </p>
                 <!-- Tombol Invert Color (Tanpa Hover Menonjol) -->
-                <a href="mailto:proview.support@gmail.com" class="inline-flex items-center justify-center gap-3 px-10 py-4 font-opensans text-[0.875rem] font-bold text-white bg-text-main border-2 border-text-main hover:bg-white hover:text-text-main transition-colors duration-300 rounded-full shadow-lg">
+                <a href="mailto:proview.support@gmail.com" class="inline-flex items-center justify-center gap-3 px-10 py-4 font-opensans text-[0.875rem] font-bold text-white bg-[#D4AF37] border-2 border-[#D4AF37] hover:bg-white hover:text-[#B99220] transition-colors duration-300 rounded-full shadow-lg">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     proview.support@gmail.com
                 </a>
@@ -320,7 +388,7 @@
         <section id="faq" class="py-24 bg-[#f8fafc] border-t border-gray-200/60">
             <div class="max-w-[1200px] mx-auto px-6">
                 <div class="max-w-3xl mx-auto">
-                    <div class="text-left md:text-center mb-16">
+                    <div class="text-center mb-16">
                         <h2 class="font-opensans text-[1.75rem] md:text-[2rem] font-bold text-text-main mb-4 tracking-tight">Pertanyaan Populer</h2>
                         <p class="font-lato text-[1rem] text-text-muted">Informasi yang paling sering ditanyakan mengenai platform kami.</p>
                     </div>
@@ -328,61 +396,61 @@
                     <div class="space-y-4">
                         <details class="faq-item group bg-white rounded-xl border border-gray-200/80 px-6 py-5 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
                             <summary class="flex justify-between items-center font-opensans font-bold text-text-main outline-none text-[1rem]">
-                                <span>Apa fokus utama konten di Found Selection?</span>
+                                <span>Apa saja topik dan kategori yang dibahas di Found Selection?</span>
                                 <span class="transition-transform duration-300 group-open:rotate-180 text-text-muted">
                                     <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
                                 </span>
                             </summary>
                             <div class="font-lato text-[1rem] text-text-body pt-4 pb-2 leading-[1.6] border-t border-gray-100 mt-4">
-                                Found Selection berfokus pada ulasan dan wawasan mendalam mengenai Teknologi, Hiburan, barang Esensial, tren Gaya Hidup, dan Kesehatan.
+                                Found Selection membahas ulasan produk dan wawasan mendalam dalam lima kategori utama: Teknologi, Hiburan, Esensial, Gaya Hidup, dan Kesehatan. Konten disusun agar informatif, mudah dipahami, dan relevan dengan kebutuhan pembaca.
                             </div>
                         </details>
 
                         <details class="faq-item group bg-white rounded-xl border border-gray-200/80 px-6 py-5 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
                             <summary class="flex justify-between items-center font-opensans font-bold text-text-main outline-none text-[1rem]">
-                                <span>Bagaimana standar objektivitas ulasan produk?</span>
+                                <span>Bagaimana standar ulasan produk di Found Selection?</span>
                                 <span class="transition-transform duration-300 group-open:rotate-180 text-text-muted">
                                     <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
                                 </span>
                             </summary>
                             <div class="font-lato text-[1rem] text-text-body pt-4 pb-2 leading-[1.6] border-t border-gray-100 mt-4">
-                                Kami memegang teguh prinsip ulasan jujur. Setiap produk dijabarkan kelebihan dan kekurangannya berdasarkan pengujian aktual.
+                                Kami memegang teguh prinsip ulasan yang jujur dan berimbang. Setiap produk dibahas berdasarkan informasi dan pengujian yang tersedia, termasuk kelebihan, kekurangan, fitur, serta detail yang relevan sebelum pembaca mengambil keputusan.
                             </div>
                         </details>
 
                         <details class="faq-item group bg-white rounded-xl border border-gray-200/80 px-6 py-5 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
                             <summary class="flex justify-between items-center font-opensans font-bold text-text-main outline-none text-[1rem]">
-                                <span>Apakah semua artikel terindeks Google?</span>
+                                <span>Apakah artikel Found Selection dioptimalkan untuk Google dan mesin pencari?</span>
                                 <span class="transition-transform duration-300 group-open:rotate-180 text-text-muted">
                                     <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
                                 </span>
                             </summary>
                             <div class="font-lato text-[1rem] text-text-body pt-4 pb-2 leading-[1.6] border-t border-gray-100 mt-4">
-                                Ya, seluruh arsitektur web kami dirancang menggunakan praktik SEO White Hat terbaik dan terstruktur dengan rapi untuk index Google.
+                                Found Selection menggunakan struktur halaman yang ramah mesin pencari, metadata yang relevan, dan praktik SEO White Hat. Namun, pengindeksan dan peringkat di Google tetap ditentukan oleh sistem Google dan tidak dapat dijamin untuk setiap artikel.
                             </div>
                         </details>
                         
                         <details class="faq-item group bg-white rounded-xl border border-gray-200/80 px-6 py-5 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
                             <summary class="flex justify-between items-center font-opensans font-bold text-text-main outline-none text-[1rem]">
-                                <span>Bagaimana cara memulai kemitraan bisnis?</span>
+                                <span>Bagaimana cara menghubungi Found Selection untuk kerja sama atau kemitraan?</span>
                                 <span class="transition-transform duration-300 group-open:rotate-180 text-text-muted">
                                     <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
                                 </span>
                             </summary>
                             <div class="font-lato text-[1rem] text-text-body pt-4 pb-2 leading-[1.6] border-t border-gray-100 mt-4">
-                                Hubungi tim kami dengan mengirimkan email kemitraan langsung ke alamat proview.support@gmail.com.
+                                Untuk kerja sama, kemitraan, ulasan produk, atau kebutuhan publikasi, hubungi tim Found Selection melalui email proview.support@gmail.com dengan menjelaskan kebutuhan dan detail kerja sama Anda.
                             </div>
                         </details>
                         
                         <details class="faq-item group bg-white rounded-xl border border-gray-200/80 px-6 py-5 shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer">
                             <summary class="flex justify-between items-center font-opensans font-bold text-text-main outline-none text-[1rem]">
-                                <span>Seberapa sering artikel baru diterbitkan?</span>
+                                <span>Seberapa sering Found Selection menerbitkan artikel baru?</span>
                                 <span class="transition-transform duration-300 group-open:rotate-180 text-text-muted">
                                     <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
                                 </span>
                             </summary>
                             <div class="font-lato text-[1rem] text-text-body pt-4 pb-2 leading-[1.6] border-t border-gray-100 mt-4">
-                                Kami memprioritaskan riset mendalam. Artikel diterbitkan secara rutin 3 hingga 5 kali per minggu secara optimal.
+                                Kami memprioritaskan riset dan kualitas konten. Artikel baru diterbitkan secara rutin sekitar 3 hingga 5 kali per minggu, mencakup topik teknologi, hiburan, esensial, gaya hidup, dan kesehatan.
                             </div>
                         </details>
                     </div>
@@ -402,30 +470,30 @@
 
             <div class="flex flex-wrap justify-center gap-x-10 gap-y-4 font-opensans">
                 <div class="relative group pb-4 -mb-4">
-                    <a href="#artikel" class="hover:text-text-main font-bold transition-colors flex items-center gap-1 cursor-pointer">
+                    <a href="#artikel" class="hover:text-[#B99220] font-bold transition-colors flex items-center gap-1 cursor-pointer">
                         Artikel
                         <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </a>
                     
                     <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-white rounded-lg shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col overflow-hidden z-50 transform translate-y-2 group-hover:translate-y-0">
-                        <a href="#cat-teknologi" class="px-5 py-3 text-left hover:bg-gray-50 text-text-main font-bold transition-colors border-b border-gray-100">Teknologi</a>
-                        <a href="#cat-hiburan" class="px-5 py-3 text-left hover:bg-gray-50 text-text-main font-bold transition-colors border-b border-gray-100">Hiburan</a>
-                        <a href="#cat-esensial" class="px-5 py-3 text-left hover:bg-gray-50 text-text-main font-bold transition-colors border-b border-gray-100">Esensial</a>
-                        <a href="#cat-gaya-hidup" class="px-5 py-3 text-left hover:bg-gray-50 text-text-main font-bold transition-colors border-b border-gray-100">Gaya Hidup</a>
-                        <a href="#cat-kesehatan" class="px-5 py-3 text-left hover:bg-gray-50 text-text-main font-bold transition-colors">Kesehatan</a>
+                        <a href="#cat-teknologi" class="px-5 py-3 text-left hover:bg-[rgba(212,175,55,0.08)] hover:text-[#B99220] text-text-main font-bold transition-colors border-b border-gray-100">Teknologi</a>
+                        <a href="#cat-hiburan" class="px-5 py-3 text-left hover:bg-[rgba(212,175,55,0.08)] hover:text-[#B99220] text-text-main font-bold transition-colors border-b border-gray-100">Hiburan</a>
+                        <a href="#cat-esensial" class="px-5 py-3 text-left hover:bg-[rgba(212,175,55,0.08)] hover:text-[#B99220] text-text-main font-bold transition-colors border-b border-gray-100">Esensial</a>
+                        <a href="#cat-gaya-hidup" class="px-5 py-3 text-left hover:bg-[rgba(212,175,55,0.08)] hover:text-[#B99220] text-text-main font-bold transition-colors border-b border-gray-100">Gaya Hidup</a>
+                        <a href="#cat-kesehatan" class="px-5 py-3 text-left hover:bg-[rgba(212,175,55,0.08)] hover:text-[#B99220] text-text-main font-bold transition-colors">Kesehatan</a>
                     </div>
                 </div>
 
-                <a href="#kerja-sama" class="hover:text-text-main font-bold transition-colors">Kerja Sama</a>
-                <a href="#faq" class="hover:text-text-main font-bold transition-colors">FAQ</a>
+                <a href="#kerja-sama" class="hover:text-[#B99220] font-bold transition-colors">Kerja Sama</a>
+                <a href="#faq" class="hover:text-[#B99220] font-bold transition-colors">FAQ</a>
             </div>
 
             <div class="flex justify-center md:justify-end gap-8 font-opensans items-center">
                 <!-- Trigger Pop-up Modal Privasi -->
-                <a href="javascript:void(0)" onclick="openPrivacyModal()" class="hover:text-text-main font-bold transition-colors">Kebijakan Privasi</a>
+                <a href="javascript:void(0)" onclick="openPrivacyModal()" class="hover:text-[#B99220] font-bold transition-colors">Kebijakan Privasi</a>
                 
-                <a href="mailto:proview.support@gmail.com" class="hover:text-text-main transition-colors flex items-center gap-2 group/mail" aria-label="Contact">
-                    <svg class="w-5 h-5 text-text-muted group-hover/mail:text-text-main transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <a href="mailto:proview.support@gmail.com" class="hover:text-[#B99220] transition-colors flex items-center gap-2 group/mail" aria-label="Contact">
+                    <svg class="w-5 h-5 text-text-muted group-hover/mail:text-[#B99220] transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     <span class="font-bold hidden md:inline">Contact</span>
                 </a>
             </div>
@@ -442,7 +510,7 @@
             <!-- Header Modal -->
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white">
                 <h2 class="font-opensans text-[1.25rem] font-bold text-text-main tracking-tight">Kebijakan Privasi</h2>
-                <button onclick="closePrivacyModal()" class="text-text-muted hover:text-red-500 transition-colors p-2 -mr-2 outline-none">
+                <button onclick="closePrivacyModal()" class="text-text-muted hover:text-[#B99220] transition-colors p-2 -mr-2 outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
@@ -467,7 +535,7 @@
             
             <!-- Footer Modal -->
             <div class="px-6 py-4 border-t border-gray-100 bg-gray-50 flex justify-end">
-                <button onclick="closePrivacyModal()" class="px-6 py-2 bg-text-main text-white font-opensans font-bold text-[0.875rem] rounded-full hover:bg-black transition-colors">
+                <button onclick="closePrivacyModal()" class="px-6 py-2 bg-[#D4AF37] text-white font-opensans font-bold text-[0.875rem] rounded-full hover:bg-[#B99220] transition-colors">
                     Saya Mengerti
                 </button>
             </div>
@@ -531,6 +599,7 @@
             }, { passive: true });
 
             // --- Pembentukan Card Artikel Maksimal 5 Item Horizontal ---
+            // Permalink utama: /artikel/{slug} (tanpa kategori, tanpa .html).
             const generateCards = (categoryId, categoryLabel, images, titles, dates, readTimes) => {
                 const container = document.querySelector(`.artikel-kategori-${categoryId}`);
                 if(!container) return;
@@ -545,15 +614,15 @@
                     const readTime = readTimes[i % readTimes.length];
                     
                     const slug = generateSlug(title);
-                    const permalink = `/artikel/${categoryId}/${slug}.html`;
+                    const permalink = `/artikel/${slug}`;
                     
                     cardsHtml += `
                         <a href="${permalink}" class="snap-start shrink-0 w-[260px] md:w-[300px] flex flex-col group cursor-pointer no-underline block outline-none">
                             <article class="transition-all duration-300 transform group-hover:-translate-y-2 h-full flex flex-col relative bg-transparent">
                                 
-                                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-5 relative bg-gray-200 shadow-sm group-hover:shadow-xl transition-all duration-300 group-hover:ring-4 group-hover:ring-blue-50/50">
+                                <div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-5 relative bg-gray-200 shadow-sm group-hover:shadow-xl transition-all duration-300 group-hover:ring-4 group-hover:ring-[#D4AF37]/20">
                                     <img src="${optimizedImg}" width="400" height="300" alt="Thumbnail ${title}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async">
-                                    <span class="absolute top-3 left-3 bg-white/95 backdrop-blur shadow-sm text-text-main text-[11px] font-opensans font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">${categoryLabel}</span>
+                                    <span class="absolute top-3 left-3 bg-white/95 backdrop-blur shadow-sm text-text-main text-[11px] font-opensans font-bold px-3 py-1.5 rounded-full uppercase tracking-wider group-hover:text-[#B99220] transition-colors duration-300">${categoryLabel}</span>
                                 </div>
                                 
                                 <!-- Metadata: Ketebalan Semibold, Warna Muted elegan, + Icon Jam -->
@@ -566,20 +635,14 @@
                                 </div>
                                 
                                 <!-- Judul Statis Tanpa Hover Color Change -->
-                                <h3 class="font-opensans text-[1.25rem] font-bold text-text-main leading-snug mb-3 line-clamp-2" title="${title}">
+                                <h3 class="font-opensans text-[1.25rem] font-bold text-text-main leading-snug mb-3 line-clamp-2 group-hover:text-[#B99220] transition-colors duration-300" title="${title}">
                                     ${title}
                                 </h3>
                                 
                                 <p class="font-lato text-[1rem] leading-[1.6] text-text-body line-clamp-2 mb-4 flex-grow">
                                     Simak penjabaran komprehensif dari tim kami mengenai kelebihan, kekurangan, dan detail spesifik produk ini.
                                 </p>
-
-                                <!-- Tombol Tactile BACA SELENGKAPNYA dengan garis bawah dinamis -->
-                                <span class="inline-block mt-auto font-opensans font-bold text-[0.875rem] uppercase tracking-wider text-[#B08D57] group-hover:text-[#8C6A3B] group-hover:underline transition-colors duration-300">
-                                    Baca Selengkapnya &rarr;
-                                </span>
-                                
-                            </article>
+</article>
                         </a>
                     `;
                 }
@@ -591,7 +654,7 @@
                 '09 September 2026', '08 September 2026', '07 September 2026', 
                 '06 September 2026', '05 September 2026'
             ];
-            const readTimesDummy = ['3 min read', '5 min read', '4 min read', '6 min read', '4 min read'];
+            const readTimesDummy = ['3 min', '5 min', '4 min', '6 min', '4 min'];
             
             generateCards('teknologi', 'Teknologi', [
                 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800',
@@ -604,7 +667,7 @@
                 'Keamanan Siber: Panduan Dasar untuk Pemula'
             ], datesOrdered, readTimesDummy);
 
-            generateCards('hiburan', 'Entertainment', [
+            generateCards('hiburan', 'Hiburan', [
                 'https://images.unsplash.com/photo-1603190287605-e6ade32fa852?q=80&w=800',
                 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=800'
             ], [
@@ -664,12 +727,12 @@
                 });
 
                 navLinks.forEach((link) => {
-                    link.classList.remove("bg-text-main", "text-white");
+                    link.classList.remove("bg-[#D4AF37]", "text-white");
                     link.classList.add("text-text-muted");
 
                     if (link.getAttribute("href").includes(current) && current !== "") {
                         link.classList.remove("text-text-muted");
-                        link.classList.add("bg-text-main", "text-white");
+                        link.classList.add("bg-[#D4AF37]", "text-white");
                     }
                 });
             }, { passive: true });
