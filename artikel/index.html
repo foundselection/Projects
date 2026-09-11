@@ -92,16 +92,19 @@ body.detail-mode .detail-only{display:block}
 .detail-content li{margin:.45rem 0;line-height:1.8}
 .detail-content a{color:#2563eb;text-decoration:underline;text-underline-offset:3px}
 .detail-content blockquote{margin:1.5rem 0;padding:1rem 1.2rem;border-left:4px solid #2563eb;background:#eff6ff;border-radius:0 12px 12px 0}
-.toc-link{display:block;padding:.22rem .45rem;border-radius:8px;color:#1e293b;text-decoration:none!important;transition:.2s;line-height:1.55}.toc-link::before{content:attr(data-number) ". ";font-variant-numeric:tabular-nums;color:#475569}.toc-link.level-3{padding-left:1.2rem}.toc-link.level-3::before{content:attr(data-number) ". "}
-.toc-link:hover,.toc-link.active{background:#eff6ff;color:#1d4ed8}
-.toc-link.level-3{font-size:.92rem}
+.toc-box{margin-top:2rem;background:#eef0f8;border:1px solid #c7cbea;border-radius:0;overflow:hidden}
+.toc-box-head{background:#3f438f;color:#fff;padding:1rem 1.2rem;font:800 1.1rem "Open Sans",Arial,sans-serif;display:flex;align-items:center;justify-content:space-between}
+.toc-box-body{padding:1rem 1.15rem}
+.toc-link{display:block;padding:.12rem .25rem;border-radius:6px;color:#1e293b;text-decoration:none!important;transition:.2s;line-height:1.55}
+.toc-link::before{content:attr(data-number) ". ";font-variant-numeric:tabular-nums;color:#334155}
+.toc-link.level-3{padding-left:1.15rem;font-size:.94rem}
+.toc-link:hover,.toc-link.active{background:#dfe6ff;color:#1d4ed8}
 .action-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;border:1px solid #dbeafe;background:#fff;color:#1e40af;border-radius:999px;padding:.7rem 1rem;font:700 .88rem "Open Sans",sans-serif;transition:.22s}
 .action-btn:hover{border-color:#93c5fd;background:#eff6ff;transform:translateY(-1px)}
 .action-btn.liked{background:#2563eb;color:#fff;border-color:#2563eb;box-shadow:0 8px 22px rgba(37,99,235,.18)}
 .related-track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.35rem .1rem 1rem;scrollbar-width:thin}
 .related-card{flex:0 0 min(300px,82vw);scroll-snap-align:start}
 .related-card article{height:100%}
-.detail-feedback textarea,.detail-feedback input{outline:none}
 @media(max-width:767px){.detail-content p{font-size:1rem;line-height:1.82}.detail-content h2{margin-top:1.8rem}}
 </style>
 
@@ -109,22 +112,23 @@ body.detail-mode .detail-only{display:block}
 <body class="bg-slate-50 text-text-body font-lato">
 
 <div id="detail-page" class="detail-only">
-  <header class="detail-hero relative overflow-hidden pt-7 pb-12 md:pt-10 md:pb-16">
+  <header class="detail-hero relative overflow-hidden pt-7 pb-10 md:pt-10 md:pb-14">
     <div class="relative max-w-[1120px] mx-auto px-5 sm:px-6 md:px-10">
-      <div class="flex items-center justify-between gap-4 mb-10">
+      <div class="flex items-start gap-3 md:gap-5">
         <a href="/artikel/" aria-label="Kembali ke artikel" title="Kembali"
-           class="inline-flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-full border border-blue-100 bg-white text-slate-700 shadow-sm hover:border-blue-300 hover:text-blue-600 transition-all">
+           class="shrink-0 inline-flex items-center justify-center w-10 h-10 md:w-11 md:h-11 rounded-full border border-blue-100 bg-white text-slate-700 shadow-sm hover:border-blue-300 hover:text-blue-600 transition-all">
           <svg class="w-[19px] h-[19px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 19l-7-7 7-7"/></svg>
         </a>
-        <span id="detail-category" class="bg-[#2563eb] text-white text-[10px] md:text-[11px] font-opensans font-bold px-3 py-1.5 rounded-full shadow-sm tracking-wide"></span>
-      </div>
-
-      <div class="max-w-4xl">
-        <h1 id="detail-title" class="font-opensans text-[2rem] sm:text-[2.55rem] md:text-[3.55rem] font-bold tracking-tight text-slate-900 leading-[1.08]"></h1>
-        <p id="detail-excerpt" class="mt-5 text-[1rem] md:text-[1.12rem] text-slate-600 leading-[1.75] max-w-3xl"></p>
-        <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] md:text-xs font-opensans font-semibold text-slate-400">
-          <time id="detail-date"></time>
-          <span id="detail-readtime"></span>
+        <div class="min-w-0 flex-1">
+          <h1 id="detail-title" class="font-opensans text-[1.7rem] sm:text-[2.15rem] md:text-[3rem] font-bold tracking-tight text-slate-900 leading-[1.1]"></h1>
+          <div class="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 text-[11px] md:text-xs font-opensans font-semibold text-slate-400">
+            <span id="detail-category" class="inline-flex items-center bg-white text-blue-700 border border-blue-100 px-3 py-1.5 rounded-full shadow-sm tracking-wide"></span>
+            <div class="flex items-center gap-4 ml-auto">
+              <time id="detail-date"></time>
+              <span id="detail-readtime"></span>
+            </div>
+          </div>
+          <p id="detail-excerpt" class="mt-5 text-[1rem] md:text-[1.12rem] text-slate-600 leading-[1.75] max-w-3xl"></p>
         </div>
       </div>
     </div>
@@ -135,25 +139,24 @@ body.detail-mode .detail-only{display:block}
       <img id="detail-image" class="w-full aspect-[16/8] object-cover" alt="" decoding="async">
     </figure>
 
-    <div class="grid grid-cols-1 lg:grid-cols-[230px_minmax(0,1fr)] gap-8 lg:gap-14 mt-10 md:mt-14">
-      <aside id="toc-wrap" class="self-start lg:sticky lg:top-24">
-        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
-          <div class="font-opensans font-bold text-sm text-slate-900 mb-3">Daftar Isi</div>
-          <nav id="toc" aria-label="Daftar isi artikel"></nav>
-        </div>
-      </aside>
+    <section id="toc-wrap" class="toc-box" aria-label="Daftar isi artikel">
+      <div class="toc-box-head">
+        <span>Daftar Isi</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="m6 15 6-6 6 6"/></svg>
+      </div>
+      <nav id="toc" class="toc-box-body" aria-label="Daftar isi artikel"></nav>
+    </section>
 
-      <article id="detail-content" class="detail-content min-w-0"></article>
-    </div>
+    <article id="detail-content" class="detail-content min-w-0 mt-10 md:mt-12"></article>
 
     <div id="detail-tags" class="mt-10 flex flex-wrap gap-2"></div>
 
     <div class="mt-8 flex flex-wrap items-center gap-2.5">
       <div id="share-wrap" class="relative">
-      <button id="share-btn" type="button" class="action-btn" aria-label="Bagikan artikel">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4A3 3 0 0 0 18 8ZM6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm12 9a3 3 0 1 0-2.83-4A3 3 0 0 0 18 24ZM8.59 13.51l6.83 3.98M15.41 6.51 8.59 10.49"/></svg>
-        Bagikan
-      </button>
+        <button id="share-btn" type="button" class="action-btn" aria-label="Bagikan artikel">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4A3 3 0 0 0 18 8ZM6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm12 9a3 3 0 1 0-2.83-4A3 3 0 0 0 18 24ZM8.59 13.51l6.83 3.98M15.41 6.51 8.59 10.49"/></svg>
+          Bagikan
+        </button>
       </div>
       <button id="like-btn" type="button" class="action-btn" aria-pressed="false" aria-label="Sukai artikel">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="m20.84 4.61-1.54-1.34A4.96 4.96 0 0 0 12 5.05a4.96 4.96 0 0 0-7.3-1.78L3.16 4.61A5.46 5.46 0 0 0 1.5 8.68c0 5.4 6.55 9.72 10.5 12.82 3.95-3.1 10.5-7.42 10.5-12.82a5.46 5.46 0 0 0-1.66-4.07Z"/></svg>
@@ -166,14 +169,12 @@ body.detail-mode .detail-only{display:block}
       <div class="flex items-end justify-between gap-4 mb-5">
         <div>
           <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">Pilihan Berikutnya</div>
-          <h2 class="mt-1 font-opensans text-xl md:text-2xl font-bold text-slate-900">Artikel Terkait</h2>
+          <h2 class="mt-1 font-opensans text-xl md:text-2xl font-bold text-slate-900">Artikel Terbaru</h2>
         </div>
         <div class="hidden sm:flex items-center gap-1 text-slate-400 text-xs font-opensans">Geser untuk melihat</div>
       </div>
       <div id="related-track" class="related-track"></div>
     </section>
-
-
   </main>
 </div>
 
@@ -634,17 +635,21 @@ loadArticles();
     const currentId=String(current.id??'');
     const currentSlug=String(current.slug??slug);
     const seen=new Set();
-    const candidates=[...all].filter(a=>{
-      const s=String(a.slug||slugify(a.title||''));
-      const id=String(a.id??'');
-      if((id&&id===currentId)||s===currentSlug||seen.has(s))return false;
-      seen.add(s);return true;
-    }).sort((a,b)=>{
-      const sameA=category(a.category)===category(current.category)?1:0;
-      const sameB=category(b.category)===category(current.category)?1:0;
-      if(sameA!==sameB)return sameB-sameA;
-      return String(b.publish_date||'').localeCompare(String(a.publish_date||''));
-    }).slice(0,5);
+    const candidates=[...all]
+      .filter(a=>{
+        const s=String(a.slug||slugify(a.title||''));
+        const id=String(a.id??'');
+        if((id&&id===currentId)||s===currentSlug||seen.has(s))return false;
+        seen.add(s);return true;
+      })
+      .sort((a,b)=>{
+        const ad=String(a.publish_date||'');
+        const bd=String(b.publish_date||'');
+        if(bd!==ad)return bd.localeCompare(ad);
+        return Number(b.id||0)-Number(a.id||0);
+      })
+      .slice(0,5);
+
     track.innerHTML=candidates.map(a=>{
       const s=a.slug||slugify(a.title), img=a.thumbnail||'';
       return `<a href="/artikel/${encodeURIComponent(s)}" class="related-card group no-underline">
@@ -652,11 +657,22 @@ loadArticles();
           <div class="relative aspect-[16/10] overflow-hidden bg-blue-50">${img?`<img src="${esc(img)}" alt="${esc(a.title)}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]" loading="lazy" decoding="async">`:`<div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>`}
             <span class="absolute top-3 left-3 bg-white text-blue-700 text-[9px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-sm">${esc(category(a.category))}</span>
           </div>
-          <div class="p-4"><div class="flex justify-between gap-2 text-[10px] font-opensans font-semibold text-slate-400"><span>${esc(dateText(a.publish_date||''))}</span><span>${a.read_time?esc(a.read_time)+' min':''}</span></div><h3 class="mt-2 font-opensans text-[.98rem] font-bold text-slate-900 leading-[1.38] group-hover:text-blue-600 transition-colors line-clamp-3">${esc(a.title)}</h3></div>
+          <div class="p-4">
+            <div class="flex justify-between gap-2 text-[10px] font-opensans font-semibold text-slate-400">
+              <span class="truncate">${esc(dateText(a.publish_date||''))}</span>
+              <span class="shrink-0">${a.read_time?esc(a.read_time)+' min':''}</span>
+            </div>
+            <h3 class="mt-2 font-opensans text-[.98rem] font-bold text-slate-900 leading-[1.38] group-hover:text-blue-600 transition-colors line-clamp-3">${esc(a.title)}</h3>
+          </div>
         </article>
       </a>`;
     }).join('');
-    if(!candidates.length)$('related-section').classList.add('hidden');
+
+    if(!candidates.length){
+      $('related-section').classList.add('hidden');
+    }else{
+      $('related-section').classList.remove('hidden');
+    }
   }
 
   async function loadDetail(){
