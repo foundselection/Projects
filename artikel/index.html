@@ -92,9 +92,9 @@ body.detail-mode .detail-only{display:block}
 .detail-content li{margin:.45rem 0;line-height:1.8}
 .detail-content a{color:#2563eb;text-decoration:underline;text-underline-offset:3px}
 .detail-content blockquote{margin:1.5rem 0;padding:1rem 1.2rem;border-left:4px solid #2563eb;background:#eff6ff;border-radius:0 12px 12px 0}
-.toc-link{display:block;padding:.48rem .7rem;border-radius:9px;color:#475569;text-decoration:none!important;transition:.2s}
+.toc-link{display:block;padding:.22rem .45rem;border-radius:8px;color:#1e293b;text-decoration:none!important;transition:.2s;line-height:1.55}.toc-link::before{content:attr(data-number) ". ";font-variant-numeric:tabular-nums;color:#475569}.toc-link.level-3{padding-left:1.2rem}.toc-link.level-3::before{content:attr(data-number) ". "}
 .toc-link:hover,.toc-link.active{background:#eff6ff;color:#1d4ed8}
-.toc-link.level-3{padding-left:1.35rem;font-size:.92rem}
+.toc-link.level-3{font-size:.92rem}
 .action-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;border:1px solid #dbeafe;background:#fff;color:#1e40af;border-radius:999px;padding:.7rem 1rem;font:700 .88rem "Open Sans",sans-serif;transition:.22s}
 .action-btn:hover{border-color:#93c5fd;background:#eff6ff;transform:translateY(-1px)}
 .action-btn.liked{background:#2563eb;color:#fff;border-color:#2563eb;box-shadow:0 8px 22px rgba(37,99,235,.18)}
@@ -149,10 +149,12 @@ body.detail-mode .detail-only{display:block}
     <div id="detail-tags" class="mt-10 flex flex-wrap gap-2"></div>
 
     <div class="mt-8 flex flex-wrap items-center gap-2.5">
+      <div id="share-wrap" class="relative">
       <button id="share-btn" type="button" class="action-btn" aria-label="Bagikan artikel">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4A3 3 0 0 0 18 8ZM6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm12 9a3 3 0 1 0-2.83-4A3 3 0 0 0 18 24ZM8.59 13.51l6.83 3.98M15.41 6.51 8.59 10.49"/></svg>
         Bagikan
       </button>
+      </div>
       <button id="like-btn" type="button" class="action-btn" aria-pressed="false" aria-label="Sukai artikel">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="m20.84 4.61-1.54-1.34A4.96 4.96 0 0 0 12 5.05a4.96 4.96 0 0 0-7.3-1.78L3.16 4.61A5.46 5.46 0 0 0 1.5 8.68c0 5.4 6.55 9.72 10.5 12.82 3.95-3.1 10.5-7.42 10.5-12.82a5.46 5.46 0 0 0-1.66-4.07Z"/></svg>
         <span id="like-label">Suka</span>
@@ -171,20 +173,7 @@ body.detail-mode .detail-only{display:block}
       <div id="related-track" class="related-track"></div>
     </section>
 
-    <section class="detail-feedback mt-16 md:mt-20">
-      <div class="max-w-2xl mx-auto rounded-2xl md:rounded-3xl bg-white border border-slate-200 shadow-sm p-6 sm:p-8 md:p-10">
-        <div class="text-center">
-          <h2 class="font-opensans text-[1.35rem] md:text-[1.65rem] font-bold text-slate-900">Punya Masukan?</h2>
-        </div>
-        <form id="detail-feedback-form" class="mt-7 space-y-4">
-          <input id="detail-feedback-name" type="text" required placeholder="Nama" class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10">
-          <input id="detail-feedback-email" type="email" required placeholder="Email" class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10">
-          <textarea id="detail-feedback-message" rows="5" required placeholder="Tulis feedback Anda..." class="w-full resize-none rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10"></textarea>
-          <button type="submit" class="w-full rounded-xl bg-[#2563eb] px-5 py-3.5 text-sm font-opensans font-bold text-white hover:bg-[#1d4ed8] transition-all">Kirim Feedback</button>
-          <p id="detail-feedback-status" class="hidden text-center text-sm"></p>
-        </form>
-      </div>
-    </section>
+
   </main>
 </div>
 
@@ -292,7 +281,7 @@ body.detail-mode .detail-only{display:block}
 </div></div>
 </section>
 
-<footer class="listing-only bg-white border-t border-gray-200 py-16 text-[0.875rem] text-text-muted text-center md:text-left relative z-10">
+<footer class="bg-white border-t border-gray-200 py-16 text-[0.875rem] text-text-muted text-center md:text-left relative z-10">
 <div class="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
 <div class="text-center md:text-left"><span class="font-opensans font-bold text-[1.5rem] tracking-tight text-text-main block mb-2">Found Selection.</span><p>&copy; 2026 Found Selection. Hak cipta dilindungi.</p></div>
 <div class="flex flex-wrap justify-center gap-x-10 gap-y-4 font-opensans">
@@ -580,10 +569,12 @@ loadArticles();
     const content=$('detail-content'), toc=$('toc');
     const heads=[...content.querySelectorAll('h2,h3')];
     const used=new Map();
+    let h2n=0,h3n=0;
     toc.innerHTML=heads.length?heads.map((h,i)=>{
       let id=headingId(h.textContent,i), n=used.get(id)||0; used.set(id,n+1); if(n)id+=`-${n+1}`;
       h.id=id;
-      return `<a class="toc-link ${h.tagName==='H3'?'level-3':''}" href="#${esc(id)}">${esc(h.textContent)}</a>`;
+      let number;if(h.tagName==='H2'){h2n++;h3n=0;number=String(h2n)}else{h3n++;number=`${h2n}.${h3n}`}
+      return `<a data-number="${number}" class="toc-link ${h.tagName==='H3'?'level-3':''}" href="#${esc(id)}">${esc(h.textContent)}</a>`;
     }).join(''):'<span class="text-xs text-slate-400">Tidak ada subjudul.</span>';
     toc.querySelectorAll('a').forEach(a=>a.addEventListener('click',e=>{
       const target=document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
@@ -610,34 +601,32 @@ loadArticles();
     box.innerHTML=tags.map(t=>`<span class="px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-opensans font-bold">#${esc(t.replace(/^#/,'')).trim()}</span>`).join('');
   }
 
-  function shareArticle(article){
+  function openShareMenu(article){
     const url=window.location.href;
     const title=article.title||document.title;
-    if(navigator.share){
-      navigator.share({title,text:article.excerpt||title,url}).catch(()=>{});
-      return;
-    }
-    navigator.clipboard?.writeText(url).then(()=>{
-      const btn=$('share-btn'),old=btn.innerHTML;
-      btn.innerHTML='Tautan disalin';
-      setTimeout(()=>btn.innerHTML=old,1800);
-    }).catch(()=>{
-      window.prompt('Salin tautan artikel:',url);
-    });
+    const text=article.excerpt||title;
+    const links=[
+      ['WhatsApp',`https://wa.me/?text=${encodeURIComponent(title+' '+url)}`],
+      ['Telegram',`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`],
+      ['Facebook',`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`],
+      ['X',`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`],
+      ['Email',`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(text+'\n\n'+url)}`]
+    ];
+    let menu=document.getElementById('share-menu');
+    if(menu){menu.remove();return;}
+    menu=document.createElement('div');
+    menu.id='share-menu';
+    menu.className='absolute left-0 top-full mt-2 z-30 w-52 rounded-2xl border border-slate-200 bg-white p-2 shadow-xl';
+    menu.innerHTML=links.map(([label,href])=>`<a target="_blank" rel="noopener noreferrer" href="${href}" class="block rounded-xl px-3 py-2.5 text-sm font-opensans font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-700">${label}</a>`).join('')+`<button type="button" id="copy-share-link" class="w-full text-left rounded-xl px-3 py-2.5 text-sm font-opensans font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-700">Salin tautan</button>`;
+    document.getElementById('share-wrap').appendChild(menu);
+    document.getElementById('copy-share-link').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(url);document.getElementById('copy-share-link').textContent='Tautan disalin';setTimeout(()=>menu.remove(),900)}catch{window.prompt('Salin tautan artikel:',url)}});
   }
 
-  function likeKey(id){return `fs-liked-${id||slug}`}
-  function setupLike(article){
-    const btn=$('like-btn'), count=$('like-count'), label=$('like-label');
-    const key=likeKey(article.id);
-    let liked=localStorage.getItem(key)==='1';
-    let localCount=Number(localStorage.getItem(`${key}-count`)||0);
-    const paint=()=>{btn.classList.toggle('liked',liked);btn.setAttribute('aria-pressed',String(liked));label.textContent=liked?'Disukai':'Suka';count.textContent=String(localCount)};
-    paint();
-    btn.addEventListener('click',()=>{
-      liked=!liked; localCount=Math.max(0,localCount+(liked?1:-1));
-      localStorage.setItem(key,liked?'1':'0');localStorage.setItem(`${key}-count`,String(localCount));paint();
-    });
+  async function setupLike(article){
+    const btn=$('like-btn'),count=$('like-count'),label=$('like-label');
+    const paint=(liked,n)=>{btn.classList.toggle('liked',liked);btn.setAttribute('aria-pressed',String(liked));label.textContent=liked?'Disukai':'Suka';count.textContent=String(n??0)};
+    try{const r=await fetch(`${API}/${encodeURIComponent(article.slug)}/like`,{credentials:'include',headers:{Accept:'application/json'}});const j=await r.json();paint(Boolean(j.liked),Number(j.likes||0));}catch{paint(false,0)}
+    btn.addEventListener('click',async()=>{if(btn.disabled)return;btn.disabled=true;try{const liked=btn.getAttribute('aria-pressed')==='true';const r=await fetch(`${API}/${encodeURIComponent(article.slug)}/like`,{method:liked?'DELETE':'POST',credentials:'include',headers:{Accept:'application/json'}});const j=await r.json();if(!r.ok||!j.success)throw new Error(j.error||'Gagal memperbarui suka.');paint(Boolean(j.liked),Number(j.likes||0));}catch(e){console.error(e)}finally{btn.disabled=false}});
   }
 
   function renderRelated(all,current){
@@ -687,20 +676,13 @@ loadArticles();
       if(!a.thumbnail)$('detail-image-wrap').classList.add('hidden');
       $('detail-content').innerHTML=a.content||'<p>Isi artikel belum tersedia.</p>';
       buildToc();renderTags(a);setupLike(a);
-      $('share-btn').addEventListener('click',()=>shareArticle(a));
+      $('share-btn').addEventListener('click',()=>openShareMenu(a));
       const list=await fetch(API,{headers:{Accept:'application/json'}}).then(x=>x.json());
       renderRelated(list.success&&Array.isArray(list.data)?list.data:[],a);
       document.title=`${a.title} | Found Selection`;
       const meta=document.querySelector('meta[name="description"]');if(meta)meta.setAttribute('content',a.excerpt||a.title||'');
       const canonical=document.querySelector('link[rel="canonical"]');if(canonical)canonical.href=window.location.href;
-      $('detail-feedback-form').addEventListener('submit',e=>{
-        e.preventDefault();
-        const name=$('detail-feedback-name').value.trim(),email=$('detail-feedback-email').value.trim(),message=$('detail-feedback-message').value.trim();
-        const subject=encodeURIComponent(`Feedback Found Selection dari ${name}`);
-        const body=encodeURIComponent(`Artikel: ${a.title}\nNama: ${name}\nEmail: ${email}\n\nFeedback:\n${message}`);
-        window.location.href=`mailto:proview.support@gmail.com?subject=${subject}&body=${body}`;
-        const st=$('detail-feedback-status');st.textContent='Membuka aplikasi email untuk mengirim feedback...';st.className='text-center text-sm text-blue-600';
-      });
+
     }catch(e){
       console.error(e);
       $('detail-title').textContent='Artikel tidak ditemukan';
