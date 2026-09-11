@@ -1,448 +1,3577 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Semua Artikel | Found Selection</title>
-<meta name="description" content="Jelajahi seluruh artikel Found Selection: teknologi, hiburan, esensial, gaya hidup, dan kesehatan.">
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<link rel="canonical" href="https://foundselection.blog/artikel/">
-<meta property="og:title" content="Semua Artikel | Found Selection">
-<meta property="og:description" content="Jelajahi seluruh artikel, ulasan, dan wawasan pilihan dari Found Selection.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://foundselection.blog/artikel/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Open+Sans:wght@400;600;700;900&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config={theme:{extend:{fontFamily:{opensans:['Open Sans','Arial','sans-serif'],lato:['Lato','Arial','sans-serif']},colors:{text:{main:'#0f172a',body:'#334155',muted:'#64748b'}}}}};
-</script>
-<style>
-:root{
-  --blue:#2563eb;
-  --blue-dark:#1d4ed8;
-  --blue-deep:#1e40af;
-  --blue-soft:#eff6ff;
-  --ink:#0f172a;
-  --body:#334155;
-  --muted:#64748b;
-  --line:#e2e8f0;
-}
-body{
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.6;
-  background:#f8fafc;
-}
-::selection{background:#2563eb;color:#fff}
-.scrollbar-hide::-webkit-scrollbar{display:none}
-.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
-.fade-in{animation:fadeIn .6s ease forwards;opacity:0}
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.hero-glow{background:
-  radial-gradient(circle at 50% 0%,rgba(37,99,235,.18),transparent 35%),
-  radial-gradient(circle at 12% 55%,rgba(147,197,253,.18),transparent 32%),
-  linear-gradient(180deg,#eff6ff 0%,#ffffff 62%,#f8fafc 100%);
-}
-.filter-active{background:var(--blue)!important;color:#fff!important;border-color:var(--blue)!important;box-shadow:0 8px 22px rgba(37,99,235,.18)}
-.filter-btn:hover{border-color:#93c5fd!important;color:var(--blue)!important}
-.filter-active:hover{color:#fff!important}
-.page-active{background:var(--blue);color:#fff;border-color:var(--blue)}
-.page-button{transition:all .2s ease}
-.page-button:hover{color:var(--blue);border-color:#93c5fd;transform:translateY(-1px)}
-.section-rule{height:1px;background:linear-gradient(90deg,#cbd5e1,transparent)}
-.fs-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 7px 26px rgba(15,23,42,.05);transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
-.fs-card:hover{transform:translateY(-5px);box-shadow:0 18px 42px rgba(15,23,42,.11);border-color:var(--line)}
-.fs-card img{transition:transform .65s cubic-bezier(.25,1,.5,1)}
-.fs-card:hover img{transform:scale(1.045)}
-.fs-main{background:#fff;border:1px solid #dbeafe;border-radius:22px;overflow:hidden;box-shadow:0 12px 42px rgba(30,64,175,.10);transition:transform .3s ease,box-shadow .3s ease}
-.fs-main:hover{transform:translateY(-5px);box-shadow:0 22px 54px rgba(30,64,175,.16)}
-.fs-main img{transition:transform .7s cubic-bezier(.25,1,.5,1)}
-.fs-main:hover img{transform:scale(1.035)}
-.fs-main .main-tag{background:#2563eb;color:#fff}
-.fs-latest{background:#fff;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 5px 18px rgba(15,23,42,.035);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
-.fs-latest:hover{transform:translateY(-3px);box-shadow:0 13px 30px rgba(15,23,42,.10);border-color:var(--line)}
-.fs-side{background:linear-gradient(180deg,#fff,#f8fbff);border:1px solid #dbeafe;border-radius:20px;padding:18px;box-shadow:0 8px 28px rgba(30,64,175,.06)}
-.fs-side-item{display:grid;grid-template-columns:88px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid #e5e7eb}
-.fs-side-item:last-child{border-bottom:0}
-.fs-side-item img{width:88px;height:72px;object-fit:cover;border-radius:11px;background:#eff6ff}
-.number-badge{width:27px;height:27px;border-radius:9px;background:#dbeafe;color:#1d4ed8;display:inline-flex;align-items:center;justify-content:center;font:700 12px 'Open Sans',sans-serif}
-@media(max-width:767px){
-  .fs-side-item{grid-template-columns:76px 1fr}
-  .fs-side-item img{width:76px;height:64px}
-}
-</style>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"CollectionPage","name":"Semua Artikel Found Selection","description":"Kumpulan artikel dan ulasan pilihan Found Selection.","url":"https://foundselection.blog/artikel/","isPartOf":{"@type":"WebSite","name":"Found Selection","url":"https://foundselection.blog/"}}
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Artikel | Found Selection</title>
+    <meta
+        name="description"
+        content="Baca artikel, wawasan, dan panduan pilihan dari Found Selection."
+    >
+
+    <meta
+        name="robots"
+        content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    >
+
+    <link
+        rel="canonical"
+        href="https://foundselection.blog/artikel/"
+    >
+
+    <meta property="og:site_name" content="Found Selection">
+    <meta property="og:title" content="Artikel | Found Selection">
+    <meta
+        property="og:description"
+        content="Baca artikel, wawasan, dan panduan pilihan dari Found Selection."
+    >
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://foundselection.blog/artikel/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Artikel | Found Selection">
+    <meta
+        name="twitter:description"
+        content="Baca artikel, wawasan, dan panduan pilihan dari Found Selection."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Open+Sans:wght@400;600;700;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        opensans: ['Open Sans', 'Arial', 'sans-serif'],
+                        lato: ['Lato', 'Arial', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        :root {
+            --blue: #2563eb;
+            --blue-dark: #1d4ed8;
+            --blue-deep: #1e40af;
+            --blue-soft: #eff6ff;
+
+            --ink: #0f172a;
+            --body: #334155;
+            --muted: #64748b;
+
+            --line: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: #f8fafc;
+            color: var(--body);
+            font-family: Lato, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::selection {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        .hero-glow {
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(37, 99, 235, .18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 12% 55%,
+                    rgba(147, 197, 253, .18),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    180deg,
+                    #eff6ff 0%,
+                    #ffffff 62%,
+                    #f8fafc 100%
+                );
+        }
+
+        .fade-in {
+            animation: fadeIn .55s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-rule {
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                #cbd5e1,
+                transparent
+            );
+        }
+
+        .filter-active {
+            background: var(--blue) !important;
+            color: #fff !important;
+            border-color: var(--blue) !important;
+            box-shadow: 0 8px 22px rgba(37, 99, 235, .18);
+        }
+
+        .filter-btn:hover {
+            border-color: #93c5fd !important;
+            color: var(--blue) !important;
+        }
+
+        .filter-active:hover {
+            color: #fff !important;
+        }
+
+        .page-button {
+            transition: all .2s ease;
+        }
+
+        .page-button:hover {
+            color: var(--blue);
+            border-color: #93c5fd;
+            transform: translateY(-1px);
+        }
+
+        .page-active {
+            background: var(--blue);
+            color: #fff;
+            border-color: var(--blue);
+        }
+
+        .fs-card {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 7px 26px rgba(15, 23, 42, .05);
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease,
+                border-color .3s ease;
+        }
+
+        .fs-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 42px rgba(15, 23, 42, .11);
+            border-color: #bfdbfe;
+        }
+
+        .fs-card img {
+            transition:
+                transform .65s cubic-bezier(.25, 1, .5, 1);
+        }
+
+        .fs-card:hover img {
+            transform: scale(1.045);
+        }
+
+        .fs-main {
+            background: #fff;
+            border: 1px solid #dbeafe;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 12px 42px rgba(30, 64, 175, .10);
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .fs-main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 22px 54px rgba(30, 64, 175, .16);
+        }
+
+        .fs-main img {
+            transition:
+                transform .7s cubic-bezier(.25, 1, .5, 1);
+        }
+
+        .fs-main:hover img {
+            transform: scale(1.035);
+        }
+
+        .fs-main .main-tag {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        .fs-latest {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, .035);
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                border-color .25s ease;
+        }
+
+        .fs-latest:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 13px 30px rgba(15, 23, 42, .09);
+            border-color: #bfdbfe;
+        }
+
+        .fs-side {
+            background: linear-gradient(
+                180deg,
+                #fff,
+                #f8fbff
+            );
+            border: 1px solid #dbeafe;
+            border-radius: 20px;
+            padding: 18px;
+            box-shadow: 0 8px 28px rgba(30, 64, 175, .06);
+        }
+
+        .fs-side-item {
+            display: grid;
+            grid-template-columns: 88px 1fr;
+            gap: 12px;
+            padding: 13px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .fs-side-item:last-child {
+            border-bottom: 0;
+        }
+
+        .fs-side-item img {
+            width: 88px;
+            height: 72px;
+            object-fit: cover;
+            border-radius: 11px;
+            background: #eff6ff;
+        }
+
+        .number-badge {
+            width: 27px;
+            height: 27px;
+            border-radius: 9px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font: 700 12px 'Open Sans', sans-serif;
+        }
+
+        /*
+         * AREA ARTIKEL INDIVIDUAL
+         */
+
+        .article-shell {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .article-content {
+            color: #334155;
+            font-family: Lato, Arial, sans-serif;
+            font-size: 1.075rem;
+            line-height: 1.9;
+        }
+
+        .article-content > * {
+            max-width: 100%;
+        }
+
+        .article-content p {
+            margin: 0 0 1.35em;
+        }
+
+        .article-content h1,
+        .article-content h2,
+        .article-content h3,
+        .article-content h4 {
+            color: #0f172a;
+            font-family: 'Open Sans', Arial, sans-serif;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-top: 1.7em;
+            margin-bottom: .7em;
+        }
+
+        .article-content h2 {
+            font-size: 1.65rem;
+        }
+
+        .article-content h3 {
+            font-size: 1.35rem;
+        }
+
+        .article-content h4 {
+            font-size: 1.15rem;
+        }
+
+        .article-content strong,
+        .article-content b {
+            color: #0f172a;
+            font-weight: 800;
+        }
+
+        .article-content em,
+        .article-content i {
+            font-style: italic;
+        }
+
+        .article-content a {
+            color: #2563eb;
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+
+        .article-content a:hover {
+            color: #1d4ed8;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin: 0 0 1.4em;
+            padding-left: 1.5rem;
+        }
+
+        .article-content ul {
+            list-style: disc;
+        }
+
+        .article-content ol {
+            list-style: decimal;
+        }
+
+        .article-content li {
+            margin: .45em 0;
+            padding-left: .15rem;
+        }
+
+        .article-content blockquote {
+            margin: 1.7rem 0;
+            padding: 1.1rem 1.3rem;
+            border-left: 4px solid #2563eb;
+            border-radius: 0 12px 12px 0;
+            background: #eff6ff;
+            color: #1e3a8a;
+            font-size: 1.08em;
+        }
+
+        .article-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 1.8rem auto;
+            border-radius: 16px;
+        }
+
+        .article-content figure {
+            margin: 1.8rem 0;
+        }
+
+        .article-content figcaption {
+            margin-top: -.9rem;
+            text-align: center;
+            color: #64748b;
+            font-size: .82rem;
+        }
+
+        .article-content hr {
+            border: 0;
+            border-top: 1px solid #e2e8f0;
+            margin: 2rem 0;
+        }
+
+        .article-content pre {
+            overflow-x: auto;
+            padding: 1rem;
+            border-radius: 14px;
+            background: #0f172a;
+            color: #e2e8f0;
+            font-size: .9rem;
+            line-height: 1.65;
+            margin: 1.5rem 0;
+        }
+
+        .article-content code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        .article-content :not(pre) > code {
+            padding: .15rem .4rem;
+            border-radius: 5px;
+            background: #eff6ff;
+            color: #1d4ed8;
+            font-size: .9em;
+        }
+
+        .article-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: .95rem;
+        }
+
+        .article-content th,
+        .article-content td {
+            border: 1px solid #e2e8f0;
+            padding: .7rem .8rem;
+            text-align: left;
+        }
+
+        .article-content th {
+            background: #eff6ff;
+            color: #0f172a;
+            font-weight: 800;
+        }
+
+        .article-content iframe {
+            width: 100%;
+            max-width: 100%;
+            border: 0;
+            border-radius: 16px;
+            margin: 1.5rem 0;
+        }
+
+        .article-cover {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+        }
+
+        .article-card-related {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all .25s ease;
+        }
+
+        .article-card-related:hover {
+            transform: translateY(-3px);
+            border-color: #bfdbfe;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, .08);
+        }
+
+        .article-card-related img {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+        }
+
+        .article-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            width: 0;
+            height: 3px;
+            background: #2563eb;
+            transition: width .08s linear;
+        }
+
+        @media (max-width: 767px) {
+            .fs-side-item {
+                grid-template-columns: 76px 1fr;
+            }
+
+            .fs-side-item img {
+                width: 76px;
+                height: 64px;
+            }
+
+            .article-content {
+                font-size: 1rem;
+                line-height: 1.82;
+            }
+
+            .article-content h2 {
+                font-size: 1.4rem;
+            }
+
+            .article-content h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+
+    <script id="article-schema" type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Artikel Found Selection",
+            "url": "https://foundselection.blog/artikel/",
+            "isPartOf": {
+                "@type": "WebSite",
+                "name": "Found Selection",
+                "url": "https://foundselection.blog/"
+            }
+        }
+    </script>
 </head>
-<body class="bg-[#f8fafc] text-text-body font-lato selection:bg-[#2563eb] selection:text-white">
-<body class="bg-slate-50 text-text-body font-lato">
-<main>
 
-<header class="relative overflow-hidden pt-10 pb-14 md:pt-14 md:pb-18">
-  <div class="absolute inset-0 hero-glow pointer-events-none" aria-hidden="true"></div>
-  <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[34rem] h-[20rem] rounded-full bg-blue-200/30 blur-3xl pointer-events-none" aria-hidden="true"></div>
+<body>
 
-  <div class="relative max-w-[1240px] mx-auto px-5 sm:px-6 md:px-10">
-    <div class="grid grid-cols-[44px_1fr_44px] items-start gap-3 md:gap-5">
-      <a href="../index.html" aria-label="Kembali ke Beranda" title="Kembali ke Beranda"
-         class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-blue-100 bg-white/90 text-slate-700 shadow-sm hover:border-blue-300 hover:text-blue-600 hover:shadow-md transition-all duration-300 fade-in">
-        <svg class="w-[19px] h-[19px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 19l-7-7 7-7"/></svg>
-      </a>
+    <div
+        id="reading-progress"
+        class="article-progress"
+        aria-hidden="true"
+    ></div>
 
-      <div class="max-w-3xl mx-auto w-full text-center fade-in">
-        <h1 class="font-opensans text-[1.8rem] sm:text-[2.2rem] md:text-[3.15rem] font-bold tracking-tight text-slate-900 leading-[1.08]">
-          Temukan bacaan yang <span class="text-blue-600">layak diperhatikan.</span>
-        </h1>
-        <p class="mt-5 text-[0.98rem] md:text-[1.08rem] text-slate-600 max-w-2xl mx-auto leading-[1.75]">
-          Pilihan artikel, wawasan, dan panduan yang disusun untuk membantu Anda menemukan informasi yang relevan.
-        </p>
-      </div>
+    <!-- ================================
+         MODE DAFTAR ARTIKEL
+    ================================= -->
 
-      <div aria-hidden="true"></div>
-    </div>
-  </div>
-</header>
+    <main id="listing-view">
 
-<section class="pb-12 md:pb-16">
-  <div class="max-w-[1240px] mx-auto px-5 sm:px-6 md:px-10">
-    <div class="flex justify-center">
-      <div class="flex flex-wrap justify-center gap-2 max-w-5xl" aria-label="Filter kategori">
-        <button data-filter="Semua" class="filter-btn filter-active shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[0.8rem] md:text-[0.85rem] transition-all">Semua</button>
-        <button data-filter="Teknologi" class="filter-btn shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[0.8rem] md:text-[0.85rem] transition-all">Teknologi</button>
-        <button data-filter="Hiburan" class="filter-btn shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[0.8rem] md:text-[0.85rem] transition-all">Hiburan</button>
-        <button data-filter="Esensial" class="filter-btn shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[0.8rem] md:text-[0.85rem] transition-all">Esensial</button>
-        <button data-filter="Gaya Hidup" class="filter-btn shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[0.8rem] md:text-[0.85rem] transition-all">Gaya Hidup</button>
-        <button data-filter="Kesehatan" class="filter-btn shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[0.8rem] md:text-[0.85rem] transition-all">Kesehatan</button>
-      </div>
-    </div>
+        <header class="relative overflow-hidden pt-10 pb-14 md:pt-14 md:pb-18">
 
-    <div class="mt-10 md:mt-12 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-10 lg:gap-12">
-      <div>
+            <div
+                class="absolute inset-0 hero-glow pointer-events-none"
+                aria-hidden="true"
+            ></div>
 
-        <div class="flex items-center gap-4 mb-5">
-          <div>
-            <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">Pilihan Utama</div>
-            <h2 class="mt-1 font-opensans text-xl md:text-2xl font-bold text-slate-900 whitespace-nowrap">Pilihan Utama</h2>
-          </div>
-          <div class="section-rule flex-1"></div>
-        </div>
-        <div id="featured-grid" class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6"></div>
+            <div
+                class="absolute -top-24 left-1/2 -translate-x-1/2 w-[34rem] h-[20rem] rounded-full bg-blue-200/30 blur-3xl pointer-events-none"
+                aria-hidden="true"
+            ></div>
 
-        <div class="flex items-center gap-4 mt-12 mb-5">
-          <div>
-            <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">Artikel Terbaru</div>
-            <h2 class="mt-1 font-opensans text-xl md:text-2xl font-bold text-slate-900 whitespace-nowrap">Artikel Terbaru</h2>
-          </div>
-          <div class="section-rule flex-1"></div>
-        </div>
-        <div id="article-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"></div>
+            <div class="relative max-w-[1240px] mx-auto px-5 sm:px-6 md:px-10">
 
-        <div id="empty-state" class="hidden text-center py-24">
-          <h2 class="mt-5 font-opensans font-bold text-xl text-slate-900">Belum ada artikel</h2>
-          <p class="mt-2 text-slate-500">Artikel pada kategori ini akan tampil di sini.</p>
-        </div>
+                <div class="grid grid-cols-[44px_1fr_44px] items-start gap-3 md:gap-5">
 
-        <nav id="pagination" class="mt-12 flex justify-center items-center gap-2" aria-label="Navigasi halaman artikel"></nav>
-      </div>
+                    <a
+                        href="/"
+                        aria-label="Kembali ke Beranda"
+                        title="Kembali ke Beranda"
+                        class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-blue-100 bg-white/90 text-slate-700 shadow-sm hover:border-blue-300 hover:text-blue-600 hover:shadow-md transition-all duration-300 fade-in"
+                    >
+                        <svg
+                            class="w-[19px] h-[19px]"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.8"
+                                d="M15 19l-7-7 7-7"
+                            />
+                        </svg>
+                    </a>
 
-      <aside class="lg:pt-0">
-        <div class="fs-side">
-          <div class="flex items-center gap-3">
-            <div>
-              <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">Pilihan Pembaca</div>
-              <h2 class="mt-1 font-opensans text-xl font-bold text-slate-900">Artikel Terpopuler</h2>
+                    <div class="max-w-3xl mx-auto w-full text-center fade-in">
+
+                        <h1 class="font-opensans text-[1.8rem] sm:text-[2.2rem] md:text-[3.15rem] font-bold tracking-tight text-slate-900 leading-[1.08]">
+                            Temukan bacaan yang
+                            <span class="text-blue-600">
+                                layak diperhatikan.
+                            </span>
+                        </h1>
+
+                        <p class="mt-5 text-[0.98rem] md:text-[1.08rem] text-slate-600 max-w-2xl mx-auto leading-[1.75]">
+                            Pilihan artikel, wawasan, dan panduan yang disusun untuk membantu Anda menemukan informasi yang relevan.
+                        </p>
+
+                    </div>
+
+                    <div aria-hidden="true"></div>
+
+                </div>
             </div>
-          </div>
-          <div id="sidebar-list" class="mt-2"></div>
+        </header>
+
+        <section class="pb-12 md:pb-16">
+
+            <div class="max-w-[1240px] mx-auto px-5 sm:px-6 md:px-10">
+
+                <div class="flex justify-center">
+
+                    <div
+                        class="flex flex-wrap justify-center gap-2 max-w-5xl"
+                        aria-label="Filter kategori"
+                    >
+                        <button
+                            data-filter="Semua"
+                            class="filter-btn filter-active shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[0.8rem] md:text-[0.85rem] transition-all"
+                        >
+                            Semua
+                        </button>
+
+                        <button
+                            data-filter="Teknologi"
+                            class="filter-btn shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[0.8rem] md:text-[0.85rem] transition-all"
+                        >
+                            Teknologi
+                        </button>
+
+                        <button
+                            data-filter="Hiburan"
+                            class="filter-btn shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[0.8rem] md:text-[0.85rem] transition-all"
+                        >
+                            Hiburan
+                        </button>
+
+                        <button
+                            data-filter="Esensial"
+                            class="filter-btn shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[0.8rem] md:text-[0.85rem] transition-all"
+                        >
+                            Esensial
+                        </button>
+
+                        <button
+                            data-filter="Gaya Hidup"
+                            class="filter-btn shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[0.8rem] md:text-[0.85rem] transition-all"
+                        >
+                            Gaya Hidup
+                        </button>
+
+                        <button
+                            data-filter="Kesehatan"
+                            class="filter-btn shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[0.8rem] md:text-[0.85rem] transition-all"
+                        >
+                            Kesehatan
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-10 md:mt-12 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-10 lg:gap-12">
+
+                    <div>
+
+                        <div class="flex items-center gap-4 mb-5">
+
+                            <div>
+                                <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">
+                                    Pilihan Utama
+                                </div>
+
+                                <h2 class="mt-1 font-opensans text-xl md:text-2xl font-bold text-slate-900 whitespace-nowrap">
+                                    Pilihan Utama
+                                </h2>
+                            </div>
+
+                            <div class="section-rule flex-1"></div>
+
+                        </div>
+
+                        <div
+                            id="featured-grid"
+                            class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6"
+                        ></div>
+
+
+                        <div class="flex items-center gap-4 mt-12 mb-5">
+
+                            <div>
+                                <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">
+                                    Artikel Terbaru
+                                </div>
+
+                                <h2 class="mt-1 font-opensans text-xl md:text-2xl font-bold text-slate-900 whitespace-nowrap">
+                                    Artikel Terbaru
+                                </h2>
+                            </div>
+
+                            <div class="section-rule flex-1"></div>
+
+                        </div>
+
+                        <div
+                            id="article-grid"
+                            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
+                        ></div>
+
+
+                        <div
+                            id="empty-state"
+                            class="hidden text-center py-24"
+                        >
+                            <h2 class="font-opensans font-bold text-xl text-slate-900">
+                                Belum ada artikel
+                            </h2>
+
+                            <p class="mt-2 text-slate-500">
+                                Artikel akan tampil di sini.
+                            </p>
+                        </div>
+
+
+                        <nav
+                            id="pagination"
+                            class="mt-12 flex justify-center items-center gap-2"
+                            aria-label="Navigasi halaman artikel"
+                        ></nav>
+
+                    </div>
+
+
+                    <aside class="lg:pt-0">
+
+                        <div class="fs-side">
+
+                            <div>
+
+                                <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">
+                                    Pilihan Pembaca
+                                </div>
+
+                                <h2 class="mt-1 font-opensans text-xl font-bold text-slate-900">
+                                    Artikel Terpopuler
+                                </h2>
+
+                            </div>
+
+                            <div
+                                id="sidebar-list"
+                                class="mt-2"
+                            ></div>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ================================
+         MODE ARTIKEL INDIVIDUAL
+    ================================= -->
+
+    <main
+        id="article-view"
+        class="hidden"
+    >
+
+        <div class="relative overflow-hidden">
+
+            <div
+                class="absolute inset-0 hero-glow pointer-events-none"
+                aria-hidden="true"
+            ></div>
+
+            <div class="relative max-w-[1100px] mx-auto px-5 sm:px-6 md:px-10 pt-8 md:pt-12 pb-12 md:pb-16">
+
+                <a
+                    href="/artikel/"
+                    class="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/90 px-4 py-2.5 text-sm font-opensans font-bold text-slate-700 shadow-sm hover:border-blue-300 hover:text-blue-600 transition-all"
+                >
+                    <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.8"
+                            d="M15 19l-7-7 7-7"
+                        />
+                    </svg>
+
+                    Semua Artikel
+                </a>
+
+
+                <div
+                    id="article-header"
+                    class="article-shell mt-10"
+                >
+
+                    <div
+                        id="article-loading"
+                        class="animate-pulse"
+                    >
+
+                        <div class="h-6 w-28 rounded-full bg-blue-100"></div>
+
+                        <div class="mt-5 h-12 md:h-16 rounded-xl bg-slate-200 w-full"></div>
+
+                        <div class="mt-3 h-12 md:h-16 rounded-xl bg-slate-200 w-[82%]"></div>
+
+                        <div class="mt-6 h-5 rounded bg-slate-200 w-72"></div>
+
+                    </div>
+
+
+                    <div
+                        id="article-header-content"
+                        class="hidden"
+                    >
+
+                        <span
+                            id="article-category"
+                            class="inline-flex items-center rounded-full bg-blue-600 px-3 py-1.5 text-[10px] font-opensans font-bold uppercase tracking-wide text-white"
+                        ></span>
+
+                        <h1
+                            id="article-title"
+                            class="mt-5 font-opensans text-[2rem] sm:text-[2.6rem] md:text-[3.55rem] font-bold tracking-tight leading-[1.08] text-slate-900"
+                        ></h1>
+
+                        <div
+                            class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-slate-500 font-opensans"
+                        >
+
+                            <time
+                                id="article-date"
+                            ></time>
+
+                            <span
+                                aria-hidden="true"
+                                class="w-1 h-1 rounded-full bg-slate-300"
+                            ></span>
+
+                            <span
+                                id="article-read-time"
+                            ></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
         </div>
-      </aside>
-    </div>
-  </div>
-</section>
-
-</main>
 
 
-<section id="feedback" class="pb-16 md:pb-20">
-<div class="max-w-[1200px] mx-auto px-5 sm:px-6 md:px-10">
-<div class="max-w-2xl mx-auto rounded-2xl md:rounded-3xl bg-white border border-gray-100 shadow-sm p-6 sm:p-8 md:p-10">
-<div class="text-center">
-<h2 class="font-opensans text-[1.35rem] md:text-[1.65rem] font-bold text-text-main">Punya Masukan?</h2>
-<p class="mt-2 text-sm md:text-[0.95rem] text-text-muted leading-relaxed">Kami ingin tahu pendapat Anda. Kirim feedback, saran, atau ide untuk Found Selection.</p>
-</div>
-<form id="feedback-form" class="mt-7 space-y-4">
-<input id="feedback-name" name="name" type="text" autocomplete="name" required placeholder="Nama" class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-sm text-text-main outline-none transition-all placeholder:text-gray-400 focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10">
-<input id="feedback-email" name="email" type="email" autocomplete="email" required placeholder="Email" class="w-full rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-sm text-text-main outline-none transition-all placeholder:text-gray-400 focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10">
-<textarea id="feedback-message" name="message" rows="5" required placeholder="Tulis feedback Anda..." class="w-full resize-none rounded-xl border border-gray-200 bg-white px-4 py-3.5 text-sm text-text-main outline-none transition-all placeholder:text-gray-400 focus:border-[#2563eb] focus:ring-4 focus:ring-[#2563eb]/10"></textarea>
-<button type="submit" class="w-full rounded-xl bg-[#2563eb] px-5 py-3.5 text-sm font-opensans font-bold text-white shadow-sm transition-all duration-300 hover:bg-[#1d4ed8] hover:-translate-y-0.5 hover:shadow-md">Kirim Feedback</button>
-<p id="feedback-status" class="hidden text-center text-sm leading-relaxed"></p>
-</form>
-</div></div>
-</section>
+        <section class="pb-16 md:pb-24">
 
-<footer class="bg-white border-t border-gray-200 py-16 text-[0.875rem] text-text-muted text-center md:text-left relative z-10">
-<div class="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
-<div class="text-center md:text-left"><span class="font-opensans font-bold text-[1.5rem] tracking-tight text-text-main block mb-2">Found Selection.</span><p>&copy; 2026 Found Selection. Hak cipta dilindungi.</p></div>
-<div class="flex flex-wrap justify-center gap-x-10 gap-y-4 font-opensans">
-<a href="../index.html" class="hover:text-[#1d4ed8] font-bold transition-colors">Beranda</a>
-<a href="./index.html" class="hover:text-[#1d4ed8] font-bold transition-colors">Artikel</a>
-<a href="../index.html#kerja-sama" class="hover:text-[#1d4ed8] font-bold transition-colors">Kerja Sama</a>
-<a href="../index.html#faq" class="hover:text-[#1d4ed8] font-bold transition-colors">FAQ</a>
-</div>
-<div class="flex justify-center md:justify-end gap-8 font-opensans items-center">
-<a href="javascript:void(0)" onclick="openPrivacyModal()" class="hover:text-[#1d4ed8] font-bold transition-colors">Kebijakan Privasi</a>
-<a href="mailto:proview.support@gmail.com" class="hover:text-[#1d4ed8] transition-colors font-bold">Kontak</a>
-</div>
-</div>
-</footer>
+            <div class="max-w-[1100px] mx-auto px-5 sm:px-6 md:px-10">
 
-<div id="privacyModal" class="fixed inset-0 z-[60] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
-<div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onclick="closePrivacyModal()"></div>
-<div id="privacyBody" class="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl mx-4 max-h-[85vh] flex flex-col overflow-hidden transform translate-y-5 scale-95 opacity-0 transition-all duration-300">
-<div class="flex items-center justify-between px-6 py-4 border-b border-gray-100"><h2 class="font-opensans text-[1.25rem] font-bold text-text-main">Kebijakan Privasi</h2><button onclick="closePrivacyModal()" class="text-text-muted hover:text-[#1d4ed8] p-2" aria-label="Tutup"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 6l12 12M6 18L18 6"/></svg></button></div>
-<div class="px-6 py-6 overflow-y-auto text-[1rem] text-text-body space-y-4">
-<p><strong>Terakhir Diperbarui: 09 September 2026</strong></p>
-<p>Selamat datang di Found Selection (foundselection.blog). Privasi Anda sangat penting bagi kami. Dokumen Kebijakan Privasi ini menguraikan jenis informasi pribadi yang dikumpulkan dan dicatat oleh sistem kami, serta bagaimana kami menggunakannya untuk menunjang keamanan dan kenyamanan penjelajahan Anda.</p>
-<h3 class="font-opensans font-bold text-lg text-text-main">1. Pengumpulan Data</h3><p>Kami hanya mengumpulkan data esensial berupa aktivitas analitik anonim guna memahami tren bacaan audiens.</p>
-<h3 class="font-opensans font-bold text-lg text-text-main">2. Penggunaan Tautan Afiliasi</h3><p>Found Selection dapat menyertakan tautan afiliasi pada beberapa ulasan produk. Jika Anda melakukan pembelian melalui tautan tersebut, kami mungkin menerima komisi tanpa biaya tambahan bagi Anda.</p>
-<h3 class="font-opensans font-bold text-lg text-text-main">3. Pengelolaan Cookies</h3><p>Anda dapat mengelola konfigurasi cookies melalui pengaturan browser yang digunakan.</p>
-<h3 class="font-opensans font-bold text-lg text-text-main">4. Hubungi Kami</h3><p>Untuk informasi lebih lanjut, hubungi kami melalui <strong>proview.support@gmail.com</strong>.</p>
-</div>
-<div class="px-6 py-4 border-t border-gray-100 bg-gray-50 flex justify-end"><button onclick="closePrivacyModal()" class="px-6 py-2 bg-[#2563eb] text-white font-opensans font-bold text-[0.875rem] rounded-full hover:bg-[#1d4ed8] transition-colors">Saya Mengerti</button></div>
-</div></div>
+                <div class="article-shell">
 
-<script>
-const API_URL='https://found-selection-api.foundselection.workers.dev/api/articles';
-let articles=[],currentFilter='Semua',currentPage=1;
+                    <div
+                        id="article-cover-wrap"
+                        class="hidden overflow-hidden rounded-2xl md:rounded-[22px] bg-blue-50 shadow-[0_15px_50px_rgba(30,64,175,.10)]"
+                    >
+                        <img
+                            id="article-cover"
+                            class="article-cover"
+                            src=""
+                            alt=""
+                            width="1200"
+                            height="675"
+                            decoding="async"
+                        >
+                    </div>
 
-const CATEGORY_LABELS={
-  'Teknologi':'Teknologi',
-  'technology':'Teknologi',
-  'Hiburan':'Hiburan',
-  'entertainment':'Hiburan',
-  'Esensial':'Esensial',
-  'essential':'Esensial',
-  'Lifestyle':'Gaya Hidup',
-  'lifestyle':'Gaya Hidup',
-  'Gaya Hidup':'Gaya Hidup',
-  'Kesehatan':'Kesehatan',
-  'health':'Kesehatan'
-};
 
-function canonicalCategory(value){
-  const key=String(value||'').trim();
-  return CATEGORY_LABELS[key] || CATEGORY_LABELS[key.toLowerCase()] || key || 'Esensial';
-}
-function getArticlesPerPage(){
-  if(window.innerWidth<768)return 6;
-  if(window.innerWidth<1024)return 6;
-  return 9;
-}
-function normalizeArticle(article){
-  return {
-    id:article.id,
-    title:article.title||'',
-    slug:article.slug||generateSlug(article.title||''),
-    category:canonicalCategory(article.category),
-    date:article.publish_date||'',
-    readTime:article.read_time?`${article.read_time} min`:'',
-    image:article.thumbnail||'',
-    excerpt:article.excerpt||''
-  };
-}
-function generateSlug(text){
-  return String(text).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)+/g,'');
-}
-function formatDate(dateString){
-  if(!dateString)return '';
-  const d=new Date(`${dateString}T00:00:00`);
-  if(Number.isNaN(d.getTime()))return dateString;
-  return new Intl.DateTimeFormat('id-ID',{day:'2-digit',month:'long',year:'numeric'}).format(d);
-}
-function getFilteredArticles(){
-  return currentFilter==='Semua'?articles:articles.filter(article=>canonicalCategory(article.category)===currentFilter);
-}
-async function loadArticles(){
-  const grid=document.getElementById('article-grid'),empty=document.getElementById('empty-state');
-  grid.innerHTML='<div class="col-span-full flex justify-center py-16"><div class="w-8 h-8 rounded-full border-2 border-gray-200 border-t-blue-600 animate-spin" aria-label="Memuat artikel"></div></div>';
-  empty.classList.add('hidden');
-  try{
-    const response=await fetch(API_URL,{headers:{Accept:'application/json'}});
-    if(!response.ok)throw new Error(`API HTTP ${response.status}`);
-    const result=await response.json();
-    if(!result.success||!Array.isArray(result.data))throw new Error('Format response API tidak sesuai.');
-    articles=result.data.map(normalizeArticle);
-    currentPage=1;renderArticles();
-  }catch(error){
-    console.error(error);articles=[];grid.innerHTML='';empty.innerHTML='<div class="text-center"><h2 class="font-opensans font-bold text-xl text-text-main">Artikel belum dapat dimuat</h2><p class="mt-2 text-text-muted">Silakan coba muat ulang halaman beberapa saat lagi.</p></div>';empty.classList.remove('hidden');document.getElementById('pagination').innerHTML='';
-  }
-}
-function escapeHtml(value){
-  return String(value??'')
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#039;');
-}
-function dateValue(a){
-  const t=Date.parse(`${a.date||''}T00:00:00`);
-  return Number.isNaN(t)?0:t;
-}
-function renderSidebar(items){
-  const el=document.getElementById('sidebar-list');
-  const list=[...items]
-    .sort((a,b)=>{
-      const av=Number(a.views??a.view_count??a.read_count??0);
-      const bv=Number(b.views??b.view_count??b.read_count??0);
-      if(av||bv)return bv-av;
-      return dateValue(b)-dateValue(a);
-    })
-    .slice(0,5);
+                    <div
+                        id="article-excerpt"
+                        class="hidden mt-8 md:mt-10 rounded-2xl border border-blue-100 bg-blue-50/70 p-5 md:p-6 text-[1.02rem] md:text-[1.08rem] leading-[1.75] text-slate-700"
+                    ></div>
 
-  el.innerHTML=list.map((article,index)=>{
-    const image=article.image||'';
-    return `<a href="/artikel/${encodeURIComponent(article.slug)}" class="fs-side-item group no-underline">
-      ${image
-        ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(article.title)}" width="176" height="144" loading="lazy" decoding="async">`
-        : `<div class="w-full h-full min-h-[64px] rounded-xl bg-gradient-to-br from-blue-50 to-slate-100"></div>`}
-      <div class="min-w-0">
-        <div class="flex items-center gap-2">
-          <span class="number-badge shrink-0">${index+1}</span>
-          <span class="text-[9px] font-opensans font-bold uppercase tracking-[.1em] text-blue-600 truncate">${escapeHtml(canonicalCategory(article.category))}</span>
+
+                    <article
+                        id="article-content"
+                        class="article-content mt-9 md:mt-12"
+                    ></article>
+
+
+                    <div class="mt-12 md:mt-16 pt-7 border-t border-slate-200">
+
+                        <div class="flex flex-wrap items-center justify-between gap-4">
+
+                            <a
+                                href="/artikel/"
+                                class="inline-flex items-center gap-2 text-sm font-opensans font-bold text-slate-600 hover:text-blue-600 transition-colors"
+                            >
+                                <svg
+                                    class="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="1.8"
+                                        d="M15 19l-7-7 7-7"
+                                    />
+                                </svg>
+
+                                Kembali ke Artikel
+                            </a>
+
+
+                            <button
+                                id="share-button"
+                                type="button"
+                                class="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-4 py-2.5 text-sm font-opensans font-bold text-blue-600 hover:bg-blue-50 hover:border-blue-200 transition-all"
+                            >
+
+                                <svg
+                                    class="w-4 h-4"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="1.8"
+                                        d="M8.5 12.5l7-4M8.5 11.5l7 4M7 14.5a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm10-5a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm0 12a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"
+                                    />
+                                </svg>
+
+                                Bagikan
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <section
+                    id="related-section"
+                    class="max-w-[1100px] mx-auto mt-16 md:mt-20"
+                >
+
+                    <div class="flex items-center gap-4 mb-6">
+
+                        <div>
+                            <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">
+                                Lanjut Membaca
+                            </div>
+
+                            <h2 class="mt-1 font-opensans text-xl md:text-2xl font-bold text-slate-900">
+                                Artikel Terkait
+                            </h2>
+                        </div>
+
+                        <div class="section-rule flex-1"></div>
+
+                    </div>
+
+
+                    <div
+                        id="related-grid"
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+                    ></div>
+
+                </section>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ================================
+         ERROR
+    ================================= -->
+
+    <main
+        id="error-view"
+        class="hidden min-h-[70vh] flex items-center justify-center px-5"
+    >
+
+        <div class="text-center max-w-xl">
+
+            <div class="mx-auto w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+
+                <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.8"
+                        d="M12 8v4m0 4h.01M4.93 19h14.14a2 2 0 0 0 1.73-3L13.73 4a2 2 0 0 0-3.46 0L3.2 16a2 2 0 0 0 1.73 3Z"
+                    />
+                </svg>
+
+            </div>
+
+            <h1 class="mt-6 font-opensans text-2xl md:text-3xl font-bold text-slate-900">
+                Artikel tidak ditemukan
+            </h1>
+
+            <p class="mt-3 text-slate-500 leading-relaxed">
+                Artikel yang Anda cari tidak tersedia atau belum dipublikasikan.
+            </p>
+
+            <a
+                href="/artikel/"
+                class="inline-flex mt-7 items-center justify-center rounded-full bg-blue-600 px-6 py-3 text-sm font-opensans font-bold text-white hover:bg-blue-700 transition-colors"
+            >
+                Kembali ke Artikel
+            </a>
+
         </div>
-        <time datetime="${escapeHtml(article.date)}" class="block mt-1 text-[10px] text-slate-400">${escapeHtml(formatDate(article.date))}</time>
-        <h3 class="mt-1 font-opensans text-[0.86rem] font-bold leading-[1.38] text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-3">${escapeHtml(article.title)}</h3>
-      </div>
-    </a>`;
-  }).join('');
-}
-function renderArticles(){
-  const grid=document.getElementById('article-grid');
-  const featured=document.getElementById('featured-grid');
-  const empty=document.getElementById('empty-state');
-  const pagination=document.getElementById('pagination');
 
-  const filtered=[...getFilteredArticles()].sort((a,b)=>dateValue(b)-dateValue(a));
-  const perPage=getArticlesPerPage();
+    </main>
 
-  if(!filtered.length){
-    featured.innerHTML='';
-    grid.innerHTML='';
-    document.getElementById('sidebar-list').innerHTML='';
-    pagination.innerHTML='';
-    empty.classList.remove('hidden');
-    return;
-  }
 
-  empty.classList.add('hidden');
+    <footer
+        id="site-footer"
+        class="bg-white border-t border-gray-200 py-16 text-[0.875rem] text-slate-500"
+    >
 
-  const top=filtered.slice(0,3);
+        <div class="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
 
-  featured.innerHTML=top.map((article,index)=>{
-    const image=article.image||'';
-    return `<a href="/artikel/${encodeURIComponent(article.slug)}" class="group block no-underline outline-none fade-in" style="animation-delay:${Math.min(index*.07,.2)}s">
-      <article class="fs-main h-full flex flex-col">
-        <div class="relative aspect-[4/3] overflow-hidden bg-blue-50">
-          ${image
-            ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(article.title)}" width="900" height="675" loading="${index===0?'eager':'lazy'}" decoding="async" class="w-full h-full object-cover">`
-            : `<div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>`}
-          <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/55 to-transparent"></div>
-          <span class="absolute top-3 left-3 bg-white text-blue-700 text-[9px] md:text-[10px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-sm tracking-wide">${escapeHtml(canonicalCategory(article.category))}</span>
-          
+            <div class="text-center md:text-left">
+
+                <span class="font-opensans font-bold text-[1.5rem] tracking-tight text-slate-900 block mb-2">
+                    Found Selection.
+                </span>
+
+                <p>
+                    &copy; 2026 Found Selection. Hak cipta dilindungi.
+                </p>
+
+            </div>
+
+
+            <div class="flex flex-wrap justify-center gap-x-10 gap-y-4 font-opensans">
+
+                <a
+                    href="/"
+                    class="hover:text-blue-700 font-bold transition-colors"
+                >
+                    Beranda
+                </a>
+
+                <a
+                    href="/artikel/"
+                    class="hover:text-blue-700 font-bold transition-colors"
+                >
+                    Artikel
+                </a>
+
+                <a
+                    href="/#kerja-sama"
+                    class="hover:text-blue-700 font-bold transition-colors"
+                >
+                    Kerja Sama
+                </a>
+
+                <a
+                    href="/#faq"
+                    class="hover:text-blue-700 font-bold transition-colors"
+                >
+                    FAQ
+                </a>
+
+            </div>
+
+
+            <div class="flex justify-center md:justify-end gap-8 font-opensans">
+
+                <a
+                    href="/"
+                    class="hover:text-blue-700 font-bold transition-colors"
+                >
+                    Beranda
+                </a>
+
+                <a
+                    href="mailto:proview.support@gmail.com"
+                    class="hover:text-blue-700 transition-colors font-bold"
+                >
+                    Kontak
+                </a>
+
+            </div>
+
         </div>
-        <div class="p-4 md:p-5 flex flex-col flex-1">
-          <div class="flex items-center justify-between gap-2 text-[10px] md:text-[11px] font-opensans font-semibold text-slate-400">
-            <time datetime="${escapeHtml(article.date)}" class="truncate">${escapeHtml(formatDate(article.date))}</time>
-            <span class="shrink-0">${escapeHtml(article.readTime)}</span>
-          </div>
-          <h2 class="mt-2 font-opensans text-[1rem] md:text-[1.08rem] font-bold text-slate-900 leading-[1.35] group-hover:text-blue-600 transition-colors line-clamp-3">${escapeHtml(article.title)}</h2>
-          <p class="mt-2 text-[0.78rem] md:text-[0.84rem] text-slate-500 leading-[1.55] line-clamp-3">${escapeHtml(article.excerpt)}</p>
-        </div>
-      </article>
-    </a>`;
-  }).join('');
 
-  const remainingAll=filtered.slice(3);
-  const popular=remainingAll
-    .slice()
-    .sort((a,b)=>{
-      const av=Number(a.views??a.view_count??a.read_count??0);
-      const bv=Number(b.views??b.view_count??b.read_count??0);
-      if(av||bv)return bv-av;
-      return dateValue(b)-dateValue(a);
-    })
-    .slice(0,5);
+    </footer>
 
-  const popularIds=new Set(popular.map(a=>String(a.id ?? a.slug)));
-  const remaining=remainingAll.filter(a=>!popularIds.has(String(a.id ?? a.slug)));
 
-  const totalPages=Math.ceil(remaining.length/perPage);
-  currentPage=Math.min(Math.max(currentPage,1),Math.max(totalPages,1));
-  const visible=remaining.slice((currentPage-1)*perPage,currentPage*perPage);
+    <script>
 
-  grid.innerHTML=visible.map((article,index)=>{
-    const image=article.image||'';
-    return `<a href="/artikel/${encodeURIComponent(article.slug)}" class="group block no-underline outline-none fade-in" style="animation-delay:${Math.min(index*.04,.22)}s">
-      <article class="fs-latest h-full flex flex-col">
-        <div class="relative aspect-[16/10] overflow-hidden bg-blue-50">
-          ${image
-            ? `<img src="${escapeHtml(image)}" alt="${escapeHtml(article.title)}" width="900" height="563" loading="lazy" decoding="async" class="w-full h-full object-cover">`
-            : `<div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>`}
-          <span class="absolute top-3 left-3 bg-white text-blue-700 text-[9px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-sm">${escapeHtml(canonicalCategory(article.category))}</span>
-        </div>
-        <div class="p-4 md:p-5">
-          <div class="flex items-center justify-between gap-2 text-[10px] md:text-[11px] font-opensans font-semibold text-slate-400">
-            <time datetime="${escapeHtml(article.date)}" class="truncate">${escapeHtml(formatDate(article.date))}</time>
-            <span class="shrink-0">${escapeHtml(article.readTime)}</span>
-          </div>
-          <h2 class="mt-2 font-opensans text-[0.98rem] md:text-[1.05rem] font-bold text-slate-900 leading-[1.38] group-hover:text-blue-600 transition-colors line-clamp-3">${escapeHtml(article.title)}</h2>
-          <p class="mt-2 text-[0.76rem] md:text-[0.82rem] text-slate-500 leading-[1.55] line-clamp-3">${escapeHtml(article.excerpt)}</p>
-        </div>
-      </article>
-    </a>`;
-  }).join('');
+        /*
+         * ============================================
+         * KONFIGURASI
+         * ============================================
+         */
 
-  renderSidebar(popular);
-  renderPagination(totalPages);
-}
-function renderPagination(totalPages){
-  const pagination=document.getElementById('pagination');
-  if(totalPages<=1){pagination.innerHTML='';return}
-  const visibleCount=Math.min(5,totalPages);
-  let start=Math.max(1,currentPage-Math.floor(visibleCount/2)),end=start+visibleCount-1;
-  if(end>totalPages){end=totalPages;start=Math.max(1,end-visibleCount+1)}
-  const buttonClass='page-button inline-flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full border border-gray-200 bg-white text-text-muted font-opensans font-bold text-xs md:text-sm';
-  let markup='';
-  if(currentPage>1)markup+=`<button type="button" data-page="${currentPage-1}" class="${buttonClass}" aria-label="Halaman sebelumnya">‹</button>`;
-  for(let page=start;page<=end;page++)markup+=`<button type="button" data-page="${page}" class="${page===currentPage?'page-active ':''}${buttonClass}" aria-label="Halaman ${page}" ${page===currentPage?'aria-current="page"':''}>${page}</button>`;
-  if(currentPage<totalPages)markup+=`<button type="button" data-page="${currentPage+1}" class="${buttonClass}" aria-label="Halaman berikutnya">›</button>`;
-  pagination.innerHTML=markup;
-  pagination.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{currentPage=Number(button.dataset.page);renderArticles();document.getElementById('article-grid').scrollIntoView({behavior:'smooth',block:'start'})}));
-}
-document.querySelectorAll('.filter-btn').forEach(button=>button.addEventListener('click',()=>{
-  document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('filter-active'));
-  button.classList.add('filter-active');currentFilter=button.dataset.filter;currentPage=1;renderArticles();
-  document.getElementById('article-grid').scrollIntoView({behavior:'smooth',block:'start'});
-}));
-let resizeTimer;
-window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{const pages=Math.ceil(getFilteredArticles().length/getArticlesPerPage());if(currentPage>Math.max(pages,1))currentPage=Math.max(pages,1);renderArticles()},150)});
+        const API_URL =
+            'https://found-selection-api.foundselection.workers.dev/api/articles';
 
-document.getElementById('feedback-form').addEventListener('submit',event=>{
-  event.preventDefault();
-  const name=document.getElementById('feedback-name').value.trim(),email=document.getElementById('feedback-email').value.trim(),message=document.getElementById('feedback-message').value.trim();
-  const subject=encodeURIComponent(`Feedback Found Selection dari ${name}`);
-  const body=encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nFeedback:\n${message}`);
-  window.location.href=`mailto:proview.support@gmail.com?subject=${subject}&body=${body}`;
-  const status=document.getElementById('feedback-status');status.textContent='Membuka aplikasi email untuk mengirim feedback...';status.className='text-center text-sm leading-relaxed text-[#1d4ed8]';
-});
-const privacyModal=document.getElementById('privacyModal'),privacyBody=document.getElementById('privacyBody');
-function openPrivacyModal(){privacyModal.classList.remove('opacity-0','pointer-events-none');privacyModal.classList.add('opacity-100');privacyBody.classList.remove('translate-y-5','scale-95','opacity-0');privacyBody.classList.add('translate-y-0','scale-100','opacity-100');document.body.style.overflow='hidden'}
-function closePrivacyModal(){privacyModal.classList.remove('opacity-100');privacyModal.classList.add('opacity-0','pointer-events-none');privacyBody.classList.remove('translate-y-0','scale-100','opacity-100');privacyBody.classList.add('translate-y-5','scale-95','opacity-0');document.body.style.overflow=''}
-loadArticles();
-</script>
+        const SITE_URL =
+            'https://foundselection.blog';
+
+        const ARTICLES_PER_PAGE_DESKTOP = 9;
+        const ARTICLES_PER_PAGE_MOBILE = 6;
+
+
+        /*
+         * ============================================
+         * STATE
+         * ============================================
+         */
+
+        let articles = [];
+        let currentFilter = 'Semua';
+        let currentPage = 1;
+        let currentArticle = null;
+
+
+        /*
+         * ============================================
+         * KATEGORI
+         * ============================================
+         */
+
+        const CATEGORY_LABELS = {
+            'Teknologi': 'Teknologi',
+            'technology': 'Teknologi',
+
+            'Hiburan': 'Hiburan',
+            'entertainment': 'Hiburan',
+
+            'Esensial': 'Esensial',
+            'essential': 'Esensial',
+
+            'Lifestyle': 'Gaya Hidup',
+            'lifestyle': 'Gaya Hidup',
+            'Gaya Hidup': 'Gaya Hidup',
+
+            'Kesehatan': 'Kesehatan',
+            'health': 'Kesehatan'
+        };
+
+
+        function canonicalCategory(value) {
+
+            const key = String(value || '').trim();
+
+            return (
+                CATEGORY_LABELS[key] ||
+                CATEGORY_LABELS[key.toLowerCase()] ||
+                key ||
+                'Esensial'
+            );
+        }
+
+
+        /*
+         * ============================================
+         * SECURITY / HTML ESCAPING
+         * ============================================
+         */
+
+        function escapeHtml(value) {
+
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+
+        /*
+         * ============================================
+         * SLUG
+         * ============================================
+         */
+
+        function generateSlug(text) {
+
+            return String(text || '')
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/(^-|-$)+/g, '');
+        }
+
+
+        function getSlugFromUrl() {
+
+            const path =
+                window.location.pathname
+                    .replace(/^\/+|\/+$/g, '');
+
+            if (!path) {
+                return '';
+            }
+
+            const parts = path.split('/');
+
+            if (
+                parts.length >= 2 &&
+                parts[0].toLowerCase() === 'artikel'
+            ) {
+
+                return decodeURIComponent(
+                    parts.slice(1).join('/')
+                );
+            }
+
+            return '';
+        }
+
+
+        /*
+         * ============================================
+         * DATE
+         * ============================================
+         */
+
+        function dateValue(article) {
+
+            const value =
+                article.publish_date ||
+                article.date ||
+                article.created_at ||
+                '';
+
+            const timestamp =
+                Date.parse(
+                    String(value).includes('T')
+                        ? value
+                        : `${value}T00:00:00`
+                );
+
+            return Number.isNaN(timestamp)
+                ? 0
+                : timestamp;
+        }
+
+
+        function formatDate(value) {
+
+            if (!value) {
+                return '';
+            }
+
+            const raw = String(value);
+
+            const date =
+                new Date(
+                    raw.includes('T')
+                        ? raw
+                        : `${raw}T00:00:00`
+                );
+
+            if (Number.isNaN(date.getTime())) {
+                return raw;
+            }
+
+            return new Intl.DateTimeFormat(
+                'id-ID',
+                {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric'
+                }
+            ).format(date);
+        }
+
+
+        function dateISO(value) {
+
+            if (!value) {
+                return '';
+            }
+
+            const raw = String(value);
+
+            const date =
+                new Date(
+                    raw.includes('T')
+                        ? raw
+                        : `${raw}T00:00:00`
+                );
+
+            if (Number.isNaN(date.getTime())) {
+                return '';
+            }
+
+            return date.toISOString();
+        }
+
+
+        /*
+         * ============================================
+         * NORMALISASI DATA
+         * ============================================
+         */
+
+        function normalizeArticle(article) {
+
+            return {
+                ...article,
+
+                id: article.id,
+
+                title:
+                    String(article.title || 'Tanpa Judul'),
+
+                slug:
+                    String(
+                        article.slug ||
+                        generateSlug(article.title || '')
+                    ),
+
+                category:
+                    canonicalCategory(article.category),
+
+                excerpt:
+                    String(article.excerpt || ''),
+
+                content:
+                    String(article.content || ''),
+
+                image:
+                    String(
+                        article.thumbnail ||
+                        article.og_image ||
+                        ''
+                    ),
+
+                date:
+                    article.publish_date ||
+                    article.created_at ||
+                    '',
+
+                readTime:
+                    article.read_time
+                        ? `${article.read_time} menit`
+                        : '',
+
+                status:
+                    String(
+                        article.status || ''
+                    ).toLowerCase()
+            };
+        }
+
+
+        /*
+         * ============================================
+         * AMBIL ARTIKEL DARI WORKER
+         * ============================================
+         */
+
+        async function fetchArticles() {
+
+            const response =
+                await fetch(
+                    API_URL,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json'
+                        },
+                        cache: 'no-store'
+                    }
+                );
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `API HTTP ${response.status}`
+                );
+            }
+
+            const result =
+                await response.json();
+
+            if (
+                !result ||
+                result.success !== true ||
+                !Array.isArray(result.data)
+            ) {
+
+                throw new Error(
+                    'Format respons API tidak sesuai.'
+                );
+            }
+
+            return result.data
+                .map(normalizeArticle)
+                .filter(
+                    article =>
+                        article.status === 'published'
+                );
+        }
+
+
+        /*
+         * ============================================
+         * MODE SWITCH
+         * ============================================
+         */
+
+        function showListing() {
+
+            document
+                .getElementById('listing-view')
+                .classList.remove('hidden');
+
+            document
+                .getElementById('article-view')
+                .classList.add('hidden');
+
+            document
+                .getElementById('error-view')
+                .classList.add('hidden');
+
+            document
+                .getElementById('site-footer')
+                .classList.remove('hidden');
+        }
+
+
+        function showArticle() {
+
+            document
+                .getElementById('listing-view')
+                .classList.add('hidden');
+
+            document
+                .getElementById('article-view')
+                .classList.remove('hidden');
+
+            document
+                .getElementById('error-view')
+                .classList.add('hidden');
+
+            document
+                .getElementById('site-footer')
+                .classList.remove('hidden');
+        }
+
+
+        function showError() {
+
+            document
+                .getElementById('listing-view')
+                .classList.add('hidden');
+
+            document
+                .getElementById('article-view')
+                .classList.add('hidden');
+
+            document
+                .getElementById('error-view')
+                .classList.remove('hidden');
+
+            document
+                .getElementById('site-footer')
+                .classList.remove('hidden');
+        }
+
+
+        /*
+         * ============================================
+         * LISTING
+         * ============================================
+         */
+
+        function getArticlesPerPage() {
+
+            return window.innerWidth < 768
+                ? ARTICLES_PER_PAGE_MOBILE
+                : ARTICLES_PER_PAGE_DESKTOP;
+        }
+
+
+        function getFilteredArticles() {
+
+            if (currentFilter === 'Semua') {
+                return articles;
+            }
+
+            return articles.filter(
+                article =>
+                    canonicalCategory(article.category) ===
+                    currentFilter
+            );
+        }
+
+
+        function renderSidebar(items) {
+
+            const element =
+                document.getElementById('sidebar-list');
+
+            const list =
+                [...items]
+                    .sort(
+                        (a, b) => {
+
+                            const av =
+                                Number(
+                                    a.views ??
+                                    a.view_count ??
+                                    a.read_count ??
+                                    0
+                                );
+
+                            const bv =
+                                Number(
+                                    b.views ??
+                                    b.view_count ??
+                                    b.read_count ??
+                                    0
+                                );
+
+                            if (av || bv) {
+                                return bv - av;
+                            }
+
+                            return dateValue(b) - dateValue(a);
+                        }
+                    )
+                    .slice(0, 5);
+
+            if (!list.length) {
+
+                element.innerHTML = '';
+
+                return;
+            }
+
+            element.innerHTML =
+                list.map(
+                    (article, index) => {
+
+                        const image =
+                            article.image || '';
+
+                        return `
+                            <a
+                                href="/artikel/${encodeURIComponent(article.slug)}"
+                                class="fs-side-item group no-underline"
+                            >
+
+                                ${
+                                    image
+                                        ? `
+                                            <img
+                                                src="${escapeHtml(image)}"
+                                                alt="${escapeHtml(article.title)}"
+                                                width="176"
+                                                height="144"
+                                                loading="lazy"
+                                                decoding="async"
+                                            >
+                                        `
+                                        : `
+                                            <div class="w-full h-full min-h-[64px] rounded-xl bg-gradient-to-br from-blue-50 to-slate-100"></div>
+                                        `
+                                }
+
+                                <div class="min-w-0">
+
+                                    <div class="flex items-center gap-2">
+
+                                        <span class="number-badge shrink-0">
+                                            ${index + 1}
+                                        </span>
+
+                                        <span class="text-[9px] font-opensans font-bold uppercase tracking-[.1em] text-blue-600 truncate">
+                                            ${escapeHtml(article.category)}
+                                        </span>
+
+                                    </div>
+
+                                    <time
+                                        datetime="${escapeHtml(article.date)}"
+                                        class="block mt-1 text-[10px] text-slate-400"
+                                    >
+                                        ${escapeHtml(formatDate(article.date))}
+                                    </time>
+
+                                    <h3 class="mt-1 font-opensans text-[0.86rem] font-bold leading-[1.38] text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-3">
+                                        ${escapeHtml(article.title)}
+                                    </h3>
+
+                                </div>
+
+                            </a>
+                        `;
+                    }
+                )
+                .join('');
+        }
+
+
+        function renderArticles() {
+
+            const grid =
+                document.getElementById(
+                    'article-grid'
+                );
+
+            const featured =
+                document.getElementById(
+                    'featured-grid'
+                );
+
+            const empty =
+                document.getElementById(
+                    'empty-state'
+                );
+
+            const pagination =
+                document.getElementById(
+                    'pagination'
+                );
+
+            const filtered =
+                [...getFilteredArticles()]
+                    .sort(
+                        (a, b) =>
+                            dateValue(b) -
+                            dateValue(a)
+                    );
+
+            if (!filtered.length) {
+
+                featured.innerHTML = '';
+
+                grid.innerHTML = '';
+
+                document
+                    .getElementById('sidebar-list')
+                    .innerHTML = '';
+
+                pagination.innerHTML = '';
+
+                empty.classList.remove(
+                    'hidden'
+                );
+
+                return;
+            }
+
+            empty.classList.add('hidden');
+
+
+            /*
+             * PILIHAN UTAMA
+             */
+
+            const top =
+                filtered.slice(0, 3);
+
+            featured.innerHTML =
+                top.map(
+                    (article, index) => {
+
+                        const image =
+                            article.image || '';
+
+                        return `
+                            <a
+                                href="/artikel/${encodeURIComponent(article.slug)}"
+                                class="group block no-underline outline-none fade-in"
+                                style="animation-delay:${Math.min(index * .07, .2)}s"
+                            >
+
+                                <article class="fs-main h-full flex flex-col">
+
+                                    <div class="relative aspect-[4/3] overflow-hidden bg-blue-50">
+
+                                        ${
+                                            image
+                                                ? `
+                                                    <img
+                                                        src="${escapeHtml(image)}"
+                                                        alt="${escapeHtml(article.title)}"
+                                                        width="900"
+                                                        height="675"
+                                                        loading="${index === 0 ? 'eager' : 'lazy'}"
+                                                        decoding="async"
+                                                        class="w-full h-full object-cover"
+                                                    >
+                                                `
+                                                : `
+                                                    <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>
+                                                `
+                                        }
+
+                                        <span class="absolute top-3 left-3 main-tag text-[9px] md:text-[10px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-md tracking-wide">
+                                            ${escapeHtml(article.category)}
+                                        </span>
+
+                                    </div>
+
+                                    <div class="p-4 md:p-5 flex flex-col flex-1">
+
+                                        <div class="flex items-center justify-between gap-2 text-[10px] md:text-[11px] font-opensans font-semibold text-slate-400">
+
+                                            <time
+                                                datetime="${escapeHtml(article.date)}"
+                                                class="truncate"
+                                            >
+                                                ${escapeHtml(formatDate(article.date))}
+                                            </time>
+
+                                            <span class="shrink-0">
+                                                ${escapeHtml(article.readTime)}
+                                            </span>
+
+                                        </div>
+
+                                        <h2 class="mt-2 font-opensans text-[1rem] md:text-[1.08rem] font-bold text-slate-900 leading-[1.35] group-hover:text-blue-600 transition-colors line-clamp-3">
+                                            ${escapeHtml(article.title)}
+                                        </h2>
+
+                                        <p class="mt-2 text-[0.78rem] md:text-[0.84rem] text-slate-500 leading-[1.55] line-clamp-3">
+                                            ${escapeHtml(article.excerpt)}
+                                        </p>
+
+                                    </div>
+
+                                </article>
+
+                            </a>
+                        `;
+                    }
+                )
+                .join('');
+
+
+            /*
+             * ARTIKEL TERBARU
+             */
+
+            const remainingAll =
+                filtered.slice(3);
+
+            const popular =
+                remainingAll
+                    .slice()
+                    .sort(
+                        (a, b) => {
+
+                            const av =
+                                Number(
+                                    a.views ??
+                                    a.view_count ??
+                                    a.read_count ??
+                                    0
+                                );
+
+                            const bv =
+                                Number(
+                                    b.views ??
+                                    b.view_count ??
+                                    b.read_count ??
+                                    0
+                                );
+
+                            if (av || bv) {
+                                return bv - av;
+                            }
+
+                            return dateValue(b) - dateValue(a);
+                        }
+                    )
+                    .slice(0, 5);
+
+
+            const popularIds =
+                new Set(
+                    popular.map(
+                        article =>
+                            String(
+                                article.id ??
+                                article.slug
+                            )
+                    )
+                );
+
+
+            const remaining =
+                remainingAll.filter(
+                    article =>
+                        !popularIds.has(
+                            String(
+                                article.id ??
+                                article.slug
+                            )
+                        )
+                );
+
+
+            const perPage =
+                getArticlesPerPage();
+
+            const totalPages =
+                Math.ceil(
+                    remaining.length /
+                    perPage
+                );
+
+            currentPage =
+                Math.min(
+                    Math.max(
+                        currentPage,
+                        1
+                    ),
+                    Math.max(
+                        totalPages,
+                        1
+                    )
+                );
+
+
+            const visible =
+                remaining.slice(
+                    (currentPage - 1) * perPage,
+                    currentPage * perPage
+                );
+
+
+            grid.innerHTML =
+                visible.map(
+                    article => {
+
+                        const image =
+                            article.image || '';
+
+                        return `
+                            <a
+                                href="/artikel/${encodeURIComponent(article.slug)}"
+                                class="group block no-underline outline-none fade-in"
+                            >
+
+                                <article class="fs-latest h-full flex flex-col">
+
+                                    <div class="relative aspect-[16/10] overflow-hidden bg-blue-50">
+
+                                        ${
+                                            image
+                                                ? `
+                                                    <img
+                                                        src="${escapeHtml(image)}"
+                                                        alt="${escapeHtml(article.title)}"
+                                                        width="900"
+                                                        height="563"
+                                                        loading="lazy"
+                                                        decoding="async"
+                                                        class="w-full h-full object-cover"
+                                                    >
+                                                `
+                                                : `
+                                                    <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>
+                                                `
+                                        }
+
+                                        <span class="absolute top-3 left-3 bg-white/95 text-blue-700 text-[9px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-sm">
+                                            ${escapeHtml(article.category)}
+                                        </span>
+
+                                    </div>
+
+                                    <div class="p-4 md:p-5">
+
+                                        <div class="flex items-center justify-between gap-2 text-[10px] md:text-[11px] font-opensans font-semibold text-slate-400">
+
+                                            <time
+                                                datetime="${escapeHtml(article.date)}"
+                                                class="truncate"
+                                            >
+                                                ${escapeHtml(formatDate(article.date))}
+                                            </time>
+
+                                            <span class="shrink-0">
+                                                ${escapeHtml(article.readTime)}
+                                            </span>
+
+                                        </div>
+
+                                        <h2 class="mt-2 font-opensans text-[0.98rem] md:text-[1.05rem] font-bold text-slate-900 leading-[1.38] group-hover:text-blue-600 transition-colors line-clamp-3">
+                                            ${escapeHtml(article.title)}
+                                        </h2>
+
+                                        <p class="mt-2 text-[0.76rem] md:text-[0.82rem] text-slate-500 leading-[1.55] line-clamp-3">
+                                            ${escapeHtml(article.excerpt)}
+                                        </p>
+
+                                    </div>
+
+                                </article>
+
+                            </a>
+                        `;
+                    }
+                )
+                .join('');
+
+
+            renderSidebar(popular);
+
+            renderPagination(
+                totalPages
+            );
+        }
+
+
+        function renderPagination(totalPages) {
+
+            const pagination =
+                document.getElementById(
+                    'pagination'
+                );
+
+            if (totalPages <= 1) {
+
+                pagination.innerHTML = '';
+
+                return;
+            }
+
+            const visibleCount =
+                Math.min(
+                    5,
+                    totalPages
+                );
+
+            let start =
+                Math.max(
+                    1,
+                    currentPage -
+                    Math.floor(
+                        visibleCount / 2
+                    )
+                );
+
+            let end =
+                start +
+                visibleCount -
+                1;
+
+            if (end > totalPages) {
+
+                end = totalPages;
+
+                start =
+                    Math.max(
+                        1,
+                        end -
+                        visibleCount +
+                        1
+                    );
+            }
+
+            const buttonClass =
+                'page-button inline-flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full border border-gray-200 bg-white text-slate-500 font-opensans font-bold text-xs md:text-sm';
+
+
+            let markup = '';
+
+
+            if (currentPage > 1) {
+
+                markup += `
+                    <button
+                        type="button"
+                        data-page="${currentPage - 1}"
+                        class="${buttonClass}"
+                        aria-label="Halaman sebelumnya"
+                    >
+                        ‹
+                    </button>
+                `;
+            }
+
+
+            for (
+                let page = start;
+                page <= end;
+                page++
+            ) {
+
+                markup += `
+                    <button
+                        type="button"
+                        data-page="${page}"
+                        class="${page === currentPage ? 'page-active ' : ''}${buttonClass}"
+                        aria-label="Halaman ${page}"
+                        ${page === currentPage ? 'aria-current="page"' : ''}
+                    >
+                        ${page}
+                    </button>
+                `;
+            }
+
+
+            if (currentPage < totalPages) {
+
+                markup += `
+                    <button
+                        type="button"
+                        data-page="${currentPage + 1}"
+                        class="${buttonClass}"
+                        aria-label="Halaman berikutnya"
+                    >
+                        ›
+                    </button>
+                `;
+            }
+
+
+            pagination.innerHTML =
+                markup;
+
+
+            pagination
+                .querySelectorAll('button')
+                .forEach(
+                    button => {
+
+                        button.addEventListener(
+                            'click',
+                            () => {
+
+                                currentPage =
+                                    Number(
+                                        button.dataset.page
+                                    );
+
+                                renderArticles();
+
+                                document
+                                    .getElementById(
+                                        'article-grid'
+                                    )
+                                    .scrollIntoView(
+                                        {
+                                            behavior: 'smooth',
+                                            block: 'start'
+                                        }
+                                    );
+                            }
+                        );
+                    }
+                );
+        }
+
+
+        /*
+         * ============================================
+         * ARTIKEL INDIVIDUAL
+         * ============================================
+         */
+
+        function findArticleBySlug(slug) {
+
+            const normalized =
+                String(slug || '')
+                    .trim()
+                    .toLowerCase();
+
+            return articles.find(
+                article =>
+                    String(
+                        article.slug || ''
+                    )
+                    .trim()
+                    .toLowerCase() ===
+                    normalized
+            );
+        }
+
+
+        function updateMeta(article) {
+
+            const title =
+                article.seo_title ||
+                `${article.title} | Found Selection`;
+
+            const description =
+                article.meta_description ||
+                article.excerpt ||
+                `Baca ${article.title} di Found Selection.`;
+
+            const canonical =
+                article.canonical_url ||
+                `${SITE_URL}/artikel/${encodeURIComponent(article.slug)}`;
+
+            const image =
+                article.og_image ||
+                article.image ||
+                '';
+
+
+            document.title =
+                title;
+
+
+            setMeta(
+                'description',
+                description
+            );
+
+            setMeta(
+                'robots',
+                `${article.robots_index || 'index'}, ${article.robots_follow || 'follow'}, max-image-preview:large, max-snippet:-1, max-video-preview:-1`
+            );
+
+
+            setCanonical(
+                canonical
+            );
+
+
+            setProperty(
+                'og:title',
+                article.og_title || title
+            );
+
+            setProperty(
+                'og:description',
+                article.og_description || description
+            );
+
+            setProperty(
+                'og:type',
+                'article'
+            );
+
+            setProperty(
+                'og:url',
+                canonical
+            );
+
+            setProperty(
+                'og:site_name',
+                'Found Selection'
+            );
+
+
+            if (image) {
+
+                setProperty(
+                    'og:image',
+                    image
+                );
+            }
+
+
+            setMeta(
+                'twitter:card',
+                image
+                    ? 'summary_large_image'
+                    : 'summary'
+            );
+
+            setMeta(
+                'twitter:title',
+                article.og_title || title
+            );
+
+            setMeta(
+                'twitter:description',
+                article.og_description || description
+            );
+
+
+            if (image) {
+
+                setMeta(
+                    'twitter:image',
+                    image
+                );
+            }
+        }
+
+
+        function setMeta(name, content) {
+
+            if (!content) {
+                return;
+            }
+
+            let element =
+                document.querySelector(
+                    `meta[name="${name}"]`
+                );
+
+            if (!element) {
+
+                element =
+                    document.createElement(
+                        'meta'
+                    );
+
+                element.setAttribute(
+                    'name',
+                    name
+                );
+
+                document.head.appendChild(
+                    element
+                );
+            }
+
+            element.setAttribute(
+                'content',
+                content
+            );
+        }
+
+
+        function setProperty(property, content) {
+
+            if (!content) {
+                return;
+            }
+
+            let element =
+                document.querySelector(
+                    `meta[property="${property}"]`
+                );
+
+            if (!element) {
+
+                element =
+                    document.createElement(
+                        'meta'
+                    );
+
+                element.setAttribute(
+                    'property',
+                    property
+                );
+
+                document.head.appendChild(
+                    element
+                );
+            }
+
+            element.setAttribute(
+                'content',
+                content
+            );
+        }
+
+
+        function setCanonical(url) {
+
+            let element =
+                document.querySelector(
+                    'link[rel="canonical"]'
+                );
+
+            if (!element) {
+
+                element =
+                    document.createElement(
+                        'link'
+                    );
+
+                element.setAttribute(
+                    'rel',
+                    'canonical'
+                );
+
+                document.head.appendChild(
+                    element
+                );
+            }
+
+            element.setAttribute(
+                'href',
+                url
+            );
+        }
+
+
+        function updateSchema(article) {
+
+            const schema =
+                {
+                    '@context': 'https://schema.org',
+                    '@type':
+                        article.schema_type ||
+                        'Article',
+
+                    headline:
+                        article.title,
+
+                    description:
+                        article.meta_description ||
+                        article.excerpt ||
+                        '',
+
+                    url:
+                        article.canonical_url ||
+                        `${SITE_URL}/artikel/${encodeURIComponent(article.slug)}`,
+
+                    datePublished:
+                        dateISO(
+                            article.publish_date ||
+                            article.date
+                        ) || undefined,
+
+                    dateModified:
+                        dateISO(
+                            article.updated_at ||
+                            article.publish_date ||
+                            article.date
+                        ) || undefined,
+
+                    image:
+                        article.image
+                            ? [article.image]
+                            : undefined,
+
+                    isPartOf:
+                        {
+                            '@type': 'WebSite',
+                            name: 'Found Selection',
+                            url: SITE_URL
+                        }
+                };
+
+
+            Object.keys(schema).forEach(
+                key => {
+
+                    if (
+                        schema[key] === undefined ||
+                        schema[key] === ''
+                    ) {
+                        delete schema[key];
+                    }
+                }
+            );
+
+
+            const script =
+                document.getElementById(
+                    'article-schema'
+                );
+
+            script.textContent =
+                JSON.stringify(
+                    schema
+                );
+        }
+
+
+        function renderArticle(article) {
+
+            currentArticle =
+                article;
+
+
+            showArticle();
+
+            updateMeta(article);
+
+            updateSchema(article);
+
+
+            const category =
+                document.getElementById(
+                    'article-category'
+                );
+
+            const title =
+                document.getElementById(
+                    'article-title'
+                );
+
+            const date =
+                document.getElementById(
+                    'article-date'
+                );
+
+            const readTime =
+                document.getElementById(
+                    'article-read-time'
+                );
+
+            const headerContent =
+                document.getElementById(
+                    'article-header-content'
+                );
+
+            const loading =
+                document.getElementById(
+                    'article-loading'
+                );
+
+
+            category.textContent =
+                article.category;
+
+
+            title.textContent =
+                article.title;
+
+
+            date.textContent =
+                formatDate(
+                    article.date
+                );
+
+            date.setAttribute(
+                'datetime',
+                article.date || ''
+            );
+
+
+            readTime.textContent =
+                article.readTime;
+
+
+            loading.classList.add(
+                'hidden'
+            );
+
+            headerContent.classList.remove(
+                'hidden'
+            );
+
+
+            /*
+             * COVER
+             */
+
+            const coverWrap =
+                document.getElementById(
+                    'article-cover-wrap'
+                );
+
+            const cover =
+                document.getElementById(
+                    'article-cover'
+                );
+
+
+            if (article.image) {
+
+                cover.src =
+                    article.image;
+
+                cover.alt =
+                    article.title;
+
+                coverWrap.classList.remove(
+                    'hidden'
+                );
+
+            } else {
+
+                cover.removeAttribute(
+                    'src'
+                );
+
+                coverWrap.classList.add(
+                    'hidden'
+                );
+            }
+
+
+            /*
+             * EXCERPT
+             */
+
+            const excerpt =
+                document.getElementById(
+                    'article-excerpt'
+                );
+
+
+            if (article.excerpt) {
+
+                excerpt.textContent =
+                    article.excerpt;
+
+                excerpt.classList.remove(
+                    'hidden'
+                );
+
+            } else {
+
+                excerpt.textContent = '';
+
+                excerpt.classList.add(
+                    'hidden'
+                );
+            }
+
+
+            /*
+             * CONTENT
+             */
+
+            const content =
+                document.getElementById(
+                    'article-content'
+                );
+
+
+            content.innerHTML =
+                sanitizeArticleHtml(
+                    article.content
+                );
+
+
+            /*
+             * RELATED
+             */
+
+            renderRelatedArticles(
+                article
+            );
+
+
+            /*
+             * SCROLL TOP
+             */
+
+            window.scrollTo(
+                {
+                    top: 0,
+                    behavior: 'instant'
+                }
+            );
+        }
+
+
+        /*
+         * ============================================
+         * SANITASI BODY ARTIKEL
+         * ============================================
+         *
+         * Body dari editor Admin memang berupa HTML.
+         * Kita pertahankan format tulisan, tetapi membuang
+         * elemen/atribut yang berisiko.
+         */
+
+        function sanitizeArticleHtml(html) {
+
+            if (!html) {
+
+                return `
+                    <p class="text-slate-500">
+                        Konten artikel belum tersedia.
+                    </p>
+                `;
+            }
+
+
+            const template =
+                document.createElement(
+                    'template'
+                );
+
+            template.innerHTML =
+                String(html);
+
+
+            const allowedTags =
+                new Set([
+                    'P',
+                    'BR',
+                    'STRONG',
+                    'B',
+                    'EM',
+                    'I',
+                    'U',
+                    'S',
+                    'H2',
+                    'H3',
+                    'H4',
+                    'UL',
+                    'OL',
+                    'LI',
+                    'BLOCKQUOTE',
+                    'A',
+                    'IMG',
+                    'FIGURE',
+                    'FIGCAPTION',
+                    'HR',
+                    'PRE',
+                    'CODE',
+                    'TABLE',
+                    'THEAD',
+                    'TBODY',
+                    'TR',
+                    'TH',
+                    'TD',
+                    'DIV',
+                    'SPAN'
+                ]);
+
+
+            const dangerousTags =
+                [
+                    'SCRIPT',
+                    'STYLE',
+                    'IFRAME',
+                    'OBJECT',
+                    'EMBED',
+                    'FORM',
+                    'INPUT',
+                    'BUTTON',
+                    'TEXTAREA',
+                    'SELECT',
+                    'VIDEO',
+                    'AUDIO',
+                    'SOURCE',
+                    'META',
+                    'LINK'
+                ];
+
+
+            dangerousTags.forEach(
+                tag => {
+
+                    template.content
+                        .querySelectorAll(tag)
+                        .forEach(
+                            node =>
+                                node.remove()
+                        );
+                }
+            );
+
+
+            const walker =
+                document.createTreeWalker(
+                    template.content,
+                    NodeFilter.SHOW_ELEMENT
+                );
+
+
+            const elements = [];
+
+            let node;
+
+            while (
+                node = walker.nextNode()
+            ) {
+                elements.push(node);
+            }
+
+
+            elements.forEach(
+                element => {
+
+                    if (
+                        !allowedTags.has(
+                            element.tagName
+                        )
+                    ) {
+
+                        element.replaceWith(
+                            ...Array.from(
+                                element.childNodes
+                            )
+                        );
+
+                        return;
+                    }
+
+
+                    Array.from(
+                        element.attributes
+                    ).forEach(
+                        attribute => {
+
+                            const name =
+                                attribute.name
+                                    .toLowerCase();
+
+                            const value =
+                                attribute.value;
+
+
+                            /*
+                             * Semua event handler dibuang.
+                             */
+
+                            if (
+                                name.startsWith(
+                                    'on'
+                                )
+                            ) {
+
+                                element.removeAttribute(
+                                    attribute.name
+                                );
+
+                                return;
+                            }
+
+
+                            /*
+                             * Style inline dibuang agar
+                             * artikel tetap konsisten.
+                             */
+
+                            if (
+                                name === 'style'
+                            ) {
+
+                                element.removeAttribute(
+                                    attribute.name
+                                );
+
+                                return;
+                            }
+
+
+                            /*
+                             * Class dibatasi.
+                             */
+
+                            if (
+                                name === 'class'
+                            ) {
+
+                                const safeClasses =
+                                    value
+                                        .split(/\s+/)
+                                        .filter(
+                                            className =>
+                                                /^language-[a-z0-9_-]+$/i.test(
+                                                    className
+                                                )
+                                        );
+
+                                if (
+                                    safeClasses.length
+                                ) {
+
+                                    element.setAttribute(
+                                        'class',
+                                        safeClasses.join(' ')
+                                    );
+
+                                } else {
+
+                                    element.removeAttribute(
+                                        'class'
+                                    );
+                                }
+
+                                return;
+                            }
+
+
+                            /*
+                             * Atribut gambar.
+                             */
+
+                            if (
+                                element.tagName ===
+                                'IMG'
+                            ) {
+
+                                const allowedImage =
+                                    [
+                                        'src',
+                                        'alt',
+                                        'width',
+                                        'height',
+                                        'loading',
+                                        'decoding'
+                                    ];
+
+
+                                if (
+                                    !allowedImage.includes(
+                                        name
+                                    )
+                                ) {
+
+                                    element.removeAttribute(
+                                        attribute.name
+                                    );
+                                }
+
+                                return;
+                            }
+
+
+                            /*
+                             * Link.
+                             */
+
+                            if (
+                                element.tagName ===
+                                'A'
+                            ) {
+
+                                const allowedLink =
+                                    [
+                                        'href',
+                                        'target',
+                                        'rel',
+                                        'title'
+                                    ];
+
+
+                                if (
+                                    !allowedLink.includes(
+                                        name
+                                    )
+                                ) {
+
+                                    element.removeAttribute(
+                                        attribute.name
+                                    );
+                                }
+
+                                return;
+                            }
+
+
+                            /*
+                             * Atribut lain dibuang.
+                             */
+
+                            const commonAllowed =
+                                [
+                                    'colspan',
+                                    'rowspan',
+                                    'scope'
+                                ];
+
+
+                            if (
+                                !commonAllowed.includes(
+                                    name
+                                )
+                            ) {
+
+                                element.removeAttribute(
+                                    attribute.name
+                                );
+                            }
+
+                        }
+                    );
+
+
+                    /*
+                     * Link hanya http/https/mailto.
+                     */
+
+                    if (
+                        element.tagName === 'A'
+                    ) {
+
+                        const href =
+                            element.getAttribute(
+                                'href'
+                            ) || '';
+
+
+                        if (
+                            !/^(https?:|mailto:|\/|#)/i.test(
+                                href
+                            )
+                        ) {
+
+                            element.removeAttribute(
+                                'href'
+                            );
+
+                        } else {
+
+                            if (
+                                /^https?:/i.test(
+                                    href
+                                )
+                            ) {
+
+                                element.setAttribute(
+                                    'target',
+                                    '_blank'
+                                );
+
+                                element.setAttribute(
+                                    'rel',
+                                    'noopener noreferrer nofollow'
+                                );
+                            }
+                        }
+                    }
+
+
+                    /*
+                     * Gambar hanya http/https/data gambar.
+                     */
+
+                    if (
+                        element.tagName === 'IMG'
+                    ) {
+
+                        const src =
+                            element.getAttribute(
+                                'src'
+                            ) || '';
+
+
+                        if (
+                            !/^(https?:|data:image\/)/i.test(
+                                src
+                            )
+                        ) {
+
+                            element.removeAttribute(
+                                'src'
+                            );
+                        }
+
+                        element.setAttribute(
+                            'loading',
+                            'lazy'
+                        );
+
+                        element.setAttribute(
+                            'decoding',
+                            'async'
+                        );
+                    }
+
+                }
+            );
+
+
+            return template.innerHTML;
+        }
+
+
+        /*
+         * ============================================
+         * ARTIKEL TERKAIT
+         * ============================================
+         */
+
+        function renderRelatedArticles(article) {
+
+            const section =
+                document.getElementById(
+                    'related-section'
+                );
+
+            const grid =
+                document.getElementById(
+                    'related-grid'
+                );
+
+
+            const sameCategory =
+                articles.filter(
+                    item =>
+                        item.id !== article.id &&
+                        item.slug !== article.slug &&
+                        item.category === article.category
+                );
+
+
+            const others =
+                articles.filter(
+                    item =>
+                        item.id !== article.id &&
+                        item.slug !== article.slug
+                );
+
+
+            const combined =
+                [
+                    ...sameCategory,
+                    ...others
+                ];
+
+
+            const unique = [];
+
+            const used =
+                new Set();
+
+
+            for (
+                const item of combined
+            ) {
+
+                const key =
+                    String(
+                        item.id ??
+                        item.slug
+                    );
+
+
+                if (
+                    used.has(key)
+                ) {
+                    continue;
+                }
+
+
+                used.add(key);
+
+                unique.push(item);
+
+
+                if (
+                    unique.length >= 3
+                ) {
+                    break;
+                }
+            }
+
+
+            if (!unique.length) {
+
+                section.classList.add(
+                    'hidden'
+                );
+
+                grid.innerHTML = '';
+
+                return;
+            }
+
+
+            section.classList.remove(
+                'hidden'
+            );
+
+
+            grid.innerHTML =
+                unique.map(
+                    item => {
+
+                        const image =
+                            item.image || '';
+
+
+                        return `
+                            <a
+                                href="/artikel/${encodeURIComponent(item.slug)}"
+                                class="article-card-related group block no-underline"
+                            >
+
+                                ${
+                                    image
+                                        ? `
+                                            <img
+                                                src="${escapeHtml(image)}"
+                                                alt="${escapeHtml(item.title)}"
+                                                width="900"
+                                                height="563"
+                                                loading="lazy"
+                                                decoding="async"
+                                            >
+                                        `
+                                        : `
+                                            <div class="aspect-[16/10] bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>
+                                        `
+                                }
+
+                                <div class="p-4">
+
+                                    <span class="text-[9px] font-opensans font-bold uppercase tracking-[.1em] text-blue-600">
+                                        ${escapeHtml(item.category)}
+                                    </span>
+
+                                    <h3 class="mt-1.5 font-opensans text-[.95rem] font-bold leading-[1.4] text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-3">
+                                        ${escapeHtml(item.title)}
+                                    </h3>
+
+                                    <div class="mt-2 flex items-center justify-between gap-2 text-[10px] font-opensans font-semibold text-slate-400">
+
+                                        <time>
+                                            ${escapeHtml(formatDate(item.date))}
+                                        </time>
+
+                                        <span>
+                                            ${escapeHtml(item.readTime)}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </a>
+                        `;
+                    }
+                )
+                .join('');
+        }
+
+
+        /*
+         * ============================================
+         * SHARE
+         * ============================================
+         */
+
+        async function shareArticle() {
+
+            if (!currentArticle) {
+                return;
+            }
+
+
+            const url =
+                window.location.href;
+
+
+            const shareData =
+                {
+                    title:
+                        currentArticle.title,
+
+                    text:
+                        currentArticle.excerpt ||
+                        currentArticle.title,
+
+                    url
+                };
+
+
+            try {
+
+                if (
+                    navigator.share
+                ) {
+
+                    await navigator.share(
+                        shareData
+                    );
+
+                    return;
+                }
+
+
+                await navigator.clipboard.writeText(
+                    url
+                );
+
+
+                showShareFeedback(
+                    'Tautan artikel berhasil disalin.'
+                );
+
+            } catch (error) {
+
+                /*
+                 * User membatalkan native share.
+                 * Tidak perlu menampilkan error.
+                 */
+
+                if (
+                    error &&
+                    error.name ===
+                    'AbortError'
+                ) {
+                    return;
+                }
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        url
+                    );
+
+                    showShareFeedback(
+                        'Tautan artikel berhasil disalin.'
+                    );
+
+                } catch {
+                    window.prompt(
+                        'Salin tautan artikel:',
+                        url
+                    );
+                }
+            }
+        }
+
+
+        function showShareFeedback(message) {
+
+            const button =
+                document.getElementById(
+                    'share-button'
+                );
+
+            const original =
+                button.innerHTML;
+
+
+            button.textContent =
+                message;
+
+
+            setTimeout(
+                () => {
+                    button.innerHTML =
+                        original;
+                },
+                1800
+            );
+        }
+
+
+        /*
+         * ============================================
+         * READING PROGRESS
+         * ============================================
+         */
+
+        function updateReadingProgress() {
+
+            const progress =
+                document.getElementById(
+                    'reading-progress'
+                );
+
+
+            if (
+                document
+                    .getElementById(
+                        'article-view'
+                    )
+                    .classList.contains(
+                        'hidden'
+                    )
+            ) {
+
+                progress.style.width =
+                    '0%';
+
+                return;
+            }
+
+
+            const scrollTop =
+                window.scrollY ||
+                document.documentElement.scrollTop;
+
+
+            const documentHeight =
+                document.documentElement.scrollHeight -
+                window.innerHeight;
+
+
+            if (
+                documentHeight <= 0
+            ) {
+
+                progress.style.width =
+                    '0%';
+
+                return;
+            }
+
+
+            const percent =
+                Math.min(
+                    100,
+                    Math.max(
+                        0,
+                        (scrollTop /
+                            documentHeight) *
+                        100
+                    )
+                );
+
+
+            progress.style.width =
+                `${percent}%`;
+        }
+
+
+        /*
+         * ============================================
+         * FILTER
+         * ============================================
+         */
+
+        document
+            .querySelectorAll(
+                '.filter-btn'
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        'click',
+                        () => {
+
+                            document
+                                .querySelectorAll(
+                                    '.filter-btn'
+                                )
+                                .forEach(
+                                    item =>
+                                        item.classList.remove(
+                                            'filter-active'
+                                        )
+                                );
+
+
+                            button.classList.add(
+                                'filter-active'
+                            );
+
+
+                            currentFilter =
+                                button.dataset.filter;
+
+                            currentPage =
+                                1;
+
+
+                            renderArticles();
+
+
+                            document
+                                .getElementById(
+                                    'article-grid'
+                                )
+                                .scrollIntoView(
+                                    {
+                                        behavior:
+                                            'smooth',
+                                        block:
+                                            'start'
+                                    }
+                                );
+                        }
+                    );
+                }
+            );
+
+
+        /*
+         * ============================================
+         * RESIZE
+         * ============================================
+         */
+
+        let resizeTimer;
+
+        window.addEventListener(
+            'resize',
+            () => {
+
+                clearTimeout(
+                    resizeTimer
+                );
+
+                resizeTimer =
+                    setTimeout(
+                        () => {
+
+                            renderArticles();
+
+                        },
+                        150
+                    );
+            }
+        );
+
+
+        /*
+         * ============================================
+         * SHARE EVENT
+         * ============================================
+         */
+
+        document
+            .getElementById(
+                'share-button'
+            )
+            .addEventListener(
+                'click',
+                shareArticle
+            );
+
+
+        /*
+         * ============================================
+         * SCROLL EVENT
+         * ============================================
+         */
+
+        window.addEventListener(
+            'scroll',
+            updateReadingProgress,
+            {
+                passive: true
+            }
+        );
+
+
+        /*
+         * ============================================
+         * INIT
+         * ============================================
+         */
+
+        async function init() {
+
+            const slug =
+                getSlugFromUrl();
+
+
+            /*
+             * Ambil data dari Worker
+             * sekali saja.
+             */
+
+            try {
+
+                articles =
+                    await fetchArticles();
+
+            } catch (error) {
+
+                console.error(
+                    'Gagal mengambil artikel:',
+                    error
+                );
+
+
+                if (slug) {
+
+                    showError();
+
+                } else {
+
+                    const empty =
+                        document.getElementById(
+                            'empty-state'
+                        );
+
+                    empty.innerHTML = `
+                        <div class="text-center">
+                            <h2 class="font-opensans font-bold text-xl text-slate-900">
+                                Artikel belum dapat dimuat
+                            </h2>
+
+                            <p class="mt-2 text-slate-500">
+                                Silakan coba muat ulang halaman beberapa saat lagi.
+                            </p>
+                        </div>
+                    `;
+
+                    showListing();
+
+                    empty.classList.remove(
+                        'hidden'
+                    );
+                }
+
+                return;
+            }
+
+
+            /*
+             * URL memiliki slug
+             * berarti tampilkan artikel individual.
+             */
+
+            if (slug) {
+
+                const article =
+                    findArticleBySlug(
+                        slug
+                    );
+
+
+                if (!article) {
+
+                    showError();
+
+                    return;
+                }
+
+
+                renderArticle(
+                    article
+                );
+
+                return;
+            }
+
+
+            /*
+             * Tidak ada slug:
+             * tampilkan daftar.
+             */
+
+            showListing();
+
+            renderArticles();
+        }
+
+
+        init();
+
+    </script>
+
 </body>
 </html>
