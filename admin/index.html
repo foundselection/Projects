@@ -10,27 +10,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lato:wght@400;700&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<!-- CSP SUDAH DIPERBARUI: frame-src https: DITAMBAHKAN AGAR EMBED YOUTUBE/URL BERHASIL -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob: https:; connect-src 'self' https://found-selection-api.foundselection.workers.dev https://api.cloudinary.com; font-src 'self' data: https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; frame-src 'self' https:; upgrade-insecure-requests">
+<!-- CSP SUDAH DIPERLONGGAR UNTUK IFRAME & YOUTUBE -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob: https:; connect-src 'self' https://found-selection-api.foundselection.workers.dev https://api.cloudinary.com; font-src 'self' data: https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; frame-src 'self' https: http:; child-src 'self' https: http:; upgrade-insecure-requests">
 <style>
 :root {
     --sidebar-width: 260px;
     --topbar-height: 60px;
-    
     --bg-main: #f3f4f6;
     --surface: #ffffff;
     --sidebar-bg: #0f172a;
     --sidebar-hover: #1e293b;
     --sidebar-active: #2563eb;
-    
     --primary: #2563eb;
     --primary-hover: #1d4ed8;
     --primary-light: #eff6ff;
-    
     --text-main: #111827;
     --text-muted: #6b7280;
     --border-color: #e5e7eb;
-    
     --success: #10b981;
     --success-bg: #dcfce7;
     --warning: #f59e0b;
@@ -41,23 +37,13 @@
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-body {
-    background: var(--bg-main);
-    color: var(--text-main);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    font-size: 14px;
-    -webkit-font-smoothing: antialiased;
-}
+body { background: var(--bg-main); color: var(--text-main); font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }
 .hidden { display: none !important; }
 button, input, textarea, select { font: inherit; }
 button { cursor: pointer; outline: none; }
 
 /* TOPBAR */
-.top {
-    height: var(--topbar-height); background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px);
-    color: var(--text-main); display: flex; align-items: center; justify-content: space-between;
-    padding: 0 24px; position: fixed; left: 0; right: 0; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color);
-}
+.top { height: var(--topbar-height); background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); color: var(--text-main); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: fixed; left: 0; right: 0; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
 .top-left { display: flex; align-items: center; gap: 12px; }
 .brand { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
 .top a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 13px; transition: 0.2s; }
@@ -66,30 +52,18 @@ button { cursor: pointer; outline: none; }
 .hamb:hover { background: #f3f4f6; color: var(--text-main); }
 
 /* SIDEBAR */
-.side {
-    position: fixed; top: var(--topbar-height); bottom: 0; left: 0;
-    width: var(--sidebar-width); background: var(--sidebar-bg); z-index: 90;
-    overflow: auto; transition: transform 0.3s ease, width 0.3s ease;
-}
+.side { position: fixed; top: var(--topbar-height); bottom: 0; left: 0; width: var(--sidebar-width); background: var(--sidebar-bg); z-index: 90; overflow: auto; transition: transform 0.3s ease, width 0.3s ease; }
 .side-resizer { position: absolute; top: 0; right: 0; width: 6px; height: 100%; cursor: col-resize; z-index: 95; }
 .side-resizer:hover, .side-resizer.active { background: var(--primary); }
 .side.collapsed { transform: translateX(-100%); }
 
 .side-title { color: #94a3b8; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 24px 20px 10px; }
-.nav {
-    display: block; width: calc(100% - 24px); margin: 4px 12px; border: 0; background: transparent;
-    color: #cbd5e1; text-align: left; padding: 10px 14px; font-size: 13px; font-weight: 500;
-    border-radius: 6px; transition: 0.2s;
-}
+.nav { display: block; width: calc(100% - 24px); margin: 4px 12px; border: 0; background: transparent; color: #cbd5e1; text-align: left; padding: 10px 14px; font-size: 13px; font-weight: 500; border-radius: 6px; transition: 0.2s; }
 .nav:hover { background: var(--sidebar-hover); color: #fff; }
 .nav.active { background: var(--sidebar-active); color: #fff; }
 
 /* MAIN CONTENT */
-.main {
-    margin-left: var(--sidebar-width);
-    padding: calc(var(--topbar-height) + 24px) 24px 48px;
-    min-height: 100vh; transition: margin-left 0.3s ease;
-}
+.main { margin-left: var(--sidebar-width); padding: calc(var(--topbar-height) + 24px) 24px 48px; min-height: 100vh; transition: margin-left 0.3s ease; }
 .main.sidebar-collapsed { margin-left: 0; }
 .wrap { max-width: 100%; margin: auto; transition: max-width 0.3s; }
 
@@ -98,11 +72,7 @@ button { cursor: pointer; outline: none; }
 .page-title { font-size: 26px; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
 .subtitle { color: var(--text-muted); font-size: 13px; margin-top: 6px; }
 
-.button {
-    display: inline-flex; align-items: center; justify-content: center;
-    border: 1px solid var(--border-color); background: var(--surface); color: var(--text-main);
-    border-radius: 6px; padding: 9px 16px; font-weight: 500; font-size: 13px; text-decoration: none; transition: 0.2s;
-}
+.button { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); background: var(--surface); color: var(--text-main); border-radius: 6px; padding: 9px 16px; font-weight: 500; font-size: 13px; text-decoration: none; transition: 0.2s; }
 .button:hover { background: #f9fafb; border-color: #d1d5db; }
 .button.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
 .button.primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
@@ -115,10 +85,7 @@ button { cursor: pointer; outline: none; }
 .panel-body { padding: 20px; }
 
 /* INPUTS */
-.input {
-    width: 100%; border: 1px solid var(--border-color); background: #fff; border-radius: 6px;
-    padding: 10px 14px; color: var(--text-main); transition: 0.2s;
-}
+.input { width: 100%; border: 1px solid var(--border-color); background: #fff; border-radius: 6px; padding: 10px 14px; color: var(--text-main); transition: 0.2s; }
 .input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
 label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; color: #374151; }
 
@@ -132,7 +99,7 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
 .stat small { color: var(--text-muted); font-size: 13px; font-weight: 500; }
 .stat strong { display: block; font-size: 28px; margin-top: 8px; font-weight: 700; color: var(--text-main); }
 
-/* EDITOR LAYOUT: 1fr mengambil sisa layar, 320px untuk sidebar SEO agar tidak terlalu sempit untuk ngetik */
+/* EDITOR LAYOUT */
 .editor-layout { display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start; }
 .sticky { position: sticky; top: calc(var(--topbar-height) + 24px); }
 
@@ -155,17 +122,7 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
 .divider { width: 1px; height: 24px; background: #e2e8f0; margin: 5px 6px; }
 
 /* Notebook Style Editor Body */
-.body {
-    height: 70vh; /* Editor dibuat tinggi namun ada scroll di dalam */
-    overflow-y: auto;
-    padding: 32px 50px; /* Padding dilebarkan agar lebih luas */
-    outline: 0;
-    font: 17px/32px Georgia, "Times New Roman", serif;
-    color: #1f2937;
-    background-image: repeating-linear-gradient(transparent, transparent 31px, #e2e8f0 31px, #e2e8f0 32px);
-    background-attachment: local;
-    position: relative;
-}
+.body { height: 70vh; overflow-y: auto; padding: 32px 50px; outline: 0; font: 17px/32px Georgia, "Times New Roman", serif; color: #1f2937; background-image: repeating-linear-gradient(transparent, transparent 31px, #e2e8f0 31px, #e2e8f0 32px); background-attachment: local; position: relative; }
 .body:empty:before { content: attr(data-placeholder); color: #94a3b8; font-style: italic; }
 .body p { margin: 0; padding-bottom: 32px; }
 .body h2 { font: 700 26px/32px 'Inter', sans-serif; margin: 0; padding-bottom: 32px; color: #0f172a; }
@@ -175,7 +132,7 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
 .body img:hover { outline: 3px solid var(--primary); outline-offset: 2px; }
 .body ul, .body ol { padding-left: 24px; margin: 0 0 32px 0; }
 .body a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
-.body iframe { display: block; margin: 16px auto 32px; border-radius: 8px; max-width: 100%; }
+.body iframe { display: block; margin: 16px auto 32px; border-radius: 8px; max-width: 100%; border: none; }
 .body table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
 .body table, .body th, .body td { border: 1px solid var(--border-color); padding: 8px; }
 
@@ -183,20 +140,7 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
 .statusbar { background: #f8fafc; border-top: 1px solid var(--border-color); padding: 10px 16px; color: var(--text-muted); font-size: 12px; display: flex; justify-content: space-between; font-weight: 500; }
 
 /* INLINE POPOVER (KLIK LINK/GAMBAR) */
-.popover {
-    position: fixed; /* Fixed agar tidak tertutup overflow div */
-    background: #fff;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15);
-    border-radius: 8px;
-    padding: 16px;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 280px;
-    animation: fadeIn 0.15s ease-out;
-}
+.popover { position: fixed; background: #fff; border: 1px solid var(--border-color); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.15); border-radius: 8px; padding: 16px; z-index: 1000; display: flex; flex-direction: column; gap: 10px; width: 280px; animation: fadeIn 0.15s ease-out; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 .popover label { font-size: 11px; margin-bottom: 0; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
 
@@ -225,8 +169,6 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
 /* ASIDE WIDGETS */
 .cat-list label { font-weight: 400; display: flex; gap: 10px; align-items: center; margin: 10px 0; font-size: 14px; cursor: pointer; }
 .cat-list input { accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; }
-
-/* DROPZONE */
 .image-drop { border: 2px dashed #cbd5e1; background: #f8fafc; min-height: 160px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; border-radius: 8px; cursor: pointer; transition: 0.2s; }
 .image-drop:hover, .image-drop.drag { border-color: var(--primary); background: var(--primary-light); }
 .image-drop b { display: block; margin-top: 8px; color: var(--text-main); }
@@ -241,7 +183,6 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
 .post-title { color: var(--text-main); font-weight: 600; font-size: 14px; background: none; border: 0; padding: 0; text-align: left; transition: 0.2s; }
 .post-title:hover { color: var(--primary); }
 .post-slug { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-family: monospace; }
-
 .recent button { width: 100%; border: 0; border-bottom: 1px solid #f1f5f9; background: transparent; text-align: left; padding: 14px 20px; transition: 0.2s; }
 .recent button:hover { background: #f8fafc; padding-left: 24px; }
 
@@ -340,7 +281,7 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
             
             <!-- EDITOR LAYOUT -->
             <div class="editor-layout">
-                <div style="min-width: 0;"> <!-- min-width: 0 mencegah flex/grid overflow -->
+                <div style="min-width: 0;">
                     <input id="title" class="input title-input" placeholder="Tulis judul artikel disini..." oninput="titleInput()">
                     <div class="permalink">
                         <span>https://foundselection.com/artikel/</span>
@@ -762,8 +703,15 @@ function openEmbedModal() { focusSelection(); $('embedUrl').value = ''; $('embed
 function insertEmbed() {
     const url = $('embedUrl').value.trim(); closeModals(); if (!url) return;
     restoreSel();
+    // Regex Youtube
     const ytMatch = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
-    const html = ytMatch ? `<iframe width="100%" height="400" src="https://www.youtube.com/embed/${ytMatch[1]}" frameborder="0" allowfullscreen></iframe><p><br></p>` : `<iframe width="100%" height="400" src="${url}" frameborder="0" allowfullscreen></iframe><p><br></p>`;
+    // Atribut Allow yang super lengkap agar iframe (terutama Youtube) tidak diblokir/error 153
+    const allowAttr = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    
+    const html = ytMatch 
+        ? `<iframe width="100%" height="400" src="https://www.youtube.com/embed/${ytMatch[1]}" frameborder="0" allow="${allowAttr}" allowfullscreen></iframe><p><br></p>` 
+        : `<iframe width="100%" height="400" src="${url}" frameborder="0" allow="${allowAttr}" allowfullscreen></iframe><p><br></p>`;
+    
     document.execCommand('insertHTML', false, html); markDirty(); analyze();
 }
 
@@ -878,12 +826,16 @@ async function savePost(forceStatus = null, silent = false) {
         const url = editingSlug ? API + '/' + encodeURIComponent(editingSlug) : API;
         const r = await apiFetch(url, { method: editingSlug ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) });
         const j = await r.json().catch(() => ({}));
+        
+        // PENTING: Jika error, lemparkan pesannya!
         if (!r.ok || !j.success) throw Error(j.error || 'Gagal menyimpan artikel.');
         
         editingSlug = p.slug; markSaved();
         if (!silent) { toast('Tersimpan dengan sukses.'); await load(); show('posts'); }
         else { await load(); }
-    } catch (e) { if (!silent) toast(e.message); }
+    } catch (e) { 
+        if (!silent) toast(e.message); 
+    }
 }
 
 function seoChecks(p) {
@@ -1014,4 +966,3 @@ $('drop').addEventListener('drop', e => { e.preventDefault(); $('drop').classLis
 </script>
 </body>
 </html>
-```eof
