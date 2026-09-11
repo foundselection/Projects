@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Artikel — Found Selection</title>
+<title>Admin Found Selection</title>
 <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
 <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
 <meta name="referrer" content="no-referrer">
@@ -14,16 +14,15 @@
 <style>
 :root {
     --sidebar-width: 260px;
-    --topbar-height: 64px;
+    --topbar-height: 60px;
     
-    /* Modern Color Palette */
-    --bg-main: #f3f4f6; /* Modern gray background */
-    --surface: #ffffff; /* Panel background */
-    --sidebar-bg: #0f172a; /* Slate 900 */
+    --bg-main: #f3f4f6;
+    --surface: #ffffff;
+    --sidebar-bg: #0f172a;
     --sidebar-hover: #1e293b;
     --sidebar-active: #2563eb;
     
-    --primary: #2563eb; /* Blue 600 */
+    --primary: #2563eb;
     --primary-hover: #1d4ed8;
     --primary-light: #eff6ff;
     
@@ -44,7 +43,7 @@ html, body { margin: 0; padding: 0; }
 body {
     background: var(--bg-main);
     color: var(--text-main);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
 }
@@ -66,174 +65,132 @@ button { cursor: pointer; outline: none; }
     left: 0; right: 0; top: 0;
     z-index: 100;
     border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
 }
 .top-left { display: flex; align-items: center; gap: 12px; }
 .brand { font-weight: 700; font-size: 16px; letter-spacing: -0.01em; }
-.top-title { color: var(--text-muted); font-size: 14px; }
 .top a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 13px; transition: 0.2s; }
 .top a:hover { color: var(--text-main); }
-.security-chip {
-    font-size: 10px; font-weight: 600;
-    margin-left: 12px; color: var(--success);
-    background: var(--success-bg);
-    border: 1px solid #bbf7d0;
-    border-radius: 12px; padding: 4px 10px;
-    letter-spacing: 0.05em; text-transform: uppercase;
-}
 .hamb {
     display: inline-flex; align-items: center; justify-content: center;
     background: none; border: 0; color: var(--text-muted);
-    width: 36px; height: 36px; border-radius: 8px;
-    transition: 0.2s;
+    width: 36px; height: 36px; border-radius: 8px; transition: 0.2s;
 }
 .hamb:hover { background: #f3f4f6; color: var(--text-main); }
 
 /* SIDEBAR */
 .side {
-    position: fixed;
-    top: var(--topbar-height); bottom: 0; left: 0;
-    width: var(--sidebar-width);
-    background: var(--sidebar-bg);
-    z-index: 90;
-    overflow: auto;
-    transition: transform 0.35s cubic-bezier(0.2, 0, 0, 1), width 0.3s ease;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+    position: fixed; top: var(--topbar-height); bottom: 0; left: 0;
+    width: var(--sidebar-width); background: var(--sidebar-bg); z-index: 90;
+    overflow: auto; transition: transform 0.3s ease, width 0.3s ease;
 }
-.side-resizer {
-    position: absolute; top: 0; right: 0; width: 6px; height: 100%;
-    cursor: col-resize; z-index: 95; background: transparent;
-}
+.side-resizer { position: absolute; top: 0; right: 0; width: 6px; height: 100%; cursor: col-resize; z-index: 95; }
 .side-resizer:hover, .side-resizer.active { background: var(--primary); }
 .side.collapsed { transform: translateX(-100%); }
 
-.side-title {
-    color: #94a3b8; font-size: 11px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.1em;
-    padding: 24px 20px 10px;
-}
+.side-title { color: #94a3b8; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 24px 20px 10px; }
 .nav {
-    display: block; width: calc(100% - 24px);
-    margin: 4px 12px; border: 0; background: transparent;
-    color: #cbd5e1; text-align: left;
-    padding: 10px 14px; font-size: 13px; font-weight: 500;
-    border-radius: 6px; transition: 0.2s ease;
+    display: block; width: calc(100% - 24px); margin: 4px 12px; border: 0; background: transparent;
+    color: #cbd5e1; text-align: left; padding: 10px 14px; font-size: 13px; font-weight: 500;
+    border-radius: 6px; transition: 0.2s;
 }
 .nav:hover { background: var(--sidebar-hover); color: #fff; }
-.nav.active { background: var(--sidebar-active); color: #fff; box-shadow: 0 2px 6px rgba(37,99,235,0.4); }
+.nav.active { background: var(--sidebar-active); color: #fff; }
 
 /* MAIN CONTENT */
 .main {
     margin-left: var(--sidebar-width);
     padding: calc(var(--topbar-height) + 32px) 32px 48px;
     min-height: 100vh;
-    transition: margin-left 0.35s cubic-bezier(0.2, 0, 0, 1);
+    transition: margin-left 0.3s ease;
 }
 .main.sidebar-collapsed { margin-left: 0; }
-.wrap { max-width: 1360px; margin: auto; }
+.wrap { max-width: 100%; margin: auto; transition: max-width 0.3s; }
 
-/* HEADER TITLE BAR */
+/* HEADER & BUTTONS */
 .titlebar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
-.page-title { font-size: 26px; font-weight: 700; margin: 0; letter-spacing: -0.02em; display: flex; align-items: center; gap: 12px; }
+.page-title { font-size: 26px; font-weight: 700; margin: 0; letter-spacing: -0.02em; }
 .subtitle { color: var(--text-muted); font-size: 13px; margin-top: 6px; }
 
-/* BUTTONS */
 .button {
     display: inline-flex; align-items: center; justify-content: center;
     border: 1px solid var(--border-color); background: var(--surface); color: var(--text-main);
-    border-radius: 6px; padding: 9px 16px; font-weight: 500; font-size: 13px;
-    text-decoration: none; transition: all 0.2s;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    border-radius: 6px; padding: 9px 16px; font-weight: 500; font-size: 13px; text-decoration: none; transition: 0.2s;
 }
-.button:hover { background: #f9fafb; border-color: #d1d5db; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-.button.primary { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: 0 2px 4px rgba(37,99,235,0.2); }
-.button.primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); transform: translateY(-1px); }
+.button:hover { background: #f9fafb; border-color: #d1d5db; }
+.button.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+.button.primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
 .button.danger { color: var(--danger); border-color: #fca5a5; }
 .button.danger:hover { background: var(--danger-bg); border-color: var(--danger); }
 
-/* PANELS / CARDS */
-.panel {
-    background: var(--surface);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-    margin-bottom: 20px;
-    overflow: hidden;
-}
-.panel-head {
-    min-height: 48px; border-bottom: 1px solid var(--border-color); background: #fafafa;
-    padding: 14px 20px; font-weight: 600; font-size: 14px;
-    display: flex; align-items: center; justify-content: space-between;
-}
+/* PANELS */
+.panel { background: var(--surface); border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
+.panel-head { min-height: 48px; border-bottom: 1px solid var(--border-color); background: #fafafa; padding: 14px 20px; font-weight: 600; font-size: 14px; display: flex; align-items: center; justify-content: space-between; }
 .panel-body { padding: 20px; }
 
 /* INPUTS */
 .input {
-    width: 100%;
-    border: 1px solid var(--border-color);
-    background: #fff;
-    border-radius: 6px;
-    padding: 10px 14px;
-    color: var(--text-main);
-    transition: all 0.2s ease;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);
+    width: 100%; border: 1px solid var(--border-color); background: #fff; border-radius: 6px;
+    padding: 10px 14px; color: var(--text-main); transition: 0.2s;
 }
-.input:focus {
-    border-color: var(--primary); outline: none;
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
-}
+.input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
 label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; color: #374151; }
-.hint { font-size: 11px; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
 
 /* GRIDS */
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .statgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-.stat { background: var(--surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+.stat { background: var(--surface); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; border-top: 4px solid var(--border-color); }
+.stat.s-green { border-top-color: var(--success); }
+.stat.s-yellow { border-top-color: var(--warning); }
+.stat.s-red { border-top-color: var(--danger); }
 .stat small { color: var(--text-muted); font-size: 13px; font-weight: 500; }
 .stat strong { display: block; font-size: 28px; margin-top: 8px; font-weight: 700; color: var(--text-main); }
 
 /* EDITOR LAYOUT */
-.editor-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 28px; }
-.sticky { position: sticky; top: calc(var(--topbar-height) + 24px); align-self: start; }
+.editor-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 28px; align-items: start; }
+.sticky { position: sticky; top: calc(var(--topbar-height) + 24px); }
 
-.title-input { font-size: 32px; font-weight: 700; padding: 0 0 16px 0; margin-bottom: 16px; border: none; box-shadow: none; background: transparent; letter-spacing: -0.02em; }
+.title-input { font-size: 32px; font-weight: 700; padding: 0 0 16px 0; margin-bottom: 16px; border: none; background: transparent; letter-spacing: -0.02em; }
 .title-input:focus { box-shadow: none; }
-.title-input::placeholder { color: #cbd5e1; }
 .permalink { display: flex; align-items: stretch; margin-bottom: 24px; font-size: 13px; }
 .permalink span { background: #f8fafc; border: 1px solid var(--border-color); border-right: 0; padding: 10px 14px; color: var(--text-muted); border-radius: 6px 0 0 6px; }
 .permalink input { border-radius: 0 6px 6px 0; box-shadow: none; }
 
-.editor-wrap { border: 1px solid var(--border-color); background: var(--surface); border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03); overflow: hidden; }
+.editor-wrap { border: 1px solid var(--border-color); background: var(--surface); border-radius: 12px; overflow: hidden; }
 .tabs { height: 44px; background: #f8fafc; border-bottom: 1px solid var(--border-color); display: flex; align-items: flex-end; padding: 0 12px; gap: 4px; }
 .tab { height: 38px; padding: 0 16px; border: 1px solid transparent; background: transparent; color: var(--text-muted); border-radius: 8px 8px 0 0; font-weight: 500; margin-bottom: -1px; }
 .tab.active { background: #fff; border-color: var(--border-color); border-bottom-color: #fff; color: var(--primary); }
 
-.toolbar { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 12px; border-bottom: 1px solid var(--border-color); background: #fff; position: sticky; top: 0; z-index: 10; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 12px; border-bottom: 1px solid var(--border-color); background: #fff; }
 .tool { height: 34px; min-width: 34px; border: 0; background: transparent; color: #475569; border-radius: 4px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; transition: 0.2s; }
 .tool:hover { background: #f1f5f9; color: var(--text-main); }
 .tool.active, .tool[aria-pressed="true"] { background: var(--primary-light); color: var(--primary); }
-.tool:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
-.tool.select { padding: 0 12px; font-weight: 400; max-width: 140px; border: 1px solid transparent; }
-.tool.select:hover { border-color: var(--border-color); }
+.tool.select { padding: 0 12px; font-weight: 400; max-width: 140px; }
 .divider { width: 1px; height: 24px; background: #e2e8f0; margin: 5px 6px; }
 
-.toolbar-status { margin-left: auto; display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 11px; padding: 0 8px; }
-.toolbar-status .dot { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; }
-.toolbar-status.on { color: var(--primary); font-weight: 600; }
-.toolbar-status.on .dot { background: var(--primary); box-shadow: 0 0 0 2px var(--primary-light); }
-
-.body { min-height: 600px; padding: 32px 40px; outline: 0; font: 17px/1.8 Georgia, "Times New Roman", serif; color: #334155; }
+/* Notebook Style Editor Body */
+.body {
+    height: 65vh; /* Fixed height with internal scroll */
+    overflow-y: auto;
+    padding: 24px 40px;
+    outline: 0;
+    font: 16px/32px Georgia, "Times New Roman", serif;
+    color: #1f2937;
+    background-image: repeating-linear-gradient(transparent, transparent 31px, #e2e8f0 31px, #e2e8f0 32px);
+    background-attachment: local;
+}
 .body:empty:before { content: attr(data-placeholder); color: #94a3b8; font-style: italic; }
-.body p { margin: 0 0 1.2em; }
-.body h2 { font: 700 28px/1.3 'Inter', sans-serif; margin: 1.5em 0 0.6em; color: #0f172a; }
-.body h3 { font: 700 22px/1.3 'Inter', sans-serif; margin: 1.2em 0 0.5em; color: #0f172a; }
-.body blockquote { border-left: 4px solid var(--primary); background: var(--primary-light); margin: 1.2em 0; padding: 12px 20px; color: #1e293b; border-radius: 0 8px 8px 0; font-style: italic; }
-.body img { max-width: 100%; height: auto; display: block; margin: 24px auto; border-radius: 8px; }
-.body ul, .body ol { padding-left: 24px; margin-bottom: 1.2em; }
+.body p { margin: 0; padding-bottom: 32px; }
+.body h2 { font: 700 24px/32px 'Inter', sans-serif; margin: 0; padding-bottom: 32px; color: #0f172a; }
+.body h3 { font: 700 20px/32px 'Inter', sans-serif; margin: 0; padding-bottom: 32px; color: #0f172a; }
+.body blockquote { border-left: 4px solid var(--primary); background: #f8fafc; margin: 0 0 32px 0; padding: 0 20px; font-style: italic; }
+.body img { max-width: 100%; height: auto; display: block; margin: 16px auto 32px; border-radius: 8px; }
+.body ul, .body ol { padding-left: 24px; margin: 0 0 32px 0; }
 .body a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; }
+.body iframe { display: block; margin: 16px auto 32px; border-radius: 8px; max-width: 100%; }
+.body table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
+.body table, .body th, .body td { border: 1px solid var(--border-color); padding: 8px; }
 
-.codearea { width: 100%; min-height: 600px; border: 0; outline: 0; resize: vertical; padding: 32px 40px; font: 14px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: #f8fafc; }
+.codearea { width: 100%; height: 65vh; overflow-y: auto; border: 0; outline: 0; resize: vertical; padding: 32px 40px; font: 14px/1.6 ui-monospace, monospace; background: #f8fafc; }
 .statusbar { background: #f8fafc; border-top: 1px solid var(--border-color); padding: 10px 16px; color: var(--text-muted); font-size: 12px; display: flex; justify-content: space-between; font-weight: 500; }
 
 /* SEO SECTION */
@@ -253,72 +210,47 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
 .no { color: #cbd5e1; font-weight: 700; font-size: 14px; }
 
 /* PREVIEW GOOGLE */
-.preview { border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+.preview { border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; background: #fff; }
 .g-url { color: #1a73e8; font: 12px/1.5 Arial, sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 6px; }
 .g-title { color: #1a0dab; font: 20px/1.3 Arial, sans-serif; margin-top: 4px; }
-.g-title:hover { text-decoration: underline; }
 .g-desc { color: #4d5156; font: 13px/1.5 Arial, sans-serif; margin-top: 4px; }
-.count { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-align: right; font-weight: 500; }
 
 /* ASIDE WIDGETS */
-.publish-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-.publish-main { width: 100%; padding: 12px; font-size: 14px; margin-bottom: 8px; }
-.meta-row { font-size: 13px; padding: 10px 0; border-top: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: space-between; }
-.meta-row:first-child { border-top: 0; }
-.meta-row strong { font-weight: 600; color: #0f172a; }
-
 .cat-list label { font-weight: 400; display: flex; gap: 10px; align-items: center; margin: 10px 0; font-size: 14px; cursor: pointer; }
 .cat-list input { accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; }
 
 /* DROPZONE */
-.image-drop { border: 2px dashed #cbd5e1; background: #f8fafc; min-height: 200px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+.image-drop { border: 2px dashed #cbd5e1; background: #f8fafc; min-height: 180px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; border-radius: 8px; cursor: pointer; transition: 0.2s; }
 .image-drop:hover, .image-drop.drag { border-color: var(--primary); background: var(--primary-light); }
 .image-drop b { display: block; margin-top: 8px; color: var(--text-main); }
-.image-preview { width: 100%; aspect-ratio: 16/9; object-fit: cover; border: 1px solid var(--border-color); margin-top: 12px; border-radius: 8px; background: #f1f5f9; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-.file-meta { font-size: 11px; color: var(--text-muted); line-height: 1.5; margin-top: 8px; }
+.image-preview { width: 100%; aspect-ratio: 16/9; object-fit: cover; border: 1px solid var(--border-color); border-radius: 8px; }
 .admin-url { font-size: 12px; color: var(--primary); word-break: break-all; background: var(--primary-light); padding: 8px 12px; border-radius: 6px; font-family: monospace; }
 
 /* TABLES */
 .table { width: 100%; border-collapse: collapse; }
-.table th { background: #f8fafc; border-bottom: 2px solid var(--border-color); padding: 12px 16px; text-align: left; color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+.table th { background: #f8fafc; border-bottom: 2px solid var(--border-color); padding: 12px 16px; text-align: left; color: var(--text-muted); font-size: 11px; text-transform: uppercase; }
 .table td { border-bottom: 1px solid var(--border-color); padding: 16px; vertical-align: middle; font-size: 13px; }
 .table tr:hover td { background: #f8fafc; }
 .post-title { color: var(--text-main); font-weight: 600; font-size: 14px; background: none; border: 0; padding: 0; text-align: left; transition: 0.2s; }
 .post-title:hover { color: var(--primary); }
 .post-slug { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-family: monospace; }
-.actions { white-space: nowrap; }
-.searchbar { display: flex; gap: 12px; margin-bottom: 16px; }
 
 .recent button { width: 100%; border: 0; border-bottom: 1px solid #f1f5f9; background: transparent; text-align: left; padding: 14px 20px; transition: 0.2s; }
 .recent button:hover { background: #f8fafc; padding-left: 24px; }
 
-.save-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; margin-right: 6px; vertical-align: middle; }
-.save-dot.changed { background: var(--warning); box-shadow: 0 0 0 2px var(--warning-bg); }
-.save-dot.saved { background: var(--success); box-shadow: 0 0 0 2px var(--success-bg); }
-
 /* TOAST & MODAL */
-.toast { position: fixed; right: 24px; bottom: 24px; background: var(--sidebar-bg); color: #fff; padding: 14px 20px; border-radius: 8px; z-index: 200; display: none; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-weight: 500; animation: slideUp 0.3s ease; }
-@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 190; display: none; align-items: center; justify-content: center; padding: 20px; animation: fadeIn 0.2s ease; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.toast { position: fixed; right: 24px; bottom: 24px; background: var(--sidebar-bg); color: #fff; padding: 14px 20px; border-radius: 8px; z-index: 200; display: none; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-weight: 500; }
+.modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 190; display: none; align-items: center; justify-content: center; padding: 20px; }
 .modalbox { width: 100%; max-width: 420px; background: #fff; padding: 24px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
 .modal-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; }
 
-/* RESPONSIVE */
-@media(max-width: 1150px) {
-    .editor-layout { grid-template-columns: 1fr; gap: 20px; }
-    .sticky { position: static; }
-}
+@media(max-width: 1150px) { .editor-layout { grid-template-columns: 1fr; gap: 20px; } .sticky { position: static; } }
 @media(max-width: 780px) {
     .side { transform: translateX(-100%); box-shadow: none; border-right: 1px solid var(--border-color); }
     .side.open { transform: translateX(0); box-shadow: 4px 0 25px rgba(0,0,0,0.15); }
     .main { margin-left: 0; padding: calc(var(--topbar-height) + 20px) 16px 35px; }
-    .top-title { display: none; }
-    .grid2, .grid3, .statgrid, .checks { grid-template-columns: 1fr; }
-    .body { min-height: 400px; padding: 20px; }
-    .toolbar { gap: 2px; }
-    .tool { min-width: 30px; }
+    .grid2, .statgrid, .checks { grid-template-columns: 1fr; }
+    .body { height: 400px; padding: 20px; }
 }
 </style>
 </head>
@@ -326,28 +258,23 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
 
 <header class="top">
     <div class="top-left">
-        <button id="hambBtn" class="hamb" type="button" onclick="toggleSide()" aria-label="Sembunyikan sidebar" aria-expanded="true" title="Sembunyikan sidebar">
-            <!-- Modern Icon -->
+        <button id="hambBtn" class="hamb" type="button" onclick="toggleSide()" aria-label="Sembunyikan sidebar" aria-expanded="true">
             <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
-        <span class="brand">Found Selection</span>
-        <span class="top-title"> &nbsp; / &nbsp; Admin Dashboard</span>
-        <span class="security-chip" title="Halaman admin: noindex + noarchive + CSP. Akses akun tetap harus diamankan di Cloudflare.">● Privat</span>
+        <span class="brand">Admin Found Selection</span>
     </div>
     <a href="/">Lihat Situs ↗</a>
 </header>
 
 <aside id="side" class="side">
-    <div id="sideResizer" class="side-resizer" aria-label="Geser untuk mengubah lebar sidebar" title="Geser untuk mengubah lebar sidebar"></div>
+    <div id="sideResizer" class="side-resizer" aria-label="Geser untuk mengubah lebar sidebar"></div>
     <div class="side-title">Utama</div>
     <button class="nav active" data-view="dashboard" onclick="show('dashboard')">▦ &nbsp; Dashboard</button>
-    
     <div class="side-title">Konten</div>
     <button class="nav" data-view="posts" onclick="show('posts')">☷ &nbsp; Artikel</button>
     <button class="nav" data-view="editor" onclick="newPost()">＋ &nbsp; Artikel Baru</button>
-    
-    <div class="side-title">Artikel Saat Ini</div>
-    <button class="nav" onclick="jump('bodyEditor')">✎ &nbsp; Isi Artikel</button>
+    <div class="side-title">Navigasi Editor</div>
+    <button class="nav" onclick="jump('bodyEditor')">✎ &nbsp; Area Menulis</button>
     <button class="nav" onclick="jump('seoPanel')">⌕ &nbsp; SEO & Meta</button>
     <button class="nav" onclick="jump('featuredPanel')">▧ &nbsp; Gambar Utama</button>
 </aside>
@@ -358,71 +285,38 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
         <!-- DASHBOARD -->
         <section id="dashboard">
             <div class="titlebar">
-                <div>
-                    <h1 class="page-title">Dashboard</h1>
-                    <div class="subtitle">Ringkasan singkat untuk mengelola artikel blog Anda.</div>
-                </div>
+                <div><h1 class="page-title">Dashboard</h1><div class="subtitle">Ringkasan statistik artikel blog Anda.</div></div>
                 <button class="button primary" onclick="newPost()">＋ Artikel Baru</button>
             </div>
             
             <div class="statgrid">
-                <div class="stat"><small>Total artikel</small><strong id="sTotal">0</strong></div>
-                <div class="stat"><small>Telah Terbit</small><strong id="sPub">0</strong></div>
-                <div class="stat"><small>Draft Disimpan</small><strong id="sDraft">0</strong></div>
-                <div class="stat"><small>SEO Sempurna</small><strong id="sSEO">0</strong></div>
-            </div>
-            
-            <div class="panel">
-                <div class="panel-head">Akses Cepat</div>
-                <div class="panel-body" style="display:flex;gap:12px;flex-wrap:wrap">
-                    <button class="button primary" onclick="newPost()">＋ Tulis Artikel</button>
-                    <button class="button" onclick="show('posts')">☷ Lihat Semua Artikel</button>
-                </div>
+                <div class="stat"><small>Total Artikel</small><strong id="sTotal">0</strong></div>
+                <div class="stat s-green"><small>SEO Baik (≥80)</small><strong id="sSeoBaik">0</strong></div>
+                <div class="stat s-yellow"><small>SEO Menengah (55-79)</small><strong id="sSeoMenengah">0</strong></div>
+                <div class="stat s-red"><small>SEO Kurang (&lt;55)</small><strong id="sSeoKurang">0</strong></div>
             </div>
             
             <div class="grid2">
-                <div class="panel">
-                    <div class="panel-head">Artikel Terbaru</div>
-                    <div id="recent" class="recent" style="padding: 0;"></div>
-                </div>
-                <div class="panel">
-                    <div class="panel-head">Kategori Konten</div>
-                    <div id="catStats" class="panel-body"></div>
-                </div>
+                <div class="panel"><div class="panel-head">Artikel Terbaru</div><div id="recent" class="recent" style="padding: 0;"></div></div>
+                <div class="panel"><div class="panel-head">Distribusi Kategori</div><div id="catStats" class="panel-body"></div></div>
             </div>
         </section>
 
         <!-- POSTS LIST -->
         <section id="posts" class="hidden">
             <div class="titlebar">
-                <div>
-                    <h1 class="page-title">Artikel</h1>
-                    <div class="subtitle">Kelola, edit, simpan, dan terbitkan artikel Anda.</div>
-                </div>
+                <div><h1 class="page-title">Artikel</h1><div class="subtitle">Kelola, edit, dan terbitkan artikel Anda.</div></div>
                 <button class="button primary" onclick="newPost()">＋ Artikel Baru</button>
             </div>
-            
             <div class="searchbar">
                 <input id="search" class="input" placeholder="Cari judul atau slug..." oninput="renderArtikel()">
                 <select id="filter" class="input" style="max-width:200px" onchange="renderArtikel()">
-                    <option value="">Semua status</option>
-                    <option value="published">Telah Terbit</option>
-                    <option value="draft">Draft</option>
+                    <option value="">Semua status</option><option value="published">Telah Terbit</option><option value="draft">Draft</option>
                 </select>
             </div>
-            
             <div class="panel" style="overflow-x:auto;">
                 <table class="table" style="min-width:850px">
-                    <thead>
-                        <tr>
-                            <th>Judul & URL</th>
-                            <th>Kategori</th>
-                            <th>Status</th>
-                            <th>Skor SEO</th>
-                            <th>Tanggal</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
+                    <thead><tr><th>Judul & URL</th><th>Kategori</th><th>Status</th><th>Skor SEO</th><th>Tanggal</th><th>Aksi</th></tr></thead>
                     <tbody id="postRows"></tbody>
                 </table>
                 <div id="noArtikel" class="hidden" style="padding:40px;text-align:center;color:var(--text-muted)">Belum ada artikel ditemukan.</div>
@@ -433,116 +327,75 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
         <section id="editorView" class="hidden">
             <div class="titlebar">
                 <div>
-                    <h1 class="page-title">
-                        <button class="button" onclick="show('posts')" style="padding: 6px 12px; margin-right: 8px;">‹ Kembali</button> 
-                        <span id="editorHeading">Artikel Baru</span>
-                    </h1>
-                    <div class="subtitle"><span id="saveState">Belum ada perubahan</span> · Editor canggih untuk menulis dan optimasi SEO.</div>
-                </div>
-                <div class="publish-row">
-                    <button class="button" onclick="savePost('draft')">Simpan Draft</button>
-                    <button class="button primary" onclick="savePost('published')">Terbitkan</button>
+                    <h1 class="page-title"><button class="button" onclick="show('posts')" style="padding: 6px 12px; margin-right: 8px;">‹ Kembali</button> <span id="editorHeading">Artikel Baru</span></h1>
                 </div>
             </div>
             
             <div class="editor-layout">
                 <div>
-                    <!-- Title Input -->
                     <input id="title" class="input title-input" placeholder="Tulis judul artikel disini..." oninput="titleInput()">
-                    
                     <div class="permalink">
                         <span>https://foundselection.com/artikel/</span>
                         <input id="slug" class="input" placeholder="slug-artikel" oninput="slugManual=true;markDirty();updateSlugPreview();analyze()">
                     </div>
                     
-                    <!-- Editor Area -->
                     <div id="bodyEditor" class="editor-wrap">
                         <div class="tabs">
-                            <button id="visualTab" class="tab active" title="Editor visual" onclick="setMode('visual')">Visual</button>
-                            <button id="codeTab" class="tab" title="Edit HTML" onclick="setMode('code')">Kode HTML</button>
+                            <button id="visualTab" class="tab active" onclick="setMode('visual')">Visual</button>
+                            <button id="codeTab" class="tab" onclick="setMode('code')">Kode HTML</button>
                         </div>
                         <div class="toolbar" id="toolbar">
                             <select id="blockFormat" class="tool select" aria-label="Format teks" onchange="formatBlock(this.value);this.value=''">
-                                <option value="">Paragraf</option>
-                                <option value="h2">Heading 2</option>
-                                <option value="h3">Heading 3</option>
-                                <option value="blockquote">Kutipan</option>
+                                <option value="">Paragraf</option><option value="H2">Heading 2</option><option value="H3">Heading 3</option><option value="BLOCKQUOTE">Kutipan</option>
+                            </select>
+                            <select id="fontFamily" class="tool select" aria-label="Jenis font" onchange="setFontFamily(this.value);this.value=''">
+                                <option value="">Jenis Font</option><option value="Inter">Inter</option><option value="Calibri">Calibri</option><option value="Lato">Lato</option><option value="Roboto">Roboto</option><option value="Georgia">Georgia</option>
                             </select>
                             <select id="fontSize" class="tool select" aria-label="Ukuran teks" onchange="setFontSize(this.value);this.value=''">
-                                <option value="">Ukuran</option>
-                                <option value="2">Kecil</option>
-                                <option value="3">Normal</option>
-                                <option value="4">Besar</option>
-                                <option value="5">Sangat Besar</option>
+                                <option value="">Ukuran</option><option value="2">Kecil</option><option value="3">Normal</option><option value="4">Besar</option><option value="5">Sangat Besar</option>
                             </select>
-                            <select id="fontFamily" class="tool select" aria-label="Jenis font" title="Jenis font" onchange="setFontFamily(this.value);this.value=''">
-                                <option value="">Jenis Font</option>
-                                <option value="Calibri">Calibri</option>
-                                <option value="Lato">Lato</option>
-                                <option value="Roboto">Roboto</option>
-                                <option value="Open Sans">Open Sans</option>
-                                <option value="Georgia">Georgia</option>
-                            </select>
-                            
                             <span class="divider"></span>
                             
-                            <button type="button" class="tool" data-cmd="bold" title="Tebal (Ctrl/Cmd+B)" aria-label="Tebal" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('bold')"><b>B</b></button>
-                            <button type="button" class="tool" data-cmd="italic" title="Miring (Ctrl/Cmd+I)" aria-label="Miring" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('italic')"><i>I</i></button>
-                            <button type="button" class="tool" data-cmd="underline" title="Garis bawah (Ctrl/Cmd+U)" aria-label="Garis bawah" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('underline')"><u>U</u></button>
-                            
+                            <button type="button" class="tool" data-cmd="bold" title="Tebal (Ctrl+B)" onclick="exec('bold')"><b>B</b></button>
+                            <button type="button" class="tool" data-cmd="italic" title="Miring (Ctrl+I)" onclick="exec('italic')"><i>I</i></button>
+                            <button type="button" class="tool" data-cmd="underline" title="Garis bawah (Ctrl+U)" onclick="exec('underline')"><u>U</u></button>
                             <span class="divider"></span>
                             
-                            <button type="button" class="tool" data-cmd="insertUnorderedList" title="Daftar berpoin" aria-label="Daftar berpoin" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('insertUnorderedList')">•≡</button>
-                            <button type="button" class="tool" data-cmd="insertOrderedList" title="Daftar bernomor" aria-label="Daftar bernomor" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('insertOrderedList')">1≡</button>
-                            <button type="button" class="tool" data-cmd="blockquote" title="Kutipan" aria-label="Kutipan" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="formatBlock('blockquote')">❝</button>
-                            
+                            <button type="button" class="tool" data-cmd="insertUnorderedList" title="Daftar berpoin" onclick="exec('insertUnorderedList')">•≡</button>
+                            <button type="button" class="tool" data-cmd="insertOrderedList" title="Daftar bernomor" onclick="exec('insertOrderedList')">1≡</button>
+                            <button type="button" class="tool" title="Tabel" onclick="insertTable()">⊞</button>
                             <span class="divider"></span>
                             
-                            <button type="button" class="tool" data-cmd="justifyLeft" title="Rata kiri" aria-label="Rata kiri" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('justifyLeft')">⇤</button>
-                            <button type="button" class="tool" data-cmd="justifyCenter" title="Rata tengah" aria-label="Rata tengah" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('justifyCenter')">⇥⇤</button>
-                            <button type="button" class="tool" data-cmd="justifyRight" title="Rata kanan" aria-label="Rata kanan" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('justifyRight')">⇥</button>
-                            
+                            <button type="button" class="tool" data-cmd="justifyLeft" title="Rata kiri" onclick="exec('justifyLeft')">⇤</button>
+                            <button type="button" class="tool" data-cmd="justifyCenter" title="Rata tengah" onclick="exec('justifyCenter')">⇥⇤</button>
+                            <button type="button" class="tool" data-cmd="justifyRight" title="Rata kanan" onclick="exec('justifyRight')">⇥</button>
                             <span class="divider"></span>
                             
-                            <button type="button" class="tool" title="Urungkan" aria-label="Urungkan" onmousedown="keepEditorSelection(event)" onclick="exec('undo')">↶</button>
-                            <button type="button" class="tool" title="Ulangi" aria-label="Ulangi" onmousedown="keepEditorSelection(event)" onclick="exec('redo')">↷</button>
-                            <button type="button" class="tool" title="Sisipkan tautan" aria-label="Sisipkan tautan" onmousedown="keepEditorSelection(event)" onclick="addLink()">🔗</button>
-                            <button type="button" class="tool" title="Sisipkan gambar" aria-label="Sisipkan gambar" onclick="insertBodyImage()">▧</button>
-                            <button type="button" class="tool" title="Hapus pemformatan" aria-label="Hapus pemformatan" onmousedown="keepEditorSelection(event)" onclick="exec('removeFormat')">⌫</button>
-                            
-                            <div id="toolbarStatus" class="toolbar-status">
-                                <span class="dot"></span>
-                                <span id="toolbarStatusText">Pilih teks untuk format</span>
-                            </div>
+                            <button type="button" class="tool" title="Sisipkan tautan" onclick="openLinkModal()">🔗</button>
+                            <button type="button" class="tool" title="Sisipkan gambar di artikel" onclick="$('bodyImageFile').click()">▧</button>
+                            <button type="button" class="tool" title="Embed Youtube/URL" onclick="openEmbedModal()">▶</button>
+                            <button type="button" class="tool" title="Hapus pemformatan" onclick="exec('removeFormat')">⌫</button>
+                            <input type="file" id="bodyImageFile" class="hidden" accept="image/*">
                         </div>
                         
-                        <div id="body" class="body" contenteditable="true" spellcheck="true" data-placeholder="Mulai tulis cerita luar biasa di sini..." oninput="analyze()"></div>
+                        <div id="body" class="body" contenteditable="true" spellcheck="true" data-placeholder="Ketik disini... (Tips: Ketik '## ' untuk Heading 2)"></div>
                         <textarea id="code" class="codearea hidden" spellcheck="false" oninput="codeChanged()"></textarea>
                         
                         <div class="statusbar">
-                            <span id="wordCount">Jumlah kata: 0</span>
+                            <span id="wordCount">0 kata · 0 karakter</span>
                             <span id="readTimeLive">Waktu baca: 0 menit</span>
                         </div>
                     </div>
                     
-                    <!-- SEO Details Panel -->
                     <div class="panel" id="seoPanel" style="margin-top:24px">
                         <div class="panel-head">
-                            <div class="seo-head">Analisis SEO <span id="seoBadge" class="badge b-gray">—</span></div>
-                            <span id="seoScore" class="score">0/100</span>
+                            <div class="seo-head">Analisis SEO <span id="seoBadge" class="badge b-gray">—</span></div><span id="seoScore" class="score">0/100</span>
                         </div>
                         <div class="panel-body">
                             <div class="grid2">
-                                <div>
-                                    <label>Kata Kunci Utama</label>
-                                    <input id="focus" class="input" placeholder="contoh: tips SEO Google" oninput="analyze()">
-                                </div>
-                                <div>
-                                    <label>Kata Kunci Terkait</label>
-                                    <input id="secondary" class="input" placeholder="contoh: panduan SEO, optimasi website">
-                                </div>
+                                <div><label>Kata Kunci Utama</label><input id="focus" class="input" placeholder="contoh: tips SEO Google" oninput="analyze()"></div>
+                                <div><label>Kata Kunci Terkait</label><input id="secondary" class="input" placeholder="contoh: panduan SEO, optimasi website"></div>
                             </div>
-                            
                             <div style="margin-top:20px">
                                 <label>Pratinjau Hasil Pencarian (Google)</label>
                                 <div class="preview">
@@ -551,20 +404,10 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
                                     <div id="gDesc" class="g-desc">Meta description akan tampil di sini sebagai ringkasan singkat dari konten Anda yang menarik pengunjung.</div>
                                 </div>
                             </div>
-                            
                             <div class="grid2" style="margin-top:20px">
-                                <div>
-                                    <label>Judul SEO (Title Tag)</label>
-                                    <input id="seoTitle" maxlength="70" class="input" placeholder="Judul yang ditampilkan di hasil pencarian" oninput="analyze()">
-                                    <div id="seoTitleCount" class="count">0/70</div>
-                                </div>
-                                <div>
-                                    <label>Deskripsi Meta</label>
-                                    <textarea id="metaDesc" maxlength="170" rows="3" class="input" placeholder="Ringkasan singkat yang membantu orang memahami isi artikel" oninput="analyze()"></textarea>
-                                    <div id="metaCount" class="count">0/170</div>
-                                </div>
+                                <div><label>Judul SEO (Title Tag)</label><input id="seoTitle" maxlength="70" class="input" placeholder="Judul pencarian" oninput="analyze()"><div id="seoTitleCount" class="count">0/70</div></div>
+                                <div><label>Deskripsi Meta</label><textarea id="metaDesc" maxlength="170" rows="3" class="input" placeholder="Ringkasan isi" oninput="analyze()"></textarea><div id="metaCount" class="count">0/170</div></div>
                             </div>
-                            
                             <div style="margin-top:20px">
                                 <label>Daftar Periksa SEO</label>
                                 <div class="progress"><i id="seoFill"></i></div>
@@ -586,23 +429,22 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
                     </div>
                 </div>
                 
-                <!-- RIGHT SIDEBAR (ASIDE) -->
                 <aside class="sticky">
                     <div class="panel">
                         <div class="panel-head">Terbitkan</div>
                         <div class="panel-body">
-                            <button class="button primary publish-main" onclick="savePost('published')">🚀 Terbitkan Artikel</button>
-                            <div class="meta-row">
-                                <span>Status:</span> 
-                                <div><strong id="pubStatus">Draft</strong> <button class="post-title" style="margin-left:8px;font-size:12px;text-decoration:underline" onclick="toggleStatus()">Ubah</button></div>
+                            <div style="margin-bottom:16px">
+                                <label>Status Artikel</label>
+                                <select id="pubStatusSelect" class="input" onchange="markDirty()">
+                                    <option value="draft">Draft</option>
+                                    <option value="published">Terbit (Publik)</option>
+                                </select>
                             </div>
-                            <div class="meta-row">
-                                <span>Visibilitas:</span> <strong>Publik</strong>
-                            </div>
-                            <div class="meta-row" style="flex-direction:column;align-items:flex-start">
-                                <span style="margin-bottom:6px">Tanggal terbit:</span>
+                            <div style="margin-bottom:16px">
+                                <label>Tanggal Terbit</label>
                                 <input id="publishDate" class="input" type="date">
                             </div>
+                            <button class="button primary" style="width:100%;padding:12px;font-size:14px" onclick="savePost()">Simpan Artikel</button>
                         </div>
                     </div>
                     
@@ -617,38 +459,35 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
                         </div>
                     </div>
                     
-                    <div class="panel">
-                        <div class="panel-head">Tautan Permanen</div>
-                        <div class="panel-body">
-                            <div class="admin-url" id="slugSidePreview">/artikel/slug-artikel</div>
-                        </div>
-                    </div>
-                    
                     <div class="panel" id="featuredPanel">
                         <div class="panel-head">Gambar Utama (Featured)</div>
                         <div class="panel-body">
                             <div id="drop" class="image-drop">
                                 <div>
                                     <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:var(--primary);margin:0 auto"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                    <b>Klik atau seret gambar</b>
-                                    <span style="font-size:11px;color:var(--text-muted)">JPEG, PNG, WebP</span>
+                                    <b>Klik atau seret gambar</b><span style="font-size:11px;color:var(--text-muted)">JPEG, PNG, WebP</span>
                                 </div>
                             </div>
                             <input id="imageFile" type="file" accept="image/jpeg,image/png,image/webp,image/avif" class="hidden">
-                            <img id="imagePreview" class="image-preview hidden" alt="Featured image preview">
-                            <div id="fileMeta" class="file-meta"></div>
+                            
+                            <div style="position:relative; margin-top:12px">
+                                <img id="imagePreview" class="image-preview hidden" alt="Featured image preview">
+                                <button id="removeImgBtn" class="button danger hidden" style="position:absolute;top:8px;right:8px;padding:4px 8px;font-size:11px" onclick="removeFeaturedImage()">Ganti</button>
+                            </div>
+                            
+                            <div id="fileMeta" style="font-size: 11px; color: var(--text-muted); margin-top: 8px;"></div>
                             
                             <div style="margin-top:16px">
-                                <label>Teks Alternatif (Alt Text) <span style="color:var(--danger)">*</span></label>
-                                <input id="altText" class="input" placeholder="Deskripsi untuk tunanetra & SEO">
+                                <label>Format Penyimpanan Akhir</label>
+                                <select id="imageFormat" class="input"><option value="webp">WebP (Direkomendasikan)</option><option value="jpeg">JPEG</option><option value="png">PNG</option></select>
                             </div>
                             <div style="margin-top:12px">
                                 <label>Nama File Gambar</label>
                                 <input id="imageName" class="input" placeholder="tips-seo-google.webp">
                             </div>
                             <div style="margin-top:12px">
-                                <label>Judul Gambar (Opsional)</label>
-                                <input id="imageTitle" class="input" placeholder="Judul pelengkap">
+                                <label>Teks Alternatif (Alt Text) <span style="color:var(--danger)">*</span></label>
+                                <input id="altText" class="input" placeholder="Deskripsi untuk tunanetra & SEO">
                             </div>
                         </div>
                     </div>
@@ -656,44 +495,10 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
                     <div class="panel">
                         <div class="panel-head">Pengaturan Lanjutan</div>
                         <div class="panel-body">
-                            <label>Estimasi Waktu Baca (menit)</label>
-                            <input id="readTime" class="input" type="number" min="1" value="5">
-                            
-                            <div style="margin-top:16px">
-                                <label>Robot Mesin Pencari</label>
-                                <div class="grid2" style="gap:10px">
-                                    <select id="robotsIndex" class="input"><option>index</option><option>noindex</option></select>
-                                    <select id="robotsFollow" class="input"><option>follow</option><option>nofollow</option></select>
-                                </div>
-                            </div>
-                            <div style="margin-top:16px">
-                                <label>Canonical URL</label>
-                                <input id="canonical" class="input" placeholder="https://foundselection.com/artikel/...">
-                            </div>
-                            <div style="margin-top:16px">
-                                <label>Tipe Schema Markup</label>
-                                <select id="schema" class="input">
-                                    <option>Article</option>
-                                    <option>NewsArticle</option>
-                                    <option>BlogPosting</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="panel">
-                        <div class="panel-head">Sosial Media (Open Graph)</div>
-                        <div class="panel-body">
-                            <label>Judul saat dibagikan</label>
-                            <input id="ogTitle" class="input" placeholder="Default: Judul Artikel">
-                            <div style="margin-top:12px">
-                                <label>Deskripsi saat dibagikan</label>
-                                <textarea id="ogDesc" class="input" rows="3" placeholder="Kalimat singkat pemancing klik (Clickbait positif)"></textarea>
-                            </div>
-                            <div style="margin-top:12px">
-                                <label>URL Gambar Kustom</label>
-                                <input id="ogImage" class="input" placeholder="Kosongkan jika pakai Featured Image">
-                            </div>
+                            <label>Estimasi Waktu Baca (menit)</label><input id="readTime" class="input" type="number" min="1" value="5">
+                            <div style="margin-top:16px"><label>Robot Mesin Pencari</label><div class="grid2" style="gap:10px"><select id="robotsIndex" class="input"><option>index</option><option>noindex</option></select><select id="robotsFollow" class="input"><option>follow</option><option>nofollow</option></select></div></div>
+                            <div style="margin-top:16px"><label>Canonical URL</label><input id="canonical" class="input" placeholder="https://foundselection.com/..."></div>
+                            <div style="margin-top:16px"><label>Tipe Schema Markup</label><select id="schema" class="input"><option>Article</option><option>NewsArticle</option><option>BlogPosting</option></select></div>
                         </div>
                     </div>
                 </aside>
@@ -702,82 +507,70 @@ label { display: block; font-weight: 500; font-size: 13px; margin-bottom: 8px; c
     </div>
 </main>
 
-<!-- LOGIN MODAL -->
+<!-- MODALS -->
 <div id="loginGate" class="modal" style="display:flex">
     <div class="modalbox" style="max-width:390px">
         <h2 style="margin:0 0 8px 0;font-size:22px">Masuk Admin</h2>
         <p style="color:var(--text-muted);font-size:13px;margin:0">Silakan masukkan sandi untuk mengakses dashboard.</p>
         <form id="loginForm" onsubmit="login(event)" style="margin-top:20px">
-            <label for="loginPassword">Kata Sandi Rahasia</label>
+            <label>Kata Sandi Rahasia</label>
             <input id="loginPassword" class="input" type="password" autocomplete="current-password" required>
             <div id="loginError" style="color:var(--danger);font-size:12px;min-height:18px;margin-top:8px"></div>
-            <div class="modal-actions">
-                <button class="button primary" type="submit" id="loginButton" style="width:100%">Masuk ke Dashboard</button>
-            </div>
+            <div class="modal-actions"><button class="button primary" type="submit" id="loginButton" style="width:100%">Masuk ke Dashboard</button></div>
         </form>
     </div>
 </div>
 
-<!-- TOAST & DELETE MODAL -->
-<div id="toast" class="toast"></div>
-<div id="modal" class="modal">
+<div id="linkModal" class="modal">
     <div class="modalbox">
-        <h2 style="margin:0 0 12px 0;font-size:20px">Hapus Artikel?</h2>
-        <p id="modalText" style="color:var(--text-muted);font-size:14px;line-height:1.5"></p>
+        <h2 style="margin:0 0 16px 0;font-size:18px">Sisipkan Tautan (Link)</h2>
+        <label>URL / Alamat Web</label>
+        <input id="linkUrl" class="input" type="url" placeholder="https://..." style="margin-bottom:20px">
         <div class="modal-actions">
-            <button class="button" onclick="closeModal()">Batal</button>
-            <button class="button danger" onclick="confirmHapus()">Ya, Hapus Permanen</button>
+            <button class="button" onclick="closeModals()">Batal</button>
+            <button class="button primary" onclick="insertLink()">Sisipkan</button>
         </div>
     </div>
 </div>
 
-<script>
-// =======================================================================
-// JAVASCRIPT ASLI - LOGIKA SISTEM TIDAK ADA YANG DIUBAH (HANYA DIRAPIKAN)
-// =======================================================================
+<div id="embedModal" class="modal">
+    <div class="modalbox">
+        <h2 style="margin:0 0 16px 0;font-size:18px">Embed URL / Youtube</h2>
+        <label>Tempel link Youtube atau URL Embed</label>
+        <input id="embedUrl" class="input" type="url" placeholder="https://www.youtube.com/watch?v=..." style="margin-bottom:20px">
+        <div class="modal-actions">
+            <button class="button" onclick="closeModals()">Batal</button>
+            <button class="button primary" onclick="insertEmbed()">Embed Sekarang</button>
+        </div>
+    </div>
+</div>
 
+<div id="toast" class="toast"></div>
+
+<script>
 const sideEl = document.getElementById('side');
 const sideResizer = document.getElementById('sideResizer');
-const SIDEBAR_KEY = 'foundselection-admin-sidebar-width';
+const SIDEBAR_KEY = 'fs-sidebar-width';
 let resizingSidebar = false, startX = 0, startWidth = 260;
 
 function applySidebarWidth(width) {
-    const w = Math.max(220, Math.min(400, Number(width) || 260));
+    const w = Math.max(220, Math.min(450, Number(width) || 260));
     document.documentElement.style.setProperty('--sidebar-width', w + 'px');
     localStorage.setItem(SIDEBAR_KEY, String(w));
 }
-
 (function restoreSidebarWidth() {
     const saved = Number(localStorage.getItem(SIDEBAR_KEY));
-    if (window.innerWidth > 780 && saved >= 220 && saved <= 400) applySidebarWidth(saved);
+    if (window.innerWidth > 780 && saved >= 220) applySidebarWidth(saved);
 })();
 
 sideResizer.addEventListener('pointerdown', e => {
     if (window.innerWidth <= 780) return;
-    resizingSidebar = true;
-    startX = e.clientX;
-    startWidth = sideEl.getBoundingClientRect().width;
-    sideResizer.classList.add('active');
-    document.body.style.userSelect = 'none';
-    document.body.style.cursor = 'col-resize';
-    sideResizer.setPointerCapture?.(e.pointerId);
+    resizingSidebar = true; startX = e.clientX; startWidth = sideEl.getBoundingClientRect().width;
+    sideResizer.classList.add('active'); document.body.style.userSelect = 'none'; document.body.style.cursor = 'col-resize'; sideResizer.setPointerCapture?.(e.pointerId);
 });
-
-sideResizer.addEventListener('pointermove', e => {
-    if (!resizingSidebar) return;
-    applySidebarWidth(startWidth + (e.clientX - startX));
-});
-
-function stopSidebarResize() {
-    if (!resizingSidebar) return;
-    resizingSidebar = false;
-    sideResizer.classList.remove('active');
-    document.body.style.userSelect = '';
-    document.body.style.cursor = '';
-}
-
-sideResizer.addEventListener('pointerup', stopSidebarResize);
-sideResizer.addEventListener('pointercancel', stopSidebarResize);
+sideResizer.addEventListener('pointermove', e => { if (resizingSidebar) applySidebarWidth(startWidth + (e.clientX - startX)); });
+function stopSidebarResize() { resizingSidebar = false; sideResizer.classList.remove('active'); document.body.style.userSelect = ''; document.body.style.cursor = ''; }
+sideResizer.addEventListener('pointerup', stopSidebarResize); sideResizer.addEventListener('pointercancel', stopSidebarResize);
 
 'use strict';
 const API = 'https://found-selection-api.foundselection.workers.dev/api/admin/articles';
@@ -787,7 +580,8 @@ const CLOUDINARY_UPLOAD_PRESET = 'found-selection';
 const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
 const CATS = ['Teknologi', 'Hiburan', 'Esensial', 'Gaya Hidup', 'Kesehatan'];
 
-let posts = [], editingSlug = null, slugManual = false, deleteSlug = null, mode = 'visual', pendingImage = null, storedImageUrl = '', dirty = false, suppressDirty = false;
+let posts = [], editingSlug = null, slugManual = false, mode = 'visual', pendingImage = null, storedImageUrl = '', dirty = false, suppressDirty = false;
+let savedSelectionRange = null;
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
@@ -795,309 +589,171 @@ const slugify = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g
 const textOf = s => { const d = document.createElement('div'); d.innerHTML = s || ''; return d.textContent || ''; };
 const words = s => String(s || '').trim().split(/\s+/).filter(Boolean).length;
 
-function toast(m) {
-    $('toast').textContent = m;
-    $('toast').style.display = 'block';
-    clearTimeout(window._toast);
-    window._toast = setTimeout(() => $('toast').style.display = 'none', 3200);
-}
+function toast(m) { $('toast').textContent = m; $('toast').style.display = 'block'; clearTimeout(window._toast); window._toast = setTimeout(() => $('toast').style.display = 'none', 3200); }
 
 function toggleSide() {
     const collapsed = document.body.classList.toggle('sidebar-collapsed');
     $('side').classList.toggle('collapsed', collapsed);
-    $('side').classList.toggle('open', !collapsed);
-    $('hambBtn').setAttribute('aria-expanded', String(!collapsed));
-    $('hambBtn').setAttribute('aria-label', collapsed ? 'Tampilkan sidebar' : 'Sembunyikan sidebar');
-    $('hambBtn').title = collapsed ? 'Tampilkan sidebar' : 'Sembunyikan sidebar';
-    localStorage.setItem('foundselection-admin-sidebar-collapsed', collapsed ? '1' : '0');
 }
 
-(function restoreSidebarState() {
-    const collapsed = localStorage.getItem('foundselection-admin-sidebar-collapsed') === '1';
-    if (collapsed) {
-        document.body.classList.add('sidebar-collapsed');
-        $('side').classList.add('collapsed');
-        $('hambBtn').setAttribute('aria-expanded', 'false');
-        $('hambBtn').setAttribute('aria-label', 'Tampilkan sidebar');
-        $('hambBtn').title = 'Tampilkan sidebar';
-    }
-})();
-
 function show(v) {
-    const leavingEditor = document.getElementById('editorView') && !document.getElementById('editorView').classList.contains('hidden') && v !== 'editor';
-    if (leavingEditor && dirty && !confirm('Ada perubahan yang belum disimpan. Keluar tanpa menyimpan?')) return;
+    const leavingEditor = !$('editorView').classList.contains('hidden') && v !== 'editor';
+    if (leavingEditor && dirty) {
+        if ($('title').value.trim() !== '') {
+            savePost(null, true); // silent save
+        }
+    }
     
     ['dashboard', 'posts', 'editorView'].forEach(id => $(id).classList.toggle('hidden', id !== (v === 'editor' ? 'editorView' : v)));
     document.querySelectorAll('.nav[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === v));
-    
     if (window.innerWidth <= 780) $('side').classList.remove('open');
     window.scrollTo(0, 0);
-    
     if (v === 'dashboard') dashboard();
     if (v === 'posts') renderArtikel();
 }
 
-function markDirty() {
-    if (suppressDirty) return;
-    dirty = true;
-    const el = $('saveState');
-    if (el) el.innerHTML = '<span class="save-dot changed"></span>Perubahan belum disimpan';
-}
-
-function markSaved() {
-    dirty = false;
-    const el = $('saveState');
-    if (el) el.innerHTML = '<span class="save-dot saved"></span>Tersimpan';
-}
+function markDirty() { if (suppressDirty) return; dirty = true; }
+function markSaved() { dirty = false; }
 
 function newPost() {
-    if (dirty && !confirm('Ada perubahan yang belum disimpan. Buat artikel baru tanpa menyimpan?')) return;
-    editingSlug = null;
-    slugManual = false;
+    editingSlug = null; slugManual = false;
     clearForm();
     $('editorHeading').textContent = 'Artikel Baru';
-    show('editor');
-    analyze();
+    show('editor'); analyze();
 }
 
 function clearForm() {
     suppressDirty = true;
-    ['title', 'slug', 'focus', 'secondary', 'seoTitle', 'metaDesc', 'excerpt', 'altText', 'imageName', 'imageTitle', 'canonical', 'ogTitle', 'ogDesc', 'ogImage'].forEach(id => $(id).value = '');
-    $('body').innerHTML = '';
-    $('code').value = '';
+    ['title', 'slug', 'focus', 'secondary', 'seoTitle', 'metaDesc', 'excerpt', 'altText', 'imageName'].forEach(id => $(id).value = '');
+    $('body').innerHTML = ''; $('code').value = '';
     $('publishDate').value = new Date().toISOString().slice(0, 10);
-    $('readTime').value = 5;
-    $('robotsIndex').value = 'index';
-    $('robotsFollow').value = 'follow';
-    $('schema').value = 'Article';
-    $('pubStatus').textContent = 'Draft';
-    document.querySelector('input[name="cat"][value="Esensial"]').checked = true;
-    $('imagePreview').classList.add('hidden');
-    $('imagePreview').removeAttribute('src');
-    $('fileMeta').textContent = '';
-    pendingImage = null;
-    storedImageUrl = '';
+    $('pubStatusSelect').value = 'draft';
+    removeFeaturedImage();
     setMode('visual');
-    suppressDirty = false;
-    markSaved();
+    suppressDirty = false; markSaved();
 }
 
 function titleInput() {
     if (!slugManual && !editingSlug) $('slug').value = slugify($('title').value);
-    updateSlugPreview();
-    analyze();
+    updateSlugPreview(); analyze();
 }
 
-function getCategory() {
-    return document.querySelector('input[name="cat"]:checked')?.value || 'Esensial';
-}
-
-function getBody() {
-    return mode === 'code' ? $('code').value : $('body').innerHTML.trim();
-}
+function getCategory() { return document.querySelector('input[name="cat"]:checked')?.value || 'Esensial'; }
+function getBody() { return mode === 'code' ? $('code').value : $('body').innerHTML.trim(); }
 
 function setMode(next) {
     if (next === mode) return;
-    if (next === 'code') {
-        $('code').value = $('body').innerHTML;
-        mode = 'code';
-    } else {
-        $('body').innerHTML = $('code').value;
-        mode = 'visual';
-    }
-    $('body').classList.toggle('hidden', mode !== 'visual');
-    $('code').classList.toggle('hidden', mode !== 'code');
+    if (next === 'code') { $('code').value = $('body').innerHTML; mode = 'code'; } 
+    else { $('body').innerHTML = $('code').value; mode = 'visual'; }
+    $('body').classList.toggle('hidden', mode !== 'visual'); $('code').classList.toggle('hidden', mode !== 'code');
     $('toolbar').classList.toggle('hidden', mode !== 'visual');
-    $('visualTab').classList.toggle('active', mode === 'visual');
-    $('codeTab').classList.toggle('active', mode === 'code');
+    $('visualTab').classList.toggle('active', mode === 'visual'); $('codeTab').classList.toggle('active', mode === 'code');
     analyze();
 }
 
-function codeChanged() {
-    if (mode === 'code') analyze();
-}
+function codeChanged() { if (mode === 'code') analyze(); }
 
-$('body').addEventListener('keyup', () => { saveEditorSelection(); updateToolbarState(); });
-$('body').addEventListener('mouseup', () => { saveEditorSelection(); updateToolbarState(); });
-document.addEventListener('selectionchange', () => {
-    if (document.activeElement === $('body') || isInsideEditor(window.getSelection()?.anchorNode)) updateToolbarState();
+// Markdown & Selection Logic
+$('body').addEventListener('keyup', () => { saveSel(); updateToolbarState(); });
+$('body').addEventListener('mouseup', () => { saveSel(); updateToolbarState(); });
+$('body').addEventListener('input', e => {
+    markDirty(); analyze();
+    const sel = window.getSelection();
+    if(!sel.isCollapsed) return;
+    const node = sel.anchorNode;
+    if(node && node.nodeType === 3) {
+        const text = node.textContent;
+        if(text === '## ') { node.textContent = ''; exec('formatBlock', 'H2'); }
+        else if (text === '### ') { node.textContent = ''; exec('formatBlock', 'H3'); }
+        else if (text === '> ') { node.textContent = ''; exec('formatBlock', 'BLOCKQUOTE'); }
+        else if (text === '- ') { node.textContent = ''; exec('insertUnorderedList'); }
+    }
 });
 
-function isInsideEditor(node) {
-    return !!node && ($('body').contains(node.nodeType === 3 ? node.parentNode : node));
+function isInsideEditor(n) { return !!n && ($('body').contains(n.nodeType === 3 ? n.parentNode : n)); }
+function saveSel() { const s = window.getSelection(); if (s && s.rangeCount && isInsideEditor(s.anchorNode)) savedSelectionRange = s.getRangeAt(0).cloneRange(); }
+function restoreSel() { const r = savedSelectionRange; if (!r) return; const s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+function focusSelection() { if (mode !== 'visual') setMode('visual'); $('body').focus(); restoreSel(); }
+
+function exec(cmd, val = null) { focusSelection(); document.execCommand(cmd, false, val); saveSel(); markDirty(); updateToolbarState(); analyze(); }
+function formatBlock(t) { if (!t) return; exec('formatBlock', t); }
+function setFontSize(v) { if (!v) return; exec('fontSize', v); }
+function setFontFamily(v) { if (!v) return; exec('fontName', v); }
+
+function insertTable() {
+    exec('insertHTML', '<table border="1"><tbody><tr><td>Baris 1</td><td>Baris 1</td></tr><tr><td>Baris 2</td><td>Baris 2</td></tr></tbody></table><p><br></p>');
 }
 
-function keepEditorSelection(e) { e.preventDefault(); saveEditorSelection(); }
-
-function saveEditorSelection() {
-    const sel = window.getSelection();
-    if (sel && sel.rangeCount && isInsideEditor(sel.anchorNode)) window.__editorRange = sel.getRangeAt(0).cloneRange();
+function closeModals() {
+    $('linkModal').style.display = 'none';
+    $('embedModal').style.display = 'none';
 }
 
-function restoreEditorSelection() {
-    const r = window.__editorRange;
-    if (!r) return;
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(r);
+function openLinkModal() { focusSelection(); $('linkUrl').value = ''; $('linkModal').style.display = 'flex'; setTimeout(() => $('linkUrl').focus(), 100); }
+function insertLink() {
+    const url = $('linkUrl').value.trim(); closeModals(); if (!url) return;
+    restoreSel(); document.execCommand('createLink', false, url); markDirty(); analyze();
 }
 
-function focusSelection() {
-    if (mode !== 'visual') setMode('visual');
-    $('body').focus();
-    restoreEditorSelection();
-}
-
-function exec(cmd, val = null) {
-    focusSelection();
-    document.execCommand(cmd, false, val);
-    saveEditorSelection();
-    markDirty();
-    updateToolbarState();
-    analyze();
-}
-
-function formatBlock(tag) {
-    if (!tag) return;
-    focusSelection();
-    document.execCommand('formatBlock', false, tag);
-    saveEditorSelection();
-    markDirty();
-    updateToolbarState();
-    analyze();
-}
-
-function setFontSize(v) {
-    if (!v) return;
-    focusSelection();
-    document.execCommand('fontSize', false, v);
-    saveEditorSelection();
-    markDirty();
-    updateToolbarState();
-    analyze();
-}
-
-function setFontFamily(v) {
-    if (!v) return;
-    focusSelection();
-    document.execCommand('fontName', false, v);
-    saveEditorSelection();
-    markDirty();
-    updateToolbarState();
-    analyze();
-}
-
-function updateSlugPreview() {
-    const slug = $('slug').value.trim() || slugify($('title').value) || 'slug-artikel';
-    $('slugSidePreview').textContent = '/artikel/' + slug;
-}
-
-function addLink() {
-    markDirty();
-    focusSelection();
-    const u = prompt('Masukkan alamat tautan:', 'https://');
-    if (!u) return;
-    document.execCommand('createLink', false, u);
-    saveEditorSelection();
-    updateToolbarState();
-    analyze();
+function openEmbedModal() { focusSelection(); $('embedUrl').value = ''; $('embedModal').style.display = 'flex'; setTimeout(() => $('embedUrl').focus(), 100); }
+function insertEmbed() {
+    const url = $('embedUrl').value.trim(); closeModals(); if (!url) return;
+    restoreSel();
+    const ytMatch = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+    const html = ytMatch ? `<iframe width="100%" height="400" src="https://www.youtube.com/embed/${ytMatch[1]}" frameborder="0" allowfullscreen></iframe><p><br></p>` : `<iframe width="100%" height="400" src="${url}" frameborder="0"></iframe><p><br></p>`;
+    document.execCommand('insertHTML', false, html); markDirty(); analyze();
 }
 
 function updateToolbarState() {
     if (mode !== 'visual') return;
-    const cmds = ['bold', 'italic', 'underline', 'insertUnorderedList', 'insertOrderedList', 'justifyLeft', 'justifyCenter', 'justifyRight'];
-    cmds.forEach(c => {
+    ['bold', 'italic', 'underline', 'insertUnorderedList', 'insertOrderedList', 'justifyLeft', 'justifyCenter', 'justifyRight'].forEach(c => {
         const b = document.querySelector(`[data-cmd="${c}"]`);
-        if (!b) return;
-        let on = false;
-        try { on = document.queryCommandState(c); } catch (e) {}
-        b.classList.toggle('active', on);
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        if (b) { let on = false; try { on = document.queryCommandState(c); } catch (e) {} b.classList.toggle('active', on); }
     });
-    
-    const sel = window.getSelection();
-    let block = 'Paragraf';
-    if (sel && sel.rangeCount && isInsideEditor(sel.anchorNode)) {
-        let n = sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentElement : sel.anchorNode;
-        while (n && n !== $('body')) {
-            const t = n.tagName;
-            if (t === 'H2') { block = 'Heading 2'; break; }
-            if (t === 'H3') { block = 'Heading 3'; break; }
-            if (t === 'BLOCKQUOTE') { block = 'Kutipan'; break; }
-            if (t === 'P') { block = 'Paragraf'; break; }
-            n = n.parentElement;
-        }
-    }
-    
-    const blockSelect = $('blockFormat');
-    if (blockSelect) {
-        blockSelect.value = block === 'Heading 2' ? 'h2' : block === 'Heading 3' ? 'h3' : block === 'Kutipan' ? 'blockquote' : '';
-        blockSelect.classList.toggle('active', !!blockSelect.value);
-    }
-    
-    const dot = $('toolbarStatus'), txt = $('toolbarStatusText');
-    if (dot && txt) {
-        const active = [...document.querySelectorAll('#toolbar .tool.active')].map(x => x.title.split(' (')[0]);
-        txt.textContent = active.length ? `${block} · ${active.join(' · ')}` : `${block} · Tidak ada format aktif`;
-        dot.classList.toggle('on', active.length > 0);
-    }
+    try {
+        const font = document.queryCommandValue('fontName').replace(/['"]/g, '');
+        if(font) $('fontFamily').value = font;
+        const size = document.queryCommandValue('fontSize');
+        if(size) $('fontSize').value = size;
+        const block = document.queryCommandValue('formatBlock').toUpperCase();
+        if(['H2','H3','BLOCKQUOTE'].includes(block)) $('blockFormat').value = block; else $('blockFormat').value = '';
+    } catch(e) {}
 }
 
-function insertBodyImage() {
-    if (storedImageUrl) {
-        document.execCommand('insertImage', false, storedImageUrl);
-        analyze();
-        return;
-    }
-    $('imageFile').click();
+// Upload Gambar Bodi (Cloudinary)
+async function uploadToCloudinary(file) {
+    const fd = new FormData(); fd.append('file', file); fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    const r = await fetch(CLOUDINARY_UPLOAD_URL, { method: 'POST', body: fd });
+    const j = await r.json();
+    if (!j.secure_url) throw Error('Gagal unggah');
+    return j.secure_url;
 }
+$('bodyImageFile').addEventListener('change', async e => {
+    const f = e.target.files[0]; if (!f) return;
+    toast('Mengunggah gambar...');
+    try {
+        const url = await uploadToCloudinary(f);
+        restoreSel(); document.execCommand('insertImage', false, url);
+        analyze(); markDirty(); toast('Gambar disisipkan.');
+    } catch(err) { toast(err.message); }
+    $('bodyImageFile').value = '';
+});
 
-function jump(id) {
-    show('editor');
-    setTimeout(() => $(`${id}`).scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
-}
-
-function toggleStatus() {
-    $('pubStatus').textContent = $('pubStatus').textContent === 'Terbit' ? 'Draft' : 'Terbit';
-}
+function updateSlugPreview() { $('slugSidePreview').textContent = '/artikel/' + ($('slug').value.trim() || slugify($('title').value) || 'slug-artikel'); }
 
 function fill(a) {
-    editingSlug = a.slug || null;
-    slugManual = true;
-    $('title').value = a.title || '';
-    $('slug').value = a.slug || '';
-    $('focus').value = a.focus_keyword || '';
-    $('secondary').value = a.secondary_keywords || '';
-    $('seoTitle').value = a.seo_title || '';
-    $('metaDesc').value = a.meta_description || '';
-    $('excerpt').value = a.excerpt || '';
-    $('body').innerHTML = a.content || '';
+    editingSlug = a.slug || null; slugManual = true;
+    $('title').value = a.title || ''; $('slug').value = a.slug || '';
+    $('focus').value = a.focus_keyword || ''; $('secondary').value = a.secondary_keywords || '';
+    $('seoTitle').value = a.seo_title || ''; $('metaDesc').value = a.meta_description || '';
+    $('excerpt').value = a.excerpt || ''; $('body').innerHTML = a.content || '';
     document.querySelectorAll('input[name="cat"]').forEach(x => x.checked = x.value === a.category);
     $('publishDate').value = a.publish_date || new Date().toISOString().slice(0, 10);
-    $('readTime').value = a.read_time || 5;
-    $('robotsIndex').value = a.robots_index || 'index';
-    $('robotsFollow').value = a.robots_follow || 'follow';
-    $('schema').value = a.schema_type || 'Article';
-    $('canonical').value = a.canonical_url || '';
-    $('ogTitle').value = a.og_title || '';
-    $('ogDesc').value = a.og_description || '';
-    $('ogImage').value = a.og_image || '';
-    $('altText').value = a.image_alt || '';
-    $('imageName').value = a.image_name || '';
-    $('imageTitle').value = a.image_title || '';
-    $('pubStatus').textContent = a.status === 'published' ? 'Terbit' : 'Draft';
+    $('pubStatusSelect').value = a.status === 'published' ? 'published' : 'draft';
     storedImageUrl = a.thumbnail || '';
-    
-    if (storedImageUrl) {
-        $('imagePreview').src = storedImageUrl;
-        $('imagePreview').classList.remove('hidden');
-        $('fileMeta').textContent = 'Featured image tersimpan.';
-    }
-    
+    updateFeaturedImageUI();
     $('editorHeading').textContent = 'Edit Artikel';
-    show('editor');
-    analyze();
-    markSaved();
+    show('editor'); analyze(); markSaved();
 }
 
 async function apiFetch(url, options = {}) {
@@ -1107,201 +763,109 @@ async function apiFetch(url, options = {}) {
     return r;
 }
 
-function showLogin() {
-    $('loginGate').style.display = 'flex';
-    setTimeout(() => $('loginPassword').focus(), 40);
-}
-
-function hideLogin() {
-    $('loginGate').style.display = 'none';
-    $('loginError').textContent = '';
-    $('loginPassword').value = '';
-}
-
+function showLogin() { $('loginGate').style.display = 'flex'; setTimeout(() => $('loginPassword').focus(), 40); }
+function hideLogin() { $('loginGate').style.display = 'none'; $('loginError').textContent = ''; $('loginPassword').value = ''; }
 async function login(e) {
-    e.preventDefault();
-    const btn = $('loginButton');
-    btn.disabled = true;
-    $('loginError').textContent = '';
+    e.preventDefault(); const btn = $('loginButton'); btn.disabled = true; $('loginError').textContent = '';
     try {
-        const r = await fetch(AUTH_API + '/login', {
-            method: 'POST', credentials: 'include',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ password: $('loginPassword').value })
-        });
+        const r = await fetch(AUTH_API + '/login', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: $('loginPassword').value }) });
         const j = await r.json().catch(() => ({}));
         if (!r.ok || !j.success) throw Error(j.error || 'Kata sandi salah.');
-        hideLogin();
-        await load();
-    } catch (err) {
-        $('loginError').textContent = err.message || 'Gagal masuk.';
-    } finally {
-        btn.disabled = false;
-    }
+        hideLogin(); await load();
+    } catch (err) { $('loginError').textContent = err.message || 'Gagal masuk.'; } finally { btn.disabled = false; }
 }
 
 async function editPost(slug) {
-    const a = posts.find(x => x.slug === slug);
-    if (a) { fill(a); return; }
-    try {
-        const r = await apiFetch(API + '/' + encodeURIComponent(slug));
-        const j = await r.json();
-        if (!j.success) throw Error(j.error || 'Artikel tidak ditemukan');
-        fill(j.data);
-    } catch (e) {
-        toast(e.message);
-    }
+    const a = posts.find(x => x.slug === slug); if (a) { fill(a); return; }
+    try { const r = await apiFetch(API + '/' + encodeURIComponent(slug)); const j = await r.json(); fill(j.data); } catch (e) { toast(e.message); }
 }
 
 function buildPayload(status) {
-    const body = getBody();
-    status = status === 'published' ? 'published' : 'draft';
     return {
-        title: $('title').value.trim(),
-        slug: $('slug').value.trim() || slugify($('title').value),
+        title: $('title').value.trim() || 'Tanpa Judul',
+        slug: $('slug').value.trim() || slugify($('title').value) || Date.now().toString(),
         category: getCategory(),
         excerpt: $('excerpt').value.trim(),
-        content: body,
+        content: getBody(),
         publish_date: $('publishDate').value,
         read_time: Math.max(1, Number($('readTime').value) || 5),
-        status,
+        status: status || $('pubStatusSelect').value,
         thumbnail: storedImageUrl || '',
         image_alt: $('altText').value.trim(),
         image_name: $('imageName').value.trim(),
-        image_title: $('imageTitle').value.trim(),
         seo_title: $('seoTitle').value.trim(),
         meta_description: $('metaDesc').value.trim(),
         focus_keyword: $('focus').value.trim(),
         secondary_keywords: $('secondary').value.trim(),
         canonical_url: $('canonical').value.trim(),
-        og_title: $('ogTitle').value.trim(),
-        og_description: $('ogDesc').value.trim(),
-        og_image: $('ogImage').value.trim(),
         robots_index: $('robotsIndex').value,
         robots_follow: $('robotsFollow').value,
         schema_type: $('schema').value
     };
 }
 
-async function uploadMedia() {
-    if (!pendingImage) return storedImageUrl;
-    const fd = new FormData();
-    fd.append('file', pendingImage.blob, pendingImage.filename);
-    fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    
-    const r = await fetch(CLOUDINARY_UPLOAD_URL, { method: 'POST', body: fd });
-    const j = await r.json().catch(() => ({}));
-    
-    if (!r.ok || !j.secure_url) throw Error(j.error?.message || 'Gagal mengunggah gambar ke Cloudinary.');
-    storedImageUrl = j.secure_url;
-    pendingImage = null;
-    return storedImageUrl;
-}
-
-async function savePost(status) {
-    const title = $('title').value.trim(), slug = $('slug').value.trim() || slugify(title), body = getBody();
-    if (!title || !slug || !textOf(body).trim() || !$('publishDate').value) {
-        toast('Lengkapi judul, slug, isi artikel, dan tanggal.');
-        return;
-    }
+async function savePost(forceStatus = null, silent = false) {
+    const title = $('title').value.trim(), slug = $('slug').value.trim() || slugify(title);
+    if (!silent && (!title || !slug)) { toast('Lengkapi judul dan slug.'); return; }
     try {
-        if (pendingImage) await uploadMedia();
-        const p = buildPayload(status);
+        if (pendingImage) storedImageUrl = await uploadToCloudinary(pendingImage.blob);
+        const p = buildPayload(forceStatus);
         const url = editingSlug ? API + '/' + encodeURIComponent(editingSlug) : API;
-        const r = await apiFetch(url, {
-            method: editingSlug ? 'PUT' : 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(p)
-        });
+        const r = await apiFetch(url, { method: editingSlug ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(p) });
         const j = await r.json().catch(() => ({}));
-        if (!r.ok || !j.success) throw Error(j.error || (j.details || []).join(', ') || 'Gagal menyimpan artikel.');
+        if (!r.ok || !j.success) throw Error(j.error || 'Gagal menyimpan artikel.');
         
-        editingSlug = p.slug;
-        markSaved();
-        toast(status === 'published' ? 'Artikel berhasil dipublikasikan.' : 'Draft berhasil disimpan.');
-        await load();
-        show('posts');
-    } catch (e) {
-        console.error(e);
-        toast(e.message);
-    }
+        editingSlug = p.slug; markSaved();
+        if (!silent) { toast('Tersimpan dengan sukses.'); await load(); show('posts'); }
+        else { await load(); }
+    } catch (e) { if (!silent) toast(e.message); }
 }
 
 function seoChecks(p) {
     const k = p.focus_keyword.toLowerCase().trim(), t = p.title.toLowerCase(), s = p.slug.toLowerCase(), c = textOf(p.content).toLowerCase(), st = p.seo_title.toLowerCase(), m = p.meta_description.toLowerCase(), w = words(c);
     return [
-        [!!p.title, 'Judul artikel terisi'],
-        [!!k, 'Kata kunci utama ditentukan'],
-        [!!p.seo_title, 'Judul SEO tersedia'],
-        [p.seo_title.length >= 40 && p.seo_title.length <= 60, 'Panjang judul SEO ideal'],
-        [!!p.meta_description, 'Deskripsi SEO tersedia'],
+        [!!p.title, 'Judul terisi'], [!!k, 'Kata kunci utama ditentukan'], [!!p.seo_title, 'Judul SEO tersedia'],
+        [p.seo_title.length >= 40 && p.seo_title.length <= 60, 'Panjang judul SEO ideal'], [!!p.meta_description, 'Deskripsi SEO tersedia'],
         [p.meta_description.length >= 120 && p.meta_description.length <= 160, 'Panjang deskripsi SEO ideal'],
-        [!!k && t.includes(k), 'Kata kunci ada di judul'],
-        [!!k && s.includes(slugify(k)), 'Kata kunci ada di slug'],
-        [!!k && c.slice(0, 600).includes(k), 'Kata kunci ada di pembuka'],
-        [!!k && st.includes(k), 'Kata kunci ada di judul SEO'],
-        [!!k && m.includes(k), 'Kata kunci ada di deskripsi SEO'],
-        [w >= 600, 'Isi artikel minimal 600 kata'],
-        [!!p.canonical_url, 'URL utama tersedia']
+        [!!k && t.includes(k), 'Kata kunci ada di judul'], [!!k && s.includes(slugify(k)), 'Kata kunci ada di slug'],
+        [!!k && c.slice(0, 600).includes(k), 'Kata kunci ada di pembuka'], [!!k && st.includes(k), 'Kata kunci ada di judul SEO'],
+        [!!k && m.includes(k), 'Kata kunci ada di deskripsi SEO'], [w >= 600, 'Isi artikel ≥600 kata'], [!!p.canonical_url, 'URL utama tersedia']
     ];
 }
 
 function analyze() {
     updateSlugPreview();
-    const p = buildPayload($('pubStatus').textContent.toLowerCase()), checks = seoChecks(p), score = Math.round(checks.filter(x => x[0]).length / checks.length * 100), txt = textOf(p.content), w = words(txt);
+    const p = buildPayload(), checks = seoChecks(p), score = Math.round(checks.filter(x => x[0]).length / checks.length * 100), txt = textOf(p.content), w = words(txt);
     
-    $('wordCount').textContent = 'Jumlah kata: ' + w;
+    $('wordCount').textContent = `${w} kata · ${txt.length} karakter`;
     $('readTimeLive').textContent = 'Waktu baca: ' + Math.max(1, Math.ceil(w / 200)) + ' min';
     $('gSlug').textContent = p.slug || 'slug-artikel';
     $('gTitle').textContent = p.seo_title || p.title || 'Judul SEO artikel';
-    $('gDesc').textContent = p.meta_description || p.excerpt || 'Meta description akan tampil di sini sebagai ringkasan singkat dari konten Anda yang menarik pengunjung.';
-    $('seoTitleCount').textContent = p.seo_title.length + '/70';
-    $('metaCount').textContent = p.meta_description.length + '/170';
-    $('seoScore').textContent = score + '/100';
-    $('seoFill').style.width = score + '%';
+    $('gDesc').textContent = p.meta_description || p.excerpt || 'Meta description akan tampil di sini sebagai ringkasan.';
+    $('seoTitleCount').textContent = p.seo_title.length + '/70'; $('metaCount').textContent = p.meta_description.length + '/170';
+    $('seoScore').textContent = score + '/100'; $('seoFill').style.width = score + '%';
     
     $('seoBadge').textContent = score >= 80 ? 'Baik' : score >= 55 ? 'Perbaiki' : 'Lengkapi';
     $('seoBadge').className = 'badge ' + (score >= 80 ? 'b-green' : score >= 55 ? 'b-yellow' : 'b-red');
     $('seoChecks').innerHTML = checks.map(x => `<div class="check"><span class="${x[0] ? 'ok' : 'no'}">${x[0] ? '✓' : '○'}</span> <span>${esc(x[1])}</span></div>`).join('');
     
     const sent = txt.split(/[.!?]+/).map(words).filter(Boolean), avg = sent.length ? sent.reduce((a, b) => a + b, 0) / sent.length : 0, paras = txt.split(/\n\s*\n/).filter(Boolean);
-    const rd = [
-        [w >= 300, 'Konten cukup panjang'],
-        [avg > 0 && avg <= 22, 'Kalimat rata-rata ≤22 kata'],
-        [paras.every(x => words(x) <= 100), 'Paragraf tidak terlalu padat'],
-        [/<h2|<h3/i.test(p.content), 'Subheading tersedia'],
-        [/<a\s/i.test(p.content), 'Ada link dalam artikel']
-    ];
-    
+    const rd = [[w >= 300, 'Konten cukup panjang'], [avg > 0 && avg <= 22, 'Kalimat rata-rata ≤22 kata'], [paras.every(x => words(x) <= 100), 'Paragraf tidak terlalu padat'], [/<h2|<h3/i.test(p.content), 'Subheading tersedia'], [/<a\s/i.test(p.content), 'Ada link di artikel']];
     const rs = Math.round(rd.filter(x => x[0]).length / rd.length * 100);
-    $('readBadge').textContent = rs + '/100';
-    $('readBadge').className = 'badge ' + (rs >= 80 ? 'b-green' : rs >= 60 ? 'b-yellow' : 'b-red');
+    $('readBadge').textContent = rs + '/100'; $('readBadge').className = 'badge ' + (rs >= 80 ? 'b-green' : rs >= 60 ? 'b-yellow' : 'b-red');
     $('readChecks').innerHTML = rd.map(x => `<div class="check"><span class="${x[0] ? 'ok' : 'no'}">${x[0] ? '✓' : '○'}</span> <span>${x[1]}</span></div>`).join('');
 }
 
 async function load() {
-    try {
-        const r = await apiFetch(API);
-        const j = await r.json();
-        if (!r.ok || !j.success) throw Error(j.error || 'API error');
-        posts = j.data || [];
-        dashboard();
-        renderArtikel();
-    } catch (e) {
-        if (e.message !== 'Sesi admin diperlukan.') toast('API tidak dapat dimuat: ' + e.message);
-    }
+    try { const r = await apiFetch(API); const j = await r.json(); posts = j.data || []; dashboard(); renderArtikel(); } 
+    catch (e) { if (e.message !== 'Sesi admin diperlukan.') toast('API error: ' + e.message); }
 }
 
-function seoScoreFor(a) {
-    const p = { ...a, content: a.content || '', focus_keyword: a.focus_keyword || '', seo_title: a.seo_title || '', meta_description: a.meta_description || '', canonical_url: a.canonical_url || '', title: a.title || '', slug: a.slug || '' };
-    const c = seoChecks(p);
-    return Math.round(c.filter(x => x[0]).length / c.length * 100);
-}
+function seoScoreFor(a) { const c = seoChecks({...a, content: a.content || '', focus_keyword: a.focus_keyword || ''}); return Math.round(c.filter(x => x[0]).length / c.length * 100); }
 
 function renderArtikel() {
     const q = ($('search')?.value || '').toLowerCase(), f = $('filter')?.value || '';
     const rows = posts.filter(a => (!q || (`${a.title} ${a.slug}`).toLowerCase().includes(q)) && (!f || a.status === f));
-    
     $('postRows').innerHTML = rows.map(a => {
         const n = seoScoreFor(a);
         return `<tr>
@@ -1310,23 +874,19 @@ function renderArtikel() {
             <td>${a.status === 'published' ? '<span class="badge b-green">Terbit</span>' : '<span class="badge b-yellow">Draft</span>'}</td>
             <td><span class="badge ${n >= 80 ? 'b-green' : n >= 55 ? 'b-yellow' : 'b-red'}">${n}</span></td>
             <td style="color:var(--text-muted)">${esc(a.publish_date || '—')}</td>
-            <td class="actions">
-                <button class="button" onclick="editPost('${esc(a.slug)}')">Edit</button> 
-                <button class="button danger" onclick="askHapus('${esc(a.slug)}')">Hapus</button>
-            </td>
+            <td class="actions"><button class="button" onclick="editPost('${esc(a.slug)}')">Edit</button></td>
         </tr>`;
     }).join('');
     $('noArtikel').classList.toggle('hidden', rows.length > 0);
 }
 
 function dashboard() {
-    const pub = posts.filter(a => a.status === 'published').length, draft = posts.filter(a => a.status === 'draft').length, seo = posts.filter(a => a.focus_keyword && a.seo_title && a.meta_description).length;
-    $('sTotal').textContent = posts.length;
-    $('sPub').textContent = pub;
-    $('sDraft').textContent = draft;
-    $('sSEO').textContent = seo;
+    let sB = 0, sM = 0, sK = 0;
+    posts.forEach(a => { const s = seoScoreFor(a); if(s >= 80) sB++; else if(s >= 55) sM++; else sK++; });
     
-    const r = [...posts].sort((a, b) => (b.publish_date || '').localeCompare(a.publish_date || '')).slice(0, 6);
+    $('sTotal').textContent = posts.length; $('sSeoBaik').textContent = sB; $('sSeoMenengah').textContent = sM; $('sSeoKurang').textContent = sK;
+    
+    const r = [...posts].sort((a, b) => (b.publish_date || '').localeCompare(a.publish_date || '')).slice(0, 5);
     $('recent').innerHTML = r.length ? r.map(a => `<button onclick="editPost('${esc(a.slug)}')"><b>${esc(a.title)}</b><small style="display:block;color:var(--text-muted);margin-top:6px">${esc(a.category || '')} · ${esc(a.publish_date || '')} · <span style="text-transform:capitalize">${a.status}</span></small></button>`).join('') : '<div style="padding:30px;color:var(--text-muted);text-align:center">Belum ada artikel.</div>';
     
     const mx = Math.max(1, ...CATS.map(c => posts.filter(a => a.category === c).length));
@@ -1336,88 +896,40 @@ function dashboard() {
     }).join('');
 }
 
-function askHapus(slug) {
-    deleteSlug = slug;
-    const a = posts.find(x => x.slug === slug);
-    $('modalText').textContent = `Artikel “${a?.title || slug}” akan dihapus secara permanen dan tidak dapat dikembalikan.`;
-    $('modal').style.display = 'flex';
+function updateFeaturedImageUI() {
+    if(storedImageUrl) { $('drop').classList.add('hidden'); $('imagePreview').src = storedImageUrl; $('imagePreview').classList.remove('hidden'); $('removeImgBtn').classList.remove('hidden'); }
+    else { $('drop').classList.remove('hidden'); $('imagePreview').classList.add('hidden'); $('removeImgBtn').classList.add('hidden'); }
 }
-
-function closeModal() {
-    $('modal').style.display = 'none';
-    deleteSlug = null;
-}
-
-async function confirmHapus() {
-    if (!deleteSlug) return;
-    try {
-        const r = await apiFetch(API + '/' + encodeURIComponent(deleteSlug), { method: 'DELETE' });
-        const j = await r.json();
-        if (!r.ok || !j.success) throw Error(j.error || 'Gagal menghapus');
-        closeModal();
-        toast('Artikel telah dihapus.');
-        await load();
-        show('posts');
-    } catch (e) {
-        toast(e.message);
-    }
-}
+function removeFeaturedImage() { storedImageUrl = ''; pendingImage = null; updateFeaturedImageUI(); markDirty(); }
 
 async function processImage(file) {
     if (!file.type.startsWith('image/')) { toast('File harus berupa gambar.'); return; }
     try {
-        const img = await new Promise((res, rej) => {
-            const u = URL.createObjectURL(file);
-            const i = new Image();
-            i.onload = () => { URL.revokeObjectURL(u); res(i); };
-            i.onerror = rej;
-            i.src = u;
-        });
+        const img = await new Promise((res, rej) => { const u = URL.createObjectURL(file); const i = new Image(); i.onload = () => { URL.revokeObjectURL(u); res(i); }; i.onerror = rej; i.src = u; });
+        let sw = img.naturalWidth, sh = img.naturalHeight, ratio = sw / sh, target = 16 / 9, cw = sw, ch = sh, sx = 0, sy = 0;
+        if (ratio > target) { cw = Math.round(sh * target); sx = Math.round((sw - cw) / 2); } else if (ratio < target) { ch = Math.round(sw / target); sy = Math.round((sh - ch) / 2); }
+        let ow = Math.min(1920, cw), oh = Math.round(ow / target); if (oh > 1080) { oh = 1080; ow = Math.round(oh * target); }
         
-        let sw = img.naturalWidth, sh = img.naturalHeight;
-        const ratio = sw / sh, target = 16 / 9;
-        let cw = sw, ch = sh, sx = 0, sy = 0;
-        
-        if (ratio > target) { cw = Math.round(sh * target); sx = Math.round((sw - cw) / 2); }
-        else if (ratio < target) { ch = Math.round(sw / target); sy = Math.round((sh - ch) / 2); }
-        
-        let ow = Math.min(1920, cw), oh = Math.round(ow / target);
-        if (oh > 1080) { oh = 1080; ow = Math.round(oh * target); }
-        
-        const canvas = document.createElement('canvas');
-        canvas.width = ow; canvas.height = oh;
-        
-        const ctx = canvas.getContext('2d');
-        ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+        const canvas = document.createElement('canvas'); canvas.width = ow; canvas.height = oh;
+        const ctx = canvas.getContext('2d'); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(img, sx, sy, cw, ch, 0, 0, ow, oh);
         
-        const blob = await new Promise(r => canvas.toBlob(r, 'image/webp', .92));
-        if (!blob) throw Error('Browser tidak mendukung WebP');
+        const format = $('imageFormat').value; // webp, jpeg, png
+        const mime = 'image/' + format;
+        const blob = await new Promise(r => canvas.toBlob(r, mime, .92));
+        const data = canvas.toDataURL(mime, .92);
         
-        const data = canvas.toDataURL('image/webp', .92);
-        const base = slugify($('focus').value || $('title').value || 'featured-image');
-        const filename = base + '.webp';
+        const safeName = file.name.split('.')[0].replace(/[^a-z0-9]/gi, '-').toLowerCase();
+        const filename = safeName + '.' + format;
         
         pendingImage = { blob, filename };
         $('imageName').value = filename;
-        $('imagePreview').src = data;
-        $('imagePreview').classList.remove('hidden');
-        
+        storedImageUrl = data; // temporary preview
+        updateFeaturedImageUI();
         if (!$('altText').value) $('altText').value = $('title').value.trim();
-        if (!$('imageTitle').value) $('imageTitle').value = $('title').value.trim();
-        
-        $('fileMeta').textContent = `${sw}×${sh} → ${ow}×${oh} WebP · ${(blob.size / 1024).toFixed(0)} KB · Sedang mengunggah...`;
+        $('fileMeta').textContent = `${sw}×${sh} → ${ow}×${oh} · ${(blob.size / 1024).toFixed(0)} KB (Siap diunggah)`;
         markDirty();
-        toast('Sedang mengunggah gambar...');
-        
-        await uploadMedia();
-        
-        $('fileMeta').textContent = `${sw}×${sh} → ${ow}×${oh} WebP · ${(blob.size / 1024).toFixed(0)} KB · Tersimpan di Cloudinary ✓`;
-        toast('Gambar berhasil diunggah.');
-    } catch (e) {
-        $('fileMeta').textContent = 'Upload gambar gagal.';
-        toast('Gagal mengunggah gambar: ' + e.message);
-    }
+    } catch (e) { toast('Gagal memproses gambar: ' + e.message); }
 }
 
 $('drop').addEventListener('click', () => $('imageFile').click());
@@ -1426,24 +938,15 @@ $('drop').addEventListener('dragover', e => { e.preventDefault(); $('drop').clas
 $('drop').addEventListener('dragleave', () => $('drop').classList.remove('drag'));
 $('drop').addEventListener('drop', e => { e.preventDefault(); $('drop').classList.remove('drag'); if (e.dataTransfer.files[0]) processImage(e.dataTransfer.files[0]) });
 
-['focus', 'secondary', 'seoTitle', 'metaDesc', 'excerpt', 'altText', 'imageName', 'imageTitle', 'canonical', 'ogTitle', 'ogDesc', 'ogImage', 'readTime', 'robotsIndex', 'robotsFollow', 'schema', 'publishDate'].forEach(id => {
-    const el = $(id);
-    if (el) { el.addEventListener('input', markDirty); el.addEventListener('change', markDirty); }
+['title','slug','focus', 'secondary', 'seoTitle', 'metaDesc', 'excerpt', 'altText', 'imageName', 'canonical', 'readTime', 'robotsIndex', 'robotsFollow', 'schema', 'publishDate'].forEach(id => {
+    const el = $(id); if (el) { el.addEventListener('input', markDirty); el.addEventListener('change', markDirty); }
 });
 
-$('body').addEventListener('input', markDirty);
-window.addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
-document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); savePost('draft'); } if (e.key === 'Escape') closeModal(); });
-
-newPost();
-updateToolbarState();
 (async () => {
-    try {
-        const r = await fetch(AUTH_API + '/me', { credentials: 'include', headers: { Accept: 'application/json' } });
-        const j = await r.json();
-        if (j.authenticated) { hideLogin(); await load(); } else showLogin();
-    } catch (e) { showLogin(); }
+    try { const r = await fetch(AUTH_API + '/me', { credentials: 'include', headers: { Accept: 'application/json' } }); const j = await r.json(); if (j.authenticated) { hideLogin(); await load(); } else showLogin(); } 
+    catch (e) { showLogin(); }
 })();
 </script>
 </body>
 </html>
+```eof
