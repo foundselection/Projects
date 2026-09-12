@@ -238,13 +238,12 @@ a:focus-visible{
   font:700 12px "Open Sans",sans-serif;
 }
 
+
 /* =========================
-   DETAIL
+   DETAIL ARTICLE EXPERIENCE
 ========================= */
 
-.detail-only{
-  display:none;
-}
+.detail-only{display:none}
 
 body.detail-mode .listing-only{
   display:none!important;
@@ -257,160 +256,178 @@ body.detail-mode .detail-only{
 .detail-header{
   position:sticky;
   top:0;
-  z-index:50;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(226,232,240,.9);
+  z-index:100;
+  width:100%;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(226,232,240,.92);
+}
+
+.detail-header-inner{
+  min-height:66px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.detail-nav-back{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:40px;
+  padding:8px 12px;
+  border-radius:999px;
+  color:#334155;
+  font:700 .82rem "Open Sans",sans-serif;
+  text-decoration:none;
+  transition:.2s ease;
+}
+
+.detail-nav-back:hover{
+  background:#f1f5f9;
+  color:var(--blue);
+}
+
+.detail-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.action-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  min-height:40px;
+  padding:.62rem .9rem;
+  border:1px solid #dbe5f2;
+  background:#fff;
+  color:#1e40af;
+  border-radius:999px;
+  font:700 .82rem "Open Sans",sans-serif;
+  cursor:pointer;
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.action-btn:hover{
+  background:#f5f9ff;
+  border-color:#bfdbfe;
+  color:var(--blue);
+  transform:translateY(-1px);
+  box-shadow:0 7px 18px rgba(30,64,175,.08);
+}
+
+.action-btn.is-saved{
+  background:var(--blue-soft);
+  border-color:#bfdbfe;
+  color:var(--blue);
 }
 
 .detail-hero{
   background:
-    radial-gradient(
-      circle at 80% 0%,
-      rgba(37,99,235,.12),
-      transparent 34%
-    ),
-    linear-gradient(
-      180deg,
-      #eff6ff 0%,
-      #fff 78%,
-      #f8fafc 100%
-    );
+    radial-gradient(circle at 78% 0%,rgba(37,99,235,.13),transparent 32%),
+    radial-gradient(circle at 10% 20%,rgba(191,219,254,.16),transparent 27%),
+    linear-gradient(180deg,#eff6ff 0%,#fff 72%,#f8fafc 100%);
 }
 
-.article-shell{
-  max-width:780px;
+.article-heading-wrap{
+  max-width:860px;
   margin:0 auto;
+  text-align:left;
+}
+
+.article-meta-row{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:9px 14px;
+  margin-bottom:16px;
+  font:700 .76rem "Open Sans",sans-serif;
+  color:#64748b;
+}
+
+.article-category{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:5px 10px;
+  border:1px solid #bfdbfe;
+  border-radius:999px;
+  background:#fff;
+  color:var(--blue)!important;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  box-shadow:0 3px 12px rgba(37,99,235,.07);
+}
+
+.article-meta-separator{
+  color:#94a3b8;
 }
 
 .detail-title{
+  margin:0;
   font-family:"Open Sans",Arial,sans-serif;
   color:var(--ink);
+  font-size:clamp(2rem,4vw,4.35rem);
   font-weight:800;
-  letter-spacing:-.035em;
-  line-height:1.08;
+  letter-spacing:-.045em;
+  line-height:1.04;
 }
 
 .detail-excerpt{
+  max-width:760px;
+  margin:22px 0 0;
   color:#526174;
-  line-height:1.8;
+  font-size:clamp(1rem,1.4vw,1.18rem);
+  line-height:1.78;
 }
 
-.detail-meta{
-  color:#64748b;
+.featured-wrap{
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 20px;
 }
 
-.detail-content{
-  color:#334155;
-  font-size:1.075rem;
-  line-height:1.95;
-}
-
-.detail-content > *{
-  max-width:100%;
-}
-
-.detail-content p{
-  margin:0 0 1.35rem;
-}
-
-.detail-content h2,
-.detail-content h3,
-.detail-content h4{
-  font-family:"Open Sans",Arial,sans-serif;
-  color:#0f172a;
-  scroll-margin-top:100px;
-}
-
-.detail-content h2{
-  margin:2.7rem 0 .9rem;
-  font-size:clamp(1.45rem,2vw,1.85rem);
-  font-weight:800;
-  line-height:1.3;
-}
-
-.detail-content h3{
-  margin:2.1rem 0 .75rem;
-  font-size:clamp(1.2rem,1.7vw,1.45rem);
-  font-weight:800;
-  line-height:1.35;
-}
-
-.detail-content h4{
-  margin:1.7rem 0 .65rem;
-  font-size:1.1rem;
-  font-weight:800;
-}
-
-.detail-content ul,
-.detail-content ol{
-  margin:0 0 1.35rem;
-  padding-left:1.5rem;
-}
-
-.detail-content li{
-  margin:.55rem 0;
-}
-
-.detail-content a{
-  color:#2563eb;
-  text-decoration:underline;
-  text-underline-offset:3px;
-}
-
-.detail-content blockquote{
-  margin:1.8rem 0;
-  padding:1.1rem 1.25rem;
-  border-left:4px solid #2563eb;
-  background:#eff6ff;
-  border-radius:0 14px 14px 0;
-  color:#334155;
-}
-
-.detail-content img{
+.featured-image{
   display:block;
-  max-width:100%;
-  height:auto;
-  margin:1.8rem auto;
-  border-radius:18px;
-}
-
-.detail-content figure{
-  margin:2rem 0;
-}
-
-.detail-content figcaption{
-  margin-top:.6rem;
-  text-align:center;
-  color:#64748b;
-  font-size:.85rem;
-}
-
-.detail-content iframe{
   width:100%;
-  min-height:420px;
-  border:0;
-  border-radius:18px;
-  margin:1.75rem 0;
+  aspect-ratio:16 / 8.4;
+  object-fit:cover;
+  border-radius:24px;
+  border:1px solid #dbeafe;
+  background:#eff6ff;
+  box-shadow:0 24px 70px rgba(30,64,175,.12);
 }
 
-.reading-divider{
-  height:1px;
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #dbe3ed,
-      transparent
-    );
+.reading-layout{
+  max-width:1035px;
+  margin:34px auto 0;
+  padding:0 20px 90px;
+  display:grid;
+  grid-template-columns:210px minmax(0,700px);
+  justify-content:center;
+  align-items:start;
+  gap:34px;
+}
+
+.toc-sidebar{
+  position:sticky;
+  top:88px;
+  align-self:start;
 }
 
 .toc-box{
-  margin-top:2rem;
   background:#fff;
   border:1px solid #dbe5f2;
-  border-radius:18px;
+  border-radius:17px;
   overflow:hidden;
   box-shadow:0 8px 28px rgba(15,23,42,.045);
 }
@@ -420,12 +437,12 @@ body.detail-mode .detail-only{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
-  padding:16px 18px;
+  gap:14px;
+  padding:14px 15px;
   border:0;
   background:#f8fbff;
-  color:#0f172a;
-  font:800 .95rem "Open Sans",sans-serif;
+  color:var(--ink);
+  font:800 .9rem "Open Sans",sans-serif;
   cursor:pointer;
 }
 
@@ -438,87 +455,330 @@ body.detail-mode .detail-only{
 }
 
 .toc-body{
-  display:none;
-  padding:14px 16px 17px;
-  border-top:1px solid #e6eef8;
-}
-
-.toc-box.open .toc-body{
   display:block;
+  padding:11px;
+  border-top:1px solid #e6eef8;
+  max-height:calc(100vh - 130px);
+  overflow:auto;
 }
 
 .toc-link{
-  display:block;
-  padding:.45rem .55rem;
+  display:flex;
+  gap:9px;
+  align-items:flex-start;
+  padding:7px 8px;
   border-radius:9px;
-  color:#334155;
+  color:#475569;
   text-decoration:none!important;
-  line-height:1.55;
-  font-size:.92rem;
+  line-height:1.45;
+  font-size:.8rem;
+  transition:background .2s ease,color .2s ease;
 }
 
 .toc-link:hover,
 .toc-link.active{
   background:#eff6ff;
-  color:#1d4ed8;
+  color:var(--blue);
 }
 
-.toc-link.level-3{
-  padding-left:1.35rem;
-  font-size:.88rem;
+.toc-link-number{
+  flex:0 0 24px;
+  color:#94a3b8;
+  font-variant-numeric:tabular-nums;
+  font-family:"Open Sans",sans-serif;
+  font-weight:800;
 }
 
-.action-btn{
+.toc-link.active .toc-link-number{
+  color:var(--blue);
+}
+
+.detail-content{
+  width:100%;
+  max-width:700px;
+  margin:0 auto;
+  color:#334155;
+  font-family:Lato,Arial,sans-serif;
+  font-size:1.08rem;
+  line-height:1.92;
+}
+
+.detail-content p{
+  margin:0 0 1.35rem;
+}
+
+.detail-content h2,
+.detail-content h3,
+.detail-content h4{
+  font-family:"Open Sans",Arial,sans-serif;
+  color:var(--blue)!important;
+  font-weight:800;
+  scroll-margin-top:95px;
+  letter-spacing:-.025em;
+}
+
+.detail-content h2{
+  margin:2.7rem 0 .9rem;
+  font-size:clamp(1.45rem,2.4vw,1.9rem);
+  line-height:1.25;
+}
+
+.detail-content h3{
+  margin:2.1rem 0 .75rem;
+  font-size:clamp(1.18rem,2vw,1.45rem);
+  line-height:1.3;
+}
+
+.detail-content h4{
+  margin:1.65rem 0 .65rem;
+  font-size:1.08rem;
+  line-height:1.35;
+}
+
+.detail-content ul,
+.detail-content ol{
+  margin:0 0 1.35rem;
+  padding-left:1.45rem;
+}
+
+.detail-content li{
+  margin:.55rem 0;
+}
+
+.detail-content a{
+  color:var(--blue)!important;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+}
+
+.detail-content strong{
+  color:#1e293b;
+}
+
+.detail-content blockquote{
+  margin:1.8rem 0;
+  padding:1.05rem 1.15rem;
+  border-left:4px solid var(--blue);
+  border-radius:0 14px 14px 0;
+  background:#eff6ff;
+  color:#334155;
+}
+
+.detail-content img{
+  display:block;
+  width:auto;
+  max-width:100%;
+  height:auto;
+  margin:1.8rem auto;
+  border-radius:18px;
+}
+
+.detail-content figure{
+  margin:2rem 0;
+}
+
+.detail-content figcaption{
+  margin-top:.65rem;
+  text-align:center;
+  color:#64748b;
+  font-size:.84rem;
+  line-height:1.55;
+}
+
+.detail-content iframe{
+  width:100%;
+  min-height:395px;
+  margin:1.8rem 0;
+  border:0;
+  border-radius:18px;
+  background:#0f172a;
+}
+
+.detail-content hr{
+  margin:2.5rem 0;
+  border:0;
+  border-top:1px solid #e2e8f0;
+}
+
+.detail-content pre{
+  max-width:100%;
+  overflow:auto;
+  margin:1.8rem 0;
+  padding:16px;
+  border-radius:14px;
+  background:#0f172a;
+  color:#e2e8f0;
+  line-height:1.65;
+  font:500 .9rem ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+.detail-content code{
+  font:600 .92em ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+.article-tags{
+  max-width:700px;
+  margin:34px auto 0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.article-tag{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:5px 10px;
+  border:1px solid #dbeafe;
+  border-radius:999px;
+  background:#eff6ff;
+  color:var(--blue);
+  font:700 .75rem "Open Sans",sans-serif;
+}
+
+.article-divider{
+  max-width:700px;
+  height:1px;
+  margin:28px auto 0;
+  background:linear-gradient(90deg,transparent,#dbe3ed,transparent);
+}
+
+.related-section{
+  max-width:1120px;
+  margin:70px auto 0;
+  padding:0 20px 80px;
+}
+
+.related-header{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:18px;
+}
+
+.related-kicker{
+  font:800 .67rem "Open Sans",sans-serif;
+  color:var(--blue);
+  letter-spacing:.17em;
+  text-transform:uppercase;
+}
+
+.related-title{
+  margin:5px 0 0;
+  font:800 1.55rem "Open Sans",sans-serif;
+  color:var(--ink);
+}
+
+.related-controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.related-arrow{
+  width:40px;
+  height:40px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:.55rem;
-  min-height:42px;
-  padding:.65rem .95rem;
   border:1px solid #dbe5f2;
+  border-radius:50%;
   background:#fff;
-  color:#1e40af;
-  border-radius:999px;
-  font:700 .85rem "Open Sans",sans-serif;
-  transition:
-    background .2s ease,
-    border-color .2s ease,
-    transform .2s ease,
-    box-shadow .2s ease;
+  color:#334155;
+  cursor:pointer;
+  transition:.2s ease;
 }
 
-.action-btn:hover{
-  background:#f5f9ff;
+.related-arrow:hover{
+  color:var(--blue);
   border-color:#bfdbfe;
+  background:#f5f9ff;
   transform:translateY(-1px);
-  box-shadow:0 7px 18px rgba(30,64,175,.08);
 }
 
 .related-track{
-  display:flex;
-  gap:1rem;
-  overflow-x:auto;
-  padding:.3rem .1rem 1rem;
-  scroll-snap-type:x mandatory;
-  scrollbar-width:thin;
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:14px;
 }
 
 .related-card{
-  flex:0 0 min(300px,82vw);
-  scroll-snap-align:start;
+  min-width:0;
+  color:inherit;
+  text-decoration:none;
+}
+
+.related-card article{
+  height:100%;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:17px;
+  box-shadow:0 6px 20px rgba(15,23,42,.035);
+  transition:.22s ease;
+}
+
+.related-card:hover article{
+  transform:translateY(-3px);
+  border-color:#dbeafe;
+  box-shadow:0 14px 32px rgba(15,23,42,.08);
+}
+
+.related-thumb{
+  position:relative;
+  aspect-ratio:16/10;
+  overflow:hidden;
+  background:#eff6ff;
+}
+
+.related-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .5s ease;
+}
+
+.related-card:hover .related-thumb img{
+  transform:scale(1.04);
+}
+
+.related-info{
+  padding:13px;
+}
+
+.related-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  color:#94a3b8;
+  font:700 .62rem "Open Sans",sans-serif;
+}
+
+.related-info h3{
+  margin:7px 0 0;
+  color:var(--ink);
+  font:800 .9rem "Open Sans",sans-serif;
+  line-height:1.42;
+}
+
+.share-wrap{
+  position:relative;
 }
 
 .share-menu{
   position:absolute;
-  left:0;
+  right:0;
   top:calc(100% + 8px);
-  z-index:70;
-  width:210px;
+  z-index:120;
+  width:220px;
   padding:8px;
   background:#fff;
   border:1px solid #dbe5f2;
   border-radius:16px;
-  box-shadow:0 16px 42px rgba(15,23,42,.14);
+  box-shadow:0 18px 45px rgba(15,23,42,.14);
 }
 
 .share-menu a,
@@ -526,25 +786,26 @@ body.detail-mode .detail-only{
   display:block;
   width:100%;
   padding:10px 12px;
-  border-radius:11px;
-  text-align:left;
-  font:600 .86rem "Open Sans",sans-serif;
-  color:#334155;
-  background:transparent;
   border:0;
+  border-radius:10px;
+  background:transparent;
+  color:#334155;
+  text-align:left;
   text-decoration:none;
+  font:600 .82rem "Open Sans",sans-serif;
+  cursor:pointer;
 }
 
 .share-menu a:hover,
 .share-menu button:hover{
   background:#eff6ff;
-  color:#1d4ed8;
+  color:var(--blue);
 }
 
 .not-found-box{
   max-width:680px;
   margin:70px auto;
-  padding:35px 24px;
+  padding:34px 24px;
   text-align:center;
   background:#fff;
   border:1px solid #e2e8f0;
@@ -552,20 +813,127 @@ body.detail-mode .detail-only{
   box-shadow:0 12px 35px rgba(15,23,42,.06);
 }
 
-@media(max-width:767px){
+@media (max-width:1024px){
 
-  .fs-side-item{
-    grid-template-columns:76px 1fr;
+  .article-heading-wrap{
+    max-width:760px;
   }
 
-  .fs-side-item img{
-    width:76px;
-    height:64px;
+  .featured-wrap{
+    max-width:900px;
+  }
+
+  .reading-layout{
+    display:block;
+    max-width:740px;
+    margin-top:28px;
+    padding-bottom:70px;
+  }
+
+  .toc-sidebar{
+    position:static;
+    width:100%;
+    margin-bottom:30px;
+  }
+
+  .toc-body{
+    display:none;
+    max-height:none;
+  }
+
+  .toc-box.open .toc-body{
+    display:block;
   }
 
   .detail-content{
+    max-width:680px;
+  }
+
+  .article-tags,
+  .article-divider{
+    max-width:680px;
+  }
+
+  .related-section{
+    max-width:900px;
+  }
+
+  .related-track{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+}
+
+@media (max-width:767px){
+
+  .detail-header-inner{
+    min-height:60px;
+  }
+
+  .detail-nav-back{
+    padding-left:8px;
+    padding-right:8px;
+  }
+
+  .action-btn{
+    min-height:38px;
+    padding:.55rem .7rem;
+  }
+
+  .action-btn span{
+    display:none;
+  }
+
+  .detail-hero{
+    padding-top:30px;
+    padding-bottom:30px;
+  }
+
+  .article-heading-wrap{
+    padding:0 20px;
+  }
+
+  .article-meta-row{
+    gap:8px 10px;
+    font-size:.68rem;
+  }
+
+  .article-category{
+    min-height:26px;
+    padding:4px 8px;
+  }
+
+  .detail-title{
+    font-size:clamp(2rem,9vw,2.7rem);
+  }
+
+  .detail-excerpt{
     font-size:1rem;
-    line-height:1.85;
+    line-height:1.72;
+  }
+
+  .featured-wrap{
+    padding:0 20px;
+  }
+
+  .featured-image{
+    aspect-ratio:16/9;
+    border-radius:18px;
+  }
+
+  .reading-layout{
+    padding:0 20px 65px;
+    margin-top:20px;
+  }
+
+  .toc-sidebar{
+    margin-bottom:24px;
+  }
+
+  .detail-content{
+    max-width:none;
+    font-size:1rem;
+    line-height:1.84;
   }
 
   .detail-content h2{
@@ -574,6 +942,64 @@ body.detail-mode .detail-only{
 
   .detail-content iframe{
     min-height:230px;
+    border-radius:14px;
+  }
+
+  .article-tags,
+  .article-divider{
+    max-width:none;
+  }
+
+  .related-section{
+    margin-top:52px;
+    padding:0 20px 65px;
+  }
+
+  .related-title{
+    font-size:1.35rem;
+  }
+
+  .related-controls{
+    display:none;
+  }
+
+  .related-track{
+    display:flex;
+    overflow-x:auto;
+    gap:12px;
+    padding-bottom:8px;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:thin;
+  }
+
+  .related-card{
+    flex:0 0 72%;
+    scroll-snap-align:start;
+  }
+
+}
+
+@media (min-width:768px) and (max-width:1024px){
+
+  .related-track{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    row-gap:16px;
+  }
+
+  .related-card:nth-child(n+4){
+    margin-top:0;
+  }
+
+}
+
+@media (min-width:1025px){
+
+  .toc-trigger{
+    display:none;
+  }
+
+  .toc-body{
+    display:block!important;
   }
 
 }
@@ -600,27 +1026,25 @@ body.detail-mode .detail-only{
      DETAIL PAGE
 ============================================================ -->
 
+
 <div id="detail-page" class="detail-only">
 
   <header class="detail-header">
-    <div class="max-w-[1120px] mx-auto px-4 sm:px-6 lg:px-8">
-
-      <div class="h-[66px] flex items-center justify-between gap-3">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="detail-header-inner">
 
         <a
           href="/artikel/"
-          class="inline-flex items-center gap-2 px-3 py-2 rounded-full text-sm font-opensans font-bold text-slate-700 hover:bg-slate-100 transition"
-          aria-label="Kembali ke artikel"
+          class="detail-nav-back"
+          aria-label="Kembali ke semua artikel"
         >
-          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M15 19l-7-7 7-7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-
-          <span class="hidden sm:inline">Artikel</span>
+          <span>Artikel</span>
         </a>
 
-
-        <div class="flex items-center gap-2">
+        <div class="detail-actions">
 
           <button
             id="bookmark-btn"
@@ -629,49 +1053,26 @@ body.detail-mode .detail-only{
             aria-pressed="false"
             aria-label="Simpan artikel"
           >
-
-            <svg
-              id="bookmark-icon"
-              width="17"
-              height="17"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M6 4.75A2.75 2.75 0 0 1 8.75 2h6.5A2.75 2.75 0 0 1 18 4.75V22l-6-3.5L6 22V4.75Z"
-                stroke-width="1.8"
-                stroke-linejoin="round"
-              />
+            <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 4.75A2.75 2.75 0 0 1 8.75 2h6.5A2.75 2.75 0 0 1 18 4.75V22l-6-3.5L6 22V4.75Z" stroke-width="1.8" stroke-linejoin="round"/>
             </svg>
-
-            <span class="hidden sm:inline">Simpan</span>
-
+            <span>Simpan</span>
           </button>
 
-
-          <div id="share-wrap" class="relative">
-
+          <div id="share-wrap" class="share-wrap">
             <button
               id="share-btn"
               type="button"
               class="action-btn"
+              aria-haspopup="true"
+              aria-expanded="false"
               aria-label="Bagikan artikel"
             >
-
-              <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M18 8a3 3 0 1 0-2.83-4A3 3 0 0 0 18 8ZM6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm12 9a3 3 0 1 0-2.83-4A3 3 0 0 0 18 24ZM8.59 13.51l6.83 3.98M15.41 6.51 8.59 10.49"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+              <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18 8a3 3 0 1 0-2.83-4A3 3 0 0 0 18 8ZM6 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm12 9a3 3 0 1 0-2.83-4A3 3 0 0 0 18 24ZM8.59 13.51l6.83 3.98M15.41 6.51 8.59 10.49" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-
-              <span class="hidden sm:inline">Bagikan</span>
-
+              <span>Bagikan</span>
             </button>
-
           </div>
 
         </div>
@@ -681,76 +1082,68 @@ body.detail-mode .detail-only{
   </header>
 
 
-  <section class="detail-hero pt-9 pb-10 md:pt-14 md:pb-14">
+  <section class="detail-hero py-9 md:py-14">
 
-    <div class="max-w-[920px] mx-auto px-5 sm:px-6">
+    <div class="article-heading-wrap px-5 sm:px-6">
 
-      <div class="article-shell">
+      <div class="article-meta-row">
 
-        <div class="mb-4">
+        <span
+          id="detail-category"
+          class="article-category"
+        ></span>
 
-          <span
-            id="detail-category"
-            class="inline-flex items-center px-3 py-1.5 rounded-full border border-blue-100 bg-white text-blue-700 text-[10px] sm:text-xs font-opensans font800 font-bold uppercase tracking-[.08em] shadow-sm"
-          ></span>
+        <time id="detail-date"></time>
 
-        </div>
+        <span class="article-meta-separator" aria-hidden="true">•</span>
 
-
-        <h1
-          id="detail-title"
-          class="detail-title text-[2rem] sm:text-[2.8rem] md:text-[4rem]"
-        ></h1>
-
-
-        <p
-          id="detail-excerpt"
-          class="detail-excerpt mt-5 text-[1rem] md:text-[1.15rem] max-w-3xl"
-        ></p>
-
-
-        <div class="detail-meta mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:text-sm font-opensans font-semibold">
-
-          <time id="detail-date"></time>
-
-          <span>•</span>
-
-          <span id="detail-readtime"></span>
-
-        </div>
+        <span id="detail-readtime"></span>
 
       </div>
+
+
+      <h1
+        id="detail-title"
+        class="detail-title"
+      ></h1>
+
+
+      <p
+        id="detail-excerpt"
+        class="detail-excerpt"
+      ></p>
 
     </div>
 
   </section>
 
 
-  <main class="max-w-[920px] mx-auto px-5 sm:px-6 pb-24">
+  <div class="featured-wrap">
 
-    <div class="article-shell">
-
-
-      <figure
-        id="detail-image-wrap"
-        class="mt-8 md:mt-10 overflow-hidden rounded-[20px] md:rounded-[28px] bg-blue-50 border border-blue-100 shadow-[0_20px_60px_rgba(30,64,175,.10)]"
+    <figure
+      id="detail-image-wrap"
+      class="m-0"
+    >
+      <img
+        id="detail-image"
+        class="featured-image"
+        alt=""
+        decoding="async"
       >
+    </figure>
 
-        <img
-          id="detail-image"
-          class="w-full aspect-[16/8.5] object-cover"
-          alt=""
-          decoding="async"
-        >
-
-      </figure>
+  </div>
 
 
-      <section
-        id="toc-wrap"
-        class="toc-box"
-        aria-label="Daftar isi artikel"
-      >
+  <div class="reading-layout">
+
+    <aside
+      id="toc-wrap"
+      class="toc-sidebar"
+      aria-label="Daftar isi artikel"
+    >
+
+      <div class="toc-box">
 
         <button
           id="toc-trigger"
@@ -758,136 +1151,100 @@ body.detail-mode .detail-only{
           class="toc-trigger"
           aria-expanded="false"
         >
-
           <span class="flex items-center gap-3">
-
-            <svg width="19" height="19" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                d="M4 6h16M4 12h16M4 18h10"
-                stroke-width="1.8"
-                stroke-linecap="round"
-              />
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h10" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
-
             <span>Daftar Isi</span>
-
           </span>
 
-          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              d="m6 9 6 6 6-6"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+          <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m6 9 6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-
         </button>
 
 
         <nav
           id="toc"
           class="toc-body"
-          aria-label="Daftar isi artikel"
+          aria-label="Navigasi subjudul"
         ></nav>
 
-      </section>
+      </div>
+
+    </aside>
 
 
-      <article
-        id="detail-content"
-        class="detail-content mt-9 md:mt-12"
-      ></article>
+    <article
+      id="detail-content"
+      class="detail-content"
+    ></article>
+
+  </div>
 
 
-      <div
-        id="detail-tags"
-        class="mt-10 flex flex-wrap gap-2"
-      ></div>
+  <div
+    id="detail-tags"
+    class="article-tags px-5 sm:px-6"
+  ></div>
 
 
-      <div class="reading-divider mt-10"></div>
+  <div class="article-divider"></div>
 
 
-      <div class="mt-7 flex flex-wrap items-center gap-2.5">
+  <section
+    id="related-section"
+    class="related-section"
+  >
+
+    <div class="related-header">
+
+      <div>
+        <div class="related-kicker">
+          Pilihan Berikutnya
+        </div>
+
+        <h2 class="related-title">
+          Artikel Terkait
+        </h2>
+      </div>
+
+
+      <div class="related-controls">
 
         <button
-          id="bookmark-bottom"
+          id="related-prev"
           type="button"
-          class="action-btn"
+          class="related-arrow"
+          aria-label="Artikel terkait sebelumnya"
         >
-
-          <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M6 4.75A2.75 2.75 0 0 1 8.75 2h6.5A2.75 2.75 0 0 1 18 4.75V22l-6-3.5L6 22V4.75Z"
-              stroke-width="1.8"
-              stroke-linejoin="round"
-            />
+          <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m14.5 18-6-6 6-6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-
-          <span>Simpan artikel</span>
-
         </button>
 
-
         <button
-          id="share-bottom"
+          id="related-next"
           type="button"
-          class="action-btn"
+          class="related-arrow"
+          aria-label="Artikel terkait berikutnya"
         >
-
-          <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M18 8a3 3 0 1 0-2.83-4A3 3 0 0 0 18 8ZM6 15a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm12 9a3 3 0 1 0-2.83-4A3 3 0 0 0 18 24ZM8.59 13.51l6.83 3.98M15.41 6.51 8.59 10.49"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+          <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m9.5 18 6-6-6-6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-
-          <span>Bagikan</span>
-
         </button>
 
       </div>
 
-
-      <section
-        id="related-section"
-        class="mt-16 md:mt-20"
-      >
-
-        <div class="flex items-end justify-between gap-4 mb-5">
-
-          <div>
-
-            <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">
-              Pilihan Berikutnya
-            </div>
-
-            <h2 class="mt-1 font-opensans text-xl md:text-2xl font-bold text-slate-900">
-              Artikel Terkait
-            </h2>
-
-          </div>
-
-          <div class="hidden sm:block text-xs text-slate-400 font-opensans font-semibold">
-            Geser untuk melihat
-          </div>
-
-        </div>
-
-
-        <div
-          id="related-track"
-          class="related-track"
-        ></div>
-
-      </section>
-
     </div>
 
-  </main>
+
+    <div
+      id="related-track"
+      class="related-track"
+    ></div>
+
+  </section>
 
 </div>
 
@@ -2350,6 +2707,7 @@ document
   );
 
 
+
 /* ============================================================
    DETAIL PAGE
 ============================================================ */
@@ -2357,59 +2715,44 @@ document
 (function(){
 
   const path =
-    window.location.pathname
-      .replace(/\/+$/,"");
+    window.location.pathname.replace(/\/+$/, "");
 
   const parts =
-    path
-      .split("/")
-      .filter(Boolean);
-
+    path.split("/").filter(Boolean);
 
   const isDetail =
     parts.length >= 2 &&
     parts[0] === "artikel";
-
 
   if(!isDetail){
     loadArticles();
     return;
   }
 
-
   const slug =
     decodeURIComponent(
-      parts
-        .slice(1)
-        .join("/")
+      parts.slice(1).join("/")
     );
 
-
-  document.body.classList.add(
-    "detail-mode"
-  );
-
+  document.body.classList.add("detail-mode");
 
   const $ =
-    id =>
-      document.getElementById(
-        id
-      );
+    id => document.getElementById(id);
+
+  let currentArticle = null;
 
 
-  let currentArticle =
-    null;
+  /* =========================
+     DETAIL HELPERS
+  ========================= */
 
+  function headingId(text, index){
 
-  function headingId(
-    text,
-    index
-  ){
-
-    return (
+    const base =
       slugify(text) ||
-      `bagian-${index + 1}`
-    );
+      `bagian-${index + 1}`;
+
+    return base;
 
   }
 
@@ -2422,42 +2765,31 @@ document
     const toc =
       $("toc");
 
-    const heads =
+    const tocWrap =
+      $("toc-wrap");
+
+    const headings =
       [
-        ...content.querySelectorAll(
-          "h2,h3"
-        )
+        ...content.querySelectorAll("h2, h3")
       ];
 
+    if(!headings.length){
 
-    const used =
-      new Map();
-
-
-    let h2Number = 0;
-    let h3Number = 0;
-
-
-    if(!heads.length){
-
-      $("toc-wrap")
-        .classList.add(
-          "hidden"
-        );
+      tocWrap.classList.add("hidden");
 
       return;
 
     }
 
+    tocWrap.classList.remove("hidden");
 
-    $("toc-wrap")
-      .classList.remove(
-        "hidden"
-      );
+    const used = new Map();
 
+    let h2Number = 0;
+    let h3Number = 0;
 
     toc.innerHTML =
-      heads.map(
+      headings.map(
         (heading,index) => {
 
           let id =
@@ -2466,67 +2798,55 @@ document
               index
             );
 
-
-          const previous =
+          const count =
             used.get(id) || 0;
 
           used.set(
             id,
-            previous + 1
+            count + 1
           );
 
-
-          if(previous){
-            id +=
-              `-${previous + 1}`;
+          if(count){
+            id += `-${count + 1}`;
           }
 
+          heading.id = id;
 
-          heading.id =
-            id;
-
-
-          let number;
-
+          let number = "";
 
           if(
-            heading.tagName ===
-            "H2"
+            heading.tagName === "H2"
           ){
 
-            h2Number++;
+            h2Number += 1;
             h3Number = 0;
-
             number =
-              String(
-                h2Number
-              );
+              String(h2Number);
 
           }else{
 
-            h3Number++;
-
+            h3Number += 1;
             number =
               `${h2Number}.${h3Number}`;
 
           }
 
-
           return `
             <a
               href="#${esc(id)}"
               data-target="${esc(id)}"
-              data-number="${number}"
               class="toc-link ${
                 heading.tagName === "H3"
                   ? "level-3"
                   : ""
               }"
             >
-              <span class="inline-flex w-9 text-slate-400 font-opensans font-bold">
+              <span class="toc-link-number">
                 ${number}
               </span>
-              <span>${esc(heading.textContent)}</span>
+              <span>
+                ${esc(heading.textContent)}
+              </span>
             </a>
           `;
 
@@ -2536,9 +2856,7 @@ document
 
 
     toc
-      .querySelectorAll(
-        ".toc-link"
-      )
+      .querySelectorAll(".toc-link")
       .forEach(
         link => {
 
@@ -2553,19 +2871,14 @@ document
                   link.dataset.target
                 );
 
-
               if(!target){
                 return;
               }
 
-
               target.scrollIntoView({
-                behavior:
-                  "smooth",
-                block:
-                  "start"
+                behavior:"smooth",
+                block:"start"
               });
-
 
               history.replaceState(
                 null,
@@ -2573,17 +2886,21 @@ document
                 `#${target.id}`
               );
 
+              if(
+                window.innerWidth <= 1024
+              ){
 
-              $("toc-wrap")
-                .classList.remove(
+                tocWrap.classList.remove(
                   "open"
                 );
 
-              $("toc-trigger")
-                .setAttribute(
-                  "aria-expanded",
-                  "false"
-                );
+                $("toc-trigger")
+                  .setAttribute(
+                    "aria-expanded",
+                    "false"
+                  );
+
+              }
 
             }
           );
@@ -2593,8 +2910,7 @@ document
 
 
     if(
-      "IntersectionObserver"
-      in window
+      "IntersectionObserver" in window
     ){
 
       const observer =
@@ -2610,7 +2926,6 @@ document
                   return;
                 }
 
-
                 toc
                   .querySelectorAll(
                     ".toc-link"
@@ -2622,12 +2937,10 @@ document
                       )
                   );
 
-
                 const active =
                   toc.querySelector(
                     `[data-target="${CSS.escape(entry.target.id)}"]`
                   );
-
 
                 if(active){
 
@@ -2643,12 +2956,12 @@ document
           },
           {
             rootMargin:
-              "-18% 0px -70% 0px"
+              "-16% 0px -70% 0px",
+            threshold:0
           }
         );
 
-
-      heads.forEach(
+      headings.forEach(
         heading =>
           observer.observe(
             heading
@@ -2660,15 +2973,12 @@ document
   }
 
 
-  function tagsFor(
-    article
-  ){
+  function tagsFor(article){
 
     const raw =
       article.tags ||
       article.tag ||
       "";
-
 
     if(
       Array.isArray(raw)
@@ -2680,33 +2990,28 @@ document
 
     }
 
-
     if(
-      typeof raw ===
-      "string" &&
+      typeof raw === "string" &&
       raw.trim()
     ){
 
       return raw
         .split(",")
         .map(
-          item =>
-            item.trim()
+          value =>
+            value.trim()
         )
         .filter(Boolean)
         .slice(0,8);
 
     }
 
-
     return [];
 
   }
 
 
-  function renderTags(
-    article
-  ){
+  function renderTags(article){
 
     const box =
       $("detail-tags");
@@ -2714,47 +3019,64 @@ document
     const tags =
       tagsFor(article);
 
-
     if(!tags.length){
 
-      box.innerHTML =
-        "";
+      box.innerHTML = "";
 
       return;
 
     }
 
-
     box.innerHTML =
-      tags.map(
-        tag =>
-          `
-            <span class="px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-opensans font-bold">
+      tags
+        .map(
+          tag => `
+            <span class="article-tag">
               #${esc(
                 tag
-                  .replace(
-                    /^#/,
-                    ""
-                  )
+                  .replace(/^#/,"")
                   .trim()
               )}
             </span>
           `
-      )
-      .join("");
+        )
+        .join("");
 
   }
 
 
-  function shareArticle(){
+  function closeShareMenu(){
+
+    const menu =
+      document.getElementById(
+        "share-menu"
+      );
+
+    if(menu){
+      menu.remove();
+    }
+
+    const button =
+      $("share-btn");
+
+    if(button){
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+    }
+
+  }
+
+
+  function openShareMenu(){
 
     if(!currentArticle){
       return;
     }
 
-
     const url =
-      window.location.href;
+      window.location.href.split("#")[0];
 
     const title =
       currentArticle.title ||
@@ -2765,15 +3087,62 @@ document
       title;
 
 
-    const existing =
+    if(
+      navigator.share &&
+      window.innerWidth < 768
+    ){
+
+      navigator
+        .share({
+          title,
+          text,
+          url
+        })
+        .catch(
+          error => {
+
+            if(
+              error?.name !==
+              "AbortError"
+            ){
+              showShareMenu(
+                url,
+                title,
+                text
+              );
+            }
+
+          }
+        );
+
+      return;
+
+    }
+
+
+    showShareMenu(
+      url,
+      title,
+      text
+    );
+
+  }
+
+
+  function showShareMenu(
+    url,
+    title,
+    text
+  ){
+
+    const current =
       document.getElementById(
         "share-menu"
       );
 
+    if(current){
 
-    if(existing){
-
-      existing.remove();
+      closeShareMenu();
 
       return;
 
@@ -2784,7 +3153,6 @@ document
       document.createElement(
         "div"
       );
-
 
     menu.id =
       "share-menu";
@@ -2802,7 +3170,7 @@ document
           title + " " + url
         )}"
       >
-        WhatsApp
+        Bagikan ke WhatsApp
       </a>
 
       <a
@@ -2814,7 +3182,7 @@ document
           title
         )}"
       >
-        Telegram
+        Bagikan ke Telegram
       </a>
 
       <a
@@ -2824,7 +3192,7 @@ document
           url
         )}"
       >
-        Facebook
+        Bagikan ke Facebook
       </a>
 
       <a
@@ -2836,7 +3204,7 @@ document
           title
         )}"
       >
-        X
+        Bagikan ke X
       </a>
 
       <a
@@ -2846,7 +3214,7 @@ document
           text + "\n\n" + url
         )}"
       >
-        Email
+        Bagikan via Email
       </a>
 
       <button
@@ -2860,8 +3228,13 @@ document
 
 
     $("share-wrap")
-      .appendChild(
-        menu
+      .appendChild(menu);
+
+
+    $("share-btn")
+      .setAttribute(
+        "aria-expanded",
+        "true"
       );
 
 
@@ -2872,20 +3245,17 @@ document
 
           try{
 
-            await navigator
-              .clipboard
-              .writeText(
-                url
-              );
+            await navigator.clipboard.writeText(
+              url
+            );
 
             $("copy-share-link")
               .textContent =
               "Tautan disalin";
 
             setTimeout(
-              () =>
-                menu.remove(),
-              900
+              closeShareMenu,
+              850
             );
 
           }catch{
@@ -2903,10 +3273,10 @@ document
   }
 
 
-  function storageKey(){
+  function bookmarkKey(){
 
     return (
-      "fs-bookmark:" +
+      "found-selection-bookmark:" +
       slug
     );
 
@@ -2917,74 +3287,37 @@ document
 
     const saved =
       localStorage.getItem(
-        storageKey()
+        bookmarkKey()
       ) === "1";
 
+    const button =
+      $("bookmark-btn");
 
-    [
-      $("bookmark-btn"),
-      $("bookmark-bottom")
-    ].forEach(
-      button => {
+    const label =
+      $("bookmark-label");
 
-        if(!button){
-          return;
-        }
+    if(!button){
+      return;
+    }
 
-
-        button.setAttribute(
-          "aria-pressed",
-          String(saved)
-        );
-
-
-        const label =
-          button.querySelector(
-            "span"
-          );
-
-
-        if(
-          button ===
-          $("bookmark-btn")
-        ){
-
-          if(label){
-            label.textContent =
-              saved
-                ? "Tersimpan"
-                : "Simpan";
-          }
-
-        }else{
-
-          if(label){
-            label.textContent =
-              saved
-                ? "Tersimpan"
-                : "Simpan artikel";
-          }
-
-        }
-
-
-        button.classList.toggle(
-          "bg-blue-50",
-          saved
-        );
-
-        button.classList.toggle(
-          "border-blue-200",
-          saved
-        );
-
-        button.classList.toggle(
-          "text-blue-700",
-          saved
-        );
-
-      }
+    button.setAttribute(
+      "aria-pressed",
+      String(saved)
     );
+
+    button.classList.toggle(
+      "is-saved",
+      saved
+    );
+
+    if(label){
+
+      label.textContent =
+        saved
+          ? "Tersimpan"
+          : "Simpan";
+
+    }
 
   }
 
@@ -2993,27 +3326,36 @@ document
 
     const saved =
       localStorage.getItem(
-        storageKey()
+        bookmarkKey()
       ) === "1";
-
 
     if(saved){
 
       localStorage.removeItem(
-        storageKey()
+        bookmarkKey()
       );
 
     }else{
 
       localStorage.setItem(
-        storageKey(),
+        bookmarkKey(),
         "1"
       );
 
     }
 
-
     updateBookmarkUI();
+
+  }
+
+
+  function relatedImage(article){
+
+    return (
+      article.thumbnail ||
+      article.image ||
+      ""
+    );
 
   }
 
@@ -3026,11 +3368,9 @@ document
     const track =
       $("related-track");
 
-
     const currentId =
       String(
-        current.id ??
-        ""
+        current.id ?? ""
       );
 
     const currentSlug =
@@ -3038,7 +3378,6 @@ document
         current.slug ??
         slug
       );
-
 
     const seen =
       new Set();
@@ -3060,27 +3399,21 @@ document
 
             const id =
               String(
-                article.id ??
-                ""
+                article.id ?? ""
               );
-
 
             if(
               (
                 id &&
                 id === currentId
               ) ||
-              articleSlug ===
-                currentSlug ||
-              seen.has(
-                articleSlug
-              )
+              articleSlug === currentSlug ||
+              seen.has(articleSlug)
             ){
 
               return false;
 
             }
-
 
             seen.add(
               articleSlug
@@ -3105,7 +3438,6 @@ document
                 ""
               );
 
-
             if(
               bd !== ad
             ){
@@ -3115,7 +3447,6 @@ document
               );
 
             }
-
 
             return (
               Number(b.id || 0) -
@@ -3127,9 +3458,7 @@ document
         .slice(0,5);
 
 
-    if(
-      !candidates.length
-    ){
+    if(!candidates.length){
 
       $("related-section")
         .classList.add(
@@ -3148,100 +3477,173 @@ document
 
 
     track.innerHTML =
-      candidates.map(
-        article => {
+      candidates
+        .map(
+          article => {
 
-          const articleSlug =
-            article.slug ||
-            slugify(
-              article.title ||
-              ""
-            );
+            const articleSlug =
+              article.slug ||
+              slugify(
+                article.title ||
+                ""
+              );
 
-          const image =
-            article.thumbnail ||
-            "";
+            const image =
+              relatedImage(
+                article
+              );
 
+            return `
+              <a
+                href="/artikel/${encodeURIComponent(articleSlug)}"
+                class="related-card group"
+              >
 
-          return `
-            <a
-              href="/artikel/${encodeURIComponent(articleSlug)}"
-              class="related-card group no-underline"
-            >
+                <article>
 
-              <article class="fs-latest h-full">
+                  <div class="related-thumb">
 
-                <div class="relative aspect-[16/10] overflow-hidden bg-blue-50">
+                    ${
+                      image
 
-                  ${
-                    image
+                      ? `
+                        <img
+                          src="${esc(image)}"
+                          alt="${esc(article.title)}"
+                          loading="lazy"
+                          decoding="async"
+                        >
+                      `
 
-                    ? `
-                      <img
-                        src="${esc(image)}"
-                        alt="${esc(article.title)}"
-                        class="w-full h-full object-cover"
-                        loading="lazy"
-                        decoding="async"
-                      >
-                    `
-
-                    : `
-                      <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>
-                    `
-                  }
-
-                  <span class="absolute top-3 left-3 bg-white text-blue-700 text-[9px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-sm">
-                    ${esc(
-                      category(
-                        article.category
-                      )
-                    )}
-                  </span>
-
-                </div>
-
-
-                <div class="p-4">
-
-                  <div class="flex justify-between gap-2 text-[10px] font-opensans font-semibold text-slate-400">
-
-                    <span class="truncate">
-                      ${esc(
-                        formatDate(
-                          article.publish_date ||
-                          ""
-                        )
-                      )}
-                    </span>
-
-                    <span>
-                      ${
-                        article.read_time
-                          ? `${esc(article.read_time)} min`
-                          : ""
-                      }
-                    </span>
+                      : `
+                        <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>
+                      `
+                    }
 
                   </div>
 
 
-                  <h3 class="mt-2 font-opensans text-[.98rem] font-bold text-slate-900 leading-[1.38] group-hover:text-blue-600 transition-colors line-clamp-3">
-                    ${esc(
-                      article.title
-                    )}
-                  </h3>
+                  <div class="related-info">
 
-                </div>
+                    <div class="related-meta">
 
-              </article>
+                      <span>
+                        ${esc(
+                          formatDate(
+                            article.publish_date ||
+                            ""
+                          )
+                        )}
+                      </span>
 
-            </a>
-          `;
+                      <span>
+                        ${
+                          article.read_time
+                            ? `${esc(article.read_time)} min`
+                            : ""
+                        }
+                      </span>
 
-        }
-      )
-      .join("");
+                    </div>
+
+
+                    <h3>
+                      ${esc(
+                        article.title
+                      )}
+                    </h3>
+
+                  </div>
+
+                </article>
+
+              </a>
+            `;
+
+          }
+        )
+        .join("");
+
+
+    updateRelatedArrows();
+
+  }
+
+
+  function updateRelatedArrows(){
+
+    const track =
+      $("related-track");
+
+    const prev =
+      $("related-prev");
+
+    const next =
+      $("related-next");
+
+
+    if(
+      !track ||
+      !prev ||
+      !next
+    ){
+      return;
+    }
+
+
+    const maxScroll =
+      track.scrollWidth -
+      track.clientWidth;
+
+
+    if(
+      maxScroll <= 4
+    ){
+
+      prev.disabled = true;
+      next.disabled = true;
+
+      return;
+
+    }
+
+
+    prev.disabled =
+      track.scrollLeft <= 4;
+
+    next.disabled =
+      track.scrollLeft >=
+      maxScroll - 4;
+
+  }
+
+
+  function scrollRelated(
+    direction
+  ){
+
+    const track =
+      $("related-track");
+
+    if(!track){
+      return;
+    }
+
+    const amount =
+      Math.max(
+        260,
+        Math.round(
+          track.clientWidth * .75
+        )
+      );
+
+    track.scrollBy({
+      left:
+        direction === "next"
+          ? amount
+          : -amount,
+      behavior:"smooth"
+    });
 
   }
 
@@ -3272,7 +3674,7 @@ document
       if(!response.ok){
 
         throw new Error(
-          "Artikel tidak ditemukan."
+          `Artikel tidak ditemukan (${response.status})`
         );
 
       }
@@ -3298,7 +3700,6 @@ document
       const article =
         result.data;
 
-
       currentArticle =
         article;
 
@@ -3311,7 +3712,6 @@ document
         document.querySelector(
           'meta[name="description"]'
         );
-
 
       if(description){
 
@@ -3328,11 +3728,11 @@ document
           'link[rel="canonical"]'
         );
 
-
       if(canonical){
 
         canonical.href =
-          window.location.href.split("#")[0];
+          window.location.href
+            .split("#")[0];
 
       }
 
@@ -3341,7 +3741,6 @@ document
         document.querySelector(
           'meta[property="og:title"]'
         );
-
 
       if(ogTitle){
 
@@ -3357,11 +3756,24 @@ document
           'meta[property="og:description"]'
         );
 
-
       if(ogDescription){
 
         ogDescription.content =
           article.excerpt ||
+          "";
+
+      }
+
+
+      const ogImage =
+        document.querySelector(
+          'meta[property="og:image"]'
+        );
+
+      if(ogImage){
+
+        ogImage.content =
+          article.thumbnail ||
           "";
 
       }
@@ -3397,7 +3809,7 @@ document
       $("detail-readtime")
         .textContent =
         article.read_time
-          ? `⏱ ${article.read_time} menit baca`
+          ? `${article.read_time} menit membaca`
           : "";
 
 
@@ -3442,41 +3854,76 @@ document
       updateBookmarkUI();
 
 
-      [
-        $("share-btn"),
-        $("share-bottom")
-      ].forEach(
-        button => {
+      $("share-btn")
+        .addEventListener(
+          "click",
+          openShareMenu
+        );
 
-          if(button){
 
-            button.addEventListener(
-              "click",
-              shareArticle
-            );
+      $("bookmark-btn")
+        .addEventListener(
+          "click",
+          toggleBookmark
+        );
+
+
+      $("toc-trigger")
+        .addEventListener(
+          "click",
+          () => {
+
+            const box =
+              $("toc-wrap");
+
+            const open =
+              box.classList.toggle(
+                "open"
+              );
+
+            $("toc-trigger")
+              .setAttribute(
+                "aria-expanded",
+                String(open)
+              );
 
           }
-
-        }
-      );
+        );
 
 
-      [
-        $("bookmark-btn"),
-        $("bookmark-bottom")
-      ].forEach(
-        button => {
+      $("related-prev")
+        .addEventListener(
+          "click",
+          () =>
+            scrollRelated(
+              "prev"
+            )
+        );
 
-          if(button){
 
-            button.addEventListener(
-              "click",
-              toggleBookmark
-            );
+      $("related-next")
+        .addEventListener(
+          "click",
+          () =>
+            scrollRelated(
+              "next"
+            )
+        );
 
+
+      $("related-track")
+        .addEventListener(
+          "scroll",
+          updateRelatedArrows,
+          {
+            passive:true
           }
+        );
 
-        }
+
+      window.addEventListener(
+        "resize",
+        updateRelatedArrows
       );
 
 
@@ -3511,6 +3958,35 @@ document
         article
       );
 
+
+      if(
+        window.location.hash
+      ){
+
+        requestAnimationFrame(
+          () => {
+
+            const target =
+              document.getElementById(
+                window.location.hash.slice(1)
+              );
+
+            if(target){
+
+              setTimeout(
+                () =>
+                  target.scrollIntoView({
+                    block:"start"
+                  }),
+                50
+              );
+
+            }
+
+          }
+        );
+
+      }
 
     }catch(error){
 
@@ -3550,17 +4026,16 @@ document
         .innerHTML = `
           <div class="not-found-box">
 
-            <h2 class="font-opensans text-xl font-bold text-slate-900">
+            <h2>
               Artikel tidak tersedia
             </h2>
 
-            <p class="mt-3 text-slate-500">
+            <p>
               Silakan kembali ke daftar artikel.
             </p>
 
             <a
               href="/artikel/"
-              class="inline-flex mt-6 px-5 py-3 rounded-full bg-blue-600 text-white font-opensans font-bold"
             >
               Kembali ke Artikel
             </a>
@@ -3579,29 +4054,6 @@ document
   }
 
 
-  $("toc-trigger")
-    .addEventListener(
-      "click",
-      () => {
-
-        const box =
-          $("toc-wrap");
-
-        const open =
-          box.classList.toggle(
-            "open"
-          );
-
-        $("toc-trigger")
-          .setAttribute(
-            "aria-expanded",
-            String(open)
-          );
-
-      }
-    );
-
-
   document.addEventListener(
     "click",
     event => {
@@ -3616,12 +4068,7 @@ document
         )
       ){
 
-        const menu =
-          $("share-menu");
-
-        if(menu){
-          menu.remove();
-        }
+        closeShareMenu();
 
       }
 
@@ -3632,6 +4079,7 @@ document
   loadDetail();
 
 })();
+
 
 </script>
 
