@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Found Selection</title>
+
+<style>
+html,body{
+  margin:0;
+  padding:0;
+  background:#f8fafc;
+}
+</style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script>
+
+(async function(){
+
+  const path =
+    window.location.pathname;
+
+  const isArticle =
+    /^\/artikel\/[^/]+\/?$/.test(
+      path
+    );
+
+  /*
+   * Hanya halaman artikel yang
+   * kita fallback ke /artikel/index.html.
+   */
+  if(!isArticle){
+
+    window.location.href =
+      "/";
+
+    return;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/artikel/index.html",
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+      throw new Error(
+        "Gagal mengambil halaman artikel."
+      );
+    }
+
+
+    const html =
+      await response.text();
+
+
+    /*
+     * document.open/write menjaga URL
+     * tetap /artikel/{slug}.
+     */
+    document.open();
+    document.write(html);
+    document.close();
+
+
+  }catch(error){
+
+    console.error(
+      "Fallback article error:",
+      error
+    );
+
+
+    document.body.innerHTML = `
+      <div style="
+        min-height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:24px;
+        font-family:Arial,sans-serif;
+        text-align:center;
+      ">
+
+        <div>
+
+          <h1>
+            Artikel tidak dapat dibuka
+          </h1>
+
+          <p>
+            Silakan kembali ke halaman artikel.
+          </p>
+
+          <a
+            href="/artikel/"
+            style="
+              display:inline-block;
+              margin-top:14px;
+              padding:12px 20px;
+              border-radius:999px;
+              background:#2563eb;
+              color:#fff;
+              text-decoration:none;
+              font-weight:700;
+            "
+          >
+            Kembali ke Artikel
+          </a>
+
+        </div>
+
+      </div>
+    `;
+
+  }
+
+})();
+
+</script>
+
+</body>
+</html>
