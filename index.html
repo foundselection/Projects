@@ -184,6 +184,8 @@
 }
 .home-article-card img{transition:transform .65s cubic-bezier(.25,1,.5,1)}
 .home-article-card:hover img{transform:scale(1.045)}
+.home-article-card:focus-within{border-color:#93c5fd;box-shadow:0 18px 42px rgba(15,23,42,.11)}
+
 
         /* =========================================================
            FOUND SELECTION — HOME UI SYSTEM v2
@@ -871,7 +873,7 @@
                                 ${safeImage
                                     ? `<img src="${safeImage}" alt="${title}" width="900" height="563" loading="lazy" decoding="async" class="w-full h-full object-cover">`
                                     : `<div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>`}
-                                <span class="absolute top-3 left-3 bg-blue-600 text-white text-[9px] md:text-[10px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-md tracking-wide">${categoryLabel}</span>
+                                <span class="absolute top-3 left-3 bg-white text-blue-700 border border-blue-100 text-[9px] md:text-[10px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-sm tracking-wide">${categoryLabel}</span>
                             </div>
 
                             <div class="p-4 md:p-5 flex flex-col flex-1">
@@ -880,14 +882,14 @@
                                     <span class="shrink-0">${readTime}</span>
                                 </div>
 
-                                <h3 class="mt-2 font-opensans text-[0.98rem] md:text-[1.05rem] font-bold text-slate-900 leading-[1.38] line-clamp-3">
-                                    <a href="${permalink}" class="hover:text-blue-600 transition-colors" title="${title}">${title}</a>
+                                <h3 class="mt-2 font-opensans text-[0.98rem] md:text-[1.05rem] font-bold text-slate-900 leading-[1.38] line-clamp-3 group-hover:text-blue-600 transition-colors">
+                                    ${title}
                                 </h3>
 
                                 ${article.excerpt ? `<p class="mt-2 text-[0.76rem] md:text-[0.82rem] text-slate-500 leading-[1.55] line-clamp-3">${escapeHtml(article.excerpt)}</p>` : ''}
                             </div>
                         </article>
-                    </div>`;
+                    </a>`;
             }
 
             function clearHomeArticleCards() {
@@ -896,68 +898,89 @@
                 });
             }
 
-            function renderDummyFallback() {
-                // Dummy hanya fallback sementara jika backend belum memiliki artikel published.
-                const dummy = {
-                    teknologi: ['Era Baru Kecerdasan Buatan dalam Kehidupan Sehari-hari','Ulasan Mendalam: Smartphone Flagship Terbaik Tahun Ini'],
-                    hiburan: ['Rekomendasi Film Independen yang Wajib Anda Tonton','Tren Musik Digital dan Pengaruhnya terhadap Musisi Lokal'],
-                    esensial: ['Headphone Noise-Cancelling: Investasi atau Gengsi?','Review Kursi Ergonomis untuk Kerja Jarak Jauh'],
-                    'gaya-hidup': ['Filosofi Minimalisme dalam Menata Ruang Pribadi','Rutinitas Pagi yang Efektif Sebelum Memulai Hari'],
-                    kesehatan: ['Pentingnya Menjaga Pola Tidur untuk Produktivitas','Superfood Lokal yang Mudah Ditemukan di Pasar']
-                };
-                const dates = ['09 September 2026','08 September 2026'];
-                const times = ['3 min','5 min'];
+            function renderArticleLoadingState() {
+                Object.values(categoryContainers).forEach(container => {
+                    if (!container) return;
+                    container.innerHTML = `
+                        <div class="snap-start shrink-0 w-[280px] md:w-[320px]">
+                            <div class="home-article-card overflow-hidden animate-pulse">
+                                <div class="aspect-[16/10] bg-slate-100"></div>
+                                <div class="p-4 md:p-5 space-y-3">
+                                    <div class="h-3 w-24 rounded bg-slate-100"></div>
+                                    <div class="h-5 w-5/6 rounded bg-slate-100"></div>
+                                    <div class="h-3 w-full rounded bg-slate-100"></div>
+                                </div>
+                            </div>
+                        </div>`;
+                });
+            }
 
-                Object.entries(dummy).forEach(([key, titles]) => {
-                    const c = categoryContainers[key];
-                    if (!c) return;
-                    c.innerHTML = titles.map((t,i) => `
-                        <div class="snap-start shrink-0 w-[280px] md:w-[320px] group block outline-none">
-                            <article class="home-article-card h-full flex flex-col">
-                                <div class="relative aspect-[16/10] overflow-hidden bg-blue-50">
-                                    <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>
-                                    <span class="absolute top-3 left-3 bg-blue-600 text-white text-[9px] md:text-[10px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-md tracking-wide">${escapeHtml(key === 'gaya-hidup' ? 'Gaya Hidup' : key.charAt(0).toUpperCase()+key.slice(1))}</span>
-                                </div>
-                                <div class="p-4 md:p-5 flex flex-col flex-1">
-                                    <div class="flex items-center justify-between gap-2 text-[10px] md:text-[11px] font-opensans font-semibold text-slate-400">
-                                        <time>${dates[i]}</time>
-                                        <span class="shrink-0">${times[i]}</span>
-                                    </div>
-                                    <h3 class="mt-2 font-opensans text-[0.98rem] md:text-[1.05rem] font-bold text-slate-900 leading-[1.38] line-clamp-3">
-                                        <a href="/artikel/${generateSlug(t)}" class="hover:text-blue-600 transition-colors">${escapeHtml(t)}</a>
-                                    </h3>
-                                </div>
-                            </article>
-                        </div>`).join('');
+            function renderArticleEmptyState(message = 'Belum ada artikel yang diterbitkan.') {
+                Object.entries(categoryContainers).forEach(([key, container]) => {
+                    if (!container) return;
+                    container.innerHTML = `
+                        <div class="w-full min-w-[280px] md:min-w-[320px] rounded-2xl border border-dashed border-slate-200 bg-white px-6 py-10 text-center">
+                            <p class="font-opensans text-sm font-semibold text-slate-500">${escapeHtml(message)}</p>
+                        </div>`;
                 });
             }
 
             async function loadHomeArticles() {
+                renderArticleLoadingState();
+
                 try {
                     const response = await fetch(ARTICLES_API, {
                         method: 'GET',
                         headers: { 'Accept': 'application/json' },
                         cache: 'no-store'
                     });
-                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                    const data = await response.json();
-                    const articles = normalizeArticles(data);
 
-                    if (articles.length > 0) {
-                        clearHomeArticleCards();
-                        articles
-                            .sort((a,b) => new Date(b.publish_date || b.created_at || 0) - new Date(a.publish_date || a.created_at || 0))
-                            .forEach(article => {
-                                const category = String(article.category || 'Esensial');
-                                const key = CATEGORY_KEYS[category] || CATEGORY_KEYS[category.toLowerCase()] || 'esensial';
-                                if (categoryContainers[key]) categoryContainers[key].insertAdjacentHTML('beforeend', renderBackendArticle(article));
-                            });
-                    } else {
-                        renderDummyFallback();
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                    const payload = await response.json();
+                    const source = Array.isArray(payload)
+                        ? payload
+                        : (Array.isArray(payload?.data) ? payload.data : (Array.isArray(payload?.articles) ? payload.articles : []));
+
+                    // Homepage hanya boleh menampilkan artikel yang benar-benar published dari Admin.
+                    const articles = source
+                        .filter(article => String(article?.status || '').trim().toLowerCase() === 'published')
+                        .sort((a, b) => new Date(b.publish_date || b.created_at || 0) - new Date(a.publish_date || a.created_at || 0));
+
+                    clearHomeArticleCards();
+
+                    if (!articles.length) {
+                        renderArticleEmptyState();
+                        return;
                     }
+
+                    const renderedCategories = new Set();
+
+                    articles.forEach(article => {
+                        const rawCategory = String(article.category || 'Esensial').trim();
+                        const key = CATEGORY_KEYS[rawCategory] || CATEGORY_KEYS[rawCategory.toLowerCase()] || 'esensial';
+                        const container = categoryContainers[key];
+
+                        if (container) {
+                            container.insertAdjacentHTML('beforeend', renderBackendArticle(article));
+                            renderedCategories.add(key);
+                        }
+                    });
+
+                    // Kategori tanpa artikel tetap memiliki keadaan kosong yang jelas.
+                    Object.entries(categoryContainers).forEach(([key, container]) => {
+                        if (!container) return;
+                        if (!renderedCategories.has(key)) {
+                            container.innerHTML = `
+                                <div class="w-full min-w-[280px] md:min-w-[320px] rounded-2xl border border-dashed border-slate-200 bg-white px-6 py-10 text-center">
+                                    <p class="font-opensans text-sm font-semibold text-slate-400">Belum ada artikel.</p>
+                                </div>`;
+                        }
+                    });
                 } catch (error) {
-                    console.warn('Artikel backend belum dapat dimuat:', error);
-                    renderDummyFallback();
+                    console.error('Gagal memuat artikel published:', error);
+                    clearHomeArticleCards();
+                    renderArticleEmptyState('Artikel belum dapat dimuat.');
                 }
             }
 
