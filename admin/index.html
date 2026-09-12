@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob: https:; connect-src 'self' https://found-selection-api.foundselection.workers.dev; font-src 'self' data: https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob: https:; connect-src 'self' https://found-selection-api.foundselection.workers.dev; font-src 'self' data: https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://open.spotify.com; upgrade-insecure-requests">
 <style>
 :root{--sidebar-width:220px;--wp:#1d2327;--blue:#2271b1;--blue2:#135e96;--border:#c3c4c7;--line:#dcdcde;--bg:#f0f0f1;--text:#1d2327;--muted:#646970;--green:#00a32a;--yellow:#dba617;--red:#d63638;--gold:#b99220;}
 *{box-sizing:border-box}html,body{margin:0;padding:0}body{background:var(--bg);color:var(--text);font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}.hidden{display:none!important}button,input,textarea,select{font:inherit}button{cursor:pointer}
@@ -122,15 +122,15 @@ body.sidebar-collapsed .main{margin-left:0}
 <main class="main"><div class="wrap">
 <section id="dashboard"><div class="titlebar"><div><h1 class="page-title">Dashboard</h1></div><button class="button primary" onclick="newPost()">Artikel Baru</button></div><div class="statgrid"><div class="stat"><small>Total artikel</small><strong id="sTotal">0</strong></div><div class="stat"><small>Terbit</small><strong id="sPub">0</strong></div><div class="stat"><small>Draft</small><strong id="sDraft">0</strong></div><div class="stat"><small>SEO lengkap</small><strong id="sSEO">0</strong></div></div><div class="grid2" style="margin-top:14px"><div class="panel"><div class="panel-head">Artikel Terbaru</div><div id="recent" class="recent"></div></div><div class="panel"><div class="panel-head">Kategori</div><div id="catStats" class="panel-body"></div></div></div></section>
 <section id="posts" class="hidden"><div class="titlebar"><div><h1 class="page-title">Artikel</h1><div class="subtitle">Kelola, edit, simpan, dan terbitkan artikel.</div></div><button class="button primary" onclick="newPost()">Artikel Baru</button></div><div class="searchbar"><input id="search" class="input" placeholder="Cari judul atau slug..." oninput="renderArtikel()"><select id="filter" class="input" style="max-width:180px" onchange="renderArtikel()"><option value="">Semua status</option><option value="published">Terbit</option><option value="draft">Draft</option></select></div><div class="panel" style="overflow:auto"><table class="table" style="min-width:850px"><thead><tr><th>Judul</th><th>Kategori</th><th>Status</th><th>SEO</th><th>Tanggal</th><th>Aksi</th></tr></thead><tbody id="postRows"></tbody></table><div id="noArtikel" class="hidden" style="padding:35px;text-align:center;color:var(--muted)">Tidak ada artikel.</div></div></section>
-<section id="editorView" class="hidden"><div class="titlebar"><div><h1 class="page-title"><button class="button" onclick="show('posts')" style="padding:4px 9px">‹</button> <span id="editorHeading">Artikel Baru</span></h1><div class="subtitle"><span id="saveState">Tersimpan</span></div></div><div class="publish-row"><button class="button" onclick="savePost('draft')">Simpan Draft</button><button class="button primary" onclick="savePost('published')">Terbitkan</button></div></div>
+<section id="editorView" class="hidden"><div class="titlebar"><div><h1 class="page-title"><button class="button" onclick="show('posts')" style="padding:4px 9px">‹</button> <span id="editorHeading">Artikel Baru</span></h1><div class="subtitle"><span id="saveState">Tersimpan</span></div></div><div class="publish-row"><button id="saveDraftBtn" class="button" onclick="savePost('draft')">Simpan Draft</button><button id="publishBtn" class="button primary" onclick="savePost('published')">Terbitkan</button></div></div>
 <div class="editor-layout"><div>
-<input id="title" class="input title-input" placeholder="Tambahkan judul artikel" oninput="titleInput()"><div class="permalink"><span>https://foundselection.com/artikel/</span><input id="slug" class="input" placeholder="slug-artikel" oninput="slugManual=true;markDirty();updateSlugPreview();analyze()"></div>
+<input id="title" class="input title-input" placeholder="Tambahkan judul artikel" oninput="titleInput()"><div class="permalink"><span>https://foundselection.blog/artikel/</span><input id="slug" class="input" placeholder="slug-artikel" oninput="slugManual=true;markDirty();updateSlugPreview();analyze()"></div>
 <div id="bodyEditor" class="editor-wrap"><div class="tabs"><button id="visualTab" class="tab active" title="Editor visual" onclick="setMode('visual')">Visual</button><button id="codeTab" class="tab" title="Edit HTML" onclick="setMode('code')">Kode</button></div><div class="toolbar" id="toolbar">
-<select id="blockFormat" class="tool select" aria-label="Format teks" onchange="formatBlock(this.value);this.value=''">
+<select id="blockFormat" class="tool select" aria-label="Format teks" onchange="formatBlock(this.value)">
 <option value="">Paragraf</option><option value="h2">Heading 2</option><option value="h3">Heading 3</option><option value="blockquote">Kutipan</option></select>
-<select id="fontSize" class="tool select" aria-label="Ukuran teks" onchange="setFontSize(this.value);this.value=''">
+<select id="fontSize" class="tool select" aria-label="Ukuran teks" onchange="setFontSize(this.value)">
 <option value="">Ukuran</option><option value="2">Kecil</option><option value="3">Normal</option><option value="4">Besar</option><option value="5">Sangat besar</option></select>
-<select id="fontFamily" class="tool select" aria-label="Jenis font" title="Jenis font" onchange="setFontFamily(this.value);this.value=''">
+<select id="fontFamily" class="tool select" aria-label="Jenis font" title="Jenis font" onchange="setFontFamily(this.value)">
 <option value="">Font</option><option value="Calibri">Calibri</option><option value="Lato">Lato</option><option value="Roboto">Roboto</option><option value="Open Sans">Open Sans</option><option value="Georgia">Georgia</option></select>
 <span class="divider"></span>
 <button type="button" class="tool" data-cmd="bold" title="Tebal (Ctrl/Cmd+B)" aria-label="Tebal" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('bold')"><b>B</b></button>
@@ -183,15 +183,64 @@ body.sidebar-collapsed .main{margin-left:0}
 <div class="panel" id="featuredPanel"><div class="panel-head">Featured Image</div><div class="panel-body">
 <div id="drop" class="image-drop"><div><div style="font-size:25px">＋</div><b>Pilih gambar utama</b><div class="hint">Klik atau tarik file ke sini</div></div></div>
 <input id="imageFile" type="file" accept="image/jpeg,image/png,image/webp,image/avif" class="hidden">
+<input id="bodyImageFile" type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif" class="hidden">
+
 <div id="selectedImage" class="image-selected hidden"><img id="imagePreview" alt="Preview gambar utama"><button class="image-change" type="button" onclick="document.getElementById('imageFile').click()">Ganti gambar</button></div>
 <div id="fileMeta" class="file-meta"></div>
 <div style="margin-top:11px"><label>Teks Alternatif (Alt Text) *</label><input id="altText" class="input" placeholder="Deskripsi gambar yang informatif"></div>
 <div style="margin-top:10px"><label>Nama file</label><div class="file-row"><input id="imageName" class="input" placeholder="nama-gambar"><select id="imageFormat" class="input" title="Format output"><option value="webp">WebP</option><option value="jpg">JPG</option><option value="jpeg">JPEG</option><option value="png">PNG</option><option value="avif">AVIF</option></select></div></div>
 <div style="margin-top:10px"><label>Judul gambar</label><input id="imageTitle" class="input" placeholder="Opsional"></div>
 </div></div>
-<div class="panel"><div class="panel-head">Pengaturan Artikel</div><div class="panel-body"><label>Waktu baca (menit)</label><input id="readTime" class="input" type="number" min="1" value="5"><div style="margin-top:12px"><label>Mesin pencari</label><div class="grid2"><select id="robotsIndex" class="input"><option>index</option><option>noindex</option></select><select id="robotsFollow" class="input"><option>follow</option><option>nofollow</option></select></div></div><div style="margin-top:12px"><label>URL utama</label><input id="canonical" class="input" placeholder="https://foundselection.com/artikel/..."></div><div style="margin-top:12px"><label>Jenis artikel</label><select id="schema" class="input"><option>Article</option><option>NewsArticle</option><option>BlogPosting</option></select></div></div></div>
+<div class="panel"><div class="panel-head">Pengaturan Artikel</div><div class="panel-body"><label>Waktu baca (menit)</label><input id="readTime" class="input" type="number" min="1" value="5"><div style="margin-top:12px"><label>Mesin pencari</label><div class="grid2"><select id="robotsIndex" class="input"><option>index</option><option>noindex</option></select><select id="robotsFollow" class="input"><option>follow</option><option>nofollow</option></select></div></div><div style="margin-top:12px"><label>URL utama</label><input id="canonical" class="input" placeholder="https://foundselection.blog/artikel/..."></div><div style="margin-top:12px"><label>Jenis artikel</label><select id="schema" class="input"><option>Article</option><option>NewsArticle</option><option>BlogPosting</option></select></div></div></div>
 <div class="panel"><div class="panel-head">Saat Dibagikan</div><div class="panel-body"><label>Judul saat dibagikan</label><input id="ogTitle" class="input" placeholder="Biasanya sama dengan judul artikel"><div style="margin-top:10px"><label>Deskripsi saat dibagikan</label><textarea id="ogDesc" class="input" rows="3" placeholder="Kalimat singkat yang menarik saat artikel dibagikan"></textarea></div><div style="margin-top:10px"><label>Gambar saat dibagikan</label><input id="ogImage" class="input" placeholder="Kosongkan jika memakai Featured Image"></div></div></div>
 </aside></div></section></div></main>
+
+<div id="imageMetaModal" class="modal">
+  <div class="modalbox" style="max-width:520px">
+    <h2 style="margin:0;font-size:18px">Edit Gambar Artikel</h2>
+    <p class="hint" style="margin-top:5px">Atur nama, alt text, judul, dan caption gambar di dalam artikel.</p>
+    <div style="margin-top:14px">
+      <label for="bodyImageName">Nama gambar</label>
+      <input id="bodyImageName" class="input" placeholder="nama-gambar.webp">
+    </div>
+    <div style="margin-top:10px">
+      <label for="bodyImageAlt">Alt text</label>
+      <input id="bodyImageAlt" class="input" placeholder="Deskripsi gambar yang informatif">
+    </div>
+    <div style="margin-top:10px">
+      <label for="bodyImageTitle">Judul gambar</label>
+      <input id="bodyImageTitle" class="input" placeholder="Opsional">
+    </div>
+    <div style="margin-top:10px">
+      <label for="bodyImageCaption">Caption</label>
+      <input id="bodyImageCaption" class="input" placeholder="Opsional">
+    </div>
+    <div style="margin-top:10px">
+      <label for="bodyImageLink">Tautan gambar (opsional)</label>
+      <input id="bodyImageLink" class="input" placeholder="https://...">
+    </div>
+    <div class="modal-actions">
+      <button class="button" type="button" onclick="closeImageMetaModal()">Batal</button>
+      <button class="button primary" type="button" onclick="applyImageMeta()">Simpan</button>
+    </div>
+  </div>
+</div>
+
+<div id="linkInspectorModal" class="modal">
+  <div class="modalbox" style="max-width:560px">
+    <h2 style="margin:0;font-size:18px">Tautan</h2>
+    <p class="hint" style="margin-top:5px">URL asli dari teks yang dipilih.</p>
+    <div style="margin-top:14px">
+      <label for="inspectedLinkUrl">URL</label>
+      <input id="inspectedLinkUrl" class="input" readonly>
+    </div>
+    <div class="modal-actions">
+      <button class="button" type="button" onclick="closeLinkInspector()">Tutup</button>
+      <button id="copyInspectedLink" class="button primary" type="button" onclick="copyInspectedLink()">Salin URL</button>
+    </div>
+  </div>
+</div>
+
 <div id="loginGate" class="modal" style="display:flex"><div class="modalbox" style="max-width:390px"><h2 style="margin:0;font-size:18px">Masuk Admin</h2><form id="loginForm" onsubmit="login(event)" style="margin-top:16px"><label for="loginPassword">Kata sandi</label><input id="loginPassword" class="input" type="password" autocomplete="current-password" required><div id="loginError" style="color:var(--red);font-size:11px;min-height:16px;margin-top:7px"></div><div class="modal-actions"><button class="button primary" type="submit" id="loginButton">Masuk</button></div></form></div></div><div id="toast" class="toast"></div><div id="modal" class="modal"><div class="modalbox"><h2 style="margin:0;font-size:18px">Hapus post?</h2><p id="modalText" style="color:var(--muted)"></p><div class="modal-actions"><button class="button" onclick="closeModal()">Batal</button><button class="button danger" onclick="confirmHapus()">Hapus</button></div></div></div>
 <script>
 const sideEl=document.getElementById('side');
@@ -227,7 +276,27 @@ function clearForm(){suppressDirty=true;['title','slug','focus','secondary','seo
 function titleInput(){if(!slugManual&&!editingSlug)$('slug').value=slugify($('title').value);updateSlugPreview();analyze()}
 function getCategory(){return document.querySelector('input[name="cat"]:checked')?.value||'Esensial'}
 function getBody(){return mode==='code'?$('code').value:$('body').innerHTML.trim()}
-function setMode(next){if(next===mode)return;if(next==='code'){$('code').value=$('body').innerHTML;mode='code'}else{$('body').innerHTML=$('code').value;mode='visual'}$('body').classList.toggle('hidden',mode!=='visual');$('code').classList.toggle('hidden',mode!=='code');$('toolbar').classList.toggle('hidden',mode!=='visual');$('visualTab').classList.toggle('active',mode==='visual');$('codeTab').classList.toggle('active',mode==='code');analyze()}
+function setMode(next){
+  if(next!== 'visual' && next!=='code') return;
+  if(next===mode){
+    updateToolbarState();
+    return;
+  }
+  if(next==='code'){
+    $('code').value=$('body').innerHTML;
+    mode='code';
+  }else{
+    $('body').innerHTML=$('code').value;
+    mode='visual';
+  }
+  $('body').classList.toggle('hidden',mode!=='visual');
+  $('code').classList.toggle('hidden',mode!=='code');
+  $('toolbar').classList.toggle('hidden',mode!=='visual');
+  $('visualTab').classList.toggle('active',mode==='visual');
+  $('codeTab').classList.toggle('active',mode==='code');
+  if(mode==='visual') updateToolbarState();
+  analyze();
+}
 function codeChanged(){if(mode==='code')analyze()}
 $('body').addEventListener('keyup',()=>{saveEditorSelection();updateToolbarState()});$('body').addEventListener('mouseup',()=>{saveEditorSelection();updateToolbarState()});document.addEventListener('selectionchange',()=>{if(document.activeElement===$('body')||isInsideEditor(window.getSelection()?.anchorNode))updateToolbarState()});
 function isInsideEditor(node){return !!node&&($('body').contains(node.nodeType===3?node.parentNode:node))}
@@ -253,34 +322,272 @@ function writerTool(kind){closePopovers();if(kind==='outline'){focusSelection();
 function updateToolbarState(){
   if(mode!=='visual')return;
   const cmds=['bold','italic','underline','insertUnorderedList','insertOrderedList','justifyLeft','justifyCenter','justifyRight'];
-  cmds.forEach(c=>{const b=document.querySelector(`[data-cmd="${c}"]`);if(!b)return;let on=false;try{on=document.queryCommandState(c)}catch(e){}b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false')});
-  let block='Paragraf',font='';
+  cmds.forEach(c=>{
+    const b=document.querySelector(`[data-cmd="${c}"]`);
+    if(!b)return;
+    let on=false;
+    try{on=document.queryCommandState(c)}catch(e){}
+    b.classList.toggle('active',on);
+    b.setAttribute('aria-pressed',on?'true':'false');
+  });
+
+  let blockKey='',blockLabel='Paragraf',font='',fontSizeValue='';
   const sel=getSelection();
   if(sel&&sel.rangeCount&&isInsideEditor(sel.anchorNode)){
     let n=sel.anchorNode.nodeType===3?sel.anchorNode.parentElement:sel.anchorNode;
-    while(n&&n!==$('body')){const t=n.tagName;if(t==='H2'){block='Heading 2';break}if(t==='H3'){block='Heading 3';break}if(t==='BLOCKQUOTE'){block='Kutipan';break}if(t==='P'){break}n=n.parentElement}
+    while(n&&n!==$('body')){
+      const t=n.tagName;
+      if(t==='H2'){blockKey='h2';blockLabel='Heading 2';break}
+      if(t==='H3'){blockKey='h3';blockLabel='Heading 3';break}
+      if(t==='BLOCKQUOTE'){blockKey='blockquote';blockLabel='Kutipan';break}
+      if(t==='P'){break}
+      n=n.parentElement;
+    }
     try{font=document.queryCommandValue('fontName')||''}catch(e){}
+    try{fontSizeValue=document.queryCommandValue('fontSize')||''}catch(e){}
   }
-  const bs=$('blockFormat');if(bs){bs.value=block==='Heading 2'?'h2':block==='Heading 3'?'h3':block==='Kutipan'?'blockquote':'';bs.classList.toggle('active',!!bs.value)}
+
+  const bs=$('blockFormat');
+  if(bs){
+    bs.value=blockKey;
+    bs.classList.toggle('active',!!blockKey);
+  }
+
+  const fs=$('fontSize');
+  if(fs){
+    fs.value=['1','2','3','4','5','6','7'].includes(String(fontSizeValue))?String(fontSizeValue):'';
+    fs.classList.toggle('active',!!fs.value);
+  }
+
+  const ff=$('fontFamily');
   const cleanFont=font.replace(/['"]/g,'').split(',')[0].trim();
+  if(ff){
+    const found=[...ff.options].find(o=>o.value.toLowerCase()===cleanFont.toLowerCase());
+    ff.value=found?found.value:'';
+    ff.classList.toggle('active',!!ff.value);
+  }
+
   const active=[...document.querySelectorAll('#toolbar .tool.active')].map(x=>x.getAttribute('title')).filter(Boolean);
   const txt=$('toolbarStatusText'),dot=$('toolbarStatus');
-  txt.textContent=`${block}${cleanFont?' · '+cleanFont:''}${active.length?' · '+active.join(' · '):' · Normal'}`;
-  dot.classList.toggle('on',block!=='Paragraf'||!!cleanFont||active.length>0);
+  txt.textContent=`${blockLabel}${cleanFont?' · '+cleanFont:''}${fs?.value?' · '+fs.options[fs.selectedIndex].text:''}${active.length?' · '+active.join(' · '):''}`;
+  dot.classList.toggle('on',blockLabel!=='Paragraf'||!!cleanFont||!!fs?.value||active.length>0);
 }
 
-function insertBodyImage(){saveEditorSelection();$('imageFile').click()}
+function insertBodyImage(){
+  if(mode!=='visual'){toast('Gunakan mode Visual untuk menyisipkan gambar.');return}
+  saveEditorSelection();
+  const input=$('bodyImageFile');
+  input.value='';
+  input.click();
+}
+function normalizeAssetFilename(name,format='webp'){
+  const base=String(name||'gambar').replace(/\.[^.]+$/,'')||'gambar';
+  return `${slugify(base)||'gambar'}.${format}`;
+}
+async function uploadBodyImageFile(file){
+  if(!(file instanceof File)||!file.type.startsWith('image/')){toast('File body harus berupa gambar.');return null}
+  const max=10*1024*1024;
+  if(file.size>max){toast('Ukuran gambar maksimal 10 MB.');return null}
+  const ext=(file.name.split('.').pop()||'webp').toLowerCase();
+  const requested=['jpg','jpeg','png','webp','avif','gif'].includes($('imageFormat').value)?$('imageFormat').value:(['jpg','jpeg','png','webp','avif','gif'].includes(ext)?ext:'webp');
+  const filename=normalizeAssetFilename(file.name,requested);
+  const fd=new FormData();
+  fd.append('file',file,filename);
+  fd.append('format',requested);
+  const r=await apiFetch(MEDIA_API,{method:'POST',body:fd});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok||!j.success)throw Error(j.error||'Upload gambar body gagal.');
+  return {url:j.url||j.data?.url||'',filename,format:requested};
+}
+function insertBodyImageElement(data){
+  if(!data?.url)return;
+  focusSelection();
+  const figure=document.createElement('figure');
+  figure.className='body-image-block';
+  figure.contentEditable='false';
+  figure.dataset.imageName=data.filename||'';
+  figure.dataset.imageTitle='';
+  figure.dataset.imageCaption='';
+  figure.dataset.imageLink='';
+  const img=document.createElement('img');
+  img.src=data.url;
+  img.alt=$('title').value.trim()||'Gambar artikel';
+  img.title='';
+  img.loading='lazy';
+  img.decoding='async';
+  figure.appendChild(img);
+  const caption=document.createElement('figcaption');
+  caption.className='image-caption';
+  caption.textContent='';
+  figure.appendChild(caption);
+  const sel=getSelection();
+  if(sel&&sel.rangeCount&&isInsideEditor(sel.anchorNode)){
+    const r=sel.getRangeAt(0);
+    r.deleteContents();
+    r.insertNode(figure);
+    r.setStartAfter(figure);
+    r.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(r);
+  }else{
+    $('body').appendChild(figure);
+    $('body').appendChild(document.createTextNode(''));
+  }
+  markDirty();analyze();
+  openImageMetaModal(figure);
+}
+function openImageMetaModal(figure){
+  window.__editingBodyImage=figure;
+  $('bodyImageName').value=figure.dataset.imageName||'';
+  $('bodyImageAlt').value=figure.querySelector('img')?.alt||'';
+  $('bodyImageTitle').value=figure.dataset.imageTitle||figure.querySelector('img')?.title||'';
+  $('bodyImageCaption').value=figure.dataset.imageCaption||figure.querySelector('figcaption')?.textContent||'';
+  $('bodyImageLink').value=figure.dataset.imageLink||figure.querySelector('a')?.href||'';
+  $('imageMetaModal').style.display='flex';
+  setTimeout(()=>$('bodyImageAlt').focus(),30);
+}
+function closeImageMetaModal(){window.__editingBodyImage=null;$('imageMetaModal').style.display='none'}
+function applyImageMeta(){
+  const figure=window.__editingBodyImage;
+  if(!figure){closeImageMetaModal();return}
+  const img=figure.querySelector('img');
+  const name=normalizeAssetFilename($('bodyImageName').value.trim()||figure.dataset.imageName||'gambar.webp',( $('imageFormat').value||'webp'));
+  const alt=$('bodyImageAlt').value.trim();
+  const title=$('bodyImageTitle').value.trim();
+  const caption=$('bodyImageCaption').value.trim();
+  const link=normalizeUrl($('bodyImageLink').value.trim());
+  if(img){
+    img.alt=alt;
+    img.title=title;
+  }
+  figure.dataset.imageName=name;
+  figure.dataset.imageTitle=title;
+  figure.dataset.imageCaption=caption;
+  figure.dataset.imageLink=link;
+  const cap=figure.querySelector('figcaption');
+  if(cap)cap.textContent=caption;
+  figure.querySelectorAll('a.image-link-wrap').forEach(a=>a.replaceWith(...a.childNodes));
+  if(link){
+    const wrap=document.createElement('a');
+    wrap.className='image-link-wrap';
+    wrap.href=link;
+    wrap.target='_blank';
+    wrap.rel='noopener noreferrer';
+    wrap.appendChild(img.cloneNode(true));
+    img.replaceWith(wrap);
+  }
+  markDirty();analyze();closeImageMetaModal();toast('Metadata gambar diperbarui.');
+}
+function openLinkInspector(anchor){
+  if(!anchor?.href)return;
+  window.__inspectedLink=anchor.href;
+  $('inspectedLinkUrl').value=anchor.href;
+  $('linkInspectorModal').style.display='flex';
+}
+function closeLinkInspector(){window.__inspectedLink='';$('linkInspectorModal').style.display='none'}
+async function copyInspectedLink(){
+  const u=$('inspectedLinkUrl').value;
+  if(!u)return;
+  try{
+    await navigator.clipboard.writeText(u);
+    $('copyInspectedLink').textContent='Tersalin';
+    setTimeout(()=>{$('copyInspectedLink').textContent='Salin URL'},1200);
+  }catch{
+    $('inspectedLinkUrl').select();
+    document.execCommand('copy');
+    toast('URL disalin.');
+  }
+}
 function jump(id){show('editor');setTimeout(()=>$(`${id}`).scrollIntoView({behavior:'smooth',block:'start'}),80)}
 function statusChanged(){markDirty();analyze()}
-function fill(a){editingSlug=a.slug||null;slugManual=true;$('title').value=a.title||'';$('slug').value=a.slug||'';$('focus').value=a.focus_keyword||'';$('secondary').value=a.secondary_keywords||'';$('seoTitle').value=a.seo_title||'';$('metaDesc').value=a.meta_description||'';$('excerpt').value=a.excerpt||'';$('body').innerHTML=a.content||'';document.querySelectorAll('input[name="cat"]').forEach(x=>x.checked=x.value===a.category);$('publishDate').value=a.publish_date||new Date().toISOString().slice(0,10);$('readTime').value=a.read_time||5;$('robotsIndex').value=a.robots_index||'index';$('robotsFollow').value=a.robots_follow||'follow';$('schema').value=a.schema_type||'Article';$('canonical').value=a.canonical_url||'';$('ogTitle').value=a.og_title||'';$('ogDesc').value=a.og_description||'';$('ogImage').value=a.og_image||'';$('altText').value=a.image_alt||'';$('imageName').value=a.image_name||'';$('imageTitle').value=a.image_title||'';$('pubStatus').textContent=a.status==='published'?'Terbit':'Draft';storedImageUrl=a.thumbnail||'';if(storedImageUrl){$('imagePreview').src=storedImageUrl;$('drop').classList.add('hidden');$('selectedImage').classList.remove('hidden');$('fileMeta').textContent='Featured image tersimpan.'}$('editorHeading').textContent='Edit Artikel';show('editor');analyze();markSaved()}
+function fill(a){
+  editingSlug=a.slug||null;
+  slugManual=true;
+  $('title').value=a.title||'';
+  $('slug').value=a.slug||'';
+  $('focus').value=a.focus_keyword||'';
+  $('secondary').value=a.secondary_keywords||'';
+  $('seoTitle').value=a.seo_title||'';
+  $('metaDesc').value=a.meta_description||'';
+  $('excerpt').value=a.excerpt||'';
+  $('body').innerHTML=a.content||'';
+  document.querySelectorAll('input[name="cat"]').forEach(x=>x.checked=x.value===a.category);
+  $('publishDate').value=a.publish_date||new Date().toISOString().slice(0,10);
+  $('readTime').value=a.read_time||5;
+  $('robotsIndex').value=a.robots_index||'index';
+  $('robotsFollow').value=a.robots_follow||'follow';
+  $('schema').value=a.schema_type||'Article';
+  $('canonical').value=a.canonical_url||'';
+  $('ogTitle').value=a.og_title||'';
+  $('ogDesc').value=a.og_description||'';
+  $('ogImage').value=a.og_image||'';
+  $('altText').value=a.image_alt||'';
+  const inferredName=a.image_name||((a.thumbnail||'').split('/').pop()||'').split('?')[0];
+  $('imageName').value=inferredName;
+  $('imageTitle').value=a.image_title||'';
+  $('pubStatus').value=a.status==='published'?'published':'draft';
+  storedImageUrl=a.thumbnail||'';
+  pendingImage=null;
+  $('imagePreview').removeAttribute('src');
+  $('drop').classList.remove('hidden');
+  $('selectedImage').classList.add('hidden');
+  $('fileMeta').textContent='';
+  if(storedImageUrl){
+    $('imagePreview').src=storedImageUrl;
+    $('drop').classList.add('hidden');
+    $('selectedImage').classList.remove('hidden');
+    $('fileMeta').textContent='Featured image tersimpan.';
+  }
+  $('editorHeading').textContent='Edit Artikel';
+  show('editor');
+  analyze();
+  markSaved();
+  updateToolbarState();
+}
 async function apiFetch(url,options={}){const opts={...options,credentials:'include',headers:{Accept:'application/json',...(options.headers||{})}};const r=await fetch(url,opts);if(r.status===401){showLogin();throw Error('Sesi admin diperlukan.')}return r}
 function showLogin(){$('loginGate').style.display='flex';setTimeout(()=>$('loginPassword').focus(),40)}
 function hideLogin(){$('loginGate').style.display='none';$('loginError').textContent='';$('loginPassword').value=''}
 async function login(e){e.preventDefault();const btn=$('loginButton');btn.disabled=true;$('loginError').textContent='';try{const r=await fetch(AUTH_API+'/login',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({password:$('loginPassword').value})});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||'Kata sandi salah.');hideLogin();await load()}catch(err){$('loginError').textContent=err.message||'Gagal masuk.'}finally{btn.disabled=false}}
 async function editPost(slug){const a=posts.find(x=>x.slug===slug);if(a){fill(a);return}try{const r=await apiFetch(API+'/'+encodeURIComponent(slug));const j=await r.json();if(!j.success)throw Error(j.error||'Artikel tidak ditemukan');fill(j.data)}catch(e){toast(e.message)}}
 function buildPayload(status){const body=getBody();status=status==='published'?'published':'draft';return{title:$('title').value.trim(),slug:$('slug').value.trim()||slugify($('title').value),category:getCategory(),excerpt:$('excerpt').value.trim(),content:body,publish_date:$('publishDate').value,read_time:Math.max(1,Number($('readTime').value)||5),status,thumbnail:storedImageUrl||'',image_alt:$('altText').value.trim(),image_name:$('imageName').value.trim(),image_title:$('imageTitle').value.trim(),seo_title:$('seoTitle').value.trim(),meta_description:$('metaDesc').value.trim(),focus_keyword:$('focus').value.trim(),secondary_keywords:$('secondary').value.trim(),canonical_url:$('canonical').value.trim(),og_title:$('ogTitle').value.trim(),og_description:$('ogDesc').value.trim(),og_image:$('ogImage').value.trim(),robots_index:$('robotsIndex').value,robots_follow:$('robotsFollow').value,schema_type:$('schema').value}}
-async function uploadMedia(){if(!pendingImage)return storedImageUrl;let filename=$('imageName').value.trim()||pendingImage.filename||'featured-image.webp';const ext=$('imageFormat').value||filename.split('.').pop()||'webp';filename=filename.replace(/\.[^.]+$/,'')+'.'+ext;const fd=new FormData();fd.append('file',pendingImage.blob,filename);fd.append('alt_text',$('altText').value.trim());fd.append('title',$('imageTitle').value.trim());const r=await apiFetch(MEDIA_API,{method:'POST',body:fd});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||'Endpoint upload gambar belum tersedia di Worker.');storedImageUrl=j.url||j.data?.url||'';if(!storedImageUrl)throw Error('Worker tidak mengembalikan URL gambar.');pendingImage=null;return storedImageUrl}
-async function savePost(status,background=false){const title=$('title').value.trim(),slug=$('slug').value.trim()||slugify(title),body=getBody();if(!title||!slug||!textOf(body).trim()||!$('publishDate').value){if(!background)toast('Lengkapi judul, slug, isi artikel, dan tanggal.');return}try{if(pendingImage) await uploadMedia(); const p=buildPayload(status);const url=editingSlug?API+'/'+encodeURIComponent(editingSlug):API;const r=await apiFetch(url,{method:editingSlug?'PUT':'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||(j.details||[]).join(', ')||'Gagal menyimpan artikel.');editingSlug=p.slug;markSaved();if(!background)toast(status==='published'?'Artikel berhasil dipublikasikan.':'Draft berhasil disimpan.');await load();if(!background)show('posts')}catch(e){console.error(e);toast(e.message)}}
+async function uploadMedia(){if(!pendingImage)return storedImageUrl;let filename=$('imageName').value.trim()||pendingImage.filename||'featured-image.webp';const ext=$('imageFormat').value||filename.split('.').pop()||'webp';filename=filename.replace(/\.[^.]+$/,'')+'.'+ext;const fd=new FormData();fd.append('file',pendingImage.blob,filename);fd.append('format',ext);fd.append('alt_text',$('altText').value.trim());fd.append('title',$('imageTitle').value.trim());const r=await apiFetch(MEDIA_API,{method:'POST',body:fd});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||'Endpoint upload gambar belum tersedia di Worker.');storedImageUrl=j.url||j.data?.url||'';if(!storedImageUrl)throw Error('Worker tidak mengembalikan URL gambar.');pendingImage=null;return storedImageUrl}
+async function savePost(status,background=false){
+  const title=$('title').value.trim();
+  const slug=$('slug').value.trim()||slugify(title);
+  const body=getBody();
+  if(!title||!slug||!textOf(body).trim()||!$('publishDate').value){
+    if(!background)toast('Lengkapi judul, slug, isi artikel, dan tanggal.');
+    return false;
+  }
+  const draftBtn=$('saveDraftBtn'),pubBtn=$('publishBtn');
+  if(saving)return false;
+  saving=true;
+  if(!background){
+    draftBtn.disabled=true;pubBtn.disabled=true;
+  }
+  try{
+    if(pendingImage) await uploadMedia();
+    const p=buildPayload(status);
+    const url=editingSlug?API+'/'+encodeURIComponent(editingSlug):API;
+    const r=await apiFetch(url,{method:editingSlug?'PUT':'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok||!j.success)throw Error(j.error||(j.details||[]).join(', ')||'Gagal menyimpan artikel.');
+    editingSlug=p.slug;
+    $('pubStatus').value=status;
+    markSaved();
+    if(!background)toast(status==='published'?'Artikel berhasil dipublikasikan.':'Draft berhasil disimpan.');
+    await load();
+    if(!background)show('posts');
+    return true;
+  }catch(e){
+    console.error(e);
+    if(!background)toast(e.message);
+    return false;
+  }finally{
+    saving=false;
+    if(!background){draftBtn.disabled=false;pubBtn.disabled=false}
+  }
+}
 function seoChecks(p){const k=p.focus_keyword.toLowerCase().trim(),t=p.title.toLowerCase(),s=p.slug.toLowerCase(),c=textOf(p.content).toLowerCase(),st=p.seo_title.toLowerCase(),m=p.meta_description.toLowerCase(),w=words(c);return[[!!p.title,'Judul artikel terisi'],[!!k,'Kata kunci utama ditentukan'],[!!p.seo_title,'Judul SEO tersedia'],[p.seo_title.length>=40&&p.seo_title.length<=60,'Panjang judul SEO ideal'],[!!p.meta_description,'Deskripsi SEO tersedia'],[p.meta_description.length>=120&&p.meta_description.length<=160,'Panjang deskripsi SEO ideal'],[!!k&&t.includes(k),'Kata kunci ada di judul'],[!!k&&s.includes(slugify(k)),'Kata kunci ada di slug'],[!!k&&c.slice(0,600).includes(k),'Kata kunci ada di pembuka'],[!!k&&st.includes(k),'Kata kunci ada di judul SEO'],[!!k&&m.includes(k),'Kata kunci ada di deskripsi SEO'],[w>=600,'Isi artikel minimal 600 kata'],[!!p.canonical_url,'URL utama tersedia'] ]}
 function analyze(){updateSlugPreview();const p=buildPayload($('pubStatus').value),checks=seoChecks(p),score=Math.round(checks.filter(x=>x[0]).length/checks.length*100),txt=textOf(p.content),w=words(txt);$('wordCount').textContent=w+' kata';$('charCount').textContent=txt.length+' karakter';$('readTimeLive').textContent='Waktu baca: '+Math.max(1,Math.ceil(w/200))+' menit';$('gSlug').textContent=p.slug||'slug-artikel';$('gTitle').textContent=p.seo_title||p.title||'Judul SEO artikel';$('gDesc').textContent=p.meta_description||p.excerpt||'Meta description akan tampil di sini.';$('seoTitleCount').textContent=p.seo_title.length+'/70';$('metaCount').textContent=p.meta_description.length+'/170';$('seoScore').textContent=score+'/100';$('seoFill').style.width=score+'%';$('seoBadge').textContent=score>=80?'Baik':score>=55?'Perlu diperbaiki':'Perlu dilengkapi';$('seoBadge').className='badge '+(score>=80?'b-green':score>=55?'b-yellow':'b-red');$('seoChecks').innerHTML=checks.map(x=>`<div class="check"><span class="${x[0]?'ok':'no'}">${x[0]?'✓':'○'}</span> ${esc(x[1])}</div>`).join('');const sent=txt.split(/[.!?]+/).map(words).filter(Boolean),avg=sent.length?sent.reduce((a,b)=>a+b,0)/sent.length:0,paras=txt.split(/\n\s*\n/).filter(Boolean),rd=[[w>=300,'Konten cukup panjang'],[avg>0&&avg<=22,'Kalimat rata-rata ≤22 kata'],[paras.every(x=>words(x)<=100),'Paragraf tidak terlalu padat'],[/<h2|<h3/i.test(p.content),'Subheading tersedia'],[/<a\s/i.test(p.content),'Ada link dalam artikel']];const rs=Math.round(rd.filter(x=>x[0]).length/rd.length*100);$('readBadge').textContent=rs+'/100';$('readBadge').className='badge '+(rs>=80?'b-green':rs>=60?'b-yellow':'b-red');$('readChecks').innerHTML=rd.map(x=>`<div class="check"><span class="${x[0]?'ok':'no'}">${x[0]?'✓':'○'}</span> ${x[1]}</div>`).join('')}
 async function load(){try{const r=await apiFetch(API);const j=await r.json();if(!r.ok||!j.success)throw Error(j.error||'API error');posts=j.data||[];dashboard();renderArtikel()}catch(e){if(e.message!=='Sesi admin diperlukan.')toast('API tidak dapat dimuat: '+e.message)}}
@@ -310,6 +617,34 @@ async function processImage(file){
   }catch(e){toast('Gagal memproses gambar.')}
 }
 $('drop').addEventListener('click',()=>$('imageFile').click());$('imageFile').addEventListener('change',e=>{if(e.target.files[0])processImage(e.target.files[0])});$('drop').addEventListener('dragover',e=>{e.preventDefault();$('drop').classList.add('drag')});$('drop').addEventListener('dragleave',()=>$('drop').classList.remove('drag'));$('drop').addEventListener('drop',e=>{e.preventDefault();$('drop').classList.remove('drag');if(e.dataTransfer.files[0])processImage(e.dataTransfer.files[0])});
+
+$('bodyImageFile').addEventListener('change',async e=>{
+  const file=e.target.files?.[0];
+  e.target.value='';
+  if(!file)return;
+  try{
+    toast('Mengunggah gambar body…');
+    const data=await uploadBodyImageFile(file);
+    insertBodyImageElement(data);
+    toast('Gambar body berhasil disisipkan.');
+  }catch(err){
+    console.error(err);
+    toast(err.message||'Upload gambar body gagal.');
+  }
+});
+$('body').addEventListener('click',e=>{
+  const figure=e.target.closest?.('.body-image-block');
+  if(figure&&$('body').contains(figure)){
+    e.preventDefault();
+    openImageMetaModal(figure);
+    return;
+  }
+  const anchor=e.target.closest?.('a[href]');
+  if(anchor&&$('body').contains(anchor)&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&!e.altKey){
+    e.preventDefault();
+    openLinkInspector(anchor);
+  }
+});
 $('imageFormat').addEventListener('change',async()=>{
   if(!pendingImage)return;
   const fileName=$('imageName').value.trim()||'featured-image';
@@ -326,12 +661,15 @@ $('imageFormat').addEventListener('change',async()=>{
 ['focus','secondary','seoTitle','metaDesc','excerpt','altText','imageName','imageTitle','canonical','ogTitle','ogDesc','ogImage','readTime','robotsIndex','robotsFollow','schema','publishDate'].forEach(id=>{const el=$(id);if(el){el.addEventListener('input',markDirty);el.addEventListener('change',markDirty)}});
 $('body').addEventListener('input',markDirty);
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
-document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();savePost('draft')}if(e.key==='Escape'){closeModal();closePopovers()}});
-newPost();updateToolbarState();(async()=>{try{const r=await fetch(AUTH_API+'/me',{credentials:'include',headers:{Accept:'application/json'}});const j=await r.json();if(j.authenticated){hideLogin();await load()}else showLogin()}catch(e){showLogin()}})();
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();savePost('draft')}if(e.key==='Escape'){closeModal();closePopovers();closeImageMetaModal();closeLinkInspector()}});
+newPost();$('body').addEventListener('focus',updateToolbarState);updateToolbarState();(async()=>{try{const r=await fetch(AUTH_API+'/me',{credentials:'include',headers:{Accept:'application/json'}});const j=await r.json();if(j.authenticated){hideLogin();await load()}else showLogin()}catch(e){showLogin()}})();
 
 document.addEventListener('visibilitychange',()=>{
-  if(document.visibilityState==='hidden'&&dirty&&!saving&&$('editorView')&&!$('editorView').classList.contains('hidden')){
-    savePost('draft',true);
+  if(document.visibilityState==='hidden'&&!saving&&$('editorView')&&!$('editorView').classList.contains('hidden')){
+    const currentStatus=$('pubStatus').value;
+    if(dirty||currentStatus==='published'){
+      savePost('draft',true);
+    }
   }
 });
 
