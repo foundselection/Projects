@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob: https:; connect-src 'self' https://found-selection-api.foundselection.workers.dev https://api.cloudinary.com; font-src 'self' data: https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: blob: https:; connect-src 'self' https://found-selection-api.foundselection.workers.dev; font-src 'self' data: https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; upgrade-insecure-requests">
 <style>
 :root{--sidebar-width:220px;--wp:#1d2327;--blue:#2271b1;--blue2:#135e96;--border:#c3c4c7;--line:#dcdcde;--bg:#f0f0f1;--text:#1d2327;--muted:#646970;--green:#00a32a;--yellow:#dba617;--red:#d63638;--gold:#b99220;}
 *{box-sizing:border-box}html,body{margin:0;padding:0}body{background:var(--bg);color:var(--text);font:13px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}.hidden{display:none!important}button,input,textarea,select{font:inherit}button{cursor:pointer}
@@ -28,15 +28,101 @@
 .save-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#8c8f94;margin-right:5px;vertical-align:middle}.save-dot.changed{background:#dba617}.save-dot.saved{background:#00a32a}.toast{position:fixed;right:20px;bottom:20px;background:var(--wp);color:#fff;padding:11px 14px;border-radius:3px;z-index:200;display:none;max-width:380px;box-shadow:0 4px 20px #0004}.modal{position:fixed;inset:0;background:#0008;z-index:190;display:none;align-items:center;justify-content:center;padding:20px}.modalbox{width:100%;max-width:430px;background:#fff;padding:20px;border-radius:4px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
 @media(max-width:1100px){.editor-layout{grid-template-columns:1fr}.sticky{position:static}.checks{grid-template-columns:1fr 1fr}}
 @media(max-width:780px){.side{width:220px;transform:translateX(-100%);transition:.2s}.side.open{transform:none}.main{margin-left:0;padding:61px 12px 35px}.top-title{display:none}.titlebar{align-items:flex-start}.grid2,.grid3,.statgrid{grid-template-columns:1fr}.checks{grid-template-columns:1fr}.body{min-height:430px;padding:14px}.toolbar{gap:0}.tool{min-width:29px}.editor-layout{gap:12px}}
+
+/* Found Selection Admin UI — v1 polish */
+:root{
+  --sidebar-width:248px;--wp:#15181d;--blue:#2563eb;--blue2:#1d4ed8;
+  --border:#d9dee5;--line:#e8ebef;--bg:#f5f7fa;--text:#171a1f;--muted:#6b7280;
+  --green:#16a34a;--yellow:#d18a00;--red:#dc2626;--gold:#b99220;
+}
+body{background:var(--bg);font-size:13px}
+.top{height:54px;padding:0 18px;background:#111418;border-bottom:1px solid #252a31}
+.brand{font-weight:700;letter-spacing:-.02em}.hamb{width:36px;height:36px;border-radius:9px}
+.side{top:54px;background:#15181d;border-right:1px solid #252a31}
+.main{padding:78px 28px 48px;transition:margin-left .22s ease}
+body.sidebar-collapsed .main{margin-left:0}
+.wrap{max-width:1600px}
+.page-title{font-weight:700;letter-spacing:-.025em}
+.subtitle{display:none}
+.button{min-height:36px;border-radius:9px;border-color:#d6dbe2;transition:.16s ease}
+.button:hover{transform:translateY(-1px)}
+.panel{border-radius:12px;border-color:#e1e5ea;box-shadow:0 8px 28px rgba(15,23,42,.055)}
+.panel-head{min-height:46px}
+.input{border-radius:9px;border-color:#d4dae1}
+.editor-layout{grid-template-columns:minmax(0,1fr) 350px;gap:18px}
+.editor-wrap{border-radius:12px;box-shadow:0 8px 28px rgba(15,23,42,.055)}
+.tabs{height:43px}
+.tab{height:43px}
+.toolbar{gap:3px;padding:7px;position:relative}
+.tool{height:32px;min-width:32px;border-radius:7px}
+.tool:hover{background:#f1f4f8}
+.tool.active,.tool[aria-pressed="true"],.tool.select.active{
+  color:var(--blue);background:#eff6ff;border-color:#bfdbfe;box-shadow:inset 0 -2px 0 var(--blue)
+}
+.tool.select{border:1px solid #e1e5ea;background:#fff}
+.toolbar-status{min-height:27px;padding:0 8px;border-radius:7px}
+.toolbar-status.on{background:#eff6ff;color:var(--blue)}
+.body{
+  min-height:0;height:560px;overflow:auto;padding:24px 30px;
+  background-color:#fff;
+  background-image:linear-gradient(to bottom,transparent 35px,rgba(148,163,184,.16) 36px);
+  background-size:100% 36px;
+}
+.body:focus{box-shadow:inset 0 0 0 2px rgba(37,99,235,.08)}
+.statusbar{min-height:40px}
+.statusbar .count-chip{
+  display:inline-flex;align-items:center;padding:4px 8px;margin-right:5px;border:1px solid #e1e5ea;
+  border-radius:7px;background:#fff
+}
+.seo-head{gap:8px}
+.badge{border-radius:999px}
+.progress{height:7px}
+.image-drop{min-height:170px;border-radius:10px;background:#fafbfc}
+.image-selected{position:relative;border-radius:10px;overflow:hidden;background:#111}
+.image-selected img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.image-selected .image-change{
+  position:absolute;right:8px;top:8px;background:rgba(17,20,24,.82);color:#fff;border:0;border-radius:8px;
+  padding:7px 9px;font-size:10px;font-weight:700
+}
+.file-row{display:grid;grid-template-columns:minmax(0,1fr) 105px;gap:8px}
+.link-popover,.embed-popover{
+  position:absolute;z-index:50;top:49px;width:min(460px,calc(100vw - 28px));padding:13px;background:#fff;
+  border:1px solid #e1e5ea;border-radius:12px;box-shadow:0 18px 50px rgba(15,23,42,.16)
+}
+.link-popover{left:205px}.embed-popover{right:8px}
+.pop-row{display:flex;gap:7px}.pop-row .input{min-width:0}
+.embed-mini{margin-top:10px;border:1px solid #e1e5ea;border-radius:9px;overflow:hidden;background:#f8fafc}
+.embed-mini iframe{width:100%;height:190px;border:0;display:block;background:#111}
+.embed-mini .generic{padding:12px;font-size:11px;color:var(--muted);word-break:break-all}
+.extra-menu{
+  position:absolute;right:0;top:39px;z-index:50;width:215px;background:#fff;border:1px solid #e1e5ea;
+  border-radius:10px;box-shadow:0 16px 40px rgba(15,23,42,.15);padding:5px
+}
+.extra-menu button{display:block;width:100%;padding:9px;border:0;border-radius:7px;background:#fff;text-align:left;font-size:11px}
+.extra-menu button:hover{background:#f1f4f8}
+.body .embed-card{margin:18px 0;border:1px solid #dfe4ea;border-radius:12px;background:#f8fafc;overflow:hidden}
+.body .embed-card .embed-label{padding:8px 12px;border-bottom:1px solid #e5e9ee;font:600 10px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#68717c}
+.body .embed-card iframe{display:block;width:100%;height:360px;border:0;background:#111}
+.body .embed-card .embed-link{display:block;padding:16px;color:var(--blue);text-decoration:none;font:600 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+@media(max-width:1100px){.editor-layout{grid-template-columns:1fr}.sticky{position:static}}
+@media(max-width:780px){
+  .main{padding:68px 12px 35px}.body{height:460px;padding:20px 17px}
+  .link-popover{left:8px}.embed-popover{right:8px}.toolbar-status{width:100%;margin-left:0;justify-content:flex-start}
+}
+
+
+.status-control{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border:1px solid #e1e5ea;background:#f8f9fb;border-radius:9px}
+.status-select{border:0;background:transparent;color:var(--blue);font-weight:700;outline:0;cursor:pointer}
+
 </style>
 </head>
 <body>
-<header class="top"><div><button id="hambBtn" class="hamb" type="button" onclick="toggleSide()" aria-label="Sembunyikan sidebar" aria-expanded="true" title="Sembunyikan sidebar">☰</button><span class="brand">Found Selection</span><span class="top-title"> &nbsp; / Admin</span><span class="security-chip" title="Halaman admin: noindex + noarchive + CSP. Akses akun tetap harus diamankan di Cloudflare.">● Privat</span></div><a href="/">Lihat Situs ↗</a></header>
+<header class="top"><div><button id="hambBtn" class="hamb" type="button" onclick="toggleSide()" aria-label="Sembunyikan sidebar" aria-expanded="true" title="Sembunyikan sidebar">☰</button><span class="brand">Admin Found Selection</span></div><a href="/">Lihat Situs ↗</a></header>
 <aside id="side" class="side"><div id="sideResizer" class="side-resizer" aria-label="Geser untuk mengubah lebar sidebar" title="Geser untuk mengubah lebar sidebar"></div><div class="side-title">Utama</div><button class="nav active" data-view="dashboard" onclick="show('dashboard')">▦ &nbsp; Dashboard</button><div class="side-title">Konten</div><button class="nav" data-view="posts" onclick="show('posts')">☷ &nbsp; Artikel</button><button class="nav" data-view="editor" onclick="newPost()">＋ &nbsp; Artikel Baru</button><div class="side-title">Artikel Saat Ini</div><button class="nav" onclick="jump('bodyEditor')">✎ &nbsp; Isi Artikel</button><button class="nav" onclick="jump('seoPanel')">⌕ &nbsp; SEO</button><button class="nav" onclick="jump('featuredPanel')">▧ &nbsp; Gambar Utama</button></aside>
 <main class="main"><div class="wrap">
-<section id="dashboard"><div class="titlebar"><div><h1 class="page-title">Dashboard</h1><div class="subtitle">Ringkasan singkat untuk mengelola artikel.</div></div><button class="button primary" onclick="newPost()">Artikel Baru</button></div><div class="statgrid"><div class="stat"><small>Total artikel</small><strong id="sTotal">0</strong></div><div class="stat"><small>Terbit</small><strong id="sPub">0</strong></div><div class="stat"><small>Draft</small><strong id="sDraft">0</strong></div><div class="stat"><small>SEO lengkap</small><strong id="sSEO">0</strong></div></div><div class="panel" style="margin-top:14px"><div class="panel-head">Akses Cepat</div><div class="panel-body" style="display:flex;gap:8px;flex-wrap:wrap"><button class="button primary" onclick="newPost()">＋ Tulis Artikel</button><button class="button" onclick="show('posts')">☷ Lihat Semua Artikel</button></div></div><div class="grid2" style="margin-top:14px"><div class="panel"><div class="panel-head">Artikel Terbaru</div><div id="recent" class="recent"></div></div><div class="panel"><div class="panel-head">Kategori</div><div id="catStats" class="panel-body"></div></div></div></section>
+<section id="dashboard"><div class="titlebar"><div><h1 class="page-title">Dashboard</h1></div><button class="button primary" onclick="newPost()">Artikel Baru</button></div><div class="statgrid"><div class="stat"><small>Total artikel</small><strong id="sTotal">0</strong></div><div class="stat"><small>Terbit</small><strong id="sPub">0</strong></div><div class="stat"><small>Draft</small><strong id="sDraft">0</strong></div><div class="stat"><small>SEO lengkap</small><strong id="sSEO">0</strong></div></div><div class="grid2" style="margin-top:14px"><div class="panel"><div class="panel-head">Artikel Terbaru</div><div id="recent" class="recent"></div></div><div class="panel"><div class="panel-head">Kategori</div><div id="catStats" class="panel-body"></div></div></div></section>
 <section id="posts" class="hidden"><div class="titlebar"><div><h1 class="page-title">Artikel</h1><div class="subtitle">Kelola, edit, simpan, dan terbitkan artikel.</div></div><button class="button primary" onclick="newPost()">Artikel Baru</button></div><div class="searchbar"><input id="search" class="input" placeholder="Cari judul atau slug..." oninput="renderArtikel()"><select id="filter" class="input" style="max-width:180px" onchange="renderArtikel()"><option value="">Semua status</option><option value="published">Terbit</option><option value="draft">Draft</option></select></div><div class="panel" style="overflow:auto"><table class="table" style="min-width:850px"><thead><tr><th>Judul</th><th>Kategori</th><th>Status</th><th>SEO</th><th>Tanggal</th><th>Aksi</th></tr></thead><tbody id="postRows"></tbody></table><div id="noArtikel" class="hidden" style="padding:35px;text-align:center;color:var(--muted)">Tidak ada artikel.</div></div></section>
-<section id="editorView" class="hidden"><div class="titlebar"><div><h1 class="page-title"><button class="button" onclick="show('posts')" style="padding:4px 9px">‹</button> <span id="editorHeading">Artikel Baru</span></h1><div class="subtitle"><span id="saveState">Belum ada perubahan</span> · Editor artikel untuk menulis, memformat, mengoptimalkan SEO, dan menerbitkan.</div></div><div class="publish-row"><button class="button" onclick="savePost('draft')">Simpan Draft</button><button class="button primary" onclick="savePost('published')">Terbitkan</button></div></div>
+<section id="editorView" class="hidden"><div class="titlebar"><div><h1 class="page-title"><button class="button" onclick="show('posts')" style="padding:4px 9px">‹</button> <span id="editorHeading">Artikel Baru</span></h1><div class="subtitle"><span id="saveState">Tersimpan</span></div></div><div class="publish-row"><button class="button" onclick="savePost('draft')">Simpan Draft</button><button class="button primary" onclick="savePost('published')">Terbitkan</button></div></div>
 <div class="editor-layout"><div>
 <input id="title" class="input title-input" placeholder="Tambahkan judul artikel" oninput="titleInput()"><div class="permalink"><span>https://foundselection.com/artikel/</span><input id="slug" class="input" placeholder="slug-artikel" oninput="slugManual=true;markDirty();updateSlugPreview();analyze()"></div>
 <div id="bodyEditor" class="editor-wrap"><div class="tabs"><button id="visualTab" class="tab active" title="Editor visual" onclick="setMode('visual')">Visual</button><button id="codeTab" class="tab" title="Edit HTML" onclick="setMode('code')">Kode</button></div><div class="toolbar" id="toolbar">
@@ -61,19 +147,48 @@
 <span class="divider"></span>
 <button type="button" class="tool" title="Urungkan" aria-label="Urungkan" onmousedown="keepEditorSelection(event)" onclick="exec('undo')">↶</button>
 <button type="button" class="tool" title="Ulangi" aria-label="Ulangi" onmousedown="keepEditorSelection(event)" onclick="exec('redo')">↷</button>
-<button type="button" class="tool" title="Sisipkan tautan" aria-label="Sisipkan tautan" onmousedown="keepEditorSelection(event)" onclick="addLink()">🔗</button>
-<button type="button" class="tool" title="Sisipkan gambar" aria-label="Sisipkan gambar" onclick="insertBodyImage()">▧</button>
+<button type="button" class="tool" title="Sisipkan tautan" aria-label="Sisipkan tautan" onclick="openLinkPopover()">🔗</button>
+<button type="button" class="tool" title="Sisipkan gambar dari perangkat" aria-label="Sisipkan gambar dari perangkat" onclick="insertBodyImage()">▧</button>
+<button type="button" class="tool" title="Sematkan link / embed" aria-label="Sematkan link / embed" onclick="openEmbedPopover()">◉</button>
+<div class="tool-menu" style="position:relative">
+  <button type="button" class="tool" title="Tools penulis" aria-label="Tools penulis" onclick="toggleExtraMenu()">✦</button>
+  <div id="extraMenu" class="extra-menu hidden">
+    <button type="button" onclick="writerTool('outline')">Buat struktur artikel</button>
+    <button type="button" onclick="writerTool('meta')">Buat meta description</button>
+    <button type="button" onclick="writerTool('title')">Bantu variasi judul</button>
+    <button type="button" onclick="writerTool('shorten')">Ringkas teks terpilih</button>
+  </div>
+</div>
 <button type="button" class="tool" title="Hapus pemformatan" aria-label="Hapus pemformatan" onmousedown="keepEditorSelection(event)" onclick="exec('removeFormat')">⌫</button>
-<div id="toolbarStatus" class="toolbar-status"><span class="dot"></span><span id="toolbarStatusText">Pilih teks untuk melihat format aktif</span></div>
-</div><div id="body" class="body" contenteditable="true" spellcheck="true" data-placeholder="Mulai tulis artikel di sini..." oninput="analyze()"></div><textarea id="code" class="codearea hidden" spellcheck="false" oninput="codeChanged()"></textarea><div class="statusbar"><span id="wordCount">Jumlah kata: 0</span><span id="readTimeLive">Waktu baca: 0 menit</span></div></div>
+<div id="toolbarStatus" class="toolbar-status"><span class="dot"></span><span id="toolbarStatusText">Paragraf · Normal</span></div>
+<div id="linkPopover" class="link-popover hidden">
+  <label>Tambahkan tautan</label>
+  <div class="pop-row"><input id="linkUrl" class="input" placeholder="https://contoh.com"><button type="button" class="button primary" onclick="applyLink()">Sisipkan</button></div>
+  <div class="hint">Teks yang sedang dipilih akan dijadikan tautan.</div>
+</div>
+<div id="embedPopover" class="embed-popover hidden">
+  <label>Sematkan link</label>
+  <div class="pop-row"><input id="embedUrl" class="input" placeholder="YouTube, Vimeo, Spotify, atau URL lain" oninput="previewEmbed()"><button type="button" class="button primary" onclick="insertEmbed()">Sematkan</button></div>
+  <div id="embedPreviewMini" class="embed-mini hidden"></div>
+  <div class="hint">Video YouTube/Vimeo akan dipreview langsung. URL lain dibuat sebagai kartu tautan.</div>
+</div>
+</div><div id="body" class="body" contenteditable="true" spellcheck="true" data-placeholder="Mulai tulis artikel di sini..." oninput="analyze()"></div><textarea id="code" class="codearea hidden" spellcheck="false" oninput="codeChanged()"></textarea><div class="statusbar"><span><span id="wordCount" class="count-chip">0 kata</span><span id="charCount" class="count-chip">0 karakter</span></span><span id="readTimeLive">Waktu baca: 0 menit</span></div></div>
 <div class="panel" id="seoPanel" style="margin-top:14px"><div class="panel-head"><div class="seo-head">SEO <span id="seoBadge" class="badge b-gray">—</span></div><span id="seoScore" class="score">0/100</span></div><div class="panel-body"><div class="grid2"><div><label>Kata kunci utama</label><input id="focus" class="input" placeholder="contoh: tips SEO Google" oninput="analyze()"></div><div><label>Kata kunci terkait</label><input id="secondary" class="input" placeholder="contoh: laptop terbaik, panduan memilih laptop"></div></div><div style="margin-top:13px"><label>Pratinjau di Google</label><div class="preview"><div class="g-url">foundselection.com/artikel/<span id="gSlug">slug-artikel</span></div><div id="gTitle" class="g-title">Judul SEO artikel</div><div id="gDesc" class="g-desc">Meta description akan tampil di sini.</div></div></div><div class="grid2" style="margin-top:13px"><div><label>Judul SEO</label><input id="seoTitle" maxlength="70" class="input" placeholder="Judul yang ditampilkan di hasil pencarian" oninput="analyze()"><div id="seoTitleCount" class="count">0/70</div></div><div><label>Deskripsi SEO</label><textarea id="metaDesc" maxlength="170" rows="3" class="input" placeholder="Ringkasan singkat yang membantu orang memahami isi artikel dari hasil pencarian" oninput="analyze()"></textarea><div id="metaCount" class="count">0/170</div></div></div><div style="margin-top:13px"><div class="progress"><i id="seoFill"></i></div><div id="seoChecks" class="checks"></div></div></div></div>
 <div class="panel"><div class="panel-head">Keterbacaan Artikel <span id="readBadge" class="badge b-gray">—</span></div><div id="readChecks" class="panel-body checks"></div></div><div class="panel"><div class="panel-head">Ringkasan Artikel</div><div class="panel-body"><textarea id="excerpt" class="input" rows="4" placeholder="Ringkasan yang tampil di kartu/listing artikel."></textarea></div></div>
 </div>
 <aside class="sticky">
-<div class="panel"><div class="panel-head">Terbitkan</div><div class="panel-body"><button class="button primary publish-main" onclick="savePost('published')">Terbitkan</button><div class="meta-row">Status: <strong id="pubStatus">Draft</strong> <button class="post-title" onclick="toggleStatus()">Edit</button></div><div class="meta-row">Visibilitas: <strong>Publik</strong></div><div class="meta-row">Tanggal terbit:<input id="publishDate" class="input" type="date" style="margin-top:6px"></div></div></div>
+<div class="panel"><div class="panel-head">Publikasi</div><div class="panel-body"><div class="status-control"><span>Status</span><select id="pubStatus" class="status-select" onchange="statusChanged()"><option value="draft">Draft</option><option value="published">Terbit</option></select></div><div class="meta-row">Visibilitas: <strong>Publik</strong></div><div class="meta-row">Tanggal terbit:<input id="publishDate" class="input" type="date" style="margin-top:6px"></div></div></div>
 <div class="panel"><div class="panel-head">Kategori</div><div class="panel-body cat-list"><label><input type="radio" name="cat" value="Teknologi">Teknologi</label><label><input type="radio" name="cat" value="Hiburan">Hiburan</label><label><input type="radio" name="cat" value="Esensial" checked>Esensial</label><label><input type="radio" name="cat" value="Gaya Hidup">Gaya Hidup</label><label><input type="radio" name="cat" value="Kesehatan">Kesehatan</label></div></div>
 <div class="panel"><div class="panel-head">Slug</div><div class="panel-body"><div class="admin-url" id="slugSidePreview">/artikel/slug-artikel</div></div></div>
-<div class="panel" id="featuredPanel"><div class="panel-head">Featured Image</div><div class="panel-body"><div id="drop" class="image-drop"><div><div style="font-size:26px">▧</div><b>Atur gambar utama</b></div></div><input id="imageFile" type="file" accept="image/jpeg,image/png,image/webp,image/avif" class="hidden"><img id="imagePreview" class="image-preview hidden" alt="Featured image preview"><div id="fileMeta" class="file-meta"></div><div style="margin-top:12px"><label>Teks Alternatif (Alt Text) *</label><input id="altText" class="input" placeholder="Deskripsi gambar yang informatif"></div><div style="margin-top:10px"><label>Nama file gambar</label><input id="imageName" class="input" placeholder="tips-seo-google.webp"></div><div style="margin-top:10px"><label>Judul gambar</label><input id="imageTitle" class="input" placeholder="Opsional"></div></div></div>
+<div class="panel" id="featuredPanel"><div class="panel-head">Featured Image</div><div class="panel-body">
+<div id="drop" class="image-drop"><div><div style="font-size:25px">＋</div><b>Pilih gambar utama</b><div class="hint">Klik atau tarik file ke sini</div></div></div>
+<input id="imageFile" type="file" accept="image/jpeg,image/png,image/webp,image/avif" class="hidden">
+<div id="selectedImage" class="image-selected hidden"><img id="imagePreview" alt="Preview gambar utama"><button class="image-change" type="button" onclick="document.getElementById('imageFile').click()">Ganti gambar</button></div>
+<div id="fileMeta" class="file-meta"></div>
+<div style="margin-top:11px"><label>Teks Alternatif (Alt Text) *</label><input id="altText" class="input" placeholder="Deskripsi gambar yang informatif"></div>
+<div style="margin-top:10px"><label>Nama file</label><div class="file-row"><input id="imageName" class="input" placeholder="nama-gambar"><select id="imageFormat" class="input" title="Format output"><option value="webp">WebP</option><option value="jpg">JPG</option><option value="jpeg">JPEG</option><option value="png">PNG</option><option value="avif">AVIF</option></select></div></div>
+<div style="margin-top:10px"><label>Judul gambar</label><input id="imageTitle" class="input" placeholder="Opsional"></div>
+</div></div>
 <div class="panel"><div class="panel-head">Pengaturan Artikel</div><div class="panel-body"><label>Waktu baca (menit)</label><input id="readTime" class="input" type="number" min="1" value="5"><div style="margin-top:12px"><label>Mesin pencari</label><div class="grid2"><select id="robotsIndex" class="input"><option>index</option><option>noindex</option></select><select id="robotsFollow" class="input"><option>follow</option><option>nofollow</option></select></div></div><div style="margin-top:12px"><label>URL utama</label><input id="canonical" class="input" placeholder="https://foundselection.com/artikel/..."></div><div style="margin-top:12px"><label>Jenis artikel</label><select id="schema" class="input"><option>Article</option><option>NewsArticle</option><option>BlogPosting</option></select></div></div></div>
 <div class="panel"><div class="panel-head">Saat Dibagikan</div><div class="panel-body"><label>Judul saat dibagikan</label><input id="ogTitle" class="input" placeholder="Biasanya sama dengan judul artikel"><div style="margin-top:10px"><label>Deskripsi saat dibagikan</label><textarea id="ogDesc" class="input" rows="3" placeholder="Kalimat singkat yang menarik saat artikel dibagikan"></textarea></div><div style="margin-top:10px"><label>Gambar saat dibagikan</label><input id="ogImage" class="input" placeholder="Kosongkan jika memakai Featured Image"></div></div></div>
 </aside></div></section></div></main>
@@ -93,11 +208,9 @@ sideResizer.addEventListener('pointerup',stopSidebarResize);sideResizer.addEvent
 'use strict';
 const API='https://found-selection-api.foundselection.workers.dev/api/admin/articles';
 const AUTH_API='https://found-selection-api.foundselection.workers.dev/api/auth';
-const CLOUDINARY_CLOUD_NAME='ql2t5mnu';
-const CLOUDINARY_UPLOAD_PRESET='found-selection';
-const CLOUDINARY_UPLOAD_URL=`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
+const MEDIA_API='https://found-selection-api.foundselection.workers.dev/api/media';
 const CATS=['Teknologi','Hiburan','Esensial','Gaya Hidup','Kesehatan'];
-let posts=[],editingSlug=null,slugManual=false,deleteSlug=null,mode='visual',pendingImage=null,storedImageUrl='',dirty=false,suppressDirty=false;
+let posts=[],editingSlug=null,slugManual=false,deleteSlug=null,mode='visual',pendingImage=null,storedImageUrl='',dirty=false,suppressDirty=false,saving=false;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const slugify=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
@@ -110,7 +223,7 @@ function show(v){const leavingEditor=document.getElementById('editorView')&&!doc
 function markDirty(){if(suppressDirty)return;dirty=true;const el=$('saveState');if(el)el.innerHTML='<span class="save-dot changed"></span>Perubahan belum disimpan';}
 function markSaved(){dirty=false;const el=$('saveState');if(el)el.innerHTML='<span class="save-dot saved"></span>Tersimpan';}
 function newPost(){if(dirty&&!confirm('Ada perubahan yang belum disimpan. Buat artikel baru tanpa menyimpan?'))return;editingSlug=null;slugManual=false;clearForm();$('editorHeading').textContent='Artikel Baru';show('editor');analyze()}
-function clearForm(){suppressDirty=true;['title','slug','focus','secondary','seoTitle','metaDesc','excerpt','altText','imageName','imageTitle','canonical','ogTitle','ogDesc','ogImage'].forEach(id=>$(id).value='');$('body').innerHTML='';$('code').value='';$('publishDate').value=new Date().toISOString().slice(0,10);$('readTime').value=5;$('robotsIndex').value='index';$('robotsFollow').value='follow';$('schema').value='Article';$('pubStatus').textContent='Draft';document.querySelector('input[name="cat"][value="Esensial"]').checked=true;$('imagePreview').classList.add('hidden');$('imagePreview').removeAttribute('src');$('fileMeta').textContent='';pendingImage=null;storedImageUrl='';setMode('visual');suppressDirty=false;markSaved()}
+function clearForm(){suppressDirty=true;['title','slug','focus','secondary','seoTitle','metaDesc','excerpt','altText','imageName','imageTitle','canonical','ogTitle','ogDesc','ogImage'].forEach(id=>$(id).value='');$('body').innerHTML='';$('code').value='';$('publishDate').value=new Date().toISOString().slice(0,10);$('readTime').value=5;$('robotsIndex').value='index';$('robotsFollow').value='follow';$('schema').value='Article';$('pubStatus').value='draft';document.querySelector('input[name="cat"][value="Esensial"]').checked=true;$('drop').classList.remove('hidden');$('selectedImage').classList.add('hidden');$('imagePreview').removeAttribute('src');$('fileMeta').textContent='';$('imageFormat').value='webp';pendingImage=null;storedImageUrl='';setMode('visual');suppressDirty=false;markSaved()}
 function titleInput(){if(!slugManual&&!editingSlug)$('slug').value=slugify($('title').value);updateSlugPreview();analyze()}
 function getCategory(){return document.querySelector('input[name="cat"]:checked')?.value||'Esensial'}
 function getBody(){return mode==='code'?$('code').value:$('body').innerHTML.trim()}
@@ -127,124 +240,100 @@ function formatBlock(tag){if(!tag)return;focusSelection();document.execCommand('
 function setFontSize(v){if(!v)return;focusSelection();document.execCommand('fontSize',false,v);saveEditorSelection();markDirty();updateToolbarState();analyze()}
 function setFontFamily(v){if(!v)return;focusSelection();document.execCommand('fontName',false,v);saveEditorSelection();markDirty();updateToolbarState();analyze()}
 function updateSlugPreview(){const slug=$('slug').value.trim()||slugify($('title').value)||'slug-artikel';$('slugSidePreview').textContent='/artikel/'+slug}
-function addLink(){markDirty();focusSelection();const u=prompt('Masukkan alamat tautan:','https://');if(!u)return;document.execCommand('createLink',false,u);saveEditorSelection();updateToolbarState();analyze()}
-function updateToolbarState(){if(mode!=='visual')return;const cmds=['bold','italic','underline','insertUnorderedList','insertOrderedList','justifyLeft','justifyCenter','justifyRight'];cmds.forEach(c=>{const b=document.querySelector(`[data-cmd=\"${c}\"]`);if(!b)return;let on=false;try{on=document.queryCommandState(c)}catch(e){}b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false')});const sel=window.getSelection();let block='Paragraf';if(sel&&sel.rangeCount&&isInsideEditor(sel.anchorNode)){let n=sel.anchorNode.nodeType===3?sel.anchorNode.parentElement:sel.anchorNode;while(n&&n!==$('body')){const t=n.tagName;if(t==='H2'){block='Heading 2';break}if(t==='H3'){block='Heading 3';break}if(t==='BLOCKQUOTE'){block='Kutipan';break}if(t==='P'){block='Paragraf';break}n=n.parentElement}}const blockSelect=$('blockFormat');if(blockSelect){blockSelect.value=block==='Heading 2'?'h2':block==='Heading 3'?'h3':block==='Kutipan'?'blockquote':'';blockSelect.classList.toggle('active',!!blockSelect.value)}const dot=$('toolbarStatus'),txt=$('toolbarStatusText');if(dot&&txt){const active=[...document.querySelectorAll('#toolbar .tool.active')].map(x=>x.title.split(' (')[0]);txt.textContent=active.length?`${block} · ${active.join(' · ')}`:`${block} · Tidak ada format aktif`;dot.classList.toggle('on',active.length>0)}}
+function closePopovers(){['linkPopover','embedPopover','extraMenu'].forEach(id=>$(id)?.classList.add('hidden'))}
+function openLinkPopover(){closePopovers();saveEditorSelection();$('linkPopover').classList.remove('hidden');$('linkUrl').focus()}
+function applyLink(){const u=$('linkUrl').value.trim();if(!u){toast('Masukkan URL terlebih dahulu.');return}const url=/^https?:\/\//i.test(u)?u:'https://'+u;focusSelection();document.execCommand('createLink',false,url);saveEditorSelection();markDirty();analyze();closePopovers();$('linkUrl').value=''}
+function toggleExtraMenu(){const m=$('extraMenu');m.classList.toggle('hidden');$('linkPopover').classList.add('hidden');$('embedPopover').classList.add('hidden')}
+function normalizeUrl(u){u=String(u||'').trim();return /^https?:\/\//i.test(u)?u:'https://'+u}
+function embedSource(url){try{const u=new URL(normalizeUrl(url)),h=u.hostname.replace(/^www\./,'');if(h==='youtube.com'||h==='youtu.be'){let id=u.searchParams.get('v');if(h==='youtu.be')id=u.pathname.slice(1);if(!id&&u.pathname.startsWith('/shorts/'))id=u.pathname.split('/')[2];return id?'https://www.youtube.com/embed/'+encodeURIComponent(id):null}if(h==='vimeo.com'){const id=u.pathname.split('/').filter(Boolean)[0];return id?'https://player.vimeo.com/video/'+encodeURIComponent(id):null}return null}catch(e){return null}}
+function openEmbedPopover(){closePopovers();saveEditorSelection();$('embedPopover').classList.remove('hidden');$('embedUrl').focus()}
+function previewEmbed(){const url=$('embedUrl').value.trim(),box=$('embedPreviewMini');if(!url){box.classList.add('hidden');box.innerHTML='';return}const src=embedSource(url);box.classList.remove('hidden');box.innerHTML=src?'<iframe src="'+esc(src)+'" loading="lazy" allowfullscreen></iframe>':'<div class="generic">Preview tautan: '+esc(url)+'</div>'}
+function insertEmbed(){const raw=$('embedUrl').value.trim();if(!raw){toast('Masukkan URL untuk embed.');return}const url=normalizeUrl(raw),src=embedSource(url);focusSelection();const div=document.createElement('div');div.className='embed-card';div.setAttribute('contenteditable','false');div.dataset.embedUrl=url;div.innerHTML=src?'<div class="embed-label">Embed</div><iframe src="'+esc(src)+'" loading="lazy" allowfullscreen></iframe>':'<div class="embed-label">Tautan</div><a class="embed-link" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(url)+'</a>';const sel=getSelection();if(sel&&sel.rangeCount&&isInsideEditor(sel.anchorNode)){const r=sel.getRangeAt(0);r.deleteContents();r.insertNode(div);r.collapse(false)}else $('body').appendChild(div);$('body').appendChild(document.createTextNode(''));markDirty();analyze();closePopovers();$('embedUrl').value=''}
+function writerTool(kind){closePopovers();if(kind==='outline'){focusSelection();document.execCommand('insertHTML',false,'<h2>Pendahuluan</h2><p>Jelaskan konteks dan kebutuhan pembaca secara langsung.</p><h2>Poin Utama</h2><p>Uraikan informasi utama dengan subheading dan paragraf yang ringkas.</p><h2>Kesimpulan</h2><p>Rangkum poin penting dan berikan langkah berikutnya.</p>');markDirty();analyze();return}if(kind==='meta'){const t=textOf(getBody()).trim();if(!t){toast('Tulis isi artikel terlebih dahulu.');return}$('metaDesc').value=t.replace(/\s+/g,' ').slice(0,160);markDirty();analyze();toast('Meta description dibuat dari isi artikel.');return}if(kind==='title'){const t=$('title').value.trim();toast(t?'Coba variasi dengan menonjolkan manfaat, angka, atau sudut pandang yang lebih spesifik.':'Isi judul artikel terlebih dahulu.');return}if(kind==='shorten'){const selected=getSelection()?.toString().trim();toast(selected?'Teks terpilih siap diringkas.':'Blok teks yang ingin diringkas terlebih dahulu.')}}
+function updateToolbarState(){
+  if(mode!=='visual')return;
+  const cmds=['bold','italic','underline','insertUnorderedList','insertOrderedList','justifyLeft','justifyCenter','justifyRight'];
+  cmds.forEach(c=>{const b=document.querySelector(`[data-cmd="${c}"]`);if(!b)return;let on=false;try{on=document.queryCommandState(c)}catch(e){}b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false')});
+  let block='Paragraf',font='';
+  const sel=getSelection();
+  if(sel&&sel.rangeCount&&isInsideEditor(sel.anchorNode)){
+    let n=sel.anchorNode.nodeType===3?sel.anchorNode.parentElement:sel.anchorNode;
+    while(n&&n!==$('body')){const t=n.tagName;if(t==='H2'){block='Heading 2';break}if(t==='H3'){block='Heading 3';break}if(t==='BLOCKQUOTE'){block='Kutipan';break}if(t==='P'){break}n=n.parentElement}
+    try{font=document.queryCommandValue('fontName')||''}catch(e){}
+  }
+  const bs=$('blockFormat');if(bs){bs.value=block==='Heading 2'?'h2':block==='Heading 3'?'h3':block==='Kutipan'?'blockquote':'';bs.classList.toggle('active',!!bs.value)}
+  const cleanFont=font.replace(/['"]/g,'').split(',')[0].trim();
+  const active=[...document.querySelectorAll('#toolbar .tool.active')].map(x=>x.getAttribute('title')).filter(Boolean);
+  const txt=$('toolbarStatusText'),dot=$('toolbarStatus');
+  txt.textContent=`${block}${cleanFont?' · '+cleanFont:''}${active.length?' · '+active.join(' · '):' · Normal'}`;
+  dot.classList.toggle('on',block!=='Paragraf'||!!cleanFont||active.length>0);
+}
 
-function insertBodyImage(){if(storedImageUrl){document.execCommand('insertImage',false,storedImageUrl);analyze();return}$('imageFile').click()}
+function insertBodyImage(){saveEditorSelection();$('imageFile').click()}
 function jump(id){show('editor');setTimeout(()=>$(`${id}`).scrollIntoView({behavior:'smooth',block:'start'}),80)}
-function toggleStatus(){$('pubStatus').textContent=$('pubStatus').textContent==='Terbit'?'Draft':'Terbit'}
-function fill(a){editingSlug=a.slug||null;slugManual=true;$('title').value=a.title||'';$('slug').value=a.slug||'';$('focus').value=a.focus_keyword||'';$('secondary').value=a.secondary_keywords||'';$('seoTitle').value=a.seo_title||'';$('metaDesc').value=a.meta_description||'';$('excerpt').value=a.excerpt||'';$('body').innerHTML=a.content||'';document.querySelectorAll('input[name="cat"]').forEach(x=>x.checked=x.value===a.category);$('publishDate').value=a.publish_date||new Date().toISOString().slice(0,10);$('readTime').value=a.read_time||5;$('robotsIndex').value=a.robots_index||'index';$('robotsFollow').value=a.robots_follow||'follow';$('schema').value=a.schema_type||'Article';$('canonical').value=a.canonical_url||'';$('ogTitle').value=a.og_title||'';$('ogDesc').value=a.og_description||'';$('ogImage').value=a.og_image||'';$('altText').value=a.image_alt||'';$('imageName').value=a.image_name||'';$('imageTitle').value=a.image_title||'';$('pubStatus').textContent=a.status==='published'?'Terbit':'Draft';storedImageUrl=a.thumbnail||'';if(storedImageUrl){$('imagePreview').src=storedImageUrl;$('imagePreview').classList.remove('hidden');$('fileMeta').textContent='Featured image tersimpan.'}$('editorHeading').textContent='Edit Artikel';show('editor');analyze();markSaved()}
+function statusChanged(){markDirty();analyze()}
+function fill(a){editingSlug=a.slug||null;slugManual=true;$('title').value=a.title||'';$('slug').value=a.slug||'';$('focus').value=a.focus_keyword||'';$('secondary').value=a.secondary_keywords||'';$('seoTitle').value=a.seo_title||'';$('metaDesc').value=a.meta_description||'';$('excerpt').value=a.excerpt||'';$('body').innerHTML=a.content||'';document.querySelectorAll('input[name="cat"]').forEach(x=>x.checked=x.value===a.category);$('publishDate').value=a.publish_date||new Date().toISOString().slice(0,10);$('readTime').value=a.read_time||5;$('robotsIndex').value=a.robots_index||'index';$('robotsFollow').value=a.robots_follow||'follow';$('schema').value=a.schema_type||'Article';$('canonical').value=a.canonical_url||'';$('ogTitle').value=a.og_title||'';$('ogDesc').value=a.og_description||'';$('ogImage').value=a.og_image||'';$('altText').value=a.image_alt||'';$('imageName').value=a.image_name||'';$('imageTitle').value=a.image_title||'';$('pubStatus').textContent=a.status==='published'?'Terbit':'Draft';storedImageUrl=a.thumbnail||'';if(storedImageUrl){$('imagePreview').src=storedImageUrl;$('drop').classList.add('hidden');$('selectedImage').classList.remove('hidden');$('fileMeta').textContent='Featured image tersimpan.'}$('editorHeading').textContent='Edit Artikel';show('editor');analyze();markSaved()}
 async function apiFetch(url,options={}){const opts={...options,credentials:'include',headers:{Accept:'application/json',...(options.headers||{})}};const r=await fetch(url,opts);if(r.status===401){showLogin();throw Error('Sesi admin diperlukan.')}return r}
 function showLogin(){$('loginGate').style.display='flex';setTimeout(()=>$('loginPassword').focus(),40)}
 function hideLogin(){$('loginGate').style.display='none';$('loginError').textContent='';$('loginPassword').value=''}
 async function login(e){e.preventDefault();const btn=$('loginButton');btn.disabled=true;$('loginError').textContent='';try{const r=await fetch(AUTH_API+'/login',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({password:$('loginPassword').value})});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||'Kata sandi salah.');hideLogin();await load()}catch(err){$('loginError').textContent=err.message||'Gagal masuk.'}finally{btn.disabled=false}}
 async function editPost(slug){const a=posts.find(x=>x.slug===slug);if(a){fill(a);return}try{const r=await apiFetch(API+'/'+encodeURIComponent(slug));const j=await r.json();if(!j.success)throw Error(j.error||'Artikel tidak ditemukan');fill(j.data)}catch(e){toast(e.message)}}
 function buildPayload(status){const body=getBody();status=status==='published'?'published':'draft';return{title:$('title').value.trim(),slug:$('slug').value.trim()||slugify($('title').value),category:getCategory(),excerpt:$('excerpt').value.trim(),content:body,publish_date:$('publishDate').value,read_time:Math.max(1,Number($('readTime').value)||5),status,thumbnail:storedImageUrl||'',image_alt:$('altText').value.trim(),image_name:$('imageName').value.trim(),image_title:$('imageTitle').value.trim(),seo_title:$('seoTitle').value.trim(),meta_description:$('metaDesc').value.trim(),focus_keyword:$('focus').value.trim(),secondary_keywords:$('secondary').value.trim(),canonical_url:$('canonical').value.trim(),og_title:$('ogTitle').value.trim(),og_description:$('ogDesc').value.trim(),og_image:$('ogImage').value.trim(),robots_index:$('robotsIndex').value,robots_follow:$('robotsFollow').value,schema_type:$('schema').value}}
-async function uploadMedia(){
-  if(!pendingImage)return storedImageUrl;
-
-  const fd=new FormData();
-  fd.append('file',pendingImage.blob,pendingImage.filename);
-  fd.append('upload_preset',CLOUDINARY_UPLOAD_PRESET);
-
-  const r=await fetch(CLOUDINARY_UPLOAD_URL,{
-    method:'POST',
-    body:fd
-  });
-
-  const j=await r.json().catch(()=>({}));
-
-  if(!r.ok||!j.secure_url){
-    throw Error(j.error?.message||'Gagal mengunggah gambar ke Cloudinary.');
-  }
-
-  storedImageUrl=j.secure_url;
-  pendingImage=null;
-  return storedImageUrl;
-}
-async function savePost(status){const title=$('title').value.trim(),slug=$('slug').value.trim()||slugify(title),body=getBody();if(!title||!slug||!textOf(body).trim()||!$('publishDate').value){toast('Lengkapi judul, slug, isi artikel, dan tanggal.');return}try{if(pendingImage) await uploadMedia(); const p=buildPayload(status);const url=editingSlug?API+'/'+encodeURIComponent(editingSlug):API;const r=await apiFetch(url,{method:editingSlug?'PUT':'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||(j.details||[]).join(', ')||'Gagal menyimpan artikel.');editingSlug=p.slug;markSaved();toast(status==='published'?'Artikel berhasil dipublikasikan.':'Draft berhasil disimpan.');await load();show('posts')}catch(e){console.error(e);toast(e.message)}}
+async function uploadMedia(){if(!pendingImage)return storedImageUrl;let filename=$('imageName').value.trim()||pendingImage.filename||'featured-image.webp';const ext=$('imageFormat').value||filename.split('.').pop()||'webp';filename=filename.replace(/\.[^.]+$/,'')+'.'+ext;const fd=new FormData();fd.append('file',pendingImage.blob,filename);fd.append('alt_text',$('altText').value.trim());fd.append('title',$('imageTitle').value.trim());const r=await apiFetch(MEDIA_API,{method:'POST',body:fd});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||'Endpoint upload gambar belum tersedia di Worker.');storedImageUrl=j.url||j.data?.url||'';if(!storedImageUrl)throw Error('Worker tidak mengembalikan URL gambar.');pendingImage=null;return storedImageUrl}
+async function savePost(status,background=false){const title=$('title').value.trim(),slug=$('slug').value.trim()||slugify(title),body=getBody();if(!title||!slug||!textOf(body).trim()||!$('publishDate').value){if(!background)toast('Lengkapi judul, slug, isi artikel, dan tanggal.');return}try{if(pendingImage) await uploadMedia(); const p=buildPayload(status);const url=editingSlug?API+'/'+encodeURIComponent(editingSlug):API;const r=await apiFetch(url,{method:editingSlug?'PUT':'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p)});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||(j.details||[]).join(', ')||'Gagal menyimpan artikel.');editingSlug=p.slug;markSaved();if(!background)toast(status==='published'?'Artikel berhasil dipublikasikan.':'Draft berhasil disimpan.');await load();if(!background)show('posts')}catch(e){console.error(e);toast(e.message)}}
 function seoChecks(p){const k=p.focus_keyword.toLowerCase().trim(),t=p.title.toLowerCase(),s=p.slug.toLowerCase(),c=textOf(p.content).toLowerCase(),st=p.seo_title.toLowerCase(),m=p.meta_description.toLowerCase(),w=words(c);return[[!!p.title,'Judul artikel terisi'],[!!k,'Kata kunci utama ditentukan'],[!!p.seo_title,'Judul SEO tersedia'],[p.seo_title.length>=40&&p.seo_title.length<=60,'Panjang judul SEO ideal'],[!!p.meta_description,'Deskripsi SEO tersedia'],[p.meta_description.length>=120&&p.meta_description.length<=160,'Panjang deskripsi SEO ideal'],[!!k&&t.includes(k),'Kata kunci ada di judul'],[!!k&&s.includes(slugify(k)),'Kata kunci ada di slug'],[!!k&&c.slice(0,600).includes(k),'Kata kunci ada di pembuka'],[!!k&&st.includes(k),'Kata kunci ada di judul SEO'],[!!k&&m.includes(k),'Kata kunci ada di deskripsi SEO'],[w>=600,'Isi artikel minimal 600 kata'],[!!p.canonical_url,'URL utama tersedia'] ]}
-function analyze(){updateSlugPreview();const p=buildPayload($('pubStatus').textContent.toLowerCase()),checks=seoChecks(p),score=Math.round(checks.filter(x=>x[0]).length/checks.length*100),txt=textOf(p.content),w=words(txt);$('wordCount').textContent='Jumlah kata: '+w;$('readTimeLive').textContent='Waktu baca: '+Math.max(1,Math.ceil(w/200))+' min';$('gSlug').textContent=p.slug||'slug-artikel';$('gTitle').textContent=p.seo_title||p.title||'Judul SEO artikel';$('gDesc').textContent=p.meta_description||p.excerpt||'Meta description akan tampil di sini.';$('seoTitleCount').textContent=p.seo_title.length+'/70';$('metaCount').textContent=p.meta_description.length+'/170';$('seoScore').textContent=score+'/100';$('seoFill').style.width=score+'%';$('seoBadge').textContent=score>=80?'Baik':score>=55?'Perlu diperbaiki':'Perlu dilengkapi';$('seoBadge').className='badge '+(score>=80?'b-green':score>=55?'b-yellow':'b-red');$('seoChecks').innerHTML=checks.map(x=>`<div class="check"><span class="${x[0]?'ok':'no'}">${x[0]?'✓':'○'}</span> ${esc(x[1])}</div>`).join('');const sent=txt.split(/[.!?]+/).map(words).filter(Boolean),avg=sent.length?sent.reduce((a,b)=>a+b,0)/sent.length:0,paras=txt.split(/\n\s*\n/).filter(Boolean),rd=[[w>=300,'Konten cukup panjang'],[avg>0&&avg<=22,'Kalimat rata-rata ≤22 kata'],[paras.every(x=>words(x)<=100),'Paragraf tidak terlalu padat'],[/<h2|<h3/i.test(p.content),'Subheading tersedia'],[/<a\s/i.test(p.content),'Ada link dalam artikel']];const rs=Math.round(rd.filter(x=>x[0]).length/rd.length*100);$('readBadge').textContent=rs+'/100';$('readBadge').className='badge '+(rs>=80?'b-green':rs>=60?'b-yellow':'b-red');$('readChecks').innerHTML=rd.map(x=>`<div class="check"><span class="${x[0]?'ok':'no'}">${x[0]?'✓':'○'}</span> ${x[1]}</div>`).join('')}
+function analyze(){updateSlugPreview();const p=buildPayload($('pubStatus').value),checks=seoChecks(p),score=Math.round(checks.filter(x=>x[0]).length/checks.length*100),txt=textOf(p.content),w=words(txt);$('wordCount').textContent=w+' kata';$('charCount').textContent=txt.length+' karakter';$('readTimeLive').textContent='Waktu baca: '+Math.max(1,Math.ceil(w/200))+' menit';$('gSlug').textContent=p.slug||'slug-artikel';$('gTitle').textContent=p.seo_title||p.title||'Judul SEO artikel';$('gDesc').textContent=p.meta_description||p.excerpt||'Meta description akan tampil di sini.';$('seoTitleCount').textContent=p.seo_title.length+'/70';$('metaCount').textContent=p.meta_description.length+'/170';$('seoScore').textContent=score+'/100';$('seoFill').style.width=score+'%';$('seoBadge').textContent=score>=80?'Baik':score>=55?'Perlu diperbaiki':'Perlu dilengkapi';$('seoBadge').className='badge '+(score>=80?'b-green':score>=55?'b-yellow':'b-red');$('seoChecks').innerHTML=checks.map(x=>`<div class="check"><span class="${x[0]?'ok':'no'}">${x[0]?'✓':'○'}</span> ${esc(x[1])}</div>`).join('');const sent=txt.split(/[.!?]+/).map(words).filter(Boolean),avg=sent.length?sent.reduce((a,b)=>a+b,0)/sent.length:0,paras=txt.split(/\n\s*\n/).filter(Boolean),rd=[[w>=300,'Konten cukup panjang'],[avg>0&&avg<=22,'Kalimat rata-rata ≤22 kata'],[paras.every(x=>words(x)<=100),'Paragraf tidak terlalu padat'],[/<h2|<h3/i.test(p.content),'Subheading tersedia'],[/<a\s/i.test(p.content),'Ada link dalam artikel']];const rs=Math.round(rd.filter(x=>x[0]).length/rd.length*100);$('readBadge').textContent=rs+'/100';$('readBadge').className='badge '+(rs>=80?'b-green':rs>=60?'b-yellow':'b-red');$('readChecks').innerHTML=rd.map(x=>`<div class="check"><span class="${x[0]?'ok':'no'}">${x[0]?'✓':'○'}</span> ${x[1]}</div>`).join('')}
 async function load(){try{const r=await apiFetch(API);const j=await r.json();if(!r.ok||!j.success)throw Error(j.error||'API error');posts=j.data||[];dashboard();renderArtikel()}catch(e){if(e.message!=='Sesi admin diperlukan.')toast('API tidak dapat dimuat: '+e.message)}}
 function seoScoreFor(a){const p={...a,content:a.content||'',focus_keyword:a.focus_keyword||'',seo_title:a.seo_title||'',meta_description:a.meta_description||'',canonical_url:a.canonical_url||'',title:a.title||'',slug:a.slug||''};const c=seoChecks(p);return Math.round(c.filter(x=>x[0]).length/c.length*100)}
 function renderArtikel(){const q=($('search')?.value||'').toLowerCase(),f=$('filter')?.value||'';const rows=posts.filter(a=>(!q||(`${a.title} ${a.slug}`).toLowerCase().includes(q))&&(!f||a.status===f));$('postRows').innerHTML=rows.map(a=>{const n=seoScoreFor(a);return`<tr><td><button class="post-title" onclick="editPost('${esc(a.slug)}')">${esc(a.title)}</button><div class="post-slug">/artikel/${esc(a.slug)}</div></td><td>${esc(a.category||'')}</td><td>${a.status==='published'?'<span class="badge b-green">Terbit</span>':'<span class="badge b-yellow">Draft</span>'}</td><td><span class="badge ${n>=80?'b-green':n>=55?'b-yellow':'b-red'}">${n}</span></td><td>${esc(a.publish_date||'—')}</td><td class="actions"><button class="button" onclick="editPost('${esc(a.slug)}')">Edit</button> <button class="button danger" onclick="askHapus('${esc(a.slug)}')">Hapus</button></td></tr>`}).join('');$('noArtikel').classList.toggle('hidden',rows.length>0)}
-function dashboard(){const pub=posts.filter(a=>a.status==='published').length,draft=posts.filter(a=>a.status==='draft').length,seo=posts.filter(a=>a.focus_keyword&&a.seo_title&&a.meta_description).length;$('sTotal').textContent=posts.length;$('sPub').textContent=pub;$('sDraft').textContent=draft;$('sSEO').textContent=seo;const r=[...posts].sort((a,b)=>(b.publish_date||'').localeCompare(a.publish_date||'')).slice(0,6);$('recent').innerHTML=r.length?r.map(a=>`<button onclick="editPost('${esc(a.slug)}')"><b>${esc(a.title)}</b><small style="display:block;color:var(--muted);margin-top:4px">${esc(a.category||'')} · ${esc(a.publish_date||'')} · ${a.status}</small></button>`).join(''):'<div style="padding:25px;color:var(--muted)">Belum ada artikel.</div>';const mx=Math.max(1,...CATS.map(c=>posts.filter(a=>a.category===c).length));$('catStats').innerHTML=CATS.map(c=>{const n=posts.filter(a=>a.category===c).length;return`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:11px;font-weight:600;margin-bottom:4px"><span>${c}</span><span>${n}</span></div><div style="height:7px;background:#dcdcde;border-radius:10px"><div style="height:7px;background:var(--blue);width:${n/mx*100}%;border-radius:10px"></div></div></div>`}).join('')}
+function dashboard(){const pub=posts.filter(a=>a.status==='published').length,draft=posts.filter(a=>a.status==='draft').length,seo=posts.filter(a=>seoScoreFor(a)>=80).length;$('sTotal').textContent=posts.length;$('sPub').textContent=pub;$('sDraft').textContent=draft;$('sSEO').textContent=seo;const r=[...posts].sort((a,b)=>(b.publish_date||'').localeCompare(a.publish_date||'')).slice(0,6);$('recent').innerHTML=r.length?r.map(a=>`<button onclick="editPost('${esc(a.slug)}')"><b>${esc(a.title)}</b><small style="display:block;color:var(--muted);margin-top:4px">${esc(a.category||'')} · ${esc(a.publish_date||'')} · ${a.status}</small></button>`).join(''):'<div style="padding:25px;color:var(--muted)">Belum ada artikel.</div>';const mx=Math.max(1,...CATS.map(c=>posts.filter(a=>a.category===c).length));$('catStats').innerHTML=CATS.map(c=>{const n=posts.filter(a=>a.category===c).length;return`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:11px;font-weight:600;margin-bottom:4px"><span>${c}</span><span>${n}</span></div><div style="height:7px;background:#dcdcde;border-radius:10px"><div style="height:7px;background:var(--blue);width:${n/mx*100}%;border-radius:10px"></div></div></div>`}).join('')}
 function askHapus(slug){deleteSlug=slug;const a=posts.find(x=>x.slug===slug);$('modalText').textContent=`“${a?.title||slug}” akan dihapus permanen.`;$('modal').style.display='flex'}function closeModal(){$('modal').style.display='none';deleteSlug=null}async function confirmHapus(){if(!deleteSlug)return;try{const r=await apiFetch(API+'/'+encodeURIComponent(deleteSlug),{method:'DELETE'});const j=await r.json();if(!r.ok||!j.success)throw Error(j.error||'Gagal menghapus');closeModal();toast('Artikel dihapus.');await load();show('posts')}catch(e){toast(e.message)}}
 async function processImage(file){
-  if(!file.type.startsWith('image/')){
-    toast('File harus berupa gambar.');
-    return;
-  }
-
+  if(!file.type.startsWith('image/')){toast('File harus berupa gambar.');return}
   try{
-    const img=await new Promise((res,rej)=>{
-      const u=URL.createObjectURL(file);
-      const i=new Image();
-      i.onload=()=>{URL.revokeObjectURL(u);res(i)};
-      i.onerror=rej;
-      i.src=u;
-    });
-
-    let sw=img.naturalWidth,sh=img.naturalHeight;
-    const ratio=sw/sh,target=16/9;
-    let cw=sw,ch=sh,sx=0,sy=0;
-
-    if(ratio>target){
-      cw=Math.round(sh*target);
-      sx=Math.round((sw-cw)/2);
-    }else if(ratio<target){
-      ch=Math.round(sw/target);
-      sy=Math.round((sh-ch)/2);
-    }
-
-    let ow=Math.min(1920,cw),oh=Math.round(ow/target);
-    if(oh>1080){
-      oh=1080;
-      ow=Math.round(oh*target);
-    }
-
-    const canvas=document.createElement('canvas');
-    canvas.width=ow;
-    canvas.height=oh;
-
-    const ctx=canvas.getContext('2d');
-    ctx.imageSmoothingEnabled=true;
-    ctx.imageSmoothingQuality='high';
-    ctx.drawImage(img,sx,sy,cw,ch,0,0,ow,oh);
-
-    const blob=await new Promise(r=>canvas.toBlob(r,'image/webp',.92));
-    if(!blob)throw Error('Browser tidak mendukung WebP');
-
-    const data=canvas.toDataURL('image/webp',.92);
-    const base=slugify($('focus').value||$('title').value||'featured-image');
-    const filename=base+'.webp';
-
-    pendingImage={blob,filename};
-    $('imageName').value=filename;
-    $('imagePreview').src=data;
-    $('imagePreview').classList.remove('hidden');
-
-    if(!$('altText').value)$('altText').value=$('title').value.trim();
-    if(!$('imageTitle').value)$('imageTitle').value=$('title').value.trim();
-
-    $('fileMeta').textContent=`${sw}×${sh} → ${ow}×${oh} WebP · ${(blob.size/1024).toFixed(0)} KB · Mengunggah...`;
-    markDirty();
-    toast('Gambar sedang diunggah ke Cloudinary...');
-
-    await uploadMedia();
-
-    $('fileMeta').textContent=`${sw}×${sh} → ${ow}×${oh} WebP · ${(blob.size/1024).toFixed(0)} KB · Tersimpan di Cloudinary`;
-    toast('Featured image berhasil diunggah.');
-  }catch(e){
-    $('fileMeta').textContent='Upload gambar gagal.';
-    toast('Gagal mengunggah gambar: '+e.message);
-  }
+    const img=await new Promise((res,rej)=>{const u=URL.createObjectURL(file),i=new Image();i.onload=()=>{URL.revokeObjectURL(u);res(i)};i.onerror=rej;i.src=u});
+    const sw=img.naturalWidth,sh=img.naturalHeight,ratio=sw/sh,target=16/9;let cw=sw,ch=sh,sx=0,sy=0;
+    if(ratio>target){cw=Math.round(sh*target);sx=Math.round((sw-cw)/2)}else if(ratio<target){ch=Math.round(sw/target);sy=Math.round((sh-ch)/2)}
+    let ow=Math.min(1920,cw),oh=Math.round(ow/target);if(oh>1080){oh=1080;ow=Math.round(oh*target)}
+    const canvas=document.createElement('canvas');canvas.width=ow;canvas.height=oh;const ctx=canvas.getContext('2d');
+    ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.drawImage(img,sx,sy,cw,ch,0,0,ow,oh);
+    const format=$('imageFormat').value||'webp',mime=format==='png'?'image/png':(format==='jpg'||format==='jpeg')?'image/jpeg':format==='avif'?'image/avif':'image/webp';
+    let blob=await new Promise(r=>canvas.toBlob(r,mime,.92)),actual=format;
+    if(!blob){blob=await new Promise(r=>canvas.toBlob(r,'image/webp',.92));actual='webp';$('imageFormat').value='webp';toast('AVIF tidak didukung browser ini, jadi diproses sebagai WebP.')}
+    const base=file.name.replace(/\.[^.]+$/,'')||'featured-image';
+    $('imageName').value=(slugify(base)||'featured-image')+'.'+actual;
+    pendingImage={blob,filename:$('imageName').value};
+    $('imagePreview').src=URL.createObjectURL(blob);$('drop').classList.add('hidden');$('selectedImage').classList.remove('hidden');
+    $('fileMeta').textContent=`Asli: ${file.name} · ${sw}×${sh} → ${ow}×${oh} · ${actual.toUpperCase()} · ${(blob.size/1024).toFixed(0)} KB`;
+    if(!$('altText').value)$('altText').value=$('title').value.trim();if(!$('imageTitle').value)$('imageTitle').value=$('title').value.trim();
+    markDirty();toast('Featured image siap digunakan.')
+  }catch(e){toast('Gagal memproses gambar.')}
 }
 $('drop').addEventListener('click',()=>$('imageFile').click());$('imageFile').addEventListener('change',e=>{if(e.target.files[0])processImage(e.target.files[0])});$('drop').addEventListener('dragover',e=>{e.preventDefault();$('drop').classList.add('drag')});$('drop').addEventListener('dragleave',()=>$('drop').classList.remove('drag'));$('drop').addEventListener('drop',e=>{e.preventDefault();$('drop').classList.remove('drag');if(e.dataTransfer.files[0])processImage(e.dataTransfer.files[0])});
+$('imageFormat').addEventListener('change',async()=>{
+  if(!pendingImage)return;
+  const fileName=$('imageName').value.trim()||'featured-image';
+  const base=fileName.replace(/\.[^.]+$/,'')||'featured-image';
+  const f=$('imageFormat').value;
+  const img=await new Promise((res,rej)=>{const u=URL.createObjectURL(pendingImage.blob),i=new Image();i.onload=()=>{URL.revokeObjectURL(u);res(i)};i.onerror=rej;i.src=u});
+  const canvas=document.createElement('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;canvas.getContext('2d').drawImage(img,0,0);
+  const mime=f==='png'?'image/png':(f==='jpg'||f==='jpeg')?'image/jpeg':f==='avif'?'image/avif':'image/webp';
+  let blob=await new Promise(r=>canvas.toBlob(r,mime,.92));
+  if(!blob){toast('Format tersebut tidak didukung browser ini.');$('imageFormat').value='webp';return}
+  $('imageName').value=slugify(base)+'.'+f;pendingImage={blob,filename:$('imageName').value};$('imagePreview').src=URL.createObjectURL(blob);markDirty();
+});
+
 ['focus','secondary','seoTitle','metaDesc','excerpt','altText','imageName','imageTitle','canonical','ogTitle','ogDesc','ogImage','readTime','robotsIndex','robotsFollow','schema','publishDate'].forEach(id=>{const el=$(id);if(el){el.addEventListener('input',markDirty);el.addEventListener('change',markDirty)}});
 $('body').addEventListener('input',markDirty);
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
-document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();savePost('draft')}if(e.key==='Escape')closeModal()});
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();savePost('draft')}if(e.key==='Escape'){closeModal();closePopovers()}});
 newPost();updateToolbarState();(async()=>{try{const r=await fetch(AUTH_API+'/me',{credentials:'include',headers:{Accept:'application/json'}});const j=await r.json();if(j.authenticated){hideLogin();await load()}else showLogin()}catch(e){showLogin()}})();
+
+document.addEventListener('visibilitychange',()=>{
+  if(document.visibilityState==='hidden'&&dirty&&!saving&&$('editorView')&&!$('editorView').classList.contains('hidden')){
+    savePost('draft',true);
+  }
+});
+
 </script>
 </body></html>
