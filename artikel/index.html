@@ -231,7 +231,7 @@ body.detail-mode .detail-only{display:block}
 
   <div class="relative max-w-[1240px] mx-auto px-5 sm:px-6 md:px-10">
     <div class="grid grid-cols-[44px_1fr_44px] items-start gap-3 md:gap-5">
-      <a href="../index.html" aria-label="Kembali ke Beranda" title="Kembali ke Beranda"
+      <a href="/" aria-label="Kembali ke Beranda" title="Kembali ke Beranda"
          class="inline-flex items-center justify-center w-11 h-11 rounded-full border border-blue-100 bg-white/90 text-slate-700 shadow-sm hover:border-blue-300 hover:text-blue-600 hover:shadow-md transition-all duration-300 fade-in">
         <svg class="w-[19px] h-[19px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 19l-7-7 7-7"/></svg>
       </a>
@@ -331,14 +331,14 @@ body.detail-mode .detail-only{display:block}
 <div class="max-w-[1200px] mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
 <div class="text-center md:text-left"><span class="font-opensans font-bold text-[1.5rem] tracking-tight text-text-main block mb-2">Found Selection.</span><p>&copy; 2026 Found Selection. Hak cipta dilindungi.</p></div>
 <div class="flex flex-wrap justify-center gap-x-10 gap-y-4 font-opensans">
-<a href="../index.html" class="hover:text-[#1d4ed8] font-bold transition-colors">Beranda</a>
-<a href="./index.html" class="hover:text-[#1d4ed8] font-bold transition-colors">Artikel</a>
-<a href="../index.html#kerja-sama" class="hover:text-[#1d4ed8] font-bold transition-colors">Kerja Sama</a>
-<a href="../index.html#faq" class="hover:text-[#1d4ed8] font-bold transition-colors">FAQ</a>
+<a href="/" class="hover:text-[#1d4ed8] font-bold transition-colors">Beranda</a>
+<a href="/artikel/" class="hover:text-[#1d4ed8] font-bold transition-colors">Artikel</a>
+<a href="/#kerja-sama" class="hover:text-[#1d4ed8] font-bold transition-colors">Kerja Sama</a>
+<a href="/#faq" class="hover:text-[#1d4ed8] font-bold transition-colors">FAQ</a>
 </div>
 <div class="flex justify-center md:justify-end gap-8 font-opensans items-center">
 <a href="javascript:void(0)" onclick="openPrivacyModal()" class="hover:text-[#1d4ed8] font-bold transition-colors">Kebijakan Privasi</a>
-<a href="mailto:proview.support@gmail.com" class="hover:text-[#1d4ed8] transition-colors font-bold">Kontak</a>
+<a href="mailto:foundselection@gmail.com" class="hover:text-[#1d4ed8] transition-colors font-bold">Kontak</a>
 </div>
 </div>
 </footer>
@@ -353,7 +353,7 @@ body.detail-mode .detail-only{display:block}
 <h3 class="font-opensans font-bold text-lg text-text-main">1. Pengumpulan Data</h3><p>Kami hanya mengumpulkan data esensial berupa aktivitas analitik anonim guna memahami tren bacaan audiens.</p>
 <h3 class="font-opensans font-bold text-lg text-text-main">2. Penggunaan Tautan Afiliasi</h3><p>Found Selection dapat menyertakan tautan afiliasi pada beberapa ulasan produk. Jika Anda melakukan pembelian melalui tautan tersebut, kami mungkin menerima komisi tanpa biaya tambahan bagi Anda.</p>
 <h3 class="font-opensans font-bold text-lg text-text-main">3. Pengelolaan Cookies</h3><p>Anda dapat mengelola konfigurasi cookies melalui pengaturan browser yang digunakan.</p>
-<h3 class="font-opensans font-bold text-lg text-text-main">4. Hubungi Kami</h3><p>Untuk informasi lebih lanjut, hubungi kami melalui <strong>proview.support@gmail.com</strong>.</p>
+<h3 class="font-opensans font-bold text-lg text-text-main">4. Hubungi Kami</h3><p>Untuk informasi lebih lanjut, hubungi kami melalui <strong>foundselection@gmail.com</strong>.</p>
 </div>
 <div class="px-6 py-4 border-t border-gray-100 bg-gray-50 flex justify-end"><button onclick="closePrivacyModal()" class="px-6 py-2 bg-[#2563eb] text-white font-opensans font-bold text-[0.875rem] rounded-full hover:bg-[#1d4ed8] transition-colors">Saya Mengerti</button></div>
 </div></div>
@@ -394,7 +394,10 @@ function normalizeArticle(article){
     date:article.publish_date||'',
     readTime:article.read_time?`${article.read_time} min`:'',
     image:article.thumbnail||'',
-    excerpt:article.excerpt||''
+    excerpt:article.excerpt||'',
+    views:Number(article.views??article.view_count??article.read_count??0)||0,
+    likes:Number(article.likes??article.like_count??0)||0,
+    popularity:Number(article.popularity??article.popular_score??0)||0
   };
 }
 function generateSlug(text){
@@ -414,11 +417,11 @@ async function loadArticles(){
   grid.innerHTML='<div class="col-span-full flex justify-center py-16"><div class="w-8 h-8 rounded-full border-2 border-gray-200 border-t-blue-600 animate-spin" aria-label="Memuat artikel"></div></div>';
   empty.classList.add('hidden');
   try{
-    const response=await fetch(API_URL,{headers:{Accept:'application/json'}});
+    const response=await fetch(API_URL,{headers:{Accept:'application/json'},cache:'no-store'});
     if(!response.ok)throw new Error(`API HTTP ${response.status}`);
     const result=await response.json();
     if(!result.success||!Array.isArray(result.data))throw new Error('Format response API tidak sesuai.');
-    articles=result.data.map(normalizeArticle);
+    articles=result.data.filter(article=>String(article?.status||'').trim().toLowerCase()==='published').map(normalizeArticle);
     currentPage=1;renderArticles();
   }catch(error){
     console.error(error);articles=[];grid.innerHTML='';empty.innerHTML='<div class="text-center"><h2 class="font-opensans font-bold text-xl text-text-main">Artikel belum dapat dimuat</h2><p class="mt-2 text-text-muted">Silakan coba muat ulang halaman beberapa saat lagi.</p></div>';empty.classList.remove('hidden');document.getElementById('pagination').innerHTML='';
@@ -436,14 +439,23 @@ function dateValue(a){
   const t=Date.parse(`${a.date||''}T00:00:00`);
   return Number.isNaN(t)?0:t;
 }
+function popularityScore(article){
+  const explicit=Number(article.popularity||0);
+  const views=Number(article.views||0);
+  const likes=Number(article.likes||0);
+  if(explicit>0) return explicit;
+  if(views>0) return views + likes*3;
+  if(likes>0) return likes*3;
+  return dateValue(article)/86400000;
+}
+
 function renderSidebar(items){
   const el=document.getElementById('sidebar-list');
   const list=[...items]
     .sort((a,b)=>{
-      const av=Number(a.views??a.view_count??a.read_count??0);
-      const bv=Number(b.views??b.view_count??b.read_count??0);
-      if(av||bv)return bv-av;
-      return dateValue(b)-dateValue(a);
+      const scoreDiff=popularityScore(b)-popularityScore(a);
+      if(scoreDiff!==0)return scoreDiff;
+      return String(b.id??'').localeCompare(String(a.id??''),undefined,{numeric:true});
     })
     .slice(0,5);
 
@@ -470,7 +482,14 @@ function renderArticles(){
   const empty=document.getElementById('empty-state');
   const pagination=document.getElementById('pagination');
 
-  const filtered=[...getFilteredArticles()].sort((a,b)=>dateValue(b)-dateValue(a));
+  const filtered=[...getFilteredArticles()]
+    .filter(article=>article&&article.slug)
+    .sort((a,b)=>{
+      const diff=dateValue(b)-dateValue(a);
+      if(diff!==0)return diff;
+      return Number(b.id||0)-Number(a.id||0);
+    });
+
   const perPage=getArticlesPerPage();
 
   if(!filtered.length){
@@ -484,9 +503,11 @@ function renderArticles(){
 
   empty.classList.add('hidden');
 
-  const top=filtered.slice(0,3);
+  // Bucket 1 — Pilihan Utama: tiga artikel terbaru.
+  const featuredItems=filtered.slice(0,3);
+  const featuredKeys=new Set(featuredItems.map(a=>String(a.id??a.slug)));
 
-  featured.innerHTML=top.map((article,index)=>{
+  featured.innerHTML=featuredItems.map((article,index)=>{
     const image=article.image||'';
     return `<a href="/artikel/${encodeURIComponent(article.slug)}" class="group block no-underline outline-none fade-in" style="animation-delay:${Math.min(index*.07,.2)}s">
       <article class="fs-main h-full flex flex-col">
@@ -496,7 +517,6 @@ function renderArticles(){
             : `<div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>`}
           <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/55 to-transparent"></div>
           <span class="absolute top-3 left-3 bg-white text-blue-700 text-[9px] md:text-[10px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-sm tracking-wide">${escapeHtml(canonicalCategory(article.category))}</span>
-          
         </div>
         <div class="p-4 md:p-5 flex flex-col flex-1">
           <div class="flex items-center justify-between gap-2 text-[10px] md:text-[11px] font-opensans font-semibold text-slate-400">
@@ -510,19 +530,23 @@ function renderArticles(){
     </a>`;
   }).join('');
 
-  const remainingAll=filtered.slice(3);
-  const popular=remainingAll
+  // Bucket 2 — Terpopuler: hanya berasal dari artikel di luar Pilihan Utama.
+  const remainingAfterFeatured=filtered.filter(a=>!featuredKeys.has(String(a.id??a.slug)));
+  const popular=remainingAfterFeatured
     .slice()
     .sort((a,b)=>{
-      const av=Number(a.views??a.view_count??a.read_count??0);
-      const bv=Number(b.views??b.view_count??b.read_count??0);
-      if(av||bv)return bv-av;
-      return dateValue(b)-dateValue(a);
+      const scoreDiff=popularityScore(b)-popularityScore(a);
+      if(scoreDiff!==0)return scoreDiff;
+      const dateDiff=dateValue(b)-dateValue(a);
+      if(dateDiff!==0)return dateDiff;
+      return Number(b.id||0)-Number(a.id||0);
     })
     .slice(0,5);
 
-  const popularIds=new Set(popular.map(a=>String(a.id ?? a.slug)));
-  const remaining=remainingAll.filter(a=>!popularIds.has(String(a.id ?? a.slug)));
+  const popularKeys=new Set(popular.map(a=>String(a.id??a.slug)));
+
+  // Bucket 3 — Terbaru: semua sisa artikel setelah Pilihan Utama + Terpopuler.
+  const remaining=remainingAfterFeatured.filter(a=>!popularKeys.has(String(a.id??a.slug)));
 
   const totalPages=Math.ceil(remaining.length/perPage);
   currentPage=Math.min(Math.max(currentPage,1),Math.max(totalPages,1));
@@ -575,13 +599,54 @@ document.querySelectorAll('.filter-btn').forEach(button=>button.addEventListener
 let resizeTimer;
 window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{const pages=Math.ceil(getFilteredArticles().length/getArticlesPerPage());if(currentPage>Math.max(pages,1))currentPage=Math.max(pages,1);renderArticles()},150)});
 
-document.getElementById('feedback-form').addEventListener('submit',event=>{
+const FEEDBACK_API=API_URL.replace('/api/articles','/api/feedback');
+
+document.getElementById('feedback-form').addEventListener('submit',async event=>{
   event.preventDefault();
-  const name=document.getElementById('feedback-name').value.trim(),email=document.getElementById('feedback-email').value.trim(),message=document.getElementById('feedback-message').value.trim();
-  const subject=encodeURIComponent(`Feedback Found Selection dari ${name}`);
-  const body=encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nFeedback:\n${message}`);
-  window.location.href=`mailto:proview.support@gmail.com?subject=${subject}&body=${body}`;
-  const status=document.getElementById('feedback-status');status.textContent='Membuka aplikasi email untuk mengirim feedback...';status.className='text-center text-sm leading-relaxed text-[#1d4ed8]';
+
+  const form=event.currentTarget;
+  const button=form.querySelector('button[type="submit"]');
+  const status=document.getElementById('feedback-status');
+  const name=document.getElementById('feedback-name').value.trim();
+  const email=document.getElementById('feedback-email').value.trim();
+  const message=document.getElementById('feedback-message').value.trim();
+
+  if(!name||!email||!message)return;
+
+  button.disabled=true;
+  button.textContent='Mengirim...';
+  button.classList.add('opacity-70','cursor-wait');
+  status.classList.remove('hidden');
+  status.textContent='Mengirim feedback...';
+  status.className='text-center text-sm leading-relaxed text-blue-600';
+
+  try{
+    const response=await fetch(FEEDBACK_API,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name,email,message})
+    });
+    const result=await response.json().catch(()=>({}));
+
+    if(!response.ok||!result.success){
+      throw new Error(result.error||`HTTP ${response.status}`);
+    }
+
+    button.disabled=true;
+    button.textContent='Terkirim';
+    button.classList.remove('bg-[#2563eb]','hover:bg-[#1d4ed8]','opacity-70','cursor-wait');
+    button.classList.add('bg-emerald-600','hover:bg-emerald-600','cursor-default');
+    status.textContent='Feedback berhasil terkirim. Terima kasih sudah membantu kami berkembang.';
+    status.className='text-center text-sm leading-relaxed text-emerald-600';
+    form.querySelectorAll('input,textarea').forEach(field=>field.disabled=true);
+  }catch(error){
+    console.error('Feedback gagal dikirim:',error);
+    button.disabled=false;
+    button.textContent='Kirim Feedback';
+    button.classList.remove('opacity-70','cursor-wait');
+    status.textContent='Feedback belum berhasil dikirim. Silakan coba lagi beberapa saat.';
+    status.className='text-center text-sm leading-relaxed text-red-600';
+  }
 });
 const privacyModal=document.getElementById('privacyModal'),privacyBody=document.getElementById('privacyBody');
 function openPrivacyModal(){privacyModal.classList.remove('opacity-0','pointer-events-none');privacyModal.classList.add('opacity-100');privacyBody.classList.remove('translate-y-5','scale-95','opacity-0');privacyBody.classList.add('translate-y-0','scale-100','opacity-100');document.body.style.overflow='hidden'}
