@@ -167,8 +167,187 @@
 .fs-side-item:last-child{border-bottom:0}
 .fs-side-item img{width:88px;height:72px;object-fit:cover;border-radius:11px;background:#eff6ff}
 .number-badge{width:27px;height:27px;border-radius:9px;background:#dbeafe;color:#1d4ed8;display:inline-flex;align-items:center;justify-content:center;font:700 12px 'Open Sans',sans-serif}
-        /* Card Beranda menggunakan sistem .fs-latest yang sama dengan /artikel/ */
-</style>
+
+/* Sistem card artikel beranda */
+.home-article-card{
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 7px 26px rgba(15,23,42,.05);
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+.home-article-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 18px 42px rgba(15,23,42,.11);
+  border-color:#bfdbfe;
+}
+.home-article-card img{transition:transform .65s cubic-bezier(.25,1,.5,1)}
+.home-article-card:hover img{transform:scale(1.045)}
+
+        /* =========================================================
+           FOUND SELECTION — HOME UI SYSTEM v2
+           Fokus: nyaman, modern, ringan, responsif, tanpa mengubah
+           kontrak API/backend yang sudah berjalan.
+        ========================================================= */
+        :root {
+            --fs-blue: #2563eb;
+            --fs-blue-dark: #1d4ed8;
+            --fs-ink: #0f172a;
+            --fs-body: #334155;
+            --fs-muted: #64748b;
+            --fs-line: #e2e8f0;
+            --fs-soft: #f8fafc;
+            --fs-card: rgba(255,255,255,.92);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            background:
+                radial-gradient(circle at 50% -10%, rgba(37,99,235,.055), transparent 30rem),
+                var(--fs-soft);
+            color: var(--fs-body);
+        }
+
+        .smart-navbar {
+            will-change: transform;
+            transition: transform .4s cubic-bezier(.22,1,.36,1);
+        }
+
+        .smart-navbar nav {
+            box-shadow: 0 12px 35px rgba(15,23,42,.08);
+            border-color: rgba(226,232,240,.9);
+            transition: box-shadow .25s ease, transform .25s ease;
+        }
+        .smart-navbar nav:hover {
+            box-shadow: 0 16px 42px rgba(15,23,42,.11);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color .22s ease, background-color .22s ease, transform .22s ease;
+        }
+        .nav-link:hover { transform: translateY(-1px); }
+        .nav-link.bg-\[\#2563eb\] {
+            box-shadow: 0 7px 18px rgba(37,99,235,.18);
+        }
+
+        .hero-surface {
+            background:
+                radial-gradient(circle at 50% 28%, rgba(255,255,255,.9), transparent 35%),
+                linear-gradient(180deg, #ffffff 0%, #f8fbff 72%, #f8fafc 100%);
+        }
+
+        .hero-copy {
+            text-wrap: balance;
+        }
+
+        .hero-eyebrow {
+            border-color: #dbeafe !important;
+            background: rgba(239,246,255,.8) !important;
+            color: var(--fs-blue-dark) !important;
+            box-shadow: 0 8px 24px rgba(37,99,235,.07);
+        }
+
+        .hero-cta {
+            box-shadow: 0 12px 28px rgba(37,99,235,.22);
+            transition: transform .22s ease, box-shadow .22s ease, background-color .22s ease;
+        }
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 34px rgba(37,99,235,.28);
+        }
+
+        .home-article-card {
+            border-color: rgba(226,232,240,.95);
+            background: var(--fs-card);
+            box-shadow: 0 8px 28px rgba(15,23,42,.055);
+            transition: transform .28s cubic-bezier(.22,1,.36,1),
+                        box-shadow .28s ease,
+                        border-color .28s ease;
+        }
+        .home-article-card:hover {
+            transform: translateY(-6px);
+            border-color: #bfdbfe;
+            box-shadow: 0 18px 42px rgba(15,23,42,.105);
+        }
+        .home-article-card a:focus-visible,
+        .nav-link:focus-visible,
+        button:focus-visible,
+        details summary:focus-visible {
+            outline: 3px solid rgba(37,99,235,.22);
+            outline-offset: 3px;
+        }
+
+        .category-heading {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .category-heading::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, #dbe3ef, transparent);
+        }
+
+        .slider-arrow {
+            width: 44px !important;
+            height: 44px !important;
+            border-color: #e2e8f0 !important;
+            box-shadow: 0 10px 24px rgba(15,23,42,.10) !important;
+            transition: opacity .2s ease, transform .2s ease,
+                        background-color .2s ease, color .2s ease;
+        }
+        .slider-arrow:hover {
+            transform: translateY(-50%) scale(1.04) !important;
+        }
+
+        .section-heading {
+            text-wrap: balance;
+        }
+
+        .faq-item {
+            border-color: rgba(226,232,240,.95) !important;
+            box-shadow: 0 5px 18px rgba(15,23,42,.035) !important;
+            transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease !important;
+        }
+        .faq-item:hover {
+            transform: translateY(-1px);
+            border-color: #bfdbfe !important;
+            box-shadow: 0 10px 25px rgba(15,23,42,.06) !important;
+        }
+
+        .footer-link {
+            transition: color .2s ease, transform .2s ease;
+        }
+        .footer-link:hover { transform: translateY(-1px); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .smart-navbar { top: .75rem; }
+            .smart-navbar nav { width: min(100%, 23rem); }
+            .smart-navbar nav > div { padding-left: .55rem; padding-right: .55rem; }
+            .nav-link { padding-left: .8rem !important; padding-right: .8rem !important; }
+        }
+
+    
+        @media (hover: none) {
+            .home-article-card:hover {
+                transform: none;
+                box-shadow: 0 8px 28px rgba(15,23,42,.055);
+            }
+        }
+
+    </style>
 
     <!-- FAQPage structured data untuk pemahaman mesin pencari -->
     <script type="application/ld+json">
@@ -241,7 +420,7 @@
     </div>
 
     <!-- Header / Hero Section (Satu-satunya Tag H1 demi SEO) -->
-    <header class="relative w-full min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden bg-white">
+    <header class="relative w-full min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden bg-white hero-surface">
         <div class="absolute inset-0 z-0">
             <picture>
                 <source media="(min-width: 1024px)" srcset="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1920&fm=webp&auto=format&fit=crop">
@@ -251,8 +430,8 @@
             <div class="absolute inset-0 bg-gradient-to-b from-white/40 via-white/80 to-[#f8fafc]"></div>
         </div>
 
-        <div class="relative z-10 text-center px-6 fade-in max-w-[1200px] mx-auto" style="animation-delay: 0.2s;">
-            <span class="inline-block py-1.5 px-4 rounded-full bg-slate-100 text-text-main text-[0.875rem] font-opensans font-bold tracking-widest mb-6 uppercase border border-slate-200">Perspektif Tajam</span>
+        <div class="relative z-10 text-center px-6 fade-in max-w-[1200px] mx-auto hero-copy" style="animation-delay: 0.2s;">
+            <span class="hero-eyebrow inline-block py-1.5 px-4 rounded-full bg-slate-100 text-text-main text-[0.875rem] font-opensans font-bold tracking-widest mb-6 uppercase border border-slate-200">Perspektif Tajam</span>
             <!-- Tag H1 Khusus di Beranda (Responsif Font Size) -->
             <h1 class="font-opensans text-[1.75rem] md:text-[2.5rem] font-bold tracking-tight text-text-main leading-[1.2] mb-6">
                 Sudut Pandang Baru <br class="hidden md:block"> untuk Setiap Cerita
@@ -260,7 +439,7 @@
             <p class="font-lato text-[1rem] text-text-body max-w-2xl mx-auto mb-10 leading-[1.6]">
                 Temukan inspirasi melalui ulasan mendalam, tren teknologi terkini, dan gaya hidup modern yang dikemas secara profesional, faktual, dan mudah dipahami.
             </p>
-            <a href="#artikel" class="inline-flex items-center justify-center px-8 py-4 font-opensans text-[0.875rem] font-bold text-white bg-[#2563eb] rounded-full hover:bg-[#1d4ed8] transition-colors shadow-lg">
+            <a href="#artikel" class="hero-cta inline-flex items-center justify-center px-8 py-4 font-opensans text-[0.875rem] font-bold text-white bg-[#2563eb] rounded-full hover:bg-[#1d4ed8] transition-colors shadow-lg">
                 Mulai Membaca
             </a>
         </div>
@@ -280,13 +459,13 @@
                     
                     <!-- Kategori: Teknologi (Slider) -->
                     <div id="cat-teknologi" class="relative scroll-mt-24 group/section">
-                        <div class="mb-6 pb-2 border-b border-gray-200/80">
+                        <div class="category-heading mb-6 pb-2 border-b border-gray-200/80">
                             <!-- Menggunakan Tag H2 pemisah kategori (Ketebalan Bold) -->
                             <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Teknologi</h2>
                         </div>
                         <div class="relative">
                             <!-- Floating Button Kiri -->
-                            <button onclick="slideLeft('slider-teknologi')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
+                            <button onclick="slideLeft('slider-teknologi')" aria-label="Geser Kiri" class="slider-arrow absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
                             </button>
                             <!-- Slider Container dengan padding Y agak besar agar animasi Pop-up Card tidak Crop -->
@@ -294,7 +473,7 @@
                                 <div class="artikel-kategori-teknologi flex gap-6 w-max pb-4"></div>
                             </div>
                             <!-- Floating Button Kanan -->
-                            <button onclick="slideRight('slider-teknologi')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
+                            <button onclick="slideRight('slider-teknologi')" aria-label="Geser Kanan" class="slider-arrow absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -302,17 +481,17 @@
 
                     <!-- Kategori: Hiburan (Slider) -->
                     <div id="cat-hiburan" class="relative scroll-mt-24 group/section">
-                        <div class="mb-6 pb-2 border-b border-gray-200/80">
+                        <div class="category-heading mb-6 pb-2 border-b border-gray-200/80">
                             <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Hiburan</h2>
                         </div>
                         <div class="relative">
-                            <button onclick="slideLeft('slider-hiburan')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
+                            <button onclick="slideLeft('slider-hiburan')" aria-label="Geser Kiri" class="slider-arrow absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
                             </button>
                             <div id="slider-hiburan" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
                                 <div class="artikel-kategori-hiburan flex gap-6 w-max pb-4"></div>
                             </div>
-                            <button onclick="slideRight('slider-hiburan')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
+                            <button onclick="slideRight('slider-hiburan')" aria-label="Geser Kanan" class="slider-arrow absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -320,17 +499,17 @@
 
                     <!-- Kategori: Esensial (Slider) -->
                     <div id="cat-esensial" class="relative scroll-mt-24 group/section">
-                        <div class="mb-6 pb-2 border-b border-gray-200/80">
+                        <div class="category-heading mb-6 pb-2 border-b border-gray-200/80">
                             <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Esensial</h2>
                         </div>
                         <div class="relative">
-                            <button onclick="slideLeft('slider-esensial')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
+                            <button onclick="slideLeft('slider-esensial')" aria-label="Geser Kiri" class="slider-arrow absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
                             </button>
                             <div id="slider-esensial" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
                                 <div class="artikel-kategori-esensial flex gap-6 w-max pb-4"></div>
                             </div>
-                            <button onclick="slideRight('slider-esensial')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
+                            <button onclick="slideRight('slider-esensial')" aria-label="Geser Kanan" class="slider-arrow absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -338,17 +517,17 @@
 
                     <!-- Kategori: Gaya Hidup (Slider) -->
                     <div id="cat-gaya-hidup" class="relative scroll-mt-24 group/section">
-                        <div class="mb-6 pb-2 border-b border-gray-200/80">
+                        <div class="category-heading mb-6 pb-2 border-b border-gray-200/80">
                             <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Gaya Hidup</h2>
                         </div>
                         <div class="relative">
-                            <button onclick="slideLeft('slider-gayahidup')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
+                            <button onclick="slideLeft('slider-gayahidup')" aria-label="Geser Kiri" class="slider-arrow absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
                             </button>
                             <div id="slider-gayahidup" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
                                 <div class="artikel-kategori-gaya-hidup flex gap-6 w-max pb-4"></div>
                             </div>
-                            <button onclick="slideRight('slider-gayahidup')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
+                            <button onclick="slideRight('slider-gayahidup')" aria-label="Geser Kanan" class="slider-arrow absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -356,17 +535,17 @@
 
                     <!-- Kategori: Kesehatan (Slider Tambahan) -->
                     <div id="cat-kesehatan" class="relative scroll-mt-24 group/section">
-                        <div class="mb-6 pb-2 border-b border-gray-200/80">
+                        <div class="category-heading mb-6 pb-2 border-b border-gray-200/80">
                             <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Kesehatan</h2>
                         </div>
                         <div class="relative">
-                            <button onclick="slideLeft('slider-kesehatan')" aria-label="Geser Kiri" class="absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
+                            <button onclick="slideLeft('slider-kesehatan')" aria-label="Geser Kiri" class="slider-arrow absolute -left-6 md:-left-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
                             </button>
                             <div id="slider-kesehatan" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth" style="will-change: transform;">
                                 <div class="artikel-kategori-kesehatan flex gap-6 w-max pb-4"></div>
                             </div>
-                            <button onclick="slideRight('slider-kesehatan')" aria-label="Geser Kanan" class="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
+                            <button onclick="slideRight('slider-kesehatan')" aria-label="Geser Kanan" class="slider-arrow absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex opacity-0 group-hover/section:opacity-100 items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-100 text-text-main hover:bg-[#2563eb] hover:text-white transition-all shadow-xl">
                                 <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -625,25 +804,6 @@
             // --- Artikel Beranda: sumber utama dari backend Admin ---
             // Artikel yang berstatus published dari API otomatis menggantikan seluruh dummy.
             const ARTICLES_API = 'https://found-selection-api.foundselection.workers.dev/api/articles';
-            const CATEGORY_LABELS = {
-                'Teknologi':'Teknologi',
-                'technology':'Teknologi',
-                'Hiburan':'Hiburan',
-                'entertainment':'Hiburan',
-                'Esensial':'Esensial',
-                'essential':'Esensial',
-                'Lifestyle':'Gaya Hidup',
-                'lifestyle':'Gaya Hidup',
-                'Gaya Hidup':'Gaya Hidup',
-                'Kesehatan':'Kesehatan',
-                'health':'Kesehatan'
-            };
-
-            function canonicalCategory(value) {
-                const key = String(value || '').trim();
-                return CATEGORY_LABELS[key] || CATEGORY_LABELS[key.toLowerCase()] || key || 'Esensial';
-            }
-
             const CATEGORY_KEYS = {
                 'Teknologi': 'teknologi',
                 'technology': 'teknologi',
@@ -696,35 +856,37 @@
                 const title = escapeHtml(article.title || 'Tanpa Judul');
                 const slug = encodeURIComponent(article.slug || generateSlug(article.title || 'artikel'));
                 const permalink = `/artikel/${slug}`;
-                const category = canonicalCategory(article.category);
+                const category = String(article.category || 'Esensial');
                 const categoryLabel = escapeHtml(category);
                 const image = article.thumbnail || article.og_image || '';
                 const safeImage = escapeHtml(image);
                 const publishDate = formatDate(article.publish_date || article.created_at);
                 const publishDateISO = dateISO(article.publish_date || article.created_at);
                 const readTime = article.read_time ? `${escapeHtml(article.read_time)} min` : '';
-                const excerpt = escapeHtml(article.excerpt || '');
 
                 return `
-                    <div class="snap-start shrink-0 w-[280px] md:w-[320px] group block outline-none fade-in">
-                        <a href="${permalink}" class="block no-underline outline-none h-full">
-                            <article class="fs-latest h-full flex flex-col">
-                                <div class="relative aspect-[16/10] overflow-hidden bg-blue-50">
-                                    ${safeImage
-                                        ? `<img src="${safeImage}" alt="${title}" width="900" height="563" loading="lazy" decoding="async" class="w-full h-full object-cover">`
-                                        : `<div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>`}
-                                    <span class="absolute top-3 left-3 bg-white/95 text-blue-700 text-[9px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-sm">${categoryLabel}</span>
+                    <div class="snap-start shrink-0 w-[280px] md:w-[320px] group block outline-none">
+                        <article class="home-article-card h-full flex flex-col">
+                            <div class="relative aspect-[16/10] overflow-hidden bg-blue-50">
+                                ${safeImage
+                                    ? `<img src="${safeImage}" alt="${title}" width="900" height="563" loading="lazy" decoding="async" class="w-full h-full object-cover">`
+                                    : `<div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>`}
+                                <span class="absolute top-3 left-3 bg-blue-600 text-white text-[9px] md:text-[10px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-md tracking-wide">${categoryLabel}</span>
+                            </div>
+
+                            <div class="p-4 md:p-5 flex flex-col flex-1">
+                                <div class="flex items-center justify-between gap-2 text-[10px] md:text-[11px] font-opensans font-semibold text-slate-400">
+                                    <time datetime="${publishDateISO}" class="truncate">${escapeHtml(publishDate)}</time>
+                                    <span class="shrink-0">${readTime}</span>
                                 </div>
-                                <div class="p-4 md:p-5">
-                                    <div class="flex items-center justify-between gap-2 text-[10px] md:text-[11px] font-opensans font-semibold text-slate-400">
-                                        <time datetime="${publishDateISO}" class="truncate">${escapeHtml(publishDate)}</time>
-                                        <span class="shrink-0">${readTime}</span>
-                                    </div>
-                                    <h3 class="mt-2 font-opensans text-[0.98rem] md:text-[1.05rem] font-bold text-slate-900 leading-[1.38] group-hover:text-blue-600 transition-colors line-clamp-3">${title}</h3>
-                                    ${excerpt ? `<p class="mt-2 text-[0.76rem] md:text-[0.82rem] text-slate-500 leading-[1.55] line-clamp-3">${excerpt}</p>` : ''}
-                                </div>
-                            </article>
-                        </a>
+
+                                <h3 class="mt-2 font-opensans text-[0.98rem] md:text-[1.05rem] font-bold text-slate-900 leading-[1.38] line-clamp-3">
+                                    <a href="${permalink}" class="hover:text-blue-600 transition-colors" title="${title}">${title}</a>
+                                </h3>
+
+                                ${article.excerpt ? `<p class="mt-2 text-[0.76rem] md:text-[0.82rem] text-slate-500 leading-[1.55] line-clamp-3">${escapeHtml(article.excerpt)}</p>` : ''}
+                            </div>
+                        </article>
                     </div>`;
             }
 
@@ -734,44 +896,68 @@
                 });
             }
 
-            async function loadHomeArticles() {
-                clearHomeArticleCards();
+            function renderDummyFallback() {
+                // Dummy hanya fallback sementara jika backend belum memiliki artikel published.
+                const dummy = {
+                    teknologi: ['Era Baru Kecerdasan Buatan dalam Kehidupan Sehari-hari','Ulasan Mendalam: Smartphone Flagship Terbaik Tahun Ini'],
+                    hiburan: ['Rekomendasi Film Independen yang Wajib Anda Tonton','Tren Musik Digital dan Pengaruhnya terhadap Musisi Lokal'],
+                    esensial: ['Headphone Noise-Cancelling: Investasi atau Gengsi?','Review Kursi Ergonomis untuk Kerja Jarak Jauh'],
+                    'gaya-hidup': ['Filosofi Minimalisme dalam Menata Ruang Pribadi','Rutinitas Pagi yang Efektif Sebelum Memulai Hari'],
+                    kesehatan: ['Pentingnya Menjaga Pola Tidur untuk Produktivitas','Superfood Lokal yang Mudah Ditemukan di Pasar']
+                };
+                const dates = ['09 September 2026','08 September 2026'];
+                const times = ['3 min','5 min'];
 
+                Object.entries(dummy).forEach(([key, titles]) => {
+                    const c = categoryContainers[key];
+                    if (!c) return;
+                    c.innerHTML = titles.map((t,i) => `
+                        <div class="snap-start shrink-0 w-[280px] md:w-[320px] group block outline-none">
+                            <article class="home-article-card h-full flex flex-col">
+                                <div class="relative aspect-[16/10] overflow-hidden bg-blue-50">
+                                    <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>
+                                    <span class="absolute top-3 left-3 bg-blue-600 text-white text-[9px] md:text-[10px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-md tracking-wide">${escapeHtml(key === 'gaya-hidup' ? 'Gaya Hidup' : key.charAt(0).toUpperCase()+key.slice(1))}</span>
+                                </div>
+                                <div class="p-4 md:p-5 flex flex-col flex-1">
+                                    <div class="flex items-center justify-between gap-2 text-[10px] md:text-[11px] font-opensans font-semibold text-slate-400">
+                                        <time>${dates[i]}</time>
+                                        <span class="shrink-0">${times[i]}</span>
+                                    </div>
+                                    <h3 class="mt-2 font-opensans text-[0.98rem] md:text-[1.05rem] font-bold text-slate-900 leading-[1.38] line-clamp-3">
+                                        <a href="/artikel/${generateSlug(t)}" class="hover:text-blue-600 transition-colors">${escapeHtml(t)}</a>
+                                    </h3>
+                                </div>
+                            </article>
+                        </div>`).join('');
+                });
+            }
+
+            async function loadHomeArticles() {
                 try {
                     const response = await fetch(ARTICLES_API, {
                         method: 'GET',
-                        headers: { Accept: 'application/json' },
+                        headers: { 'Accept': 'application/json' },
                         cache: 'no-store'
                     });
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    const data = await response.json();
+                    const articles = normalizeArticles(data);
 
-                    if (!response.ok) throw new Error(`API HTTP ${response.status}`);
-
-                    const result = await response.json();
-                    if (!result.success || !Array.isArray(result.data)) {
-                        throw new Error('Format response API tidak sesuai.');
+                    if (articles.length > 0) {
+                        clearHomeArticleCards();
+                        articles
+                            .sort((a,b) => new Date(b.publish_date || b.created_at || 0) - new Date(a.publish_date || a.created_at || 0))
+                            .forEach(article => {
+                                const category = String(article.category || 'Esensial');
+                                const key = CATEGORY_KEYS[category] || CATEGORY_KEYS[category.toLowerCase()] || 'esensial';
+                                if (categoryContainers[key]) categoryContainers[key].insertAdjacentHTML('beforeend', renderBackendArticle(article));
+                            });
+                    } else {
+                        renderDummyFallback();
                     }
-
-                    const articles = result.data
-                        .filter(article => String(article?.status || '').toLowerCase() === 'published')
-                        .sort((a,b) =>
-                            new Date(b.publish_date || b.created_at || 0) -
-                            new Date(a.publish_date || a.created_at || 0)
-                        );
-
-                    articles.forEach(article => {
-                        const category = canonicalCategory(article.category);
-                        const key = CATEGORY_KEYS[category] || CATEGORY_KEYS[category.toLowerCase()] || 'esensial';
-
-                        if (categoryContainers[key]) {
-                            categoryContainers[key].insertAdjacentHTML(
-                                'beforeend',
-                                renderBackendArticle(article)
-                            );
-                        }
-                    });
                 } catch (error) {
                     console.warn('Artikel backend belum dapat dimuat:', error);
-                    clearHomeArticleCards();
+                    renderDummyFallback();
                 }
             }
 
