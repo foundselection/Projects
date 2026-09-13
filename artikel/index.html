@@ -93,6 +93,31 @@ a:focus-visible{
   outline-offset:3px;
 }
 
+.modal-active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.modal-inactive{
+  opacity:0;
+  pointer-events:none;
+}
+
+.modal-content-transition{
+  transition:opacity .25s ease;
+}
+
+.modal-inactive .modal-body{
+  transform:translateY(14px) scale(.98);
+  opacity:0;
+}
+
+.modal-active .modal-body{
+  transform:translateY(0) scale(1);
+  opacity:1;
+  transition:transform .25s ease,opacity .25s ease;
+}
+
 /* =========================
    LISTING
 ========================= */
@@ -1394,27 +1419,27 @@ body.detail-mode .detail-only{
           aria-label="Filter kategori"
         >
 
-          <button type="button" <button data-filter="Semua" class="filter-btn filter-active px-4 py-2.5 rounded-full border border-gray-200 bg-white font-opensans font-bold text-[.8rem] md:text-[.85rem]">
+          <button type="button" data-filter="Semua" class="filter-btn filter-active px-4 py-2.5 rounded-full border border-gray-200 bg-white font-opensans font-bold text-[.8rem] md:text-[.85rem]">
             Semua
           </button>
 
-          <button type="button" <button data-filter="Teknologi" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
+          <button type="button" data-filter="Teknologi" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
             Teknologi
           </button>
 
-          <button type="button" <button data-filter="Hiburan" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
+          <button type="button" data-filter="Hiburan" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
             Hiburan
           </button>
 
-          <button type="button" <button data-filter="Esensial" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
+          <button type="button" data-filter="Esensial" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
             Esensial
           </button>
 
-          <button type="button" <button data-filter="Gaya Hidup" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
+          <button type="button" data-filter="Gaya Hidup" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
             Gaya Hidup
           </button>
 
-          <button type="button" <button data-filter="Kesehatan" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
+          <button type="button" data-filter="Kesehatan" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
             Kesehatan
           </button>
 
@@ -1427,31 +1452,29 @@ body.detail-mode .detail-only{
 
         <div>
 
-          <div id="featured-section">
-            <div id="featured-header" class="flex items-center gap-4 mb-5">
+          <div class="flex items-center gap-4 mb-5">
 
-              <div>
+            <div>
 
-                <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">
-                  Pilihan Utama
-                </div>
-
-                <h2 class="mt-1 font-opensans text-xl md:text-2xl font-bold text-slate-900">
-                  Pilihan Utama
-                </h2>
-
+              <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">
+                Pilihan Utama
               </div>
 
-              <div class="section-rule flex-1"></div>
+              <h2 class="mt-1 font-opensans text-xl md:text-2xl font-bold text-slate-900">
+                Pilihan Utama
+              </h2>
 
             </div>
 
+            <div class="section-rule flex-1"></div>
 
-            <div
-              id="featured-grid"
-              class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6"
-            ></div>
           </div>
+
+
+          <div
+            id="featured-grid"
+            class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6"
+          ></div>
 
 
           <div class="flex items-center gap-4 mt-12 mb-5">
@@ -1667,6 +1690,14 @@ body.detail-mode .detail-only{
           FAQ
         </a>
 
+        <a
+          href="#privacyModal"
+          onclick="event.preventDefault(); openPrivacyModal()"
+          class="hover:text-blue-700 font-bold transition"
+        >
+          Kebijakan Privasi
+        </a>
+
       </div>
 
 
@@ -1688,6 +1719,67 @@ body.detail-mode .detail-only{
 </div>
 
 
+<!-- ============================================================
+     KEBIJAKAN PRIVASI
+============================================================ -->
+
+<div
+  id="privacyModal"
+  class="fixed inset-0 z-[200] flex items-center justify-center modal-inactive modal-content-transition"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="privacyModalTitle"
+>
+  <div
+    class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+    onclick="closePrivacyModal()"
+    aria-hidden="true"
+  ></div>
+
+  <div class="modal-body relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl mx-4 max-h-[85vh] flex flex-col overflow-hidden">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white">
+      <h2 id="privacyModalTitle" class="font-opensans text-[1.25rem] font-bold text-slate-900 tracking-tight">Kebijakan Privasi</h2>
+
+      <button
+        type="button"
+        aria-label="Tutup Kebijakan Privasi"
+        onclick="closePrivacyModal()"
+        class="text-slate-500 hover:text-[#1d4ed8] transition-colors p-2 -mr-2 outline-none"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+    </div>
+
+    <div class="px-6 py-6 overflow-y-auto font-lato text-[1rem] text-slate-700 space-y-4">
+      <p><strong>Terakhir Diperbarui: 09 September 2026</strong></p>
+      <p>Selamat datang di Found Selection (foundselection.blog). Privasi Anda sangat penting bagi kami. Dokumen Kebijakan Privasi ini menguraikan jenis informasi pribadi yang dikumpulkan dan dicatat oleh sistem kami, serta bagaimana kami menggunakannya untuk menunjang keamanan dan kenyamanan penjelajahan Anda.</p>
+
+      <h3 class="font-opensans font-bold text-[1.125rem] text-slate-900 mt-6">1. Pengumpulan Data</h3>
+      <p>Kami hanya mengumpulkan data esensial berupa aktivitas analitik anonim (seperti *page views* dan *time on site*) guna memahami tren bacaan audiens. Kami tidak melakukan ekstraksi data sensitif tanpa persetujuan eksplisit dari pihak pengguna.</p>
+
+      <h3 class="font-opensans font-bold text-[1.125rem] text-slate-900 mt-6">2. Penggunaan Tautan Afiliasi</h3>
+      <p>Found Selection berpartisipasi dalam program afiliasi. Kami menyertakan tautan afiliasi pada beberapa ulasan produk. Jika Anda mengklik atau melakukan pembelian melalui tautan tersebut, sistem jaringan afiliasi mungkin akan menempatkan *cookies* pada peramban (*browser*) Anda untuk melacak sumber referensi. Kami mungkin menerima komisi kecil tanpa adanya biaya tambahan bagi Anda.</p>
+
+      <h3 class="font-opensans font-bold text-[1.125rem] text-slate-900 mt-6">3. Pengelolaan Cookies</h3>
+      <p>Anda memegang kendali penuh atas konfigurasi *cookies* pada peramban Anda. Anda dapat menonaktifkan pelacakan pihak ketiga melalui pengaturan privasi keamanan *browser* yang Anda gunakan kapan saja.</p>
+
+      <h3 class="font-opensans font-bold text-[1.125rem] text-slate-900 mt-6">4. Hubungi Kami</h3>
+      <p>Apabila Anda memerlukan informasi lebih lanjut mengenai tata kelola privasi portal publikasi kami, jangan ragu untuk menghubungi representatif hukum atau tim peninjau kami melalui alamat: <strong>foundselection@gmail.com</strong>.</p>
+    </div>
+
+    <div class="px-6 py-4 border-t border-gray-100 bg-gray-50 flex justify-end">
+      <button
+        type="button"
+        onclick="closePrivacyModal()"
+        class="px-6 py-2 bg-[#2563eb] text-white font-opensans font-bold text-[0.875rem] rounded-full hover:bg-[#1d4ed8] transition-colors"
+      >
+        Saya Mengerti
+      </button>
+    </div>
+  </div>
+</div>
+
+
 <script>
 
 const API =
@@ -1695,6 +1787,41 @@ const API =
 
 const FEEDBACK_API =
   "https://found-selection-api.foundselection.workers.dev/api/feedback";
+
+const privacyModal =
+  document.getElementById("privacyModal");
+
+let lastPrivacyTrigger = null;
+
+function openPrivacyModal(){
+  if(!privacyModal) return;
+  lastPrivacyTrigger = document.activeElement;
+  privacyModal.classList.remove("modal-inactive");
+  privacyModal.classList.add("modal-active");
+  document.body.style.overflow = "hidden";
+
+  const closeButton =
+    privacyModal.querySelector('button[aria-label="Tutup Kebijakan Privasi"]');
+
+  if(closeButton) closeButton.focus();
+}
+
+function closePrivacyModal(){
+  if(!privacyModal) return;
+  privacyModal.classList.remove("modal-active");
+  privacyModal.classList.add("modal-inactive");
+  document.body.style.overflow = "";
+
+  if(lastPrivacyTrigger && typeof lastPrivacyTrigger.focus === "function"){
+    lastPrivacyTrigger.focus();
+  }
+}
+
+document.addEventListener("keydown", event => {
+  if(event.key === "Escape" && privacyModal?.classList.contains("modal-active")){
+    closePrivacyModal();
+  }
+});
 
 let articles = [];
 let currentFilter = "Semua";
@@ -1856,7 +1983,7 @@ function optimizedImageUrl(url, width){
   const prefix = source.slice(0, markerIndex + marker.length);
   const rest = source.slice(markerIndex + marker.length);
 
-  const versionMatch = rest.match(/^(?:[^/]+\/)*(v\\d+\/)/);
+  const versionMatch = rest.match(/^(?:[^/]+\/)*(v\d+\/)/);
 
   if(versionMatch){
     return prefix
@@ -1884,23 +2011,48 @@ function imageSrcSet(url, widths = [480,640]){
     .join(", ");
 }
 
-function isEditorialPick(article){
-  const explicit =
-    article?.featured ??
-    article?.is_featured ??
-    article?.editorial ??
-    article?.editorial_pick;
+function readPlacement(article, key){
 
-  if(
-    explicit === true ||
-    explicit === 1 ||
-    String(explicit || "").toLowerCase() === "true" ||
-    String(explicit || "").toLowerCase() === "featured"
-  ){
-    return true;
+  const placement =
+    article?.placement ||
+    article?.placements ||
+    article?.section_placement ||
+    article?.sectionPlacement ||
+    {};
+
+  const aliases = {
+    featured:["featured","is_featured","show_featured","editorial","editorial_pick"],
+    latest:["latest","is_latest","show_latest","include_latest"],
+    popular:["popular","is_popular","show_popular","include_popular"]
+  };
+
+  for(const name of aliases[key] || []){
+    if(Object.prototype.hasOwnProperty.call(article || {}, name)){
+      return article[name];
+    }
+    if(Object.prototype.hasOwnProperty.call(placement, name)){
+      return placement[name];
+    }
   }
 
-  return false;
+  return null;
+}
+
+function placementBoolean(value){
+  const normalized = String(value ?? "").trim().toLowerCase();
+  return value === true || value === 1 || normalized === "true" || normalized === "1" || normalized === "yes" || normalized === "on";
+}
+
+function hasPlacementControl(article){
+  return (
+    readPlacement(article,"featured") !== null ||
+    readPlacement(article,"latest") !== null ||
+    readPlacement(article,"popular") !== null
+  );
+}
+
+function isPlacementEnabled(article, key){
+  return placementBoolean(readPlacement(article,key));
 }
 
 
@@ -1951,7 +2103,15 @@ function normalizeArticle(article){
         article.likes ??
         article.like_count ??
         0
-      ) || 0
+      ) || 0,
+
+    placement: {
+      featured: readPlacement(article,"featured"),
+      latest: readPlacement(article,"latest"),
+      popular: readPlacement(article,"popular")
+    },
+
+    placementConfigured: hasPlacementControl(article)
 
   };
 
@@ -2204,11 +2364,6 @@ function renderArticles(){
       "featured-grid"
     );
 
-  const featuredSection =
-    document.getElementById(
-      "featured-section"
-    );
-
   const empty =
     document.getElementById(
       "empty-state"
@@ -2250,7 +2405,6 @@ function renderArticles(){
   if(!filtered.length){
 
     featured.innerHTML = "";
-    if(featuredSection) featuredSection.hidden = true;
     grid.innerHTML = "";
 
     document.getElementById(
@@ -2273,18 +2427,35 @@ function renderArticles(){
   );
 
 
-  /* PILIHAN UTAMA — hanya tampil jika ada flag editorial eksplisit. */
-  const editorialPool =
-    filtered.filter(
-      isEditorialPick
+  /*
+     Placement is admin-ready. Until the Worker/Admin exposes placement flags,
+     keep the current safe fallback so the section never renders empty by accident.
+     Once flags exist, each section is independent and overlap is allowed.
+     */
+  const placementMode =
+    filtered.some(
+      article => article.placementConfigured
     );
 
   const featuredItems =
-    editorialPool.slice(0,3);
+    (placementMode
+      ? filtered.filter(
+          article =>
+            isPlacementEnabled(article,"featured")
+        )
+      : filtered
+    ).slice(0,3);
 
-  if(featuredSection){
-    featuredSection.hidden = featuredItems.length === 0;
+  const featuredHeader =
+    featured.previousElementSibling;
+
+  if(featuredHeader){
+    featuredHeader.classList.toggle(
+      "hidden",
+      placementMode && featuredItems.length === 0
+    );
   }
+
 
   featured.innerHTML =
     featuredItems
@@ -2335,9 +2506,7 @@ function renderArticles(){
                     `
 
                     : `
-                      <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100 flex items-center justify-center px-5 text-center">
-                        <span class="font-opensans text-[.72rem] md:text-[.76rem] font-semibold tracking-wide text-slate-400">Gambar belum tersedia</span>
-                      </div>
+                      <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>
                     `
                   }
 
@@ -2384,9 +2553,14 @@ function renderArticles(){
       .join("");
 
 
-  /* TERBARU — always newest, independent of featured/popular */
+  /* TERBARU — independent section; admin flags may include/exclude it. */
   const latest =
     [...filtered]
+      .filter(
+        article =>
+          !placementMode ||
+          isPlacementEnabled(article,"latest")
+      )
       .sort(
         (a,b) => {
           const diff =
@@ -2407,6 +2581,16 @@ function renderArticles(){
 
   const perPage =
     getArticlesPerPage();
+
+  const latestHeader =
+    grid.previousElementSibling;
+
+  if(latestHeader){
+    latestHeader.classList.toggle(
+      "hidden",
+      placementMode && latest.length === 0
+    );
+  }
 
   const totalPages =
     Math.max(
@@ -2533,6 +2717,11 @@ function renderArticles(){
 
   const popular =
     [...filtered]
+      .filter(
+        article =>
+          !placementMode ||
+          isPlacementEnabled(article,"popular")
+      )
       .sort(
         (a,b) => {
 
@@ -2557,6 +2746,11 @@ function renderArticles(){
   renderSidebar(
     popular
   );
+
+  if(placementMode && !popular.length){
+    document.getElementById("sidebar-list").innerHTML =
+      '<p class="py-5 text-sm leading-relaxed text-slate-500">Belum ada artikel yang dipilih untuk Artikel Terpopuler.</p>';
+  }
 
   renderPagination(
     totalPages
@@ -2662,7 +2856,7 @@ function renderPagination(
                 "article-grid"
               )
               .scrollIntoView({
-                behavior:"smooth",
+                behavior:"auto",
                 block:"start"
               });
 
@@ -3735,9 +3929,7 @@ document
                       `
 
                       : `
-                        <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100 flex items-center justify-center px-5 text-center">
-                        <span class="font-opensans text-[.72rem] md:text-[.76rem] font-semibold tracking-wide text-slate-400">Gambar belum tersedia</span>
-                      </div>
+                        <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>
                       `
                     }
 
