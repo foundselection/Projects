@@ -100,7 +100,7 @@ body.sidebar-collapsed .main{margin-left:0}
 }
 .extra-menu button{display:block;width:100%;padding:9px;border:0;border-radius:7px;background:#fff;text-align:left;font-size:11px}
 .extra-menu button:hover{background:#f1f4f8}
-.body .embed-card{margin:18px 0;border:1px solid #dfe4ea;border-radius:12px;background:#f8fafc;overflow:hidden}
+.body .embed-card{margin:18px 0;border:1px solid #dfe4ea;border-radius:12px;background:#f8fafc;overflow:hidden;cursor:pointer}.body .embed-card:hover{border-color:#bfdbfe;box-shadow:0 0 0 2px rgba(37,99,235,.08)}
 .body .embed-card .embed-label{padding:8px 12px;border-bottom:1px solid #e5e9ee;font:600 10px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#68717c}
 .body .embed-card iframe{display:block;width:100%;height:360px;border:0;background:#111}
 .body .embed-card .embed-link{display:block;padding:16px;color:var(--blue);text-decoration:none;font:600 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -219,9 +219,10 @@ body.sidebar-collapsed .main{margin-left:0}
       <label for="bodyImageLink">Tautan gambar (opsional)</label>
       <input id="bodyImageLink" class="input" placeholder="https://...">
     </div>
-    <div class="modal-actions">
-      <button class="button" type="button" onclick="closeImageMetaModal()">Batal</button>
-      <button class="button primary" type="button" onclick="applyImageMeta()">Simpan</button>
+    <div class="modal-actions" style="justify-content:space-between">
+      <button class="button danger" type="button" onclick="deleteEditingBodyImage()">Hapus gambar</button>
+      <div style="display:flex;gap:8px"><button class="button" type="button" onclick="closeImageMetaModal()">Batal</button>
+      <button class="button primary" type="button" onclick="applyImageMeta()">Simpan</button></div>
     </div>
   </div>
 </div>
@@ -321,7 +322,7 @@ function normalizeUrl(u){u=String(u||'').trim();return /^https?:\/\//i.test(u)?u
 function embedSource(url){try{const u=new URL(normalizeUrl(url)),h=u.hostname.replace(/^www\./,'');if(h==='youtube.com'||h==='youtu.be'){let id=u.searchParams.get('v');if(h==='youtu.be')id=u.pathname.slice(1);if(!id&&u.pathname.startsWith('/shorts/'))id=u.pathname.split('/')[2];return id?'https://www.youtube.com/embed/'+encodeURIComponent(id)+'?origin='+encodeURIComponent(window.location.origin):null}if(h==='vimeo.com'){const id=u.pathname.split('/').filter(Boolean)[0];return id?'https://player.vimeo.com/video/'+encodeURIComponent(id):null}return null}catch(e){return null}}
 function openEmbedPopover(){closePopovers();saveEditorSelection();$('embedPopover').classList.remove('hidden');$('embedUrl').focus()}
 function previewEmbed(){const url=$('embedUrl').value.trim(),box=$('embedPreviewMini');if(!url){box.classList.add('hidden');box.innerHTML='';return}const src=embedSource(url);box.classList.remove('hidden');box.innerHTML=src?'<iframe src="'+esc(src)+'" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>':'<div class="generic">Preview tautan: '+esc(url)+'</div>'}
-function insertEmbed(){const raw=$('embedUrl').value.trim();if(!raw){toast('Masukkan URL untuk embed.');return}const url=normalizeUrl(raw),src=embedSource(url);focusSelection();const div=document.createElement('div');div.className='embed-card';div.setAttribute('contenteditable','false');div.dataset.embedUrl=url;div.innerHTML=src?'<div class="embed-label">Embed</div><iframe src="'+esc(src)+'" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>':'<div class="embed-label">Tautan</div><a class="embed-link" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(url)+'</a>';const sel=getSelection();if(sel&&sel.rangeCount&&isInsideEditor(sel.anchorNode)){const r=sel.getRangeAt(0);r.deleteContents();r.insertNode(div);r.collapse(false)}else $('body').appendChild(div);$('body').appendChild(document.createTextNode(''));markDirty();analyze();closePopovers();$('embedUrl').value=''}
+function insertEmbed(){const raw=$('embedUrl').value.trim();if(!raw){toast('Masukkan URL untuk embed.');return}const url=normalizeUrl(raw),src=embedSource(url);focusSelection();const div=document.createElement('div');div.className='embed-card';div.setAttribute('contenteditable','false');div.dataset.embedUrl=url;div.innerHTML=src?'<div class="embed-label">Embed · klik untuk hapus</div><iframe src="'+esc(src)+'" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>':'<div class="embed-label">Tautan · klik untuk hapus</div><a class="embed-link" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(url)+'</a>';const sel=getSelection();if(sel&&sel.rangeCount&&isInsideEditor(sel.anchorNode)){const r=sel.getRangeAt(0);r.deleteContents();r.insertNode(div)}else $('body').appendChild(div);const editable=insertEditableParagraphAfter(div);focusEditableParagraph(editable);markDirty();analyze();closePopovers();$('embedUrl').value=''}
 function writerTool(kind){closePopovers();if(kind==='outline'){focusSelection();document.execCommand('insertHTML',false,'<h2>Pendahuluan</h2><p>Jelaskan konteks dan kebutuhan pembaca secara langsung.</p><h2>Poin Utama</h2><p>Uraikan informasi utama dengan subheading dan paragraf yang ringkas.</p><h2>Kesimpulan</h2><p>Rangkum poin penting dan berikan langkah berikutnya.</p>');markDirty();analyze();return}if(kind==='meta'){const t=textOf(getBody()).trim();if(!t){toast('Tulis isi artikel terlebih dahulu.');return}$('metaDesc').value=t.replace(/\s+/g,' ').slice(0,160);markDirty();analyze();toast('Meta description dibuat dari isi artikel.');return}if(kind==='title'){const t=$('title').value.trim();toast(t?'Coba variasi dengan menonjolkan manfaat, angka, atau sudut pandang yang lebih spesifik.':'Isi judul artikel terlebih dahulu.');return}if(kind==='shorten'){const selected=getSelection()?.toString().trim();toast(selected?'Teks terpilih siap diringkas.':'Blok teks yang ingin diringkas terlebih dahulu.')}}
 function updateToolbarState(){
   if(mode!=='visual')return;
@@ -457,14 +458,11 @@ function insertBodyImageElement(data){
     const r=sel.getRangeAt(0);
     r.deleteContents();
     r.insertNode(figure);
-    r.setStartAfter(figure);
-    r.collapse(true);
-    sel.removeAllRanges();
-    sel.addRange(r);
   }else{
     $('body').appendChild(figure);
-    $('body').appendChild(document.createTextNode(''));
   }
+  const editable=insertEditableParagraphAfter(figure);
+  focusEditableParagraph(editable);
   markDirty();analyze();
   openImageMetaModal(figure);
 }
@@ -479,6 +477,35 @@ function openImageMetaModal(figure){
   setTimeout(()=>$('bodyImageAlt').focus(),30);
 }
 function closeImageMetaModal(){window.__editingBodyImage=null;$('imageMetaModal').style.display='none'}
+function deleteEditingBodyImage(){
+  const figure=window.__editingBodyImage;
+  if(!figure){closeImageMetaModal();return}
+  figure.remove();
+  window.__editingBodyImage=null;
+  $('imageMetaModal').style.display='none';
+  markDirty();
+  analyze();
+  toast('Gambar dihapus.');
+}
+function insertEditableParagraphAfter(block){
+  if(!block?.parentNode)return null;
+  const next=block.nextSibling;
+  if(next && next.nodeType===1 && next.tagName==='P')return next;
+  const p=document.createElement('p');
+  p.innerHTML='<br>';
+  block.parentNode.insertBefore(p,block.nextSibling);
+  return p;
+}
+function focusEditableParagraph(p){
+  if(!p)return;
+  const range=document.createRange();
+  const sel=getSelection();
+  range.selectNodeContents(p);
+  range.collapse(false);
+  sel.removeAllRanges();
+  sel.addRange(range);
+  $('body').focus();
+}
 function applyImageMeta(){
   const figure=window.__editingBodyImage;
   if(!figure){closeImageMetaModal();return}
@@ -700,6 +727,17 @@ $('body').addEventListener('click',e=>{
     openImageMetaModal(figure);
     return;
   }
+  const embed=e.target.closest?.('.embed-card');
+  if(embed&&$('body').contains(embed)){
+    e.preventDefault();
+    if(confirm('Hapus embed/video ini dari artikel?')){
+      embed.remove();
+      markDirty();
+      analyze();
+      toast('Embed/video dihapus.');
+    }
+    return;
+  }
   const anchor=e.target.closest?.('a[href]');
   if(anchor&&$('body').contains(anchor)&&!e.ctrlKey&&!e.metaKey&&!e.shiftKey&&!e.altKey){
     e.preventDefault();
@@ -723,6 +761,20 @@ $('imageFormat').addEventListener('change',async()=>{
 $('body').addEventListener('input',markDirty);
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
 document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();savePost('draft')}if(e.key==='Escape'){closeModal();closePopovers();closeImageMetaModal();closeLinkInspector()}});
+$('body').addEventListener('keydown',e=>{
+  if(!['Backspace','Delete'].includes(e.key))return;
+  const sel=getSelection();
+  if(!sel||!sel.rangeCount)return;
+  let node=sel.anchorNode?.nodeType===3?sel.anchorNode.parentElement:sel.anchorNode;
+  const block=node?.closest?.('.body-image-block,.embed-card');
+  if(block&&$('body').contains(block)){
+    e.preventDefault();
+    block.remove();
+    markDirty();
+    analyze();
+    toast('Elemen dihapus.');
+  }
+});
 newPost();$('body').addEventListener('focus',updateToolbarState);updateToolbarState();(async()=>{try{const r=await fetch(AUTH_API+'/me',{credentials:'include',headers:{Accept:'application/json'}});const j=await r.json();if(j.authenticated){hideLogin();await load()}else showLogin()}catch(e){showLogin()}})();
 
 document.addEventListener('visibilitychange',()=>{
