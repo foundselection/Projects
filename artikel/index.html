@@ -1427,29 +1427,31 @@ body.detail-mode .detail-only{
 
         <div>
 
-          <div class="flex items-center gap-4 mb-5">
+          <div id="featured-section">
+            <div id="featured-header" class="flex items-center gap-4 mb-5">
 
-            <div>
+              <div>
 
-              <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">
-                Pilihan Utama
+                <div class="text-[10px] font-opensans font-bold uppercase tracking-[.18em] text-blue-600">
+                  Pilihan Utama
+                </div>
+
+                <h2 class="mt-1 font-opensans text-xl md:text-2xl font-bold text-slate-900">
+                  Pilihan Utama
+                </h2>
+
               </div>
 
-              <h2 class="mt-1 font-opensans text-xl md:text-2xl font-bold text-slate-900">
-                Pilihan Utama
-              </h2>
+              <div class="section-rule flex-1"></div>
 
             </div>
 
-            <div class="section-rule flex-1"></div>
 
+            <div
+              id="featured-grid"
+              class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6"
+            ></div>
           </div>
-
-
-          <div
-            id="featured-grid"
-            class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6"
-          ></div>
 
 
           <div class="flex items-center gap-4 mt-12 mb-5">
@@ -2202,6 +2204,11 @@ function renderArticles(){
       "featured-grid"
     );
 
+  const featuredSection =
+    document.getElementById(
+      "featured-section"
+    );
+
   const empty =
     document.getElementById(
       "empty-state"
@@ -2243,6 +2250,7 @@ function renderArticles(){
   if(!filtered.length){
 
     featured.innerHTML = "";
+    if(featuredSection) featuredSection.hidden = true;
     grid.innerHTML = "";
 
     document.getElementById(
@@ -2265,20 +2273,18 @@ function renderArticles(){
   );
 
 
-  /* PILIHAN UTAMA — editorial selection */
+  /* PILIHAN UTAMA — hanya tampil jika ada flag editorial eksplisit. */
   const editorialPool =
     filtered.filter(
       isEditorialPick
     );
 
   const featuredItems =
-    (
-      editorialPool.length
-        ? editorialPool
-        : filtered
-    )
-      .slice(0,3);
+    editorialPool.slice(0,3);
 
+  if(featuredSection){
+    featuredSection.hidden = featuredItems.length === 0;
+  }
 
   featured.innerHTML =
     featuredItems
@@ -2329,7 +2335,9 @@ function renderArticles(){
                     `
 
                     : `
-                      <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>
+                      <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100 flex items-center justify-center px-5 text-center">
+                        <span class="font-opensans text-[.72rem] md:text-[.76rem] font-semibold tracking-wide text-slate-400">Gambar belum tersedia</span>
+                      </div>
                     `
                   }
 
@@ -3727,7 +3735,9 @@ document
                       `
 
                       : `
-                        <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>
+                        <div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100 flex items-center justify-center px-5 text-center">
+                        <span class="font-opensans text-[.72rem] md:text-[.76rem] font-semibold tracking-wide text-slate-400">Gambar belum tersedia</span>
+                      </div>
                       `
                     }
 
