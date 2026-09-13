@@ -21,11 +21,12 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-N8VVWT4H');</script>
     <!-- End Google Tag Manager -->
-    <title>Found Selection | Ulasan & Artikel Terkini Inspirasi Anda</title>
+    <title>Found Selection - Artikel Pilihan Teknologi, Hiburan & Gaya Hidup</title>
     
-    <meta name="description" content="Found Selection menyajikan ulasan produk mendalam, artikel teknologi, hiburan, esensial, gaya hidup, dan kesehatan terkini. Temukan perspektif baru yang faktual dan tajam.">
-    <meta name="keywords" content="ulasan produk, blog teknologi, tren hiburan, gaya hidup modern, kesehatan, artikel esensial, Found Selection, review objektif">
-    <meta name="author" content="Found Selection">
+    <meta name="description" content="Temukan artikel berkualitas tentang teknologi, hiburan, kesehatan, dan gaya hidup. Review produk, tips praktis, dan rekomendasi terpercaya dari Found Selection.">
+        <meta name="author" content="Found Selection">
+    <meta name="theme-color" content="#2563eb">
+    <meta property="og:locale" content="id_ID">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <!-- Bahasa utama: Indonesia. Arsitektur siap diperluas ke /en/article/{slug} bila demand internasional terbukti. -->
     
@@ -36,12 +37,22 @@
     <meta property="og:description" content="Temukan artikel pilihan, ulasan produk terpercaya, dan tren terkini dari kacamata Found Selection.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://foundselection.blog/">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1200&fm=webp&auto=format&fit=crop">
+    <meta property="og:image" content="https://foundselection.blog/found-selection-hero.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Found Selection - Artikel Pilihan Teknologi, Hiburan & Gaya Hidup">
+    <meta name="twitter:description" content="Temukan artikel berkualitas tentang teknologi, hiburan, kesehatan, dan gaya hidup. Review produk, tips praktis, dan rekomendasi terpercaya dari Found Selection.">
+    <meta name="twitter:image" content="https://foundselection.blog/found-selection-hero.jpg">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preload" as="image" href="/found-selection-hero.jpg" fetchpriority="high">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Sistem 3 Font SEO Google: Lato, Open Sans, Roboto -->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font utama: Open Sans untuk UI/heading, Lato untuk body/content -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -51,7 +62,6 @@
                     fontFamily: {
                         opensans: ['Open Sans', 'Arial', 'sans-serif'],
                         lato: ['Lato', 'Arial', 'sans-serif'],
-                        roboto: ['Roboto', 'Arial', 'sans-serif'],
                     },
                     colors: {
                         text: {
@@ -342,6 +352,19 @@
         }
 
     
+
+        @media (max-width: 767px) {
+            .home-article-card-link {
+                width: min(74vw, 300px) !important;
+            }
+            .home-article-skeleton {
+                width: min(74vw, 300px) !important;
+            }
+            .home-article-empty {
+                min-width: min(74vw, 300px) !important;
+            }
+        }
+
         @media (hover: none) {
             .home-article-card:hover {
                 transform: none;
@@ -350,6 +373,31 @@
         }
 
     </style>
+
+    <!-- WebSite + Organization structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Found Selection",
+          "url": "https://foundselection.blog/",
+          "description": "Artikel pilihan tentang teknologi, hiburan, kesehatan, gaya hidup, dan produk esensial Indonesia."
+        },
+        {
+          "@type": "Organization",
+          "name": "Found Selection",
+          "url": "https://foundselection.blog/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://foundselection.blog/android-chrome-512x512.png"
+          },
+          "email": "foundselection@gmail.com"
+        }
+      ]
+    }
+    </script>
 
     <!-- FAQPage structured data untuk pemahaman mesin pencari -->
     <script type="application/ld+json">
@@ -425,9 +473,7 @@
     <header class="relative w-full min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden bg-white hero-surface">
         <div class="absolute inset-0 z-0">
             <picture>
-                <source media="(min-width: 1024px)" srcset="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1920&fm=webp&auto=format&fit=crop">
-                <source media="(min-width: 640px)" srcset="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=1024&fm=webp&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=640&fm=webp&auto=format&fit=crop" width="1920" height="1080" alt="Ruang kerja editorial Found Selection" class="w-full h-full object-cover object-center opacity-30" fetchpriority="high">
+                <img src="/found-selection-hero.jpg" width="1920" height="1080" alt="Ruang kerja editorial Found Selection" class="w-full h-full object-cover object-center opacity-30" fetchpriority="high" decoding="async">
             </picture>
             <div class="absolute inset-0 bg-gradient-to-b from-white/40 via-white/80 to-[#f8fafc]"></div>
         </div>
@@ -436,10 +482,10 @@
             <span class="hero-eyebrow inline-block py-1.5 px-4 rounded-full bg-slate-100 text-text-main text-[0.875rem] font-opensans font-bold tracking-widest mb-6 uppercase border border-slate-200">Perspektif Tajam</span>
             <!-- Tag H1 Khusus di Beranda (Responsif Font Size) -->
             <h1 class="font-opensans text-[1.75rem] md:text-[2.5rem] font-bold tracking-tight text-text-main leading-[1.2] mb-6">
-                Sudut Pandang Baru <br class="hidden md:block"> untuk Setiap Cerita
+                Temukan Artikel Pilihan <br class="hidden md:block"> untuk Setiap Aspek Hidup Anda
             </h1>
             <p class="font-lato text-[1rem] text-text-body max-w-2xl mx-auto mb-10 leading-[1.6]">
-                Temukan inspirasi melalui ulasan mendalam, tren teknologi terkini, dan gaya hidup modern yang dikemas secara profesional, faktual, dan mudah dipahami.
+                Kami menyediakan pilihan artikel terbaik tentang teknologi, hiburan, kesehatan, gaya hidup, dan produk esensial — dikurasi khusus untuk Anda.
             </p>
             <a href="#artikel" class="hero-cta inline-flex items-center justify-center px-8 py-4 font-opensans text-[0.875rem] font-bold text-white bg-[#2563eb] rounded-full hover:bg-[#1d4ed8] transition-colors shadow-lg">
                 Mulai Membaca
@@ -450,11 +496,11 @@
     <main>
         <!-- Section Artikel (5 Kategori dengan Slider Horizontal per 5 Artikel) -->
         <section id="artikel" class="py-24 bg-[#f8fafc]">
-            <div class="max-w-[1200px] mx-auto px-8 md:px-12">
+            <div class="max-w-[1200px] mx-auto px-5 md:px-12">
                 
                 <div class="text-center mb-16">
-                    <h2 class="font-opensans text-[1.75rem] md:text-[2rem] font-bold text-text-main mb-4 tracking-tight">Bacaan Terkini</h2>
-                    <p class="font-lato text-[1rem] text-text-muted max-w-2xl mx-auto">Eksplorasi wawasan terbaru dari kategori pilihan kami, disusun mendalam dan dioptimalkan untuk Anda.</p>
+                    <h2 class="font-opensans text-[1.75rem] md:text-[2rem] font-bold text-text-main mb-4 tracking-tight">Jelajahi Kategori Kami</h2>
+                    <p class="font-lato text-[1rem] text-text-muted max-w-2xl mx-auto">Jelajahi artikel terbaru, review produk, tips praktis, dan rekomendasi terpercaya dari lima kategori Found Selection.</p>
                 </div>
 
                 <div class="space-y-24">
@@ -553,6 +599,16 @@
                         </div>
                     </div>
 
+                </div>
+
+                <!-- Artikel Terbaru: aggregation hub dari artikel published -->
+                <div id="artikel-terbaru" class="mt-24 scroll-mt-24">
+                    <div class="category-heading mb-6 pb-2 border-b border-gray-200/80">
+                        <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Artikel Terbaru</h2>
+                    </div>
+                    <div id="latest-home-slider" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth">
+                        <div id="latest-home-articles" class="flex gap-6 w-max pb-4"></div>
+                    </div>
                 </div>
 
                 <!-- Tombol Tunggal "Lihat Semua Artikel" Invert Color (Tanpa Hover Menonjol) -->
@@ -688,7 +744,7 @@
 
             <div class="flex justify-center md:justify-end gap-8 font-opensans items-center">
                 <!-- Trigger Pop-up Modal Privasi -->
-                <a href="javascript:void(0)" onclick="openPrivacyModal()" class="hover:text-[#1d4ed8] font-bold transition-colors">Kebijakan Privasi</a>
+                <a href="#privacyModal" onclick="event.preventDefault(); openPrivacyModal()" class="hover:text-[#1d4ed8] font-bold transition-colors">Kebijakan Privasi</a>
                 
                 <a href="mailto:foundselection@gmail.com" class="hover:text-[#1d4ed8] transition-colors flex items-center gap-2 group/mail" aria-label="Contact">
                     <svg class="w-5 h-5 text-text-muted group-hover/mail:text-[#1d4ed8] transition-colors" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -699,7 +755,7 @@
     </footer>
 
     <!-- POP-UP MODAL KEBIJAKAN PRIVASI -->
-    <div id="privacyModal" class="fixed inset-0 z-[60] flex items-center justify-center modal-inactive modal-content-transition">
+    <div id="privacyModal" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle" class="fixed inset-0 z-[60] flex items-center justify-center modal-inactive modal-content-transition">
         <!-- Backdrop -->
         <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onclick="closePrivacyModal()"></div>
         
@@ -707,8 +763,8 @@
         <div class="modal-body relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl mx-4 max-h-[85vh] flex flex-col overflow-hidden">
             <!-- Header Modal -->
             <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-white">
-                <h2 class="font-opensans text-[1.25rem] font-bold text-text-main tracking-tight">Kebijakan Privasi</h2>
-                <button onclick="closePrivacyModal()" class="text-text-muted hover:text-[#1d4ed8] transition-colors p-2 -mr-2 outline-none">
+                <h2 id="privacyModalTitle" class="font-opensans text-[1.25rem] font-bold text-text-main tracking-tight">Kebijakan Privasi</h2>
+                <button type="button" onclick="closePrivacyModal()" aria-label="Tutup Kebijakan Privasi" class="text-text-muted hover:text-[#1d4ed8] transition-colors p-2 -mr-2 outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
@@ -742,19 +798,23 @@
 
     <script>
         // Logika Geser Slider
+        function getSliderScrollAmount() {
+            return window.innerWidth < 768
+                ? Math.min(window.innerWidth * 0.74, 300) + 24
+                : 324;
+        }
+
         function slideLeft(sliderId) {
             const slider = document.getElementById(sliderId);
-            if(slider) {
-                const scrollAmount = window.innerWidth < 768 ? 284 : 324;
-                slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            if (slider) {
+                slider.scrollBy({ left: -getSliderScrollAmount(), behavior: 'smooth' });
             }
         }
 
         function slideRight(sliderId) {
             const slider = document.getElementById(sliderId);
-            if(slider) {
-                const scrollAmount = window.innerWidth < 768 ? 284 : 324;
-                slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            if (slider) {
+                slider.scrollBy({ left: getSliderScrollAmount(), behavior: 'smooth' });
             }
         }
 
@@ -853,6 +913,7 @@
                 'gaya-hidup': document.querySelector('.artikel-kategori-gaya-hidup'),
                 kesehatan: document.querySelector('.artikel-kategori-kesehatan')
             };
+            const latestHomeContainer = document.getElementById('latest-home-articles');
 
             function escapeHtml(value) {
                 return String(value ?? '').replace(/[&<>"']/g, ch => ({
@@ -880,30 +941,52 @@
                 return Number.isNaN(d.getTime()) ? '' : d.toISOString().slice(0,10);
             }
 
+            function optimizeArticleImage(url, width = 640) {
+                const raw = String(url || '').trim();
+                if (!raw) return '';
+                try {
+                    const parsed = new URL(raw, window.location.origin);
+                    const uploadMarker = '/upload/';
+                    const uploadIndex = parsed.pathname.indexOf(uploadMarker);
+                    if (parsed.hostname.includes('res.cloudinary.com') && uploadIndex !== -1) {
+                        const afterUpload = parsed.pathname.slice(uploadIndex + uploadMarker.length);
+                        const firstSegment = afterUpload.split('/')[0];
+                        const alreadyTransformed = /(^|,)(f_auto|q_auto|w_\d+|h_\d+|c_[^,]+|dpr_auto)(,|$)/.test(firstSegment);
+                        if (!alreadyTransformed) {
+                            parsed.pathname = parsed.pathname.replace(uploadMarker, `${uploadMarker}f_auto,q_auto,w_${width}/`);
+                        }
+                    }
+                    return parsed.href;
+                } catch {
+                    return raw;
+                }
+            }
+
             function renderBackendArticle(article) {
                 const title = escapeHtml(article.title || 'Tanpa Judul');
                 const slug = encodeURIComponent(article.slug || generateSlug(article.title || 'artikel'));
                 const permalink = `/artikel/${slug}`;
                 const category = String(article.category || 'Esensial');
                 const categoryLabel = escapeHtml(category);
-                const image = article.thumbnail || article.og_image || '';
+                const image = optimizeArticleImage(article.thumbnail || article.og_image || '', 640);
                 const safeImage = escapeHtml(image);
+                const imageAlt = escapeHtml(article.image_alt || article.title || 'Gambar artikel Found Selection');
                 const publishDate = formatDate(article.publish_date || article.created_at);
                 const publishDateISO = dateISO(article.publish_date || article.created_at);
-                const readTime = article.read_time ? `${escapeHtml(article.read_time)} min` : '';
+                const readTime = article.read_time ? `${escapeHtml(article.read_time)} menit` : '';
 
                 return `
-                    <a href="${permalink}" class="snap-start shrink-0 w-[280px] md:w-[320px] group block outline-none no-underline focus:outline-none" aria-label="Baca artikel: ${title}">
+                    <a href="${permalink}" class="home-article-card-link snap-start shrink-0 w-[min(74vw,300px)] md:w-[320px] group block outline-none no-underline focus:outline-none" aria-label="Baca artikel: ${title}">
                         <article class="home-article-card h-full flex flex-col">
                             <div class="relative aspect-[16/10] overflow-hidden bg-blue-50">
                                 ${safeImage
-                                    ? `<img src="${safeImage}" alt="${title}" width="900" height="563" loading="lazy" decoding="async" class="w-full h-full object-cover">`
+                                    ? `<img src="${safeImage}" alt="${imageAlt}" width="640" height="400" loading="lazy" decoding="async" class="w-full h-full object-cover">`
                                     : `<div class="w-full h-full bg-gradient-to-br from-blue-50 via-white to-slate-100"></div>`}
                                 <span class="absolute top-3 left-3 bg-white text-blue-700 border border-blue-100 text-[9px] md:text-[10px] font-opensans font-bold px-2.5 py-1.5 rounded-full shadow-sm tracking-wide">${categoryLabel}</span>
                             </div>
 
                             <div class="p-4 md:p-5 flex flex-col flex-1">
-                                <div class="flex items-center justify-between gap-2 text-[10px] md:text-[11px] font-opensans font-semibold text-slate-400">
+                                <div class="flex items-center justify-between gap-2 text-[10px] md:text-[11px] font-opensans font-semibold text-slate-500">
                                     <time datetime="${publishDateISO}" class="truncate">${escapeHtml(publishDate)}</time>
                                     <span class="shrink-0">${readTime}</span>
                                 </div>
@@ -922,13 +1005,14 @@
                 Object.values(categoryContainers).forEach(container => {
                     if (container) container.innerHTML = '';
                 });
+                if (latestHomeContainer) latestHomeContainer.innerHTML = '';
             }
 
             function renderArticleLoadingState() {
                 Object.values(categoryContainers).forEach(container => {
                     if (!container) return;
                     container.innerHTML = `
-                        <div class="snap-start shrink-0 w-[280px] md:w-[320px]">
+                        <div class="home-article-skeleton snap-start shrink-0 w-[min(74vw,300px)] md:w-[320px]">
                             <div class="home-article-card overflow-hidden animate-pulse">
                                 <div class="aspect-[16/10] bg-slate-100"></div>
                                 <div class="p-4 md:p-5 space-y-3">
@@ -939,13 +1023,26 @@
                             </div>
                         </div>`;
                 });
+                if (latestHomeContainer) {
+                    latestHomeContainer.innerHTML = `
+                        <div class="home-article-skeleton snap-start shrink-0 w-[min(74vw,300px)] md:w-[320px]">
+                            <div class="home-article-card overflow-hidden animate-pulse">
+                                <div class="aspect-[16/10] bg-slate-100"></div>
+                                <div class="p-4 md:p-5 space-y-3">
+                                    <div class="h-3 w-24 rounded bg-slate-100"></div>
+                                    <div class="h-5 w-5/6 rounded bg-slate-100"></div>
+                                    <div class="h-3 w-full rounded bg-slate-100"></div>
+                                </div>
+                            </div>
+                        </div>`;
+                }
             }
 
             function renderArticleEmptyState(message = 'Belum ada artikel yang diterbitkan.') {
                 Object.entries(categoryContainers).forEach(([key, container]) => {
                     if (!container) return;
                     container.innerHTML = `
-                        <div class="w-full min-w-[280px] md:min-w-[320px] rounded-2xl border border-dashed border-slate-200 bg-white px-6 py-10 text-center">
+                        <div class="home-article-empty w-full min-w-[min(74vw,300px)] md:min-w-[320px] rounded-2xl border border-dashed border-slate-200 bg-white px-6 py-10 text-center">
                             <p class="font-opensans text-sm font-semibold text-slate-500">${escapeHtml(message)}</p>
                         </div>`;
                 });
@@ -958,7 +1055,7 @@
                     const response = await fetch(ARTICLES_API, {
                         method: 'GET',
                         headers: { 'Accept': 'application/json' },
-                        cache: 'no-store'
+                        cache: 'default'
                     });
 
                     if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -974,6 +1071,14 @@
                         .sort((a, b) => new Date(b.publish_date || b.created_at || 0) - new Date(a.publish_date || a.created_at || 0));
 
                     clearHomeArticleCards();
+
+                    // Homepage: tampilkan 6 artikel terbaru sebagai discovery layer.
+                    if (latestHomeContainer) {
+                        latestHomeContainer.innerHTML = articles
+                            .slice(0, 6)
+                            .map(renderBackendArticle)
+                            .join('');
+                    }
 
                     if (!articles.length) {
                         renderArticleEmptyState();
@@ -998,7 +1103,7 @@
                         if (!container) return;
                         if (!renderedCategories.has(key)) {
                             container.innerHTML = `
-                                <div class="w-full min-w-[280px] md:min-w-[320px] rounded-2xl border border-dashed border-slate-200 bg-white px-6 py-10 text-center">
+                                <div class="home-article-empty w-full min-w-[min(74vw,300px)] md:min-w-[320px] rounded-2xl border border-dashed border-slate-200 bg-white px-6 py-10 text-center">
                                     <p class="font-opensans text-sm font-semibold text-slate-400">Belum ada artikel.</p>
                                 </div>`;
                         }
