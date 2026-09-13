@@ -195,6 +195,7 @@
 .home-article-card img{transition:transform .65s cubic-bezier(.25,1,.5,1)}
 .home-article-card:hover img{transform:scale(1.045)}
 .home-article-card:focus-within{border-color:#93c5fd;box-shadow:0 18px 42px rgba(15,23,42,.11)}
+.home-article-card-link{transition:none !important;-webkit-tap-highlight-color:transparent}
 
 
         /* =========================================================
@@ -630,11 +631,16 @@
                 <p class="font-lato text-[1rem] text-text-body mb-10 leading-[1.6] max-w-2xl mx-auto">
                     Hadirkan produk Anda di hadapan audiens yang tepat. Kami menyajikan ulasan yang berimbang, elegan, dan teroptimasi secara profesional untuk visibilitas maksimal di mesin pencari.
                 </p>
-                <!-- Tombol kerja sama: buka Gmail Compose dengan pesan awal terisi -->
-                <button type="button" onclick="openCollaborationCompose()" class="inline-flex items-center justify-center gap-3 px-10 py-4 font-opensans text-[0.875rem] font-bold text-white bg-[#2563eb] border-2 border-[#2563eb] hover:bg-white hover:text-[#1d4ed8] transition-colors duration-300 rounded-full shadow-lg">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2-2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <!-- Tombol kerja sama: selalu buka tepat 1 tab Gmail, beranda tetap -->
+                <a
+                    href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=foundselection%40gmail.com&amp;su=Kerja%20Sama%20dengan%20Found%20Selection&amp;body=Halo%20Found%20Selection%2C%0A%0ASaya%20tertarik%20mengajukan%20kerja%20sama%20dengan%20detail%20singkat%20berikut%3A%0A%0ANama%20%2F%20Brand%3A%0AJenis%20kerja%20sama%3A%0AProduk%20%2F%20layanan%3A%0AWebsite%20%2F%20link%3A%0ADetail%20singkat%3A%0A%0ATerima%20kasih.%20Saya%20menunggu%20respons%20dari%20tim%20Found%20Selection."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center gap-3 px-10 py-4 font-opensans text-[0.875rem] font-bold text-white bg-[#2563eb] border-2 border-[#2563eb] hover:bg-white hover:text-[#1d4ed8] transition-colors duration-300 rounded-full shadow-lg"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                     Mulai Kerja Sama
-                </button>
+                </a>
             </div>
         </section>
 
@@ -835,31 +841,6 @@
             return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
         }
 
-        function openCollaborationCompose() {
-            const to = 'foundselection@gmail.com';
-            const subject = 'Kerja Sama dengan Found Selection';
-            const body = [
-                'Halo Found Selection,',
-                '',
-                'Saya tertarik mengajukan kerja sama dengan detail singkat berikut:',
-                '',
-                'Nama / Brand:',
-                'Jenis kerja sama:',
-                'Produk / layanan:',
-                'Website / link:',
-                'Detail singkat:',
-                '',
-                'Terima kasih. Saya menunggu respons dari tim Found Selection.'
-            ].join('\n');
-
-            const composeUrl = 'https://mail.google.com/mail/?view=cm&fs=1'
-                + '&to=' + encodeURIComponent(to)
-                + '&su=' + encodeURIComponent(subject)
-                + '&body=' + encodeURIComponent(body);
-
-            const popup = window.open(composeUrl, '_blank', 'noopener,noreferrer');
-            if (!popup) window.location.href = composeUrl;
-        }
 
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -991,7 +972,7 @@
                                     <span class="shrink-0">${readTime}</span>
                                 </div>
 
-                                <h3 class="mt-2 font-opensans text-[0.98rem] md:text-[1.05rem] font-bold text-slate-900 leading-[1.38] line-clamp-3 group-hover:text-blue-600 transition-colors">
+                                <h3 class="mt-2 font-opensans text-[0.98rem] md:text-[1.05rem] font-bold text-slate-900 leading-[1.38] line-clamp-3 group-hover:text-blue-600">
                                     ${title}
                                 </h3>
 
@@ -1009,33 +990,7 @@
             }
 
             function renderArticleLoadingState() {
-                Object.values(categoryContainers).forEach(container => {
-                    if (!container) return;
-                    container.innerHTML = `
-                        <div class="home-article-skeleton snap-start shrink-0 w-[min(74vw,300px)] md:w-[320px]">
-                            <div class="home-article-card overflow-hidden animate-pulse">
-                                <div class="aspect-[16/10] bg-slate-100"></div>
-                                <div class="p-4 md:p-5 space-y-3">
-                                    <div class="h-3 w-24 rounded bg-slate-100"></div>
-                                    <div class="h-5 w-5/6 rounded bg-slate-100"></div>
-                                    <div class="h-3 w-full rounded bg-slate-100"></div>
-                                </div>
-                            </div>
-                        </div>`;
-                });
-                if (latestHomeContainer) {
-                    latestHomeContainer.innerHTML = `
-                        <div class="home-article-skeleton snap-start shrink-0 w-[min(74vw,300px)] md:w-[320px]">
-                            <div class="home-article-card overflow-hidden animate-pulse">
-                                <div class="aspect-[16/10] bg-slate-100"></div>
-                                <div class="p-4 md:p-5 space-y-3">
-                                    <div class="h-3 w-24 rounded bg-slate-100"></div>
-                                    <div class="h-5 w-5/6 rounded bg-slate-100"></div>
-                                    <div class="h-3 w-full rounded bg-slate-100"></div>
-                                </div>
-                            </div>
-                        </div>`;
-                }
+                clearHomeArticleCards();
             }
 
             function renderArticleEmptyState(message = 'Belum ada artikel yang diterbitkan.') {
@@ -1049,7 +1004,7 @@
             }
 
             async function loadHomeArticles() {
-                renderArticleLoadingState();
+                clearHomeArticleCards();
 
                 try {
                     const response = await fetch(ARTICLES_API, {
@@ -1087,13 +1042,15 @@
 
                     const renderedCategories = new Set();
 
+                    const categoryCounts = {};
                     articles.forEach(article => {
                         const rawCategory = String(article.category || 'Esensial').trim();
                         const key = CATEGORY_KEYS[rawCategory] || CATEGORY_KEYS[rawCategory.toLowerCase()] || 'esensial';
                         const container = categoryContainers[key];
 
-                        if (container) {
+                        if (container && (categoryCounts[key] || 0) < 5) {
                             container.insertAdjacentHTML('beforeend', renderBackendArticle(article));
+                            categoryCounts[key] = (categoryCounts[key] || 0) + 1;
                             renderedCategories.add(key);
                         }
                     });
