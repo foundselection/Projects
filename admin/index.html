@@ -23,7 +23,7 @@
 .seo-head{display:flex;align-items:center;gap:8px}.score{font-weight:800}.badge{display:inline-flex;padding:4px 8px;border-radius:10px;font-size:10px;font-weight:700}.b-green{background:#edfaef;color:#008a20}.b-yellow{background:#fff8e5;color:#996800}.b-red{background:#fcf0f1;color:#b32d2e}.b-gray{background:#f0f0f1;color:#646970}.progress{height:7px;background:#dcdcde;border-radius:10px;overflow:hidden}.progress>i{display:block;height:100%;background:var(--green);width:0;transition:.2s}.checks{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;margin-top:11px}.check{font-size:11px;line-height:1.45}.ok{color:var(--green);font-weight:700}.no{color:#8c8f94;font-weight:700}
 .preview{border:1px solid var(--line);border-radius:3px;padding:13px;background:#fff}.g-url{color:#188038;font:12px Arial,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.g-title{color:#1a0dab;font:19px/1.3 Arial,sans-serif;margin-top:3px}.g-desc{color:#4d5156;font:12px/1.45 Arial,sans-serif;margin-top:4px}.count{font-size:11px;color:var(--muted);margin-top:4px;text-align:right}
 .publish-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.publish-main{width:100%}.meta-row{font-size:12px;padding:7px 0;border-top:1px solid #f0f0f1}.meta-row:first-child{border-top:0}.meta-row strong{font-weight:600}.cat-list label{font-weight:400;display:flex;gap:8px;align-items:center;margin:8px 0}.cat-list input{accent-color:var(--blue)}.placement-list{display:grid;gap:9px}.placement-item{display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border:1px solid #e1e5ea;background:#fafbfc;border-radius:9px}.placement-item:hover{border-color:#bfdbfe;background:#f8fbff}.placement-item input{margin-top:2px;accent-color:var(--blue)}.placement-item strong{display:block;font-size:12px}.placement-item span{display:block;margin-top:2px;font-size:10px;color:var(--muted);line-height:1.4}
-.image-drop{border:2px dashed #c3c4c7;background:#f6f7f7;min-height:185px;display:flex;align-items:center;justify-content:center;text-align:center;padding:15px;border-radius:3px;cursor:pointer}.image-drop.drag{border-color:var(--blue);background:#f0f6fc}.image-preview{width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--line);margin-top:10px;background:#f0f0f1}.file-meta{font-size:10px;color:var(--muted);line-height:1.5;margin-top:6px}.notice{border-left:4px solid var(--blue);background:#f0f6fc;padding:9px 10px;font-size:11px;line-height:1.5;margin-top:10px}.notice.warn{border-color:#dba617;background:#fff8e5}.admin-url{font-size:10px;color:var(--muted);word-break:break-all}
+.image-drop{border:2px dashed #c3c4c7;background:#f6f7f7;min-height:185px;display:flex;align-items:center;justify-content:center;text-align:center;padding:15px;border-radius:3px;cursor:pointer}.image-drop.drag{border-color:var(--blue);background:#f0f6fc}.image-preview{width:100%;aspect-ratio:16/9;object-fit:cover;border:1px solid var(--line);margin-top:10px;background:#f0f0f1}.file-meta{font-size:10px;color:var(--muted);line-height:1.5;margin-top:6px}.notice{border-left:4px solid var(--blue);background:#f0f6fc;padding:9px 10px;font-size:11px;line-height:1.5;margin-top:10px}.notice.warn{border-color:#dba617;background:#fff8e5}.image-drop.media-unavailable{opacity:.68;cursor:not-allowed}.admin-url{font-size:10px;color:var(--muted);word-break:break-all}
 .table{width:100%;border-collapse:collapse}.table th{background:#f6f7f7;border-bottom:1px solid var(--border);padding:9px 10px;text-align:left;color:#50575e;font-size:10px;text-transform:uppercase}.table td{border-bottom:1px solid #f0f0f1;padding:11px 10px;vertical-align:top;font-size:12px}.table tr:hover td{background:#f9f9f9}.post-title{color:var(--blue);font-weight:700;background:none;border:0;padding:0;text-align:left}.post-slug{font-size:10px;color:var(--muted);margin-top:3px}.actions{white-space:nowrap}.searchbar{display:flex;gap:8px;margin-bottom:12px}.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{background:#fff;border:1px solid var(--border);padding:14px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:26px;margin-top:4px}.recent button{width:100%;border:0;border-bottom:1px solid #f0f0f1;background:#fff;text-align:left;padding:11px}.recent button:hover{background:#f9f9f9}
 .save-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#8c8f94;margin-right:5px;vertical-align:middle}.save-dot.changed{background:#dba617}.save-dot.saved{background:#00a32a}.toast{position:fixed;right:20px;bottom:20px;background:var(--wp);color:#fff;padding:11px 14px;border-radius:3px;z-index:200;display:none;max-width:380px;box-shadow:0 4px 20px #0004}.modal{position:fixed;inset:0;background:#0008;z-index:190;display:none;align-items:center;justify-content:center;padding:20px}.modalbox{width:100%;max-width:430px;background:#fff;padding:20px;border-radius:4px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
 @media(max-width:1100px){.editor-layout{grid-template-columns:1fr}.sticky{position:static}.checks{grid-template-columns:1fr 1fr}}
@@ -259,7 +259,7 @@ const API='https://found-selection-api.foundselection.workers.dev/api/admin/arti
 const AUTH_API='https://found-selection-api.foundselection.workers.dev/api/auth';
 const MEDIA_API='https://found-selection-api.foundselection.workers.dev/api/media';
 const CATS=['Teknologi','Hiburan','Esensial','Gaya Hidup','Kesehatan'];
-let posts=[],editingSlug=null,slugManual=false,deleteSlug=null,mode='visual',pendingImage=null,storedImageUrl='',dirty=false,suppressDirty=false,saving=false;
+let posts=[],editingSlug=null,slugManual=false,deleteSlug=null,mode='visual',pendingImage=null,storedImageUrl='',dirty=false,suppressDirty=false,saving=false,mediaUnavailable=false;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const slugify=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
@@ -388,7 +388,27 @@ function normalizeAssetFilename(name,format='webp'){
   const base=String(name||'gambar').replace(/\.[^.]+$/,'')||'gambar';
   return `${slugify(base)||'gambar'}.${format}`;
 }
+function markMediaUnavailable(message){
+  mediaUnavailable=true;
+  const drop=$('drop');
+  const fileMeta=$('fileMeta');
+  if(drop){
+    drop.classList.add('media-unavailable');
+    drop.setAttribute('aria-disabled','true');
+  }
+  if(fileMeta){
+    fileMeta.textContent=message||'Upload gambar sementara tidak tersedia. Konfigurasi Cloudinary di Worker terlebih dahulu.';
+  }
+}
+
+function mediaGuard(){
+  if(!mediaUnavailable) return true;
+  toast('Upload gambar belum tersedia karena Cloudinary belum dikonfigurasi di Cloudflare Worker.');
+  return false;
+}
+
 async function uploadBodyImageFile(file){
+  if(!mediaGuard()) return null;
   if(!(file instanceof File)||!file.type.startsWith('image/')){toast('File body harus berupa gambar.');return null}
   const max=10*1024*1024;
   if(file.size>max){toast('Ukuran gambar maksimal 10 MB.');return null}
@@ -400,8 +420,16 @@ async function uploadBodyImageFile(file){
   fd.append('format',requested);
   const r=await apiFetch(MEDIA_API,{method:'POST',body:fd});
   const j=await r.json().catch(()=>({}));
-  if(!r.ok||!j.success)throw Error(j.error||'Upload gambar body gagal.');
-  return {url:j.url||j.data?.url||'',filename,format:requested};
+  if(!r.ok||!j.success){
+    markMediaUnavailable(j.error||'Upload gambar belum tersedia. Konfigurasi Cloudinary di Cloudflare Worker terlebih dahulu.');
+    throw Error(j.error||'Upload gambar belum tersedia.');
+  }
+  const url=j.url||j.data?.url||'';
+  if(!url){
+    markMediaUnavailable('Worker tidak mengembalikan URL gambar. Konfigurasi endpoint media/Cloudinary terlebih dahulu.');
+    throw Error('Worker tidak mengembalikan URL gambar.');
+  }
+  return {url,filename,format:requested};
 }
 function insertBodyImageElement(data){
   if(!data?.url)return;
@@ -557,7 +585,32 @@ function hideLogin(){$('loginGate').style.display='none';$('loginError').textCon
 async function login(e){e.preventDefault();const btn=$('loginButton');btn.disabled=true;$('loginError').textContent='';try{const r=await fetch(AUTH_API+'/login',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({password:$('loginPassword').value})});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||'Kata sandi salah.');hideLogin();await load()}catch(err){$('loginError').textContent=err.message||'Gagal masuk.'}finally{btn.disabled=false}}
 async function editPost(slug){const a=posts.find(x=>x.slug===slug);if(a){fill(a);return}try{const r=await apiFetch(API+'/'+encodeURIComponent(slug));const j=await r.json();if(!j.success)throw Error(j.error||'Artikel tidak ditemukan');fill(j.data)}catch(e){toast(e.message)}}
 function buildPayload(status){const body=getBody();status=status==='published'?'published':'draft';return{title:$('title').value.trim(),slug:$('slug').value.trim()||slugify($('title').value),category:getCategory(),excerpt:$('excerpt').value.trim(),content:body,publish_date:$('publishDate').value,read_time:Math.max(1,Number($('readTime').value)||5),status,thumbnail:storedImageUrl||'',image_alt:$('altText').value.trim(),image_name:$('imageName').value.trim(),image_title:$('imageTitle').value.trim(),seo_title:$('seoTitle').value.trim(),meta_description:$('metaDesc').value.trim(),focus_keyword:$('focus').value.trim(),secondary_keywords:$('secondary').value.trim(),canonical_url:$('canonical').value.trim(),show_featured:$('placementFeatured').checked,show_latest:$('placementLatest').checked,show_popular:$('placementPopular').checked,og_title:$('ogTitle').value.trim(),og_description:$('ogDesc').value.trim(),og_image:$('ogImage').value.trim(),robots_index:$('robotsIndex').value,robots_follow:$('robotsFollow').value,schema_type:$('schema').value}}
-async function uploadMedia(){if(!pendingImage)return storedImageUrl;let filename=$('imageName').value.trim()||pendingImage.filename||'featured-image.webp';const ext=$('imageFormat').value||filename.split('.').pop()||'webp';filename=filename.replace(/\.[^.]+$/,'')+'.'+ext;const fd=new FormData();fd.append('file',pendingImage.blob,filename);fd.append('format',ext);fd.append('alt_text',$('altText').value.trim());fd.append('title',$('imageTitle').value.trim());const r=await apiFetch(MEDIA_API,{method:'POST',body:fd});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||'Endpoint upload gambar belum tersedia di Worker.');storedImageUrl=j.url||j.data?.url||'';if(!storedImageUrl)throw Error('Worker tidak mengembalikan URL gambar.');pendingImage=null;return storedImageUrl}
+async function uploadMedia(){
+  if(!pendingImage)return storedImageUrl;
+  if(!mediaGuard())throw Error('Upload gambar belum tersedia.');
+  let filename=$('imageName').value.trim()||pendingImage.filename||'featured-image.webp';
+  const ext=$('imageFormat').value||filename.split('.').pop()||'webp';
+  filename=filename.replace(/\.[^.]+$/,'')+'.'+ext;
+  const fd=new FormData();
+  fd.append('file',pendingImage.blob,filename);
+  fd.append('format',ext);
+  fd.append('alt_text',$('altText').value.trim());
+  fd.append('title',$('imageTitle').value.trim());
+  const r=await apiFetch(MEDIA_API,{method:'POST',body:fd});
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok||!j.success){
+    markMediaUnavailable(j.error||'Upload featured image belum tersedia. Konfigurasi Cloudinary di Cloudflare Worker terlebih dahulu.');
+    throw Error(j.error||'Upload featured image belum tersedia.');
+  }
+  storedImageUrl=j.url||j.data?.url||'';
+  if(!storedImageUrl){
+    markMediaUnavailable('Worker tidak mengembalikan URL gambar. Konfigurasi endpoint media/Cloudinary terlebih dahulu.');
+    throw Error('Worker tidak mengembalikan URL gambar.');
+  }
+  pendingImage=null;
+  return storedImageUrl;
+}
+
 async function savePost(status,background=false){
   const title=$('title').value.trim();
   const slug=$('slug').value.trim()||slugify(title);
@@ -587,7 +640,7 @@ async function savePost(status,background=false){
     if(!background)show('posts');
     return true;
   }catch(e){
-    console.error(e);
+    if(!mediaUnavailable) console.error(e);
     if(!background)toast(e.message);
     return false;
   }finally{
@@ -604,6 +657,7 @@ function renderArtikel(){const q=($('search')?.value||'').toLowerCase(),f=$('fil
 function dashboard(){const pub=posts.filter(a=>a.status==='published').length,draft=posts.filter(a=>a.status==='draft').length,seo=posts.filter(a=>seoScoreFor(a)>=80).length;$('sTotal').textContent=posts.length;$('sPub').textContent=pub;$('sDraft').textContent=draft;$('sSEO').textContent=seo;const r=[...posts].sort((a,b)=>(b.publish_date||'').localeCompare(a.publish_date||'')).slice(0,6);$('recent').innerHTML=r.length?r.map(a=>`<button onclick="editPost('${esc(a.slug)}')"><b>${esc(a.title)}</b><small style="display:block;color:var(--muted);margin-top:4px">${esc(a.category||'')} · ${esc(a.publish_date||'')} · ${a.status}</small></button>`).join(''):'<div style="padding:25px;color:var(--muted)">Belum ada artikel.</div>';const mx=Math.max(1,...CATS.map(c=>posts.filter(a=>a.category===c).length));$('catStats').innerHTML=CATS.map(c=>{const n=posts.filter(a=>a.category===c).length;return`<div style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:11px;font-weight:600;margin-bottom:4px"><span>${c}</span><span>${n}</span></div><div style="height:7px;background:#dcdcde;border-radius:10px"><div style="height:7px;background:var(--blue);width:${n/mx*100}%;border-radius:10px"></div></div></div>`}).join('')}
 function askHapus(slug){deleteSlug=slug;const a=posts.find(x=>x.slug===slug);$('modalText').textContent=`“${a?.title||slug}” akan dihapus permanen.`;$('modal').style.display='flex'}function closeModal(){$('modal').style.display='none';deleteSlug=null}async function confirmHapus(){if(!deleteSlug)return;try{const r=await apiFetch(API+'/'+encodeURIComponent(deleteSlug),{method:'DELETE'});const j=await r.json();if(!r.ok||!j.success)throw Error(j.error||'Gagal menghapus');closeModal();toast('Artikel dihapus.');await load();show('posts')}catch(e){toast(e.message)}}
 async function processImage(file){
+  if(!mediaGuard())return;
   if(!file.type.startsWith('image/')){toast('File harus berupa gambar.');return}
   try{
     const img=await new Promise((res,rej)=>{const u=URL.createObjectURL(file),i=new Image();i.onload=()=>{URL.revokeObjectURL(u);res(i)};i.onerror=rej;i.src=u});
@@ -624,7 +678,7 @@ async function processImage(file){
     markDirty();toast('Featured image siap digunakan.')
   }catch(e){toast('Gagal memproses gambar.')}
 }
-$('drop').addEventListener('click',()=>$('imageFile').click());$('imageFile').addEventListener('change',e=>{if(e.target.files[0])processImage(e.target.files[0])});$('drop').addEventListener('dragover',e=>{e.preventDefault();$('drop').classList.add('drag')});$('drop').addEventListener('dragleave',()=>$('drop').classList.remove('drag'));$('drop').addEventListener('drop',e=>{e.preventDefault();$('drop').classList.remove('drag');if(e.dataTransfer.files[0])processImage(e.dataTransfer.files[0])});
+$('drop').addEventListener('click',()=>{if(mediaGuard())$('imageFile').click()});$('imageFile').addEventListener('change',e=>{if(e.target.files[0])processImage(e.target.files[0])});$('drop').addEventListener('dragover',e=>{e.preventDefault();$('drop').classList.add('drag')});$('drop').addEventListener('dragleave',()=>$('drop').classList.remove('drag'));$('drop').addEventListener('drop',e=>{e.preventDefault();$('drop').classList.remove('drag');if(e.dataTransfer.files[0])processImage(e.dataTransfer.files[0])});
 
 $('bodyImageFile').addEventListener('change',async e=>{
   const file=e.target.files?.[0];
@@ -636,7 +690,6 @@ $('bodyImageFile').addEventListener('change',async e=>{
     insertBodyImageElement(data);
     toast('Gambar body berhasil disisipkan.');
   }catch(err){
-    console.error(err);
     toast(err.message||'Upload gambar body gagal.');
   }
 });
