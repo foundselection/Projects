@@ -4,24 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Artikel | Found Selection</title>
+<title>Artikel - Found Selection | Semua Artikel Pilihan</title>
 
-<meta name="description" content="Artikel Found Selection.">
+<meta name="description" content="Jelajahi koleksi artikel Found Selection. Temukan artikel terbaru tentang teknologi, hiburan, kesehatan, gaya hidup, dan produk pilihan. Baca, pelajari, bagikan.">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <link rel="canonical" href="https://foundselection.blog/artikel/">
 
 <meta property="og:site_name" content="Found Selection">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Found Selection">
-<meta property="og:description" content="Artikel Found Selection.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Artikel - Found Selection | Semua Artikel Pilihan">
+<meta property="og:description" content="Jelajahi koleksi artikel Found Selection. Temukan artikel terbaru tentang teknologi, hiburan, kesehatan, gaya hidup, dan produk pilihan.">
 <meta property="og:url" content="https://foundselection.blog/artikel/">
-<meta property="og:image" content="">
+<meta property="og:image" content="https://foundselection.blog/android-chrome-512x512.png">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Artikel - Found Selection | Semua Artikel Pilihan">
+<meta name="twitter:description" content="Jelajahi koleksi artikel Found Selection. Temukan artikel terbaru tentang teknologi, hiburan, kesehatan, gaya hidup, dan produk pilihan.">
+<meta name="twitter:image" content="https://foundselection.blog/android-chrome-512x512.png">
+
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://res.cloudinary.com">
 
 <link
-  href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;600;700;900&family=Open+Sans:wght@400;600;700;800;900&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Open+Sans:wght@400;600;700;800&display=swap"
   rel="stylesheet"
 >
 
@@ -46,7 +58,7 @@ tailwind.config = {
   --blue:#2563eb;
   --blue-dark:#1d4ed8;
   --blue-soft:#eff6ff;
-  --heading-blue:#315aa6;
+  --heading-blue:#2563eb;
   --ink:#0f172a;
   --body:#334155;
   --muted:#64748b;
@@ -58,7 +70,7 @@ tailwind.config = {
 }
 
 html{
-  scroll-behavior:smooth;
+  scroll-behavior:auto;
 }
 
 body{
@@ -1281,7 +1293,7 @@ body.detail-mode .detail-only{
         <div class="related-kicker">Pilihan Berikutnya</div>
         <h2 class="related-title">Artikel Terkait</h2>
       </div>
-      <div class="text-xs text-slate-400 font-opensans font-semibold">7 artikel</div>
+      <div class="text-xs text-slate-400 font-opensans font-semibold">Artikel terkait</div>
     </div>
 
     <div class="related-stage">
@@ -1353,8 +1365,7 @@ body.detail-mode .detail-only{
         <div class="max-w-3xl mx-auto w-full text-center">
 
           <h1 class="font-opensans text-[1.8rem] sm:text-[2.2rem] md:text-[3.15rem] font-bold tracking-tight text-slate-900 leading-[1.08]">
-            Temukan bacaan yang
-            <span class="text-blue-600">layak diperhatikan.</span>
+            Semua Artikel Found Selection
           </h1>
 
           <p class="mt-5 text-[.98rem] md:text-[1.08rem] text-slate-600 max-w-2xl mx-auto leading-[1.75]">
@@ -1383,27 +1394,27 @@ body.detail-mode .detail-only{
           aria-label="Filter kategori"
         >
 
-          <button data-filter="Semua" class="filter-btn filter-active px-4 py-2.5 rounded-full border border-gray-200 bg-white font-opensans font-bold text-[.8rem] md:text-[.85rem]">
+          <button type="button" <button data-filter="Semua" class="filter-btn filter-active px-4 py-2.5 rounded-full border border-gray-200 bg-white font-opensans font-bold text-[.8rem] md:text-[.85rem]">
             Semua
           </button>
 
-          <button data-filter="Teknologi" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
+          <button type="button" <button data-filter="Teknologi" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
             Teknologi
           </button>
 
-          <button data-filter="Hiburan" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
+          <button type="button" <button data-filter="Hiburan" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
             Hiburan
           </button>
 
-          <button data-filter="Esensial" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
+          <button type="button" <button data-filter="Esensial" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
             Esensial
           </button>
 
-          <button data-filter="Gaya Hidup" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
+          <button type="button" <button data-filter="Gaya Hidup" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
             Gaya Hidup
           </button>
 
-          <button data-filter="Kesehatan" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
+          <button type="button" <button data-filter="Kesehatan" class="filter-btn px-4 py-2.5 rounded-full border border-gray-200 bg-white text-slate-600 font-opensans font-bold text-[.8rem] md:text-[.85rem]">
             Kesehatan
           </button>
 
@@ -1819,6 +1830,78 @@ function popularityScore(article){
 }
 
 
+function optimizedImageUrl(url, width){
+  const source = String(url || "");
+  if(!source){
+    return "";
+  }
+
+  const safeWidth = Math.max(
+    160,
+    Math.round(Number(width) || 640)
+  );
+
+  if(!source.includes("res.cloudinary.com") || !source.includes("/image/upload/")){
+    return source;
+  }
+
+  const marker = "/image/upload/";
+  const markerIndex = source.indexOf(marker);
+  if(markerIndex === -1){
+    return source;
+  }
+
+  const prefix = source.slice(0, markerIndex + marker.length);
+  const rest = source.slice(markerIndex + marker.length);
+
+  const versionMatch = rest.match(/^(?:[^/]+\/)*(v\\d+\/)/);
+
+  if(versionMatch){
+    return prefix
+      + `f_auto,q_auto,w_${safeWidth}/`
+      + versionMatch[1]
+      + rest.slice(versionMatch[0].length);
+  }
+
+  return prefix
+    + `f_auto,q_auto,w_${safeWidth}/`
+    + rest;
+}
+
+function imageSrcSet(url, widths = [480,640]){
+  const source = String(url || "");
+  if(!source || !source.includes("res.cloudinary.com")){
+    return "";
+  }
+
+  return widths
+    .map(
+      width =>
+        `${esc(optimizedImageUrl(source,width))} ${width}w`
+    )
+    .join(", ");
+}
+
+function isEditorialPick(article){
+  const explicit =
+    article?.featured ??
+    article?.is_featured ??
+    article?.editorial ??
+    article?.editorial_pick;
+
+  if(
+    explicit === true ||
+    explicit === 1 ||
+    String(explicit || "").toLowerCase() === "true" ||
+    String(explicit || "").toLowerCase() === "featured"
+  ){
+    return true;
+  }
+
+  return false;
+}
+
+
 /* ============================================================
    LISTING
 ============================================================ */
@@ -1844,7 +1927,7 @@ function normalizeArticle(article){
 
     readTime:
       article.read_time
-        ? `${article.read_time} min`
+        ? `${article.read_time} menit`
         : "",
 
     image:
@@ -1915,14 +1998,17 @@ async function loadArticles(){
       "empty-state"
     );
 
-  grid.innerHTML = `
-    <div class="col-span-full flex justify-center py-16">
-      <div
-        class="w-8 h-8 rounded-full border-2 border-gray-200 border-t-blue-600 animate-spin"
-        aria-label="Memuat artikel"
-      ></div>
-    </div>
-  `;
+  grid.setAttribute("aria-busy","true");
+
+  if(!grid.innerHTML.trim()){
+    grid.innerHTML = `
+      <div class="col-span-full flex justify-center py-16">
+        <span class="text-sm font-opensans font-semibold text-slate-400" role="status">
+          Memuat artikel...
+        </span>
+      </div>
+    `;
+  }
 
   empty.classList.add("hidden");
 
@@ -1935,7 +2021,7 @@ async function loadArticles(){
           headers:{
             Accept:"application/json"
           },
-          cache:"no-store"
+          cache:"default"
         }
       );
 
@@ -1971,6 +2057,7 @@ async function loadArticles(){
     currentPage = 1;
 
     renderArticles();
+    grid.setAttribute("aria-busy","false");
 
   }catch(error){
 
@@ -1996,6 +2083,7 @@ async function loadArticles(){
     `;
 
     empty.classList.remove("hidden");
+    grid.setAttribute("aria-busy","false");
 
   }
 
@@ -2050,9 +2138,11 @@ function renderSidebar(items){
 
               ? `
                 <img
-                  src="${esc(image)}"
+                  src="${esc(optimizedImageUrl(image,240))}"
+                  srcset="${imageSrcSet(image,[160,240])}"
+                  sizes="82px"
                   alt="${esc(article.title)}"
-                  width="164"
+                  width="240"
                   height="136"
                   loading="lazy"
                   decoding="async"
@@ -2154,6 +2244,7 @@ function renderArticles(){
 
     featured.innerHTML = "";
     grid.innerHTML = "";
+
     document.getElementById(
       "sidebar-list"
     ).innerHTML = "";
@@ -2174,20 +2265,19 @@ function renderArticles(){
   );
 
 
-  /* PILIHAN UTAMA */
+  /* PILIHAN UTAMA — editorial selection */
+  const editorialPool =
+    filtered.filter(
+      isEditorialPick
+    );
 
   const featuredItems =
-    filtered.slice(0,3);
-
-  const featuredKeys =
-    new Set(
-      featuredItems.map(
-        a =>
-          String(
-            a.id ?? a.slug
-          )
-      )
-    );
+    (
+      editorialPool.length
+        ? editorialPool
+        : filtered
+    )
+      .slice(0,3);
 
 
   featured.innerHTML =
@@ -2197,6 +2287,18 @@ function renderArticles(){
 
           const image =
             article.image || "";
+
+          const src =
+            optimizedImageUrl(
+              image,
+              640
+            );
+
+          const srcset =
+            imageSrcSet(
+              image,
+              [480,640]
+            );
 
           return `
             <a
@@ -2213,11 +2315,14 @@ function renderArticles(){
 
                     ? `
                       <img
-                        src="${esc(image)}"
+                        src="${esc(src)}"
+                        srcset="${srcset}"
+                        sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1024px) calc((100vw - 80px)/2), 360px"
                         alt="${esc(article.title)}"
-                        width="900"
-                        height="675"
+                        width="640"
+                        height="480"
                         loading="${index === 0 ? "eager" : "lazy"}"
+                        fetchpriority="${index === 0 ? "high" : "auto"}"
                         decoding="async"
                         class="w-full h-full object-cover"
                       >
@@ -2271,65 +2376,25 @@ function renderArticles(){
       .join("");
 
 
-  /* POPULER */
-
-  const remainingAfterFeatured =
-    filtered.filter(
-      article =>
-        !featuredKeys.has(
-          String(
-            article.id ?? article.slug
-          )
-        )
-    );
-
-
-  const popular =
-    [...remainingAfterFeatured]
+  /* TERBARU — always newest, independent of featured/popular */
+  const latest =
+    [...filtered]
       .sort(
         (a,b) => {
-
           const diff =
-            popularityScore(b) -
-            popularityScore(a);
+            dateValue(b) -
+            dateValue(a);
 
           if(diff !== 0){
             return diff;
           }
 
           return (
-            dateValue(b) -
-            dateValue(a)
+            Number(b.id || 0) -
+            Number(a.id || 0)
           );
-
         }
-      )
-      .slice(0,5);
-
-
-  const popularKeys =
-    new Set(
-      popular.map(
-        a =>
-          String(
-            a.id ?? a.slug
-          )
-      )
-    );
-
-
-  /* TERBARU */
-
-  const remaining =
-    remainingAfterFeatured.filter(
-      article =>
-        !popularKeys.has(
-          String(
-            article.id ??
-            article.slug
-          )
-        )
-    );
+      );
 
 
   const perPage =
@@ -2339,7 +2404,7 @@ function renderArticles(){
     Math.max(
       1,
       Math.ceil(
-        remaining.length /
+        latest.length /
         perPage
       )
     );
@@ -2356,7 +2421,7 @@ function renderArticles(){
 
 
   const visible =
-    remaining.slice(
+    latest.slice(
       (currentPage - 1) *
         perPage,
       currentPage *
@@ -2370,6 +2435,18 @@ function renderArticles(){
 
         const image =
           article.image || "";
+
+        const src =
+          optimizedImageUrl(
+            image,
+            640
+          );
+
+        const srcset =
+          imageSrcSet(
+            image,
+            [480,640]
+          );
 
         return `
           <a
@@ -2386,10 +2463,12 @@ function renderArticles(){
 
                   ? `
                     <img
-                      src="${esc(image)}"
+                      src="${esc(src)}"
+                      srcset="${srcset}"
+                      sizes="(max-width: 639px) calc(100vw - 40px), (max-width: 1023px) calc((100vw - 60px)/2), 300px"
                       alt="${esc(article.title)}"
-                      width="900"
-                      height="563"
+                      width="640"
+                      height="400"
                       loading="lazy"
                       decoding="async"
                       class="w-full h-full object-cover"
@@ -2442,6 +2521,29 @@ function renderArticles(){
       }
     )
     .join("");
+
+
+  const popular =
+    [...filtered]
+      .sort(
+        (a,b) => {
+
+          const diff =
+            popularityScore(b) -
+            popularityScore(a);
+
+          if(diff !== 0){
+            return diff;
+          }
+
+          return (
+            dateValue(b) -
+            dateValue(a)
+          );
+
+        }
+      )
+      .slice(0,5);
 
 
   renderSidebar(
@@ -2590,6 +2692,20 @@ document
           button.classList.add(
             "filter-active"
           );
+
+          document
+            .querySelectorAll(
+              ".filter-btn"
+            )
+            .forEach(
+              item =>
+                item.setAttribute(
+                  "aria-pressed",
+                  item === button
+                    ? "true"
+                    : "false"
+                )
+            );
 
           currentFilter =
             button.dataset.filter;
@@ -3599,8 +3715,12 @@ document
 
                       ? `
                         <img
-                          src="${esc(image)}"
+                          src="${esc(optimizedImageUrl(image,480))}"
+                          srcset="${imageSrcSet(image,[320,480])}"
+                          sizes="(max-width: 767px) 72vw, 200px"
                           alt="${esc(article.title)}"
+                          width="480"
+                          height="300"
                           loading="lazy"
                           decoding="async"
                         >
@@ -3630,7 +3750,7 @@ document
                       <span>
                         ${
                           article.read_time
-                            ? `${esc(article.read_time)} min`
+                            ? `${esc(article.read_time)} menit`
                             : ""
                         }
                       </span>
@@ -3754,7 +3874,7 @@ document
                 "application/json"
             },
             cache:
-              "no-store"
+              "default"
           }
         );
 
@@ -3905,12 +4025,44 @@ document
 
         $("detail-image")
           .src =
-          article.thumbnail;
+          optimizedImageUrl(
+            article.thumbnail,
+            1280
+          );
+
+        const detailSrcset =
+          imageSrcSet(
+            article.thumbnail,
+            [768,1024,1280]
+          );
+
+        if(detailSrcset){
+          $("detail-image")
+            .setAttribute(
+              "srcset",
+              detailSrcset
+            );
+
+          $("detail-image")
+            .setAttribute(
+              "sizes",
+              "(max-width: 767px) calc(100vw - 40px), min(1120px, 100vw - 40px)"
+            );
+        }
 
         $("detail-image")
           .alt =
+          article.image_alt ||
           article.title ||
           "";
+
+        $("detail-image")
+          .width =
+          1280;
+
+        $("detail-image")
+          .height =
+          672;
 
         $("detail-image-wrap")
           .classList.remove(
@@ -4030,7 +4182,7 @@ document
                 "application/json"
             },
             cache:
-              "no-store"
+              "default"
           }
         );
 
