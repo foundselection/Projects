@@ -594,8 +594,29 @@ body.detail-mode .detail-only{
   padding-left:1.45rem;
 }
 
+/* Preserve list markers from the Admin editor. */
+.detail-content ul{
+  list-style-type:disc;
+}
+
+.detail-content ol{
+  list-style-type:decimal;
+}
+
+.detail-content ul ul{
+  list-style-type:circle;
+}
+
+.detail-content ul ul ul{
+  list-style-type:square;
+}
+
 .detail-content li{
   margin:.55rem 0;
+}
+
+.detail-content li::marker{
+  color:#64748b;
 }
 
 .detail-content a{
@@ -936,6 +957,50 @@ body.detail-mode .detail-only{
 }
 
 @media (max-width:767px){
+
+  /* Listing: keep article cards compact enough to show more content at once. */
+  .listing-only #featured-grid,
+  .listing-only #article-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+
+  .listing-only #featured-grid .fs-main,
+  .listing-only #article-grid .fs-latest{
+    border-radius:14px;
+  }
+
+  .listing-only #featured-grid .fs-main .p-4,
+  .listing-only #featured-grid .fs-main .p-5,
+  .listing-only #article-grid .fs-latest .p-4,
+  .listing-only #article-grid .fs-latest .p-5{
+    padding:13px;
+  }
+
+  .listing-only #featured-grid .aspect\[4\/3\]{
+    aspect-ratio:4 / 3;
+  }
+
+  .listing-only #article-grid .aspect\[16\/10\]{
+    aspect-ratio:16 / 10;
+  }
+
+  .listing-only #featured-grid h2,
+  .listing-only #article-grid h2{
+    font-size:.92rem;
+    line-height:1.35;
+  }
+
+  .listing-only #featured-grid p,
+  .listing-only #article-grid p{
+    font-size:.72rem;
+    line-height:1.45;
+  }
+
+  .listing-only #featured-grid .group,
+  .listing-only #article-grid .group{
+    min-width:0;
+  }
 
   .detail-header-inner{
     min-height:60px;
