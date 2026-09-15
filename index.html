@@ -593,16 +593,6 @@
 
                 </div>
 
-                <!-- Artikel Terbaru: aggregation hub dari artikel published -->
-                <div id="artikel-terbaru" class="mt-24 scroll-mt-24">
-                    <div class="category-heading mb-6 pb-2 border-b border-gray-200/80">
-                        <h2 class="font-opensans text-[1.75rem] font-bold text-text-main tracking-tight">Artikel Terbaru</h2>
-                    </div>
-                    <div id="latest-home-slider" class="overflow-x-auto py-10 -my-10 pr-8 snap-x snap-mandatory scrollbar-hide w-full scroll-smooth">
-                        <div id="latest-home-articles" class="flex gap-6 w-max pb-4"></div>
-                    </div>
-                </div>
-
                 <!-- Tombol Tunggal "Lihat Semua Artikel" Invert Color (Tanpa Hover Menonjol) -->
                 <div class="mt-20 text-center">
                     <a href="/artikel/" class="inline-flex items-center justify-center px-10 py-4 font-opensans text-[0.875rem] font-bold text-text-main bg-white border-2 border-[#2563eb] rounded-full hover:bg-[#2563eb] hover:text-white transition-colors duration-300 shadow-sm">
@@ -890,7 +880,7 @@
                 'gaya-hidup': document.querySelector('.artikel-kategori-gaya-hidup'),
                 kesehatan: document.querySelector('.artikel-kategori-kesehatan')
             };
-            const latestHomeContainer = document.getElementById('latest-home-articles');
+            
 
             function escapeHtml(value) {
                 return String(value ?? '').replace(/[&<>"']/g, ch => ({
@@ -982,7 +972,7 @@
                 Object.values(categoryContainers).forEach(container => {
                     if (container) container.innerHTML = '';
                 });
-                if (latestHomeContainer) latestHomeContainer.innerHTML = '';
+                
             }
 
             function renderArticleLoadingState() {
@@ -1023,13 +1013,7 @@
 
                     clearHomeArticleCards();
 
-                    // Homepage: tampilkan 6 artikel terbaru sebagai discovery layer.
-                    if (latestHomeContainer) {
-                        latestHomeContainer.innerHTML = articles
-                            .slice(0, 6)
-                            .map(renderBackendArticle)
-                            .join('');
-                    }
+                    
 
                     if (!articles.length) {
                         renderArticleEmptyState();
