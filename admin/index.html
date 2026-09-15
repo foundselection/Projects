@@ -28,6 +28,36 @@
 .save-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#8c8f94;margin-right:5px;vertical-align:middle}.save-dot.changed{background:#dba617}.save-dot.saved{background:#00a32a}.toast{position:fixed;right:20px;bottom:20px;background:var(--wp);color:#fff;padding:11px 14px;border-radius:3px;z-index:200;display:none;max-width:380px;box-shadow:0 4px 20px #0004}.modal{position:fixed;inset:0;background:#0008;z-index:190;display:none;align-items:center;justify-content:center;padding:20px}.modalbox{width:100%;max-width:430px;background:#fff;padding:20px;border-radius:4px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
 @media(max-width:1100px){.editor-layout{grid-template-columns:1fr}.sticky{position:static}.checks{grid-template-columns:1fr 1fr}}
 @media(max-width:780px){.side{width:220px;transform:translateX(-100%);transition:.2s}.side.open{transform:none}.main{margin-left:0;padding:61px 12px 35px}.top-title{display:none}.titlebar{align-items:flex-start}.grid2,.grid3,.statgrid{grid-template-columns:1fr}.checks{grid-template-columns:1fr}.body{min-height:430px;padding:14px}.toolbar{gap:0}.tool{min-width:29px}.editor-layout{gap:12px}}
+/* v2 editor polish: stable controls, collapsible cards, fullscreen canvas, tables */
+.editor-tools-row{display:flex;align-items:center;gap:6px;padding:6px 8px;border-bottom:1px solid var(--line);background:#fff}
+.editor-tools-row .tool-label{font-size:10px;color:var(--muted);font-weight:700;margin-right:auto}
+.tool.icon-only{font-size:15px}
+.panel-toggle{width:28px;height:28px;border:1px solid transparent;border-radius:7px;background:transparent;color:#6b7280;font-weight:700;cursor:pointer}
+.panel-toggle:hover{background:#f1f4f8;color:var(--blue)}
+.panel.is-collapsed>.panel-body{display:none}
+.panel.is-collapsed>.panel-head{border-bottom:0}
+.editor-layout.hide-sidebar{grid-template-columns:minmax(0,1fr)}
+.editor-layout.hide-sidebar>.sticky{display:none}
+.editor-canvas-fullscreen{overflow:hidden!important}
+.editor-canvas-fullscreen #bodyEditor{position:fixed;inset:12px;z-index:180;display:flex;flex-direction:column;border-radius:14px;box-shadow:0 30px 90px rgba(0,0,0,.25);background:#fff}
+.editor-canvas-fullscreen #bodyEditor:before{content:"";position:fixed;inset:0;background:rgba(17,20,24,.45);z-index:-1}
+.editor-canvas-fullscreen #bodyEditor .body{flex:1;height:auto!important;min-height:0}
+.editor-canvas-fullscreen #bodyEditor .statusbar{flex:0 0 auto}
+.table-popover{position:absolute;z-index:80;top:49px;right:95px;width:min(430px,calc(100vw - 24px));padding:13px;background:#fff;border:1px solid #e1e5ea;border-radius:12px;box-shadow:0 18px 50px rgba(15,23,42,.16)}
+.table-grid{display:grid;grid-template-columns:repeat(8,24px);gap:3px;margin:10px 0}
+.table-grid button{width:24px;height:24px;padding:0;border:1px solid #d6dbe2;border-radius:4px;background:#fff;cursor:pointer}
+.table-grid button:hover,.table-grid button.active{border-color:#2563eb;background:#eff6ff}
+.table-settings{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.table-cell-active{outline:2px solid rgba(37,99,235,.25);outline-offset:-2px}
+.body table{width:100%;border-collapse:collapse;margin:18px 0;table-layout:fixed}
+.body th,.body td{border:1px solid #cbd5e1;padding:8px 10px;min-width:60px;vertical-align:top}
+.body th{background:#f8fafc;font-weight:700}
+.body table:focus-within{box-shadow:0 0 0 2px rgba(37,99,235,.10)}
+.body ul{list-style:disc;padding-left:30px}
+.body ol{list-style:decimal;padding-left:30px}
+.body li{margin:.28em 0}
+@media(max-width:780px){.table-popover{left:8px;right:8px;width:auto}.editor-canvas-fullscreen #bodyEditor{inset:6px}.table-grid{grid-template-columns:repeat(8,22px)}.table-grid button{width:22px;height:22px}}
+
 
 /* Found Selection Admin UI — v1 polish */
 :root{
@@ -120,35 +150,41 @@ body.sidebar-collapsed .main{margin-left:0}
 <header class="top"><div><button id="hambBtn" class="hamb" type="button" onclick="toggleSide()" aria-label="Sembunyikan sidebar" aria-expanded="true" title="Sembunyikan sidebar">☰</button><span class="brand">Admin Found Selection</span></div><a href="/">Lihat Situs ↗</a></header>
 <aside id="side" class="side"><div id="sideResizer" class="side-resizer" aria-label="Geser untuk mengubah lebar sidebar" title="Geser untuk mengubah lebar sidebar"></div><div class="side-title">Utama</div><button class="nav active" data-view="dashboard" onclick="show('dashboard')">▦ &nbsp; Dashboard</button><div class="side-title">Konten</div><button class="nav" data-view="posts" onclick="show('posts')">☷ &nbsp; Artikel</button><button class="nav" data-view="editor" onclick="newPost()">＋ &nbsp; Artikel Baru</button><div class="side-title">Artikel Saat Ini</div><button class="nav" onclick="jump('bodyEditor')">✎ &nbsp; Isi Artikel</button><button class="nav" onclick="jump('seoPanel')">⌕ &nbsp; SEO</button><button class="nav" onclick="jump('featuredPanel')">▧ &nbsp; Gambar Utama</button></aside>
 <main class="main"><div class="wrap">
-<section id="dashboard"><div class="titlebar"><div><h1 class="page-title">Dashboard</h1></div><button class="button primary" onclick="newPost()">Artikel Baru</button></div><div class="statgrid"><div class="stat"><small>Total artikel</small><strong id="sTotal">0</strong></div><div class="stat"><small>Terbit</small><strong id="sPub">0</strong></div><div class="stat"><small>Draft</small><strong id="sDraft">0</strong></div><div class="stat"><small>SEO lengkap</small><strong id="sSEO">0</strong></div></div><div class="grid2" style="margin-top:14px"><div class="panel"><div class="panel-head">Artikel Terbaru</div><div id="recent" class="recent"></div></div><div class="panel"><div class="panel-head">Kategori</div><div id="catStats" class="panel-body"></div></div></div></section>
+<section id="dashboard"><div class="titlebar"><div><h1 class="page-title">Dashboard</h1></div><button class="button primary" onclick="newPost()">Artikel Baru</button></div><div class="statgrid"><div class="stat"><small>Total artikel</small><strong id="sTotal">0</strong></div><div class="stat"><small>Terbit</small><strong id="sPub">0</strong></div><div class="stat"><small>Draft</small><strong id="sDraft">0</strong></div><div class="stat"><small>SEO lengkap</small><strong id="sSEO">0</strong></div></div><div class="grid2" style="margin-top:14px"><div class="panel"><div class="panel-head">Artikel Terbaru</div><div id="recent" class="recent"></div></div><div class="panel" id="categoryPanel"><div class="panel-head">Kategori<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('categoryPanel')">⌄</button></div><div id="catStats" class="panel-body"></div></div></div></section>
 <section id="posts" class="hidden"><div class="titlebar"><div><h1 class="page-title">Artikel</h1><div class="subtitle">Kelola, edit, simpan, dan terbitkan artikel.</div></div><button class="button primary" onclick="newPost()">Artikel Baru</button></div><div class="searchbar"><input id="search" class="input" placeholder="Cari judul atau slug..." oninput="renderArtikel()"><select id="filter" class="input" style="max-width:180px" onchange="renderArtikel()"><option value="">Semua status</option><option value="published">Terbit</option><option value="draft">Draft</option></select></div><div class="panel" style="overflow:auto"><table class="table" style="min-width:850px"><thead><tr><th>Judul</th><th>Kategori</th><th>Status</th><th>SEO</th><th>Tanggal</th><th>Aksi</th></tr></thead><tbody id="postRows"></tbody></table><div id="noArtikel" class="hidden" style="padding:35px;text-align:center;color:var(--muted)">Tidak ada artikel.</div></div></section>
 <section id="editorView" class="hidden"><div class="titlebar"><div><h1 class="page-title"><button class="button" onclick="show('posts')" style="padding:4px 9px">‹</button> <span id="editorHeading">Artikel Baru</span></h1><div class="subtitle"><span id="saveState">Tersimpan</span></div></div><div class="publish-row"><button id="saveDraftBtn" class="button" onclick="savePost('draft')">Simpan Draft</button><button id="publishBtn" class="button primary" onclick="savePost('published')">Terbitkan</button></div></div>
 <div class="editor-layout"><div>
 <input id="title" class="input title-input" placeholder="Tambahkan judul artikel" oninput="titleInput()"><div class="permalink"><span>https://foundselection.blog/artikel/</span><input id="slug" class="input" placeholder="slug-artikel" oninput="slugManual=true;markDirty();updateSlugPreview();analyze()"></div>
-<div id="bodyEditor" class="editor-wrap"><div class="tabs"><button id="visualTab" class="tab active" title="Editor visual" onclick="setMode('visual')">Visual</button><button id="codeTab" class="tab" title="Edit HTML" onclick="setMode('code')">Kode</button></div><div class="toolbar" id="toolbar">
+<div id="bodyEditor" class="editor-wrap"><div class="tabs"><button id="visualTab" class="tab active" title="Editor visual" onclick="setMode('visual')">Visual</button><button id="codeTab" class="tab" title="Edit HTML" onclick="setMode('code')">Kode</button><button id="fullscreenBtn" class="tab" type="button" title="Layar penuh editor" onclick="toggleEditorFullscreen()">⛶ Layar penuh</button></div><div class="toolbar" id="toolbar">
 <select id="blockFormat" class="tool select" aria-label="Format teks" onchange="formatBlock(this.value)">
 <option value="">Paragraf</option><option value="h2">Heading 2</option><option value="h3">Heading 3</option><option value="blockquote">Kutipan</option></select>
-<select id="fontSize" class="tool select" aria-label="Ukuran teks" onchange="setFontSize(this.value)">
+<select id="fontSize" class="tool select" aria-label="Ukuran teks" onpointerdown="saveEditorSelection()" onchange="setFontSize(this.value)">
 <option value="">Ukuran</option><option value="2">Kecil</option><option value="3">Normal</option><option value="4">Besar</option><option value="5">Sangat besar</option></select>
-<select id="fontFamily" class="tool select" aria-label="Jenis font" title="Jenis font" onchange="setFontFamily(this.value)">
+<select id="fontFamily" class="tool select" aria-label="Jenis font" title="Jenis font" onpointerdown="saveEditorSelection()" onchange="setFontFamily(this.value)">
 <option value="">Font</option><option value="Calibri">Calibri</option><option value="Lato">Lato</option><option value="Roboto">Roboto</option><option value="Open Sans">Open Sans</option><option value="Georgia">Georgia</option></select>
 <span class="divider"></span>
 <button type="button" class="tool" data-cmd="bold" title="Tebal (Ctrl/Cmd+B)" aria-label="Tebal" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('bold')"><b>B</b></button>
 <button type="button" class="tool" data-cmd="italic" title="Miring (Ctrl/Cmd+I)" aria-label="Miring" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('italic')"><i>I</i></button>
 <button type="button" class="tool" data-cmd="underline" title="Garis bawah (Ctrl/Cmd+U)" aria-label="Garis bawah" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('underline')"><u>U</u></button>
+<button type="button" class="tool" title="Warna teks" aria-label="Warna teks" onclick="applyTextColor()">A</button>
+<button type="button" class="tool" title="Highlight teks" aria-label="Highlight teks" onclick="applyHighlight()">▰</button>
 <span class="divider"></span>
 <button type="button" class="tool" data-cmd="insertUnorderedList" title="Daftar berpoin" aria-label="Daftar berpoin" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('insertUnorderedList')">•≡</button>
 <button type="button" class="tool" data-cmd="insertOrderedList" title="Daftar bernomor" aria-label="Daftar bernomor" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('insertOrderedList')">1≡</button>
-<button type="button" class="tool" data-cmd="blockquote" title="Kutipan" aria-label="Kutipan" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="formatBlock('blockquote')">❝</button>
-<span class="divider"></span>
 <button type="button" class="tool" data-cmd="justifyLeft" title="Rata kiri" aria-label="Rata kiri" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('justifyLeft')">☰</button>
 <button type="button" class="tool" data-cmd="justifyCenter" title="Rata tengah" aria-label="Rata tengah" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('justifyCenter')">≡</button>
-<button type="button" class="tool" data-cmd="justifyRight" title="Rata kanan" aria-label="Rata kanan" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('justifyRight')">☰</button>
+<button type="button" class="tool" data-cmd="justifyRight" title="Rata kanan" aria-label="Rata kanan" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('justifyRight')">☷</button>
+<button type="button" class="tool" title="Checklist" aria-label="Checklist" onclick="toggleChecklist()">☑</button>
+<button type="button" class="tool" title="Kurangi indentasi" aria-label="Kurangi indentasi" onmousedown="keepEditorSelection(event)" onclick="exec('outdent')">⇤</button>
+<button type="button" class="tool" title="Tambah indentasi" aria-label="Tambah indentasi" onmousedown="keepEditorSelection(event)" onclick="exec('indent')">⇥</button>
+<button type="button" class="tool" data-cmd="blockquote" title="Kutipan" aria-label="Kutipan" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="formatBlock('blockquote')">❝</button>
 <span class="divider"></span>
 <button type="button" class="tool" title="Urungkan" aria-label="Urungkan" onmousedown="keepEditorSelection(event)" onclick="exec('undo')">↶</button>
 <button type="button" class="tool" title="Ulangi" aria-label="Ulangi" onmousedown="keepEditorSelection(event)" onclick="exec('redo')">↷</button>
 <button type="button" class="tool" title="Sisipkan tautan" aria-label="Sisipkan tautan" onclick="openLinkPopover()">🔗</button>
 <button type="button" class="tool" title="Sisipkan gambar dari perangkat" aria-label="Sisipkan gambar dari perangkat" onclick="insertBodyImage()">▧</button>
+<button type="button" class="tool" title="Sisipkan tabel" aria-label="Sisipkan tabel" onclick="openTablePopover()">▦</button>
+<button type="button" class="tool" title="Opsi tabel" aria-label="Opsi tabel" onclick="openTableSettings()">⊞</button><button type="button" class="tool" title="Warna sel tabel" aria-label="Warna sel tabel" onclick="applySelectedCellBackground()">▰</button>
 <button type="button" class="tool" title="Sematkan link / embed" aria-label="Sematkan link / embed" onclick="openEmbedPopover()">◉</button>
 <div class="tool-menu" style="position:relative">
   <button type="button" class="tool" title="Tools penulis" aria-label="Tools penulis" onclick="toggleExtraMenu()">✦</button>
@@ -161,6 +197,18 @@ body.sidebar-collapsed .main{margin-left:0}
 </div>
 <button type="button" class="tool" title="Hapus pemformatan" aria-label="Hapus pemformatan" onmousedown="keepEditorSelection(event)" onclick="exec('removeFormat')">⌫</button>
 <div id="toolbarStatus" class="toolbar-status"><span class="dot"></span><span id="toolbarStatusText">Paragraf · Normal</span></div>
+<div id="tablePopover" class="table-popover hidden">
+  <label>Pilih ukuran tabel</label>
+  <div id="tableGrid" class="table-grid" aria-label="Pilih ukuran tabel"></div>
+  <div id="tableGridLabel" class="hint">Pilih jumlah kolom × baris</div>
+  <div class="table-settings">
+    <div><label>Border (px)</label><input id="tableBorderWidth" class="input" type="number" min="0" max="8" value="1"></div>
+    <div><label>Padding sel (px)</label><input id="tableCellPadding" class="input" type="number" min="0" max="24" value="8"></div>
+    <div><label>Border color</label><input id="tableBorderColor" class="input" type="text" value="#cbd5e1"></div>
+    <div><label>Header</label><select id="tableHeaderMode" class="input"><option value="first">Baris pertama = header</option><option value="none">Tanpa header</option></select></div>
+  </div>
+  <div class="pop-row" style="margin-top:10px"><button type="button" class="button" onclick="closeTablePopover()">Batal</button><button type="button" class="button" onclick="applyTableSettings()">Terapkan opsi</button><button type="button" class="button primary" onclick="insertTable()">Sisipkan tabel</button></div>
+</div>
 <div id="linkPopover" class="link-popover hidden">
   <label>Tambahkan tautan</label>
   <div class="pop-row"><input id="linkUrl" class="input" placeholder="https://contoh.com"><button type="button" class="button primary" onclick="applyLink()">Sisipkan</button></div>
@@ -172,15 +220,15 @@ body.sidebar-collapsed .main{margin-left:0}
   <div id="embedPreviewMini" class="embed-mini hidden"></div>
   <div class="hint">Video YouTube/Vimeo akan dipreview langsung. URL lain dibuat sebagai kartu tautan.</div>
 </div>
-</div><div id="body" class="body" contenteditable="true" spellcheck="true" data-placeholder="Mulai tulis artikel di sini..." oninput="analyze()"></div><textarea id="code" class="codearea hidden" spellcheck="false" oninput="codeChanged()"></textarea><div class="statusbar"><span><span id="wordCount" class="count-chip">0 kata</span><span id="charCount" class="count-chip">0 karakter</span></span><span id="readTimeLive">Waktu baca: 0 menit</span></div></div>
-<div class="panel" id="seoPanel" style="margin-top:14px"><div class="panel-head"><div class="seo-head">SEO <span id="seoBadge" class="badge b-gray">—</span></div><span id="seoScore" class="score">0/100</span></div><div class="panel-body"><div class="grid2"><div><label>Kata kunci utama</label><input id="focus" class="input" placeholder="contoh: tips SEO Google" oninput="analyze()"></div><div><label>Kata kunci terkait</label><input id="secondary" class="input" placeholder="contoh: laptop terbaik, panduan memilih laptop"></div></div><div style="margin-top:13px"><label>Pratinjau di Google</label><div class="preview"><div class="g-url">foundselection.com/artikel/<span id="gSlug">slug-artikel</span></div><div id="gTitle" class="g-title">Judul SEO artikel</div><div id="gDesc" class="g-desc">Meta description akan tampil di sini.</div></div></div><div class="grid2" style="margin-top:13px"><div><label>Judul SEO</label><input id="seoTitle" maxlength="70" class="input" placeholder="Judul yang ditampilkan di hasil pencarian" oninput="analyze()"><div id="seoTitleCount" class="count">0/70</div></div><div><label>Deskripsi SEO</label><textarea id="metaDesc" maxlength="170" rows="3" class="input" placeholder="Ringkasan singkat yang membantu orang memahami isi artikel dari hasil pencarian" oninput="analyze()"></textarea><div id="metaCount" class="count">0/170</div></div></div><div style="margin-top:13px"><div class="progress"><i id="seoFill"></i></div><div id="seoChecks" class="checks"></div></div></div></div>
-<div class="panel"><div class="panel-head">Keterbacaan Artikel <span id="readBadge" class="badge b-gray">—</span></div><div id="readChecks" class="panel-body checks"></div></div><div class="panel"><div class="panel-head">Ringkasan Artikel</div><div class="panel-body"><textarea id="excerpt" class="input" rows="4" placeholder="Ringkasan yang tampil di kartu/listing artikel."></textarea></div></div>
+</div><div class="editor-tools-row"><span class="tool-label">Editor visual</span><button type="button" class="button" onclick="toggleEditorSidebar()">Panel kanan</button><button type="button" class="button" onclick="toggleEditorFullscreen()">⛶ Layar penuh</button></div><div id="body" class="body" contenteditable="true" spellcheck="true" data-placeholder="Mulai tulis artikel di sini..." oninput="analyze()"></div><textarea id="code" class="codearea hidden" spellcheck="false" oninput="codeChanged()"></textarea><div class="statusbar"><span><span id="wordCount" class="count-chip">0 kata</span><span id="charCount" class="count-chip">0 karakter</span></span><span id="readTimeLive">Waktu baca: 0 menit</span></div></div>
+<div class="panel" id="seoPanel" style="margin-top:14px"><div class="panel-head"><div class="seo-head">SEO <span id="seoBadge" class="badge b-gray">—</span></div><div><span id="seoScore" class="score">0/100</span><button type="button" class="panel-toggle" title="Sembunyikan/tampilkan SEO" onclick="togglePanel('seoPanel')">⌄</button></div></div><div class="panel-body"><div class="grid2"><div><label>Kata kunci utama</label><input id="focus" class="input" placeholder="contoh: tips SEO Google" oninput="analyze()"></div><div><label>Kata kunci terkait</label><input id="secondary" class="input" placeholder="contoh: laptop terbaik, panduan memilih laptop"></div></div><div style="margin-top:13px"><label>Pratinjau di Google</label><div class="preview"><div class="g-url">foundselection.com/artikel/<span id="gSlug">slug-artikel</span></div><div id="gTitle" class="g-title">Judul SEO artikel</div><div id="gDesc" class="g-desc">Meta description akan tampil di sini.</div></div></div><div class="grid2" style="margin-top:13px"><div><label>Judul SEO</label><input id="seoTitle" maxlength="70" class="input" placeholder="Judul yang ditampilkan di hasil pencarian" oninput="analyze()"><div id="seoTitleCount" class="count">0/70</div></div><div><label>Deskripsi SEO</label><textarea id="metaDesc" maxlength="170" rows="3" class="input" placeholder="Ringkasan singkat yang membantu orang memahami isi artikel dari hasil pencarian" oninput="analyze()"></textarea><div id="metaCount" class="count">0/170</div></div></div><div style="margin-top:13px"><div class="progress"><i id="seoFill"></i></div><div id="seoChecks" class="checks"></div></div></div></div>
+<div class="panel" id="readabilityPanel"><div class="panel-head">Keterbacaan Artikel <span id="readBadge" class="badge b-gray">—</span><button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('readabilityPanel')">⌄</button></div><div id="readChecks" class="panel-body checks"></div></div><div class="panel" id="excerptPanel"><div class="panel-head">Ringkasan Artikel<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('excerptPanel')">⌄</button></div><div class="panel-body"><textarea id="excerpt" class="input" rows="4" placeholder="Ringkasan yang tampil di kartu/listing artikel."></textarea></div></div>
 </div>
 <aside class="sticky">
-<div class="panel"><div class="panel-head">Publikasi</div><div class="panel-body"><div class="status-control"><span>Status</span><select id="pubStatus" class="status-select" onchange="statusChanged()"><option value="draft">Draft</option><option value="published">Terbit</option></select></div><div class="meta-row">Visibilitas: <strong>Publik</strong></div><div class="meta-row">Tanggal terbit:<input id="publishDate" class="input" type="date" style="margin-top:6px"></div></div></div>
-<div class="panel"><div class="panel-head">Kategori</div><div class="panel-body cat-list"><label><input type="radio" name="cat" value="Teknologi">Teknologi</label><label><input type="radio" name="cat" value="Hiburan">Hiburan</label><label><input type="radio" name="cat" value="Esensial" checked>Esensial</label><label><input type="radio" name="cat" value="Gaya Hidup">Gaya Hidup</label><label><input type="radio" name="cat" value="Kesehatan">Kesehatan</label></div></div><div class="panel"><div class="panel-head">Penempatan di /artikel/</div><div class="panel-body"><div class="placement-list"><label class="placement-item"><input id="placementFeatured" type="checkbox"><span><strong>Pilihan Utama</strong>Tampilkan sebagai pilihan editorial utama.</span></label><label class="placement-item"><input id="placementLatest" type="checkbox" checked><span><strong>Artikel Terbaru</strong>Tampilkan di daftar artikel terbaru.</span></label><label class="placement-item"><input id="placementPopular" type="checkbox" checked><span><strong>Artikel Terpopuler</strong>Izinkan masuk daftar pilihan pembaca.</span></label></div><div class="hint" style="margin-top:9px">Satu artikel boleh berada di lebih dari satu bagian.</div></div></div>
-<div class="panel"><div class="panel-head">Slug</div><div class="panel-body"><div class="admin-url" id="slugSidePreview">/artikel/slug-artikel</div></div></div>
-<div class="panel" id="featuredPanel"><div class="panel-head">Featured Image</div><div class="panel-body">
+<div class="panel" id="publishPanel"><div class="panel-head">Publikasi<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('publishPanel')">⌄</button></div><div class="panel-body"><div class="status-control"><span>Status</span><select id="pubStatus" class="status-select" onchange="statusChanged()"><option value="draft">Draft</option><option value="published">Terbit</option></select></div><div class="meta-row">Visibilitas: <strong>Publik</strong></div><div class="meta-row">Tanggal terbit:<input id="publishDate" class="input" type="date" style="margin-top:6px"></div></div></div>
+<div class="panel"><div class="panel-head">Kategori</div><div class="panel-body cat-list"><label><input type="radio" name="cat" value="Teknologi">Teknologi</label><label><input type="radio" name="cat" value="Hiburan">Hiburan</label><label><input type="radio" name="cat" value="Esensial" checked>Esensial</label><label><input type="radio" name="cat" value="Gaya Hidup">Gaya Hidup</label><label><input type="radio" name="cat" value="Kesehatan">Kesehatan</label></div></div><div class="panel" id="placementPanel"><div class="panel-head">Penempatan di /artikel/<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('placementPanel')">⌄</button></div><div class="panel-body"><div class="placement-list"><label class="placement-item"><input id="placementFeatured" type="checkbox"><span><strong>Pilihan Utama</strong>Tampilkan sebagai pilihan editorial utama.</span></label><label class="placement-item"><input id="placementLatest" type="checkbox" checked><span><strong>Artikel Terbaru</strong>Tampilkan di daftar artikel terbaru.</span></label><label class="placement-item"><input id="placementPopular" type="checkbox" checked><span><strong>Artikel Terpopuler</strong>Izinkan masuk daftar pilihan pembaca.</span></label></div><div class="hint" style="margin-top:9px">Satu artikel boleh berada di lebih dari satu bagian.</div></div></div>
+<div class="panel" id="slugPanel"><div class="panel-head">Slug<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('slugPanel')">⌄</button></div><div class="panel-body"><div class="admin-url" id="slugSidePreview">/artikel/slug-artikel</div></div></div>
+<div class="panel" id="featuredPanel"><div class="panel-head">Featured Image<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('featuredPanel')">⌄</button></div><div class="panel-body">
 <div id="drop" class="image-drop"><div><div style="font-size:25px">＋</div><b>Pilih gambar utama</b><div class="hint">Klik atau tarik file ke sini</div></div></div>
 <input id="imageFile" type="file" accept="image/jpeg,image/png,image/webp,image/avif" class="hidden">
 <input id="bodyImageFile" type="file" accept="image/jpeg,image/png,image/webp,image/avif,image/gif" class="hidden">
@@ -191,8 +239,8 @@ body.sidebar-collapsed .main{margin-left:0}
 <div style="margin-top:10px"><label>Nama file</label><div class="file-row"><input id="imageName" class="input" placeholder="nama-gambar"><select id="imageFormat" class="input" title="Format output"><option value="webp">WebP</option><option value="jpg">JPG</option><option value="jpeg">JPEG</option><option value="png">PNG</option><option value="avif">AVIF</option></select></div></div>
 <div style="margin-top:10px"><label>Judul gambar</label><input id="imageTitle" class="input" placeholder="Opsional"></div>
 </div></div>
-<div class="panel"><div class="panel-head">Pengaturan Artikel</div><div class="panel-body"><label>Waktu baca (menit)</label><input id="readTime" class="input" type="number" min="1" value="5"><div style="margin-top:12px"><label>Mesin pencari</label><div class="grid2"><select id="robotsIndex" class="input"><option>index</option><option>noindex</option></select><select id="robotsFollow" class="input"><option>follow</option><option>nofollow</option></select></div></div><div style="margin-top:12px"><label>URL utama</label><input id="canonical" class="input" placeholder="https://foundselection.blog/artikel/..."></div><div style="margin-top:12px"><label>Jenis artikel</label><select id="schema" class="input"><option>Article</option><option>NewsArticle</option><option>BlogPosting</option></select></div></div></div>
-<div class="panel"><div class="panel-head">Saat Dibagikan</div><div class="panel-body"><label>Judul saat dibagikan</label><input id="ogTitle" class="input" placeholder="Biasanya sama dengan judul artikel"><div style="margin-top:10px"><label>Deskripsi saat dibagikan</label><textarea id="ogDesc" class="input" rows="3" placeholder="Kalimat singkat yang menarik saat artikel dibagikan"></textarea></div><div style="margin-top:10px"><label>Gambar saat dibagikan</label><input id="ogImage" class="input" placeholder="Kosongkan jika memakai Featured Image"></div></div></div>
+<div class="panel" id="articleSettingsPanel"><div class="panel-head">Pengaturan Artikel<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('articleSettingsPanel')">⌄</button></div><div class="panel-body"><label>Waktu baca (menit)</label><input id="readTime" class="input" type="number" min="1" value="5"><div style="margin-top:12px"><label>Mesin pencari</label><div class="grid2"><select id="robotsIndex" class="input"><option>index</option><option>noindex</option></select><select id="robotsFollow" class="input"><option>follow</option><option>nofollow</option></select></div></div><div style="margin-top:12px"><label>URL utama</label><input id="canonical" class="input" placeholder="https://foundselection.blog/artikel/..."></div><div style="margin-top:12px"><label>Jenis artikel</label><select id="schema" class="input"><option>Article</option><option>NewsArticle</option><option>BlogPosting</option></select></div></div></div>
+<div class="panel" id="sharePanel"><div class="panel-head">Saat Dibagikan<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('sharePanel')">⌄</button></div><div class="panel-body"><label>Judul saat dibagikan</label><input id="ogTitle" class="input" placeholder="Biasanya sama dengan judul artikel"><div style="margin-top:10px"><label>Deskripsi saat dibagikan</label><textarea id="ogDesc" class="input" rows="3" placeholder="Kalimat singkat yang menarik saat artikel dibagikan"></textarea></div><div style="margin-top:10px"><label>Gambar saat dibagikan</label><input id="ogImage" class="input" placeholder="Kosongkan jika memakai Featured Image"></div></div></div>
 </aside></div></section></div></main>
 
 <div id="imageMetaModal" class="modal">
@@ -292,6 +340,7 @@ function setMode(next){
     mode='code';
   }else{
     $('body').innerHTML=$('code').value;
+    normalizeLists();
     mode='visual';
   }
   $('body').classList.toggle('hidden',mode!=='visual');
@@ -303,16 +352,84 @@ function setMode(next){
   analyze();
 }
 function codeChanged(){if(mode==='code')analyze()}
-$('body').addEventListener('keyup',()=>{saveEditorSelection();updateToolbarState()});$('body').addEventListener('mouseup',()=>{saveEditorSelection();updateToolbarState()});document.addEventListener('selectionchange',()=>{if(document.activeElement===$('body')||isInsideEditor(window.getSelection()?.anchorNode))updateToolbarState()});
+$('body').addEventListener('keyup',()=>{saveEditorSelection();updateToolbarState();afterTableSelection()});$('body').addEventListener('mouseup',()=>{saveEditorSelection();updateToolbarState();afterTableSelection()});document.addEventListener('selectionchange',()=>{if(document.activeElement===$('body')||isInsideEditor(window.getSelection()?.anchorNode)){updateToolbarState();afterTableSelection()}});
 function isInsideEditor(node){return !!node&&($('body').contains(node.nodeType===3?node.parentNode:node))}
 function keepEditorSelection(e){e.preventDefault();saveEditorSelection()}
 function saveEditorSelection(){const sel=window.getSelection();if(sel&&sel.rangeCount&&isInsideEditor(sel.anchorNode))window.__editorRange=sel.getRangeAt(0).cloneRange()}
 function restoreEditorSelection(){const r=window.__editorRange;if(!r)return;const sel=window.getSelection();sel.removeAllRanges();sel.addRange(r)}
 function focusSelection(){if(mode!=='visual')setMode('visual');$('body').focus();restoreEditorSelection()}
-function exec(cmd,val=null){focusSelection();document.execCommand(cmd,false,val);saveEditorSelection();markDirty();updateToolbarState();analyze()}
+function exec(cmd,val=null){
+  focusSelection();
+  if(cmd==='insertUnorderedList'||cmd==='insertOrderedList'){
+    document.execCommand(cmd,false,val);
+    normalizeLists();
+  }else{
+    document.execCommand(cmd,false,val);
+  }
+  saveEditorSelection();markDirty();updateToolbarState();analyze();
+}
 function formatBlock(tag){if(!tag)return;focusSelection();document.execCommand('formatBlock',false,tag);saveEditorSelection();markDirty();updateToolbarState();analyze()}
-function setFontSize(v){if(!v)return;focusSelection();document.execCommand('fontSize',false,v);saveEditorSelection();markDirty();updateToolbarState();analyze()}
+function setFontSize(v){
+  if(!v)return;
+  focusSelection();
+  const px={2:'14px',3:'17px',4:'22px',5:'30px'}[String(v)]||'17px';
+  document.execCommand('fontSize',false,'7');
+  $('body').querySelectorAll('font[size="7"]').forEach(font=>{
+    const span=document.createElement('span');
+    span.style.fontSize=px;
+    span.innerHTML=font.innerHTML;
+    font.replaceWith(span);
+  });
+  saveEditorSelection();markDirty();updateToolbarState();analyze();
+}
 function setFontFamily(v){if(!v)return;focusSelection();document.execCommand('fontName',false,v);saveEditorSelection();markDirty();updateToolbarState();analyze()}
+function applyInlineStyle(style){
+  focusSelection();
+  const value=document.execCommand('hiliteColor',false,style) ? true : false;
+  saveEditorSelection();markDirty();updateToolbarState();analyze();
+  return value;
+}
+function applyTextColor(){
+  const color=prompt('Masukkan warna teks (contoh #2563eb):','#2563eb');
+  if(!color)return;
+  focusSelection();document.execCommand('foreColor',false,color);saveEditorSelection();markDirty();updateToolbarState();analyze();
+}
+function applyHighlight(){
+  const color=prompt('Masukkan warna highlight (contoh #fef08a):','#fef08a');
+  if(!color)return;
+  applyInlineStyle(color);
+}
+function normalizeLists(){
+  $('body').querySelectorAll('ul').forEach(ul=>ul.style.listStyleType='disc');
+  $('body').querySelectorAll('ol').forEach(ol=>ol.style.listStyleType='decimal');
+}
+function toggleChecklist(){
+  focusSelection();
+  const selected=getSelection();
+  if(!selected||!selected.rangeCount)return;
+  const text=selected.toString().trim();
+  if(!text){
+    document.execCommand('insertHTML',false,'<ul class="checklist"><li>☐ <span>&nbsp;</span></li></ul>');
+  }else{
+    document.execCommand('insertUnorderedList',false);
+    normalizeLists();
+    const root=$('body');
+    root.querySelectorAll('ul:not(.checklist) li').forEach(li=>{
+      if(!li.textContent.trim().startsWith('☐') && !li.textContent.trim().startsWith('☑')) li.innerHTML='☐ '+li.innerHTML;
+    });
+  }
+  saveEditorSelection();markDirty();analyze();
+}
+function togglePanel(id){$(id)?.classList.toggle('is-collapsed')}
+function toggleEditorSidebar(){document.querySelector('.editor-layout')?.classList.toggle('hide-sidebar')}
+function toggleEditorFullscreen(){
+  document.body.classList.toggle('editor-canvas-fullscreen');
+  const active=document.body.classList.contains('editor-canvas-fullscreen');
+  $('fullscreenBtn')?.setAttribute('aria-pressed',String(active));
+  if(active){ $('body').focus(); }
+}
+function closeEditorFullscreen(){document.body.classList.remove('editor-canvas-fullscreen')}
+
 function updateSlugPreview(){const slug=$('slug').value.trim()||slugify($('title').value)||'slug-artikel';$('slugSidePreview').textContent='/artikel/'+slug}
 function closePopovers(){['linkPopover','embedPopover','extraMenu'].forEach(id=>$(id)?.classList.add('hidden'))}
 function openLinkPopover(){closePopovers();saveEditorSelection();$('linkPopover').classList.remove('hidden');$('linkUrl').focus()}
@@ -377,6 +494,82 @@ function updateToolbarState(){
   txt.textContent=`${blockLabel}${cleanFont?' · '+cleanFont:''}${fs?.value?' · '+fs.options[fs.selectedIndex].text:''}${active.length?' · '+active.join(' · '):''}`;
   dot.classList.toggle('on',blockLabel!=='Paragraf'||!!cleanFont||!!fs?.value||active.length>0);
 }
+
+function buildTableGrid(){
+  const grid=$('tableGrid');
+  if(!grid)return;
+  grid.innerHTML='';
+  for(let r=1;r<=8;r++)for(let c=1;c<=8;c++){
+    const b=document.createElement('button');
+    b.type='button'; b.dataset.rows=r; b.dataset.cols=c; b.title=`${c} kolom × ${r} baris`;
+    b.addEventListener('mouseenter',()=>highlightTableGrid(r,c));
+    b.addEventListener('click',()=>{window.__tablePick={rows:r,cols:c};highlightTableGrid(r,c);$('tableGridLabel').textContent=`${c} kolom × ${r} baris`});
+    grid.appendChild(b);
+  }
+}
+function highlightTableGrid(rows,cols){document.querySelectorAll('#tableGrid button').forEach(b=>b.classList.toggle('active',Number(b.dataset.rows)<=rows&&Number(b.dataset.cols)<=cols))}
+function openTablePopover(){closePopovers();saveEditorSelection();buildTableGrid();$('tableGridLabel').textContent='Pilih jumlah kolom × baris';$('tablePopover').classList.remove('hidden')}
+function closeTablePopover(){$('tablePopover').classList.add('hidden')}
+function tableCellFromSelection(){
+  const sel=getSelection();
+  if(!sel||!sel.anchorNode)return null;
+  const n=sel.anchorNode.nodeType===3?sel.anchorNode.parentElement:sel.anchorNode;
+  return n?.closest?.('td,th');
+}
+function openTableSettings(){
+  const cell=tableCellFromSelection();
+  if(!cell){toast('Klik di dalam tabel terlebih dahulu.');return}
+  window.__activeTableCell=cell;
+  const table=cell.closest('table');
+  const border=parseInt((cell.style.borderWidth||'').replace('px',''))||1;
+  $('tableBorderWidth').value=border;
+  $('tableCellPadding').value=parseInt(getComputedStyle(cell).paddingTop)||8;
+  $('tableBorderColor').value=(cell.style.borderColor||'#cbd5e1');
+  $('tableHeaderMode').value=table.querySelector('th')?'first':'none';
+  $('tablePopover').classList.remove('hidden');
+}
+function applyTableSettings(){
+  const cell=window.__activeTableCell;
+  const table=cell?.closest('table');
+  if(!table)return;
+  const w=Math.max(0,Math.min(8,Number($('tableBorderWidth').value)||0));
+  const pad=Math.max(0,Math.min(24,Number($('tableCellPadding').value)||0));
+  const color=$('tableBorderColor').value.trim()||'#cbd5e1';
+  table.querySelectorAll('td,th').forEach(td=>{td.style.border=`${w}px solid ${color}`;td.style.padding=`${pad}px  ${pad}px`});
+  if($('tableHeaderMode').value==='first'){
+    const first=table.querySelector('tr');
+    if(first && !first.querySelector('th')){
+      [...first.children].forEach(td=>{const th=document.createElement('th');th.innerHTML=td.innerHTML;th.style.cssText=td.style.cssText;td.replaceWith(th)});
+    }
+  }else{
+    table.querySelectorAll('th').forEach(th=>{const td=document.createElement('td');td.innerHTML=th.innerHTML;td.style.cssText=th.style.cssText;th.replaceWith(td)});
+  }
+  markDirty();analyze();closeTablePopover();
+}
+function insertTable(){
+  const pick=window.__tablePick||{rows:3,cols:3};
+  const rows=Math.max(1,Math.min(8,pick.rows)),cols=Math.max(1,Math.min(8,pick.cols));
+  const border=Math.max(0,Math.min(8,Number($('tableBorderWidth').value)||1));
+  const pad=Math.max(0,Math.min(24,Number($('tableCellPadding').value)||8));
+  const color=esc($('tableBorderColor').value.trim()||'#cbd5e1');
+  const header=$('tableHeaderMode').value==='first';
+  let html='<table style="width:100%;border-collapse:collapse;table-layout:fixed"><tbody>';
+  for(let r=0;r<rows;r++){
+    html+='<tr>';
+    for(let c=0;c<cols;c++){
+      const tag=header&&r===0?'th':'td';
+      const bg=header&&r===0?'background:#f8fafc;':'';
+      html+=`<${tag} style="border:${border}px solid ${color};padding:${pad}px;vertical-align:top;${bg}">${header&&r===0?'Header':''}</${tag}>`;
+    }
+    html+='</tr>';
+  }
+  html+='</tbody></table><p><br></p>';
+  focusSelection();document.execCommand('insertHTML',false,html);normalizeLists();markDirty();analyze();closeTablePopover();
+}
+
+function afterTableSelection(){const cell=tableCellFromSelection();document.querySelectorAll('.body td,.body th').forEach(x=>x.classList.remove('table-cell-active'));cell?.classList.add('table-cell-active')}
+
+function applySelectedCellBackground(){const cell=tableCellFromSelection()||window.__activeTableCell;if(!cell)return;const color=prompt('Warna latar sel (contoh #eff6ff):',cell.style.backgroundColor||'#ffffff');if(color){cell.style.backgroundColor=color;markDirty();analyze()}}
 
 function insertBodyImage(){
   if(mode!=='visual'){toast('Gunakan mode Visual untuk menyisipkan gambar.');return}
@@ -611,7 +804,7 @@ function showLogin(){$('loginGate').style.display='flex';setTimeout(()=>$('login
 function hideLogin(){$('loginGate').style.display='none';$('loginError').textContent='';$('loginPassword').value=''}
 async function login(e){e.preventDefault();const btn=$('loginButton');btn.disabled=true;$('loginError').textContent='';try{const r=await fetch(AUTH_API+'/login',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({password:$('loginPassword').value})});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||'Kata sandi salah.');hideLogin();await load()}catch(err){$('loginError').textContent=err.message||'Gagal masuk.'}finally{btn.disabled=false}}
 async function editPost(slug){const a=posts.find(x=>x.slug===slug);if(a){fill(a);return}try{const r=await apiFetch(API+'/'+encodeURIComponent(slug));const j=await r.json();if(!j.success)throw Error(j.error||'Artikel tidak ditemukan');fill(j.data)}catch(e){toast(e.message)}}
-function buildPayload(status){const body=getBody();status=status==='published'?'published':'draft';return{title:$('title').value.trim(),slug:$('slug').value.trim()||slugify($('title').value),category:getCategory(),excerpt:$('excerpt').value.trim(),content:body,publish_date:$('publishDate').value,read_time:Math.max(1,Number($('readTime').value)||5),status,thumbnail:storedImageUrl||'',image_alt:$('altText').value.trim(),image_name:$('imageName').value.trim(),image_title:$('imageTitle').value.trim(),seo_title:$('seoTitle').value.trim(),meta_description:$('metaDesc').value.trim(),focus_keyword:$('focus').value.trim(),secondary_keywords:$('secondary').value.trim(),canonical_url:$('canonical').value.trim(),show_featured:$('placementFeatured').checked,show_latest:$('placementLatest').checked,show_popular:$('placementPopular').checked,og_title:$('ogTitle').value.trim(),og_description:$('ogDesc').value.trim(),og_image:$('ogImage').value.trim(),robots_index:$('robotsIndex').value,robots_follow:$('robotsFollow').value,schema_type:$('schema').value}}
+function buildPayload(status){const body=getBody();if(mode==='visual')normalizeLists();const normalizedBody=getBody();status=status==='published'?'published':'draft';return{title:$('title').value.trim(),slug:$('slug').value.trim()||slugify($('title').value),category:getCategory(),excerpt:$('excerpt').value.trim(),content:normalizedBody,publish_date:$('publishDate').value,read_time:Math.max(1,Number($('readTime').value)||5),status,thumbnail:storedImageUrl||'',image_alt:$('altText').value.trim(),image_name:$('imageName').value.trim(),image_title:$('imageTitle').value.trim(),seo_title:$('seoTitle').value.trim(),meta_description:$('metaDesc').value.trim(),focus_keyword:$('focus').value.trim(),secondary_keywords:$('secondary').value.trim(),canonical_url:$('canonical').value.trim(),show_featured:$('placementFeatured').checked,show_latest:$('placementLatest').checked,show_popular:$('placementPopular').checked,og_title:$('ogTitle').value.trim(),og_description:$('ogDesc').value.trim(),og_image:$('ogImage').value.trim(),robots_index:$('robotsIndex').value,robots_follow:$('robotsFollow').value,schema_type:$('schema').value}}
 async function uploadMedia(){
   if(!pendingImage)return storedImageUrl;
   if(!mediaGuard())throw Error('Upload gambar belum tersedia.');
@@ -760,7 +953,7 @@ $('imageFormat').addEventListener('change',async()=>{
 ['focus','secondary','seoTitle','metaDesc','excerpt','altText','imageName','imageTitle','canonical','ogTitle','ogDesc','ogImage','readTime','robotsIndex','robotsFollow','schema','publishDate','placementFeatured','placementLatest','placementPopular'].forEach(id=>{const el=$(id);if(el){el.addEventListener('input',markDirty);el.addEventListener('change',markDirty)}});
 $('body').addEventListener('input',markDirty);
 window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
-document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();savePost('draft')}if(e.key==='Escape'){closeModal();closePopovers();closeImageMetaModal();closeLinkInspector()}});
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'){e.preventDefault();savePost('draft')}if(e.key==='Escape'){closeModal();closePopovers();closeImageMetaModal();closeLinkInspector();closeTablePopover();closeEditorFullscreen()}});
 $('body').addEventListener('keydown',e=>{
   if(!['Backspace','Delete'].includes(e.key))return;
   const sel=getSelection();
