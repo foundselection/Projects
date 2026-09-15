@@ -8,7 +8,12 @@
 
 <meta name="description" content="Jelajahi koleksi artikel Found Selection. Temukan artikel terbaru tentang teknologi, hiburan, kesehatan, gaya hidup, dan produk pilihan. Baca, pelajari, bagikan.">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<link rel="canonical" href="https://foundselection.blog/artikel/">
+
+<!-- FIX SEO: Canonical URL diset default, lalu langsung disesuaikan oleh skrip di bawahnya agar Googlebot tidak menganggap artikel sebagai duplikat -->
+<link rel="canonical" id="canonical-link" href="https://foundselection.blog/artikel/">
+<script>
+  document.getElementById('canonical-link').href = window.location.href.split('#')[0].split('?')[0];
+</script>
 
 <meta property="og:site_name" content="Found Selection">
 <meta property="og:type" content="website">
@@ -554,6 +559,9 @@ body.detail-mode .detail-only{
   font-family:Lato,Arial,sans-serif;
   font-size:1.08rem;
   line-height:1.92;
+  /* FIX: Mengizinkan URL dan kata panjang untuk patah agar tidak merusak layar HP */
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .detail-content p{
@@ -660,9 +668,21 @@ body.detail-mode .detail-only{
   line-height:1.55;
 }
 
+/* FIX: CSS khusus tabel responsif untuk konten dari editor admin */
+.detail-content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
+  margin: 1.8rem 0;
+}
+
+/* FIX: iframe video menjadi responsif rasio 16:9 murni */
 .detail-content iframe{
   width:100%;
-  min-height:395px;
+  aspect-ratio: 16 / 9;
+  height: auto;
   margin:1.8rem 0;
   border:0;
   border-radius:18px;
@@ -1076,8 +1096,8 @@ body.detail-mode .detail-only{
     margin-top:2.2rem;
   }
 
+  /* FIX: Hapus min-height agar iframe mengikuti aspect-ratio 16:9 secara penuh di HP */
   .detail-content iframe{
-    min-height:230px;
     border-radius:14px;
   }
 
@@ -3339,15 +3359,9 @@ document
                 window.innerWidth <= 1024
               ){
 
-                tocWrap.classList.remove(
-                  "open"
-                );
-
-                $("toc-trigger")
-                  .setAttribute(
-                    "aria-expanded",
-                    "false"
-                  );
+                const box = document.querySelector(".toc-box");
+                box.classList.remove("open");
+                $("toc-trigger").setAttribute("aria-expanded", "false");
 
               }
 
@@ -4384,8 +4398,7 @@ document
           "click",
           () => {
 
-            const box =
-              $("toc-wrap");
+            const box = document.querySelector(".toc-box");
 
             const open =
               box.classList.toggle(
