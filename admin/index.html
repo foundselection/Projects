@@ -89,7 +89,19 @@ body.sidebar-collapsed .main{margin-left:0}
 .tool.active,.tool[aria-pressed="true"],.tool.select.active{
   color:var(--blue);background:#eff6ff;border-color:#bfdbfe;box-shadow:inset 0 -2px 0 var(--blue)
 }
-.tool.select{border:1px solid #e1e5ea;background:#fff}
+ .tool.select{border:1px solid #e1e5ea;background:#fff;cursor:pointer}
+.tool.select:focus{outline:2px solid rgba(37,99,235,.18);outline-offset:0}
+.panel-toggle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 28px}
+.legacy-category{padding:8px 10px!important;border:1px solid #f2d38a;background:#fff8e5;border-radius:9px;display:flex!important}
+.panel-toggle .panel-chevron{display:block;transition:transform .16s ease}
+.panel.is-collapsed .panel-toggle .panel-chevron{transform:rotate(-90deg)}
+.panel-head .head-controls{display:flex;align-items:center;gap:8px}
+.editor-tools-row .button.active{background:#eff6ff;border-color:#bfdbfe;color:var(--blue)}
+.editor-canvas-fullscreen #bodyEditor .tabs{border-radius:14px 14px 0 0}
+.editor-canvas-fullscreen #bodyEditor .editor-tools-row{display:none}
+.body table td,.body table th{overflow-wrap:anywhere}
+.body .checklist{list-style:none;padding-left:8px}
+.body .checklist li{list-style:none}
 .toolbar-status{min-height:27px;padding:0 8px;border-radius:7px}
 .toolbar-status.on{background:#eff6ff;color:var(--blue)}
 .body{
@@ -156,12 +168,22 @@ body.sidebar-collapsed .main{margin-left:0}
 <div class="editor-layout"><div>
 <input id="title" class="input title-input" placeholder="Tambahkan judul artikel" oninput="titleInput()"><div class="permalink"><span>https://foundselection.blog/artikel/</span><input id="slug" class="input" placeholder="slug-artikel" oninput="slugManual=true;markDirty();updateSlugPreview();analyze()"></div>
 <div id="bodyEditor" class="editor-wrap"><div class="tabs"><button id="visualTab" class="tab active" title="Editor visual" onclick="setMode('visual')">Visual</button><button id="codeTab" class="tab" title="Edit HTML" onclick="setMode('code')">Kode</button><button id="fullscreenBtn" class="tab" type="button" title="Layar penuh editor" onclick="toggleEditorFullscreen()">⛶ Layar penuh</button></div><div class="toolbar" id="toolbar">
-<select id="blockFormat" class="tool select" aria-label="Format teks" onchange="formatBlock(this.value)">
-<option value="">Paragraf</option><option value="h2">Heading 2</option><option value="h3">Heading 3</option><option value="blockquote">Kutipan</option></select>
-<select id="fontSize" class="tool select" aria-label="Ukuran teks" onpointerdown="saveEditorSelection()" onchange="setFontSize(this.value)">
+<select id="blockFormat" class="tool select" onmousedown="saveEditorSelection()" aria-label="Format teks" onchange="formatBlock(this.value)">
+<option value="">Paragraf</option><option value="h2">Heading 2</option><option value="h3">Heading 3</option><option value="h4">Heading 4</option><option value="blockquote">Kutipan</option></select>
+<select id="fontSize" class="tool select" onmousedown="saveEditorSelection()" aria-label="Ukuran teks" onpointerdown="saveEditorSelection()" onchange="setFontSize(this.value)">
 <option value="">Ukuran</option><option value="2">Kecil</option><option value="3">Normal</option><option value="4">Besar</option><option value="5">Sangat besar</option></select>
-<select id="fontFamily" class="tool select" aria-label="Jenis font" title="Jenis font" onpointerdown="saveEditorSelection()" onchange="setFontFamily(this.value)">
+<select id="fontFamily" class="tool select" onmousedown="saveEditorSelection()" aria-label="Jenis font" title="Jenis font" onpointerdown="saveEditorSelection()" onchange="setFontFamily(this.value)">
 <option value="">Font</option><option value="Calibri">Calibri</option><option value="Lato">Lato</option><option value="Roboto">Roboto</option><option value="Open Sans">Open Sans</option><option value="Georgia">Georgia</option></select>
+<span class="divider"></span>
+<button type="button" class="tool" title="Warna teks" aria-label="Warna teks" onmousedown="keepEditorSelection(event)" onclick="applyTextColor()">A</button>
+<button type="button" class="tool" title="Warna stabilo" aria-label="Warna stabilo" onmousedown="keepEditorSelection(event)" onclick="applyHighlight()">🖍</button>
+<select id="lineSpacing" class="tool select" title="Spasi baris" aria-label="Spasi baris" onmousedown="saveEditorSelection()" onchange="setLineSpacing(this.value)">
+  <option value="">Spasi</option>
+  <option value="1">1.0</option>
+  <option value="1.15">1.15</option>
+  <option value="1.5">1.5</option>
+  <option value="2">2.0</option>
+</select>
 <span class="divider"></span>
 <button type="button" class="tool" data-cmd="bold" title="Tebal (Ctrl/Cmd+B)" aria-label="Tebal" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('bold')"><b>B</b></button>
 <button type="button" class="tool" data-cmd="italic" title="Miring (Ctrl/Cmd+I)" aria-label="Miring" aria-pressed="false" onmousedown="keepEditorSelection(event)" onclick="exec('italic')"><i>I</i></button>
@@ -226,7 +248,7 @@ body.sidebar-collapsed .main{margin-left:0}
 </div>
 <aside class="sticky">
 <div class="panel" id="publishPanel"><div class="panel-head">Publikasi<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('publishPanel')">⌄</button></div><div class="panel-body"><div class="status-control"><span>Status</span><select id="pubStatus" class="status-select" onchange="statusChanged()"><option value="draft">Draft</option><option value="published">Terbit</option></select></div><div class="meta-row">Visibilitas: <strong>Publik</strong></div><div class="meta-row">Tanggal terbit:<input id="publishDate" class="input" type="date" style="margin-top:6px"></div></div></div>
-<div class="panel"><div class="panel-head">Kategori</div><div class="panel-body cat-list"><label><input type="radio" name="cat" value="Teknologi">Teknologi</label><label><input type="radio" name="cat" value="Hiburan">Hiburan</label><label><input type="radio" name="cat" value="Esensial" checked>Esensial</label><label><input type="radio" name="cat" value="Gaya Hidup">Gaya Hidup</label><label><input type="radio" name="cat" value="Kesehatan">Kesehatan</label></div></div><div class="panel" id="placementPanel"><div class="panel-head">Penempatan di /artikel/<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('placementPanel')">⌄</button></div><div class="panel-body"><div class="placement-list"><label class="placement-item"><input id="placementFeatured" type="checkbox"><span><strong>Pilihan Utama</strong>Tampilkan sebagai pilihan editorial utama.</span></label><label class="placement-item"><input id="placementLatest" type="checkbox" checked><span><strong>Artikel Terbaru</strong>Tampilkan di daftar artikel terbaru.</span></label><label class="placement-item"><input id="placementPopular" type="checkbox" checked><span><strong>Artikel Terpopuler</strong>Izinkan masuk daftar pilihan pembaca.</span></label></div><div class="hint" style="margin-top:9px">Satu artikel boleh berada di lebih dari satu bagian.</div></div></div>
+<div class="panel" id="categoryEditorPanel"><div class="panel-head"><span>Kategori</span><button type="button" class="panel-toggle" title="Sembunyikan/tampilkan Kategori" onclick="togglePanel('categoryEditorPanel')"><span class="panel-chevron">⌄</span></button></div><div class="panel-body cat-list"><label><input type="radio" name="cat" value="Teknologi">Teknologi</label><label><input type="radio" name="cat" value="Hiburan">Hiburan</label><label><input type="radio" name="cat" value="Esensial" checked>Esensial</label><label><input type="radio" name="cat" value="Gaya Hidup">Gaya Hidup</label><label><input type="radio" name="cat" value="Kesehatan">Kesehatan</label></div></div><div class="panel" id="placementPanel"><div class="panel-head">Penempatan di /artikel/<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('placementPanel')">⌄</button></div><div class="panel-body"><div class="placement-list"><label class="placement-item"><input id="placementFeatured" type="checkbox"><span><strong>Pilihan Utama</strong>Tampilkan sebagai pilihan editorial utama.</span></label><label class="placement-item"><input id="placementLatest" type="checkbox" checked><span><strong>Artikel Terbaru</strong>Tampilkan di daftar artikel terbaru.</span></label><label class="placement-item"><input id="placementPopular" type="checkbox" checked><span><strong>Artikel Terpopuler</strong>Izinkan masuk daftar pilihan pembaca.</span></label></div><div class="hint" style="margin-top:9px">Satu artikel boleh berada di lebih dari satu bagian.</div></div></div>
 <div class="panel" id="slugPanel"><div class="panel-head">Slug<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('slugPanel')">⌄</button></div><div class="panel-body"><div class="admin-url" id="slugSidePreview">/artikel/slug-artikel</div></div></div>
 <div class="panel" id="featuredPanel"><div class="panel-head">Featured Image<button type="button" class="panel-toggle" title="Sembunyikan/tampilkan" onclick="togglePanel('featuredPanel')">⌄</button></div><div class="panel-body">
 <div id="drop" class="image-drop"><div><div style="font-size:25px">＋</div><b>Pilih gambar utama</b><div class="hint">Klik atau tarik file ke sini</div></div></div>
@@ -308,6 +330,7 @@ const API='https://found-selection-api.foundselection.workers.dev/api/admin/arti
 const AUTH_API='https://found-selection-api.foundselection.workers.dev/api/auth';
 const MEDIA_API='https://found-selection-api.foundselection.workers.dev/api/media';
 const CATS=['Teknologi','Hiburan','Esensial','Gaya Hidup','Kesehatan'];
+const PANEL_STATE_KEY='foundselection-admin-panel-state-v2';
 let posts=[],editingSlug=null,slugManual=false,deleteSlug=null,mode='visual',pendingImage=null,storedImageUrl='',dirty=false,suppressDirty=false,saving=false,mediaUnavailable=false;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -321,13 +344,13 @@ function show(v){const leavingEditor=document.getElementById('editorView')&&!doc
 function markDirty(){if(suppressDirty)return;dirty=true;const el=$('saveState');if(el)el.innerHTML='<span class="save-dot changed"></span>Perubahan belum disimpan';}
 function markSaved(){dirty=false;const el=$('saveState');if(el)el.innerHTML='<span class="save-dot saved"></span>Tersimpan';}
 function newPost(){if(dirty&&!confirm('Ada perubahan yang belum disimpan. Buat artikel baru tanpa menyimpan?'))return;editingSlug=null;slugManual=false;clearForm();$('editorHeading').textContent='Artikel Baru';show('editor');analyze()}
-function clearForm(){suppressDirty=true;['title','slug','focus','secondary','seoTitle','metaDesc','excerpt','altText','imageName','imageTitle','canonical','ogTitle','ogDesc','ogImage'].forEach(id=>$(id).value='');$('body').innerHTML='';$('code').value='';$('publishDate').value=new Date().toISOString().slice(0,10);$('readTime').value=5;$('robotsIndex').value='index';$('robotsFollow').value='follow';$('schema').value='Article';$('pubStatus').value='draft';document.querySelector('input[name="cat"][value="Esensial"]').checked=true;
+function clearForm(){suppressDirty=true;['title','slug','focus','secondary','seoTitle','metaDesc','excerpt','altText','imageName','imageTitle','canonical','ogTitle','ogDesc','ogImage'].forEach(id=>$(id).value='');$('body').innerHTML='';$('code').value='';$('publishDate').value=new Date().toISOString().slice(0,10);$('readTime').value=5;$('robotsIndex').value='index';$('robotsFollow').value='follow';$('schema').value='Article';$('pubStatus').value='draft';document.querySelector('input[name="cat"][value="Esensial"]').checked=true;document.getElementById('legacyCategoryOption')?.remove();
   $('placementFeatured').checked=false;
   $('placementLatest').checked=true;
   $('placementPopular').checked=true;
   $('drop').classList.remove('hidden');$('selectedImage').classList.add('hidden');$('imagePreview').removeAttribute('src');$('fileMeta').textContent='';$('imageFormat').value='webp';pendingImage=null;storedImageUrl='';setMode('visual');suppressDirty=false;markSaved()}
 function titleInput(){if(!slugManual&&!editingSlug)$('slug').value=slugify($('title').value);updateSlugPreview();analyze()}
-function getCategory(){return document.querySelector('input[name="cat"]:checked')?.value||'Esensial'}
+function getCategory(){const checked=document.querySelector('input[name="cat"]:checked');return checked?.value||null}
 function getBody(){return mode==='code'?$('code').value:$('body').innerHTML.trim()}
 function setMode(next){
   if(next!== 'visual' && next!=='code') return;
@@ -351,57 +374,93 @@ function setMode(next){
   if(mode==='visual') updateToolbarState();
   analyze();
 }
-function codeChanged(){if(mode==='code')analyze()}
+function codeChanged(){if(mode==='code'){markDirty();analyze()}}
 $('body').addEventListener('keyup',()=>{saveEditorSelection();updateToolbarState();afterTableSelection()});$('body').addEventListener('mouseup',()=>{saveEditorSelection();updateToolbarState();afterTableSelection()});document.addEventListener('selectionchange',()=>{if(document.activeElement===$('body')||isInsideEditor(window.getSelection()?.anchorNode)){updateToolbarState();afterTableSelection()}});
 function isInsideEditor(node){return !!node&&($('body').contains(node.nodeType===3?node.parentNode:node))}
 function keepEditorSelection(e){e.preventDefault();saveEditorSelection()}
 function saveEditorSelection(){const sel=window.getSelection();if(sel&&sel.rangeCount&&isInsideEditor(sel.anchorNode))window.__editorRange=sel.getRangeAt(0).cloneRange()}
 function restoreEditorSelection(){const r=window.__editorRange;if(!r)return;const sel=window.getSelection();sel.removeAllRanges();sel.addRange(r)}
-function focusSelection(){if(mode!=='visual')setMode('visual');$('body').focus();restoreEditorSelection()}
+function focusSelection(){
+  if(mode!=='visual') setMode('visual');
+  const body=$('body');
+  body.focus({preventScroll:true});
+  restoreEditorSelection();
+}
 function exec(cmd,val=null){
   focusSelection();
-  if(cmd==='insertUnorderedList'||cmd==='insertOrderedList'){
-    document.execCommand(cmd,false,val);
-    normalizeLists();
-  }else{
-    document.execCommand(cmd,false,val);
-  }
-  saveEditorSelection();markDirty();updateToolbarState();analyze();
+  document.execCommand(cmd,false,val);
+  if(cmd==='insertUnorderedList'||cmd==='insertOrderedList') normalizeLists();
+  saveEditorSelection();
+  markDirty();
+  updateToolbarState();
+  analyze();
 }
-function formatBlock(tag){if(!tag)return;focusSelection();document.execCommand('formatBlock',false,tag);saveEditorSelection();markDirty();updateToolbarState();analyze()}
+function formatBlock(tag){
+  if(!tag)return;
+  focusSelection();
+  document.execCommand('formatBlock',false,tag);
+  saveEditorSelection();
+  markDirty();
+  updateToolbarState();
+  analyze();
+}
 function setFontSize(v){
   if(!v)return;
   focusSelection();
-  const px={2:'14px',3:'17px',4:'22px',5:'30px'}[String(v)]||'17px';
+  const px={2:'14px',3:'17px',4:'22px',5:'30px'}[String(v)];
+  if(!px)return;
+  const before=new Set($('body').querySelectorAll('font[size="7"]'));
   document.execCommand('fontSize',false,'7');
   $('body').querySelectorAll('font[size="7"]').forEach(font=>{
+    if(before.has(font)) return;
     const span=document.createElement('span');
     span.style.fontSize=px;
-    span.innerHTML=font.innerHTML;
+    while(font.firstChild) span.appendChild(font.firstChild);
     font.replaceWith(span);
   });
-  saveEditorSelection();markDirty();updateToolbarState();analyze();
+  saveEditorSelection();
+  markDirty();
+  updateToolbarState();
+  analyze();
 }
-function setFontFamily(v){if(!v)return;focusSelection();document.execCommand('fontName',false,v);saveEditorSelection();markDirty();updateToolbarState();analyze()}
+function setFontFamily(v){
+  if(!v)return;
+  focusSelection();
+  document.execCommand('fontName',false,v);
+  saveEditorSelection();
+  markDirty();
+  updateToolbarState();
+  analyze();
+}
 function applyInlineStyle(style){
   focusSelection();
-  const value=document.execCommand('hiliteColor',false,style) ? true : false;
-  saveEditorSelection();markDirty();updateToolbarState();analyze();
-  return value;
+  document.execCommand('hiliteColor',false,style);
+  saveEditorSelection();
+  markDirty();
+  updateToolbarState();
+  analyze();
 }
 function applyTextColor(){
   const color=prompt('Masukkan warna teks (contoh #2563eb):','#2563eb');
   if(!color)return;
-  focusSelection();document.execCommand('foreColor',false,color);saveEditorSelection();markDirty();updateToolbarState();analyze();
+  focusSelection();
+  document.execCommand('foreColor',false,color);
+  saveEditorSelection();
+  markDirty();
+  updateToolbarState();
+  analyze();
 }
 function applyHighlight(){
-  const color=prompt('Masukkan warna highlight (contoh #fef08a):','#fef08a');
+  const color=prompt('Masukkan warna stabilo (contoh #fef08a):','#fef08a');
   if(!color)return;
   applyInlineStyle(color);
 }
 function normalizeLists(){
-  $('body').querySelectorAll('ul').forEach(ul=>ul.style.listStyleType='disc');
-  $('body').querySelectorAll('ol').forEach(ol=>ol.style.listStyleType='decimal');
+  $('body').querySelectorAll('ul').forEach(ul=>{
+    ul.style.listStyleType=ul.classList.contains('checklist')?'none':'disc';
+    ul.style.paddingLeft=ul.classList.contains('checklist')?'8px':'30px';
+  });
+  $('body').querySelectorAll('ol').forEach(ol=>{ol.style.listStyleType='decimal';ol.style.paddingLeft='30px'});
 }
 function toggleChecklist(){
   focusSelection();
@@ -412,23 +471,70 @@ function toggleChecklist(){
     document.execCommand('insertHTML',false,'<ul class="checklist"><li>☐ <span>&nbsp;</span></li></ul>');
   }else{
     document.execCommand('insertUnorderedList',false);
-    normalizeLists();
     const root=$('body');
     root.querySelectorAll('ul:not(.checklist) li').forEach(li=>{
-      if(!li.textContent.trim().startsWith('☐') && !li.textContent.trim().startsWith('☑')) li.innerHTML='☐ '+li.innerHTML;
+      if(!li.textContent.trim().startsWith('☐')&&!li.textContent.trim().startsWith('☑')) li.innerHTML='☐ '+li.innerHTML;
     });
   }
+  normalizeLists();
   saveEditorSelection();markDirty();analyze();
 }
-function togglePanel(id){$(id)?.classList.toggle('is-collapsed')}
-function toggleEditorSidebar(){document.querySelector('.editor-layout')?.classList.toggle('hide-sidebar')}
+function applyLineSpacing(value){
+  focusSelection();
+  const sel=getSelection();
+  if(!sel||!sel.rangeCount)return;
+  let node=sel.anchorNode?.nodeType===3?sel.anchorNode:sel.anchorNode;
+  const block=node?.closest?.('p,h2,h3,h4,blockquote,li')||$('body');
+  block.style.lineHeight=String(value);
+  saveEditorSelection();
+  markDirty();
+  updateToolbarState();
+  analyze();
+}
+function toggleSpacingMenu(){
+  closePopovers();
+  $('spacingMenu').classList.toggle('hidden');
+}
+function setLineSpacing(value){
+  applyLineSpacing(value);
+  $('spacingMenu').classList.add('hidden');
+}
+function togglePanel(id){
+  const el=$(id);
+  if(!el)return;
+  el.classList.toggle('is-collapsed');
+  const state=JSON.parse(localStorage.getItem(PANEL_STATE_KEY)||'{}');
+  state[id]=el.classList.contains('is-collapsed');
+  localStorage.setItem(PANEL_STATE_KEY,JSON.stringify(state));
+}
+function restorePanelState(){
+  let state={};
+  try{state=JSON.parse(localStorage.getItem(PANEL_STATE_KEY)||'{}')||{}}catch(e){}
+  Object.keys(state).forEach(id=>{if(state[id])$(id)?.classList.add('is-collapsed')});
+}
+function toggleEditorSidebar(){
+  const layout=document.querySelector('.editor-layout');
+  if(!layout)return;
+  const hidden=layout.classList.toggle('hide-sidebar');
+  localStorage.setItem('foundselection-admin-editor-sidebar-hidden',hidden?'1':'0');
+}
+function restoreEditorSidebarState(){
+  if(localStorage.getItem('foundselection-admin-editor-sidebar-hidden')==='1'){
+    document.querySelector('.editor-layout')?.classList.add('hide-sidebar');
+  }
+}
 function toggleEditorFullscreen(){
   document.body.classList.toggle('editor-canvas-fullscreen');
   const active=document.body.classList.contains('editor-canvas-fullscreen');
   $('fullscreenBtn')?.setAttribute('aria-pressed',String(active));
-  if(active){ $('body').focus(); }
+  $('fullscreenBtn')?.classList.toggle('active',active);
+  if(active){$('body').focus({preventScroll:true});restoreEditorSelection();}
 }
-function closeEditorFullscreen(){document.body.classList.remove('editor-canvas-fullscreen')}
+function closeEditorFullscreen(){
+  document.body.classList.remove('editor-canvas-fullscreen');
+  $('fullscreenBtn')?.setAttribute('aria-pressed','false');
+  $('fullscreenBtn')?.classList.remove('active');
+}
 
 function updateSlugPreview(){const slug=$('slug').value.trim()||slugify($('title').value)||'slug-artikel';$('slugSidePreview').textContent='/artikel/'+slug}
 function closePopovers(){['linkPopover','embedPopover','extraMenu'].forEach(id=>$(id)?.classList.add('hidden'))}
@@ -447,8 +553,7 @@ function updateToolbarState(){
   cmds.forEach(c=>{
     const b=document.querySelector(`[data-cmd="${c}"]`);
     if(!b)return;
-    let on=false;
-    try{on=document.queryCommandState(c)}catch(e){}
+    let on=false;try{on=document.queryCommandState(c)}catch(e){}
     b.classList.toggle('active',on);
     b.setAttribute('aria-pressed',on?'true':'false');
   });
@@ -461,24 +566,42 @@ function updateToolbarState(){
       const t=n.tagName;
       if(t==='H2'){blockKey='h2';blockLabel='Heading 2';break}
       if(t==='H3'){blockKey='h3';blockLabel='Heading 3';break}
+      if(t==='H4'){blockKey='h4';blockLabel='Heading 4';break}
       if(t==='BLOCKQUOTE'){blockKey='blockquote';blockLabel='Kutipan';break}
-      if(t==='P'){break}
+      if(/^P$|^LI$/.test(t)){break}
       n=n.parentElement;
     }
-    try{font=document.queryCommandValue('fontName')||''}catch(e){}
-    try{fontSizeValue=document.queryCommandValue('fontSize')||''}catch(e){}
+    const probe=n&&n!==$('body')?n:sel.anchorNode.nodeType===3?sel.anchorNode.parentElement:sel.anchorNode;
+    if(probe){
+      try{font=getComputedStyle(probe).fontFamily||''}catch(e){}
+      try{fontSizeValue=Math.round(parseFloat(getComputedStyle(probe).fontSize))+'px'}catch(e){}
+    }
   }
 
   const bs=$('blockFormat');
-  if(bs){
-    bs.value=blockKey;
-    bs.classList.toggle('active',!!blockKey);
-  }
-
+  if(bs){bs.value=blockKey;bs.classList.toggle('active',!!blockKey)}
   const fs=$('fontSize');
   if(fs){
-    fs.value=['1','2','3','4','5','6','7'].includes(String(fontSizeValue))?String(fontSizeValue):'';
+    const pxMap={'14px':'2','17px':'3','22px':'4','30px':'5'};
+    fs.value=pxMap[fontSizeValue]||'';
     fs.classList.toggle('active',!!fs.value);
+  }
+  const ls=$('lineSpacing');
+  if(ls){
+    let ratio='';
+    if(sel&&sel.rangeCount&&isInsideEditor(sel.anchorNode)){
+      const probe=sel.anchorNode.nodeType===3?sel.anchorNode.parentElement:sel.anchorNode;
+      const lh=getComputedStyle(probe||$('body')).lineHeight;
+      const fsPx=parseFloat(getComputedStyle(probe||$('body')).fontSize)||17;
+      if(lh && lh!=='normal'){
+        const r=(parseFloat(lh)/fsPx);
+        const options=['1','1.15','1.5','2'];
+        const hit=options.find(x=>Math.abs(Number(x)-r)<0.04);
+        ratio=hit||'';
+      }
+    }
+    ls.value=ratio;
+    ls.classList.toggle('active',!!ratio);
   }
 
   const ff=$('fontFamily');
@@ -488,11 +611,10 @@ function updateToolbarState(){
     ff.value=found?found.value:'';
     ff.classList.toggle('active',!!ff.value);
   }
-
   const active=[...document.querySelectorAll('#toolbar .tool.active')].map(x=>x.getAttribute('title')).filter(Boolean);
   const txt=$('toolbarStatusText'),dot=$('toolbarStatus');
-  txt.textContent=`${blockLabel}${cleanFont?' · '+cleanFont:''}${fs?.value?' · '+fs.options[fs.selectedIndex].text:''}${active.length?' · '+active.join(' · '):''}`;
-  dot.classList.toggle('on',blockLabel!=='Paragraf'||!!cleanFont||!!fs?.value||active.length>0);
+  if(txt)txt.textContent=`${blockLabel}${cleanFont?' · '+cleanFont:''}${fs?.value?' · '+fs.options[fs.selectedIndex].text:''}${active.length?' · '+active.join(' · '):''}`;
+  if(dot)dot.classList.toggle('on',blockLabel!=='Paragraf'||!!cleanFont||!!fs?.value||active.length>0);
 }
 
 function buildTableGrid(){
@@ -607,7 +729,8 @@ async function uploadBodyImageFile(file){
   const max=10*1024*1024;
   if(file.size>max){toast('Ukuran gambar maksimal 10 MB.');return null}
   const ext=(file.name.split('.').pop()||'webp').toLowerCase();
-  const requested=['jpg','jpeg','png','webp','avif','gif'].includes($('imageFormat').value)?$('imageFormat').value:(['jpg','jpeg','png','webp','avif','gif'].includes(ext)?ext:'webp');
+  const typeMap={'image/jpeg':'jpg','image/png':'png','image/webp':'webp','image/avif':'avif','image/gif':'gif'};
+  const requested=typeMap[file.type]||(['jpg','jpeg','png','webp','avif','gif'].includes(ext)?ext:'webp');
   const filename=normalizeAssetFilename(file.name,requested);
   const fd=new FormData();
   fd.append('file',file,filename);
@@ -707,7 +830,8 @@ function applyImageMeta(){
   const alt=$('bodyImageAlt').value.trim();
   const title=$('bodyImageTitle').value.trim();
   const caption=$('bodyImageCaption').value.trim();
-  const link=normalizeUrl($('bodyImageLink').value.trim());
+  const rawLink=$('bodyImageLink').value.trim();
+  const link=rawLink?normalizeUrl(rawLink):'';
   if(img){
     img.alt=alt;
     img.title=title;
@@ -764,6 +888,20 @@ function fill(a){
   $('excerpt').value=a.excerpt||'';
   $('body').innerHTML=a.content||'';
   document.querySelectorAll('input[name="cat"]').forEach(x=>x.checked=x.value===a.category);
+  const knownCategory=CATS.includes(a.category);
+  if(!knownCategory && a.category){
+    let legacy=document.getElementById('legacyCategoryOption');
+    if(!legacy){
+      legacy=document.createElement('label');legacy.id='legacyCategoryOption';legacy.className='legacy-category';
+      legacy.innerHTML='<input type="radio" name="cat" id="legacyCategory">';
+      legacy.insertAdjacentText('beforeend','Kategori saat ini: '+String(a.category));
+      document.querySelector('#categoryEditorPanel .cat-list')?.appendChild(legacy);
+    }
+    $('legacyCategory').value=a.category;
+    $('legacyCategory').checked=true;
+  }else{
+    document.getElementById('legacyCategoryOption')?.remove();
+  }
   $('publishDate').value=a.publish_date||new Date().toISOString().slice(0,10);
   $('readTime').value=a.read_time||5;
   $('robotsIndex').value=a.robots_index||'index';
@@ -804,7 +942,7 @@ function showLogin(){$('loginGate').style.display='flex';setTimeout(()=>$('login
 function hideLogin(){$('loginGate').style.display='none';$('loginError').textContent='';$('loginPassword').value=''}
 async function login(e){e.preventDefault();const btn=$('loginButton');btn.disabled=true;$('loginError').textContent='';try{const r=await fetch(AUTH_API+'/login',{method:'POST',credentials:'include',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({password:$('loginPassword').value})});const j=await r.json().catch(()=>({}));if(!r.ok||!j.success)throw Error(j.error||'Kata sandi salah.');hideLogin();await load()}catch(err){$('loginError').textContent=err.message||'Gagal masuk.'}finally{btn.disabled=false}}
 async function editPost(slug){const a=posts.find(x=>x.slug===slug);if(a){fill(a);return}try{const r=await apiFetch(API+'/'+encodeURIComponent(slug));const j=await r.json();if(!j.success)throw Error(j.error||'Artikel tidak ditemukan');fill(j.data)}catch(e){toast(e.message)}}
-function buildPayload(status){const body=getBody();if(mode==='visual')normalizeLists();const normalizedBody=getBody();status=status==='published'?'published':'draft';return{title:$('title').value.trim(),slug:$('slug').value.trim()||slugify($('title').value),category:getCategory(),excerpt:$('excerpt').value.trim(),content:normalizedBody,publish_date:$('publishDate').value,read_time:Math.max(1,Number($('readTime').value)||5),status,thumbnail:storedImageUrl||'',image_alt:$('altText').value.trim(),image_name:$('imageName').value.trim(),image_title:$('imageTitle').value.trim(),seo_title:$('seoTitle').value.trim(),meta_description:$('metaDesc').value.trim(),focus_keyword:$('focus').value.trim(),secondary_keywords:$('secondary').value.trim(),canonical_url:$('canonical').value.trim(),show_featured:$('placementFeatured').checked,show_latest:$('placementLatest').checked,show_popular:$('placementPopular').checked,og_title:$('ogTitle').value.trim(),og_description:$('ogDesc').value.trim(),og_image:$('ogImage').value.trim(),robots_index:$('robotsIndex').value,robots_follow:$('robotsFollow').value,schema_type:$('schema').value}}
+function buildPayload(status){const body=getBody();if(mode==='visual')normalizeLists();const normalizedBody=getBody();status=status==='published'?'published':'draft';const cat=getCategory();if(!cat)throw Error('Pilih kategori artikel sebelum menyimpan.');return{title:$('title').value.trim(),slug:$('slug').value.trim()||slugify($('title').value),category:cat,excerpt:$('excerpt').value.trim(),content:normalizedBody,publish_date:$('publishDate').value,read_time:Math.max(1,Number($('readTime').value)||5),status,thumbnail:storedImageUrl||'',image_alt:$('altText').value.trim(),image_name:$('imageName').value.trim(),image_title:$('imageTitle').value.trim(),seo_title:$('seoTitle').value.trim(),meta_description:$('metaDesc').value.trim(),focus_keyword:$('focus').value.trim(),secondary_keywords:$('secondary').value.trim(),canonical_url:$('canonical').value.trim(),show_featured:$('placementFeatured').checked,show_latest:$('placementLatest').checked,show_popular:$('placementPopular').checked,og_title:$('ogTitle').value.trim(),og_description:$('ogDesc').value.trim(),og_image:$('ogImage').value.trim(),robots_index:$('robotsIndex').value,robots_follow:$('robotsFollow').value,schema_type:$('schema').value}}
 async function uploadMedia(){
   if(!pendingImage)return storedImageUrl;
   if(!mediaGuard())throw Error('Upload gambar belum tersedia.');
@@ -870,7 +1008,7 @@ async function savePost(status,background=false){
 }
 /* SEO menggunakan pemeriksaan cakupan/konteks; tanpa target keyword density mekanis. */
 function seoChecks(p){const k=p.focus_keyword.toLowerCase().trim(),t=p.title.toLowerCase(),s=p.slug.toLowerCase(),c=textOf(p.content).toLowerCase(),st=p.seo_title.toLowerCase(),m=p.meta_description.toLowerCase(),w=words(c);return[[!!p.title,'Judul artikel terisi'],[!!k,'Kata kunci utama ditentukan'],[!!p.seo_title,'Judul SEO tersedia'],[p.seo_title.length>=40&&p.seo_title.length<=60,'Panjang judul SEO ideal'],[!!p.meta_description,'Deskripsi SEO tersedia'],[p.meta_description.length>=120&&p.meta_description.length<=160,'Panjang deskripsi SEO ideal'],[!!k&&t.includes(k),'Topik utama tercermin di judul'],[!!k&&s.includes(slugify(k)),'Topik utama tercermin di slug'],[!!k&&c.slice(0,600).includes(k),'Topik utama dikenalkan di pembuka'],[!!k&&st.includes(k),'Topik utama tercermin di judul SEO'],[!!k&&m.includes(k),'Topik utama tercermin di deskripsi SEO'],[w>=600,'Isi artikel minimal 600 kata'],[!!p.canonical_url,'URL utama tersedia'] ]}
-function analyze(){updateSlugPreview();const p=buildPayload($('pubStatus').value),checks=seoChecks(p),score=Math.round(checks.filter(x=>x[0]).length/checks.length*100),txt=textOf(p.content),w=words(txt);$('wordCount').textContent=w+' kata';$('charCount').textContent=txt.length+' karakter';$('readTimeLive').textContent='Waktu baca: '+Math.max(1,Math.ceil(w/200))+' menit';$('gSlug').textContent=p.slug||'slug-artikel';$('gTitle').textContent=p.seo_title||p.title||'Judul SEO artikel';$('gDesc').textContent=p.meta_description||p.excerpt||'Meta description akan tampil di sini.';$('seoTitleCount').textContent=p.seo_title.length+'/70';$('metaCount').textContent=p.meta_description.length+'/170';$('seoScore').textContent=score+'/100';$('seoFill').style.width=score+'%';$('seoBadge').textContent=score>=80?'Baik':score>=55?'Perlu diperbaiki':'Perlu dilengkapi';$('seoBadge').className='badge '+(score>=80?'b-green':score>=55?'b-yellow':'b-red');$('seoChecks').innerHTML=checks.map(x=>`<div class="check"><span class="${x[0]?'ok':'no'}">${x[0]?'✓':'○'}</span> ${esc(x[1])}</div>`).join('');const sent=txt.split(/[.!?]+/).map(words).filter(Boolean),avg=sent.length?sent.reduce((a,b)=>a+b,0)/sent.length:0,paras=txt.split(/\n\s*\n/).filter(Boolean),rd=[[w>=300,'Konten cukup panjang'],[avg>0&&avg<=22,'Kalimat rata-rata ≤22 kata'],[paras.every(x=>words(x)<=100),'Paragraf tidak terlalu padat'],[/<h2|<h3/i.test(p.content),'Subheading tersedia'],[/<a\s/i.test(p.content),'Ada link dalam artikel']];const rs=Math.round(rd.filter(x=>x[0]).length/rd.length*100);$('readBadge').textContent=rs+'/100';$('readBadge').className='badge '+(rs>=80?'b-green':rs>=60?'b-yellow':'b-red');$('readChecks').innerHTML=rd.map(x=>`<div class="check"><span class="${x[0]?'ok':'no'}">${x[0]?'✓':'○'}</span> ${x[1]}</div>`).join('')}
+function analyze(){updateSlugPreview();const p=buildPayload($('pubStatus').value),checks=seoChecks(p),score=Math.round(checks.filter(x=>x[0]).length/checks.length*100),txt=textOf(p.content),w=words(txt);$('wordCount').textContent=w+' kata';$('charCount').textContent=txt.length+' karakter';$('readTimeLive').textContent='Waktu baca: '+Math.max(1,Math.ceil(w/200))+' menit';$('gSlug').textContent=p.slug||'slug-artikel';$('gTitle').textContent=p.seo_title||p.title||'Judul SEO artikel';$('gDesc').textContent=p.meta_description||p.excerpt||'Meta description akan tampil di sini.';$('seoTitleCount').textContent=p.seo_title.length+'/70';$('metaCount').textContent=p.meta_description.length+'/170';$('seoScore').textContent=score+'/100';$('seoFill').style.width=score+'%';$('seoBadge').textContent=score>=80?'Baik':score>=55?'Perlu diperbaiki':'Perlu dilengkapi';$('seoBadge').className='badge '+(score>=80?'b-green':score>=55?'b-yellow':'b-red');$('seoChecks').innerHTML=checks.map(x=>`<div class="check"><span class="${x[0]?'ok':'no'}">${x[0]?'✓':'○'}</span> ${esc(x[1])}</div>`).join('');const sent=txt.split(/[.!?]+/).map(words).filter(Boolean),avg=sent.length?sent.reduce((a,b)=>a+b,0)/sent.length:0,holder=document.createElement('div');holder.innerHTML=p.content||'';const paraCounts=[...holder.querySelectorAll('p,li,blockquote')].map(el=>words(el.textContent||''));const rd=[[w>=300,'Konten cukup panjang'],[avg>0&&avg<=22,'Kalimat rata-rata ≤22 kata'],[!paraCounts.length||paraCounts.every(n=>n<=100),'Paragraf tidak terlalu padat'],[/<h2|<h3|<h4/i.test(p.content),'Subheading tersedia'],[/<a\s/i.test(p.content),'Ada link dalam artikel']];const rs=Math.round(rd.filter(x=>x[0]).length/rd.length*100);$('readBadge').textContent=rs+'/100';$('readBadge').className='badge '+(rs>=80?'b-green':rs>=60?'b-yellow':'b-red');$('readChecks').innerHTML=rd.map(x=>`<div class="check"><span class="${x[0]?'ok':'no'}">${x[0]?'✓':'○'}</span> ${x[1]}</div>`).join('')}
 async function load(){try{const r=await apiFetch(API);const j=await r.json();if(!r.ok||!j.success)throw Error(j.error||'API error');posts=j.data||[];dashboard();renderArtikel()}catch(e){if(e.message!=='Sesi admin diperlukan.')toast('API tidak dapat dimuat: '+e.message)}}
 function seoScoreFor(a){const p={...a,content:a.content||'',focus_keyword:a.focus_keyword||'',seo_title:a.seo_title||'',meta_description:a.meta_description||'',canonical_url:a.canonical_url||'',title:a.title||'',slug:a.slug||''};const c=seoChecks(p);return Math.round(c.filter(x=>x[0]).length/c.length*100)}
 function renderArtikel(){const q=($('search')?.value||'').toLowerCase(),f=$('filter')?.value||'';const rows=posts.filter(a=>(!q||(`${a.title} ${a.slug}`).toLowerCase().includes(q))&&(!f||a.status===f));$('postRows').innerHTML=rows.map(a=>{const n=seoScoreFor(a);return`<tr><td><button class="post-title" onclick="editPost('${esc(a.slug)}')">${esc(a.title)}</button><div class="post-slug">/artikel/${esc(a.slug)}</div></td><td>${esc(a.category||'')}</td><td>${a.status==='published'?'<span class="badge b-green">Terbit</span>':'<span class="badge b-yellow">Draft</span>'}</td><td><span class="badge ${n>=80?'b-green':n>=55?'b-yellow':'b-red'}">${n}</span></td><td>${esc(a.publish_date||'—')}</td><td class="actions"><button class="button" onclick="editPost('${esc(a.slug)}')">Edit</button> <button class="button danger" onclick="askHapus('${esc(a.slug)}')">Hapus</button></td></tr>`}).join('');$('noArtikel').classList.toggle('hidden',rows.length>0)}
@@ -879,6 +1017,8 @@ function askHapus(slug){deleteSlug=slug;const a=posts.find(x=>x.slug===slug);$('
 async function processImage(file){
   if(!mediaGuard())return;
   if(!file.type.startsWith('image/')){toast('File harus berupa gambar.');return}
+  const maxFeatured=15*1024*1024;
+  if(file.size>maxFeatured){toast('Featured image maksimal 15 MB agar editor tetap ringan.');return}
   try{
     const img=await new Promise((res,rej)=>{const u=URL.createObjectURL(file),i=new Image();i.onload=()=>{URL.revokeObjectURL(u);res(i)};i.onerror=rej;i.src=u});
     const sw=img.naturalWidth,sh=img.naturalHeight,ratio=sw/sh,target=16/9;let cw=sw,ch=sh,sx=0,sy=0;
@@ -968,13 +1108,13 @@ $('body').addEventListener('keydown',e=>{
     toast('Elemen dihapus.');
   }
 });
-newPost();$('body').addEventListener('focus',updateToolbarState);updateToolbarState();(async()=>{try{const r=await fetch(AUTH_API+'/me',{credentials:'include',headers:{Accept:'application/json'}});const j=await r.json();if(j.authenticated){hideLogin();await load()}else showLogin()}catch(e){showLogin()}})();
+newPost();restorePanelState();restoreEditorSidebarState();$('body').addEventListener('focus',updateToolbarState);updateToolbarState();(async()=>{try{const r=await fetch(AUTH_API+'/me',{credentials:'include',headers:{Accept:'application/json'}});const j=await r.json();if(j.authenticated){hideLogin();await load()}else showLogin()}catch(e){showLogin()}})();
 
 document.addEventListener('visibilitychange',()=>{
   if(document.visibilityState==='hidden'&&!saving&&$('editorView')&&!$('editorView').classList.contains('hidden')){
     const currentStatus=$('pubStatus').value;
     if(dirty||currentStatus==='published'){
-      savePost('draft',true);
+      savePost(currentStatus,true);
     }
   }
 });
